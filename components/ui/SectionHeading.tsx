@@ -48,7 +48,9 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <Tag className={cn(titleSize[as], onDark && "text-cream")}>{title}</Tag>
+      <Tag id={id} className={cn(titleSize[as], onDark && "text-cream")}>
+        {title}
+      </Tag>
       {lede && (
         <p
           className={cn(

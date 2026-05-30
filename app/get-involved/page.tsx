@@ -7,7 +7,6 @@ import {
 } from "lucide-react";
 import { PageHero } from "@/components/Hero";
 import { Section } from "@/components/ui/Section";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/CTASection";

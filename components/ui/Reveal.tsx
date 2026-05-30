@@ -30,12 +30,9 @@ export function Reveal({
     if (!el) return;
 
     // If reduced motion is requested, show immediately without observing.
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-    ) {
-      setShown(true);
-      return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      const id = requestAnimationFrame(() => setShown(true));
+      return () => cancelAnimationFrame(id);
     }
 
     const observer = new IntersectionObserver(

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
 import { Figure } from "@/components/Figure";
 import { Badge } from "@/components/ui/Badge";
 import { FieldNoteBody } from "@/components/FieldNoteBody";

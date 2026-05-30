@@ -3,7 +3,6 @@ import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
@@ -26,7 +25,7 @@ import {
   donateCtaBand,
   newsletter,
 } from "@/content/home";
-import { activePrograms, roadmap } from "@/content/programs";
+import { activePrograms } from "@/content/programs";
 import { stats } from "@/content/stats";
 import { getFeaturedFieldNote } from "@/content/fieldNotes";
 

@@ -35,7 +35,7 @@ export default function ContactPage() {
           <div className="lg:pt-2">
             <h2 className="text-h3">Other ways to reach us</h2>
             <p className="mt-3 text-stone">
-              We're most responsive on Instagram and Telegram.
+              We&apos;re most responsive on Instagram and Telegram.
             </p>
             <SocialLinks variant="dark" showLabels className="mt-5 flex-col items-start gap-2" />
 

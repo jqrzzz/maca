@@ -31,7 +31,7 @@ export default function ProgramsPage() {
       {/* Active programs — detailed */}
       <Section tone="cream">
         <div className="space-y-16">
-          {activePrograms.map((program, i) => (
+          {activePrograms.map((program) => (
             <Reveal key={program.slug}>
               <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-12">
                 <div>

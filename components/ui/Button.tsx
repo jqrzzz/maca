@@ -79,8 +79,17 @@ export function Button(props: ButtonProps) {
   );
 
   if ("href" in props && props.href !== undefined) {
-    const { href, external, variant: _v, size: _s, fullWidth: _f, ...rest } =
-      props as ButtonAsLink;
+    // Strip styling-only props so they don't leak onto the anchor element.
+    const {
+      href,
+      external,
+      variant: _variant,
+      size: _size,
+      fullWidth: _fullWidth,
+      children: _children,
+      className: _className,
+      ...rest
+    } = props as ButtonAsLink;
 
     if (external) {
       return (
@@ -102,8 +111,15 @@ export function Button(props: ButtonProps) {
     );
   }
 
-  const { variant: _v, size: _s, fullWidth: _f, ...rest } =
-    props as ButtonAsButton;
+  const {
+    variant: _variant,
+    size: _size,
+    fullWidth: _fullWidth,
+    children: _children,
+    className: _className,
+    ...rest
+  } = props as ButtonAsButton;
+
   return (
     <button className={classes} {...rest}>
       {children}

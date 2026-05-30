@@ -22,8 +22,10 @@ export function MobileNav() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Close on route change.
+  // Close the menu when the route changes (syncing UI to the router, an
+  // external system). The synchronous setState here is intentional.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
   }, [pathname]);
 
