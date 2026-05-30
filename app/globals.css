@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   MACA Foundation — Design System
+   Single source of truth for color, type, spacing, radius, shadow tokens.
+   Tailwind v4 CSS-first config: tokens below generate utilities
+   (e.g. --color-clay-500 -> bg-clay-500 / text-clay-500).
+   Aesthetic: "Warm & humanitarian" — clay, sand, forest, cream + gold accent.
+   ============================================================================ */
+
+@theme {
+  /* --- Brand: Clay (action / warmth) ------------------------------------ */
+  --color-clay-50: #fbf1e8;
+  --color-clay-100: #f3dcc6;
+  --color-clay-300: #dd9a5c;
+  --color-clay-500: #b45309; /* primary brand */
+  --color-clay-600: #983f07; /* button bg / AA on cream */
+  --color-clay-700: #7c3306; /* small text on light (AA) */
+
+  /* --- Brand: Forest (deep anchor / dark sections) ---------------------- */
+  --color-forest-500: #1f3d2b;
+  --color-forest-600: #18301f;
+  --color-forest-700: #112417;
+
+  /* --- Grounds ---------------------------------------------------------- */
+  --color-sand: #f5efe6; /* alternating section background */
+  --color-cream: #fffdf8; /* default page background */
+
+  /* --- Accent (single) -------------------------------------------------- */
+  --color-gold-400: #e0a458;
+
+  /* --- Warm neutrals ---------------------------------------------------- */
+  --color-ink: #241f1a; /* primary body text (~15:1 on cream) */
+  --color-stone: #6b635a; /* secondary text */
+  --color-line: #e7dfd3; /* hairline borders */
+
+  /* --- Fonts (CSS vars set by next/font in layout) ---------------------- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* --- Fluid type scale (1.25 ratio) ------------------------------------ */
+  --text-display: clamp(2.75rem, 1.6rem + 4.2vw, 4.5rem);
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+  --text-h1: clamp(2.25rem, 1.6rem + 2.2vw, 3.25rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h2: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+  --text-h3--line-height: 1.25;
+  --text-lede: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-lede--line-height: 1.55;
+
+  /* --- Radius ----------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* --- Shadows (warm-tinted, low-contrast) ------------------------------ */
+  --shadow-soft: 0 1px 2px rgba(36, 31, 26, 0.04),
+    0 8px 24px -12px rgba(36, 31, 26, 0.12);
+  --shadow-lift: 0 12px 40px -16px rgba(36, 31, 26, 0.22);
+
+  /* --- Container width --------------------------------------------------- */
+  --container-prose: 46rem;
+  --container-page: 72rem;
+}
+
+/* ----------------------------------------------------------------------------
+   Base styles
+   ---------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-forest-700);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Consistent, visible focus everywhere (gold ring + offset) */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-400);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--color-clay-100);
+    color: var(--color-clay-700);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Reusable utilities
+   ---------------------------------------------------------------------------- */
+
+/* Subtle warm grain overlay for hero / footer (no asset, ~3% opacity) */
+@utility grain {
+  position: relative;
+}
+@utility grain-overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scroll-reveal animation (paired with the Reveal client component) */
+@keyframes maca-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-reveal {
+  animation: maca-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-reveal {
+    animation: none !important;
+  }
+}
