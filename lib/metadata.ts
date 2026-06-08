@@ -18,6 +18,13 @@ export function buildMetadata({
 }): Metadata {
   const desc = description ?? site.description;
   const url = new URL(path, baseUrl).toString();
+  const ogImage = {
+    url: "/og.png",
+    width: 1200,
+    height: 630,
+    type: "image/png",
+    alt: `${site.name} — ${site.tagline}`,
+  };
 
   return {
     title,
@@ -29,11 +36,13 @@ export function buildMetadata({
       title: title ? `${title} · ${site.name}` : site.name,
       description: desc,
       url,
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: title ? `${title} · ${site.name}` : site.name,
       description: desc,
+      images: ["/og.png"],
     },
   };
 }
