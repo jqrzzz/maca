@@ -83,7 +83,7 @@ export const config = {
   },
 
   contact: {
-    email: env("NEXT_PUBLIC_CONTACT_EMAIL") || "hello@maca.example.org",
+    email: env("NEXT_PUBLIC_CONTACT_EMAIL") || "hello@prasm.example.org",
     formspree: env("NEXT_PUBLIC_FORMSPREE_ENDPOINT"),
     newsletterAction: env("NEXT_PUBLIC_NEWSLETTER_ACTION"),
   },

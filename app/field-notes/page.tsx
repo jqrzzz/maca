@@ -25,7 +25,7 @@ export default function FieldNotesPage() {
       <PageHero
         eyebrow="Field notes"
         title="Dispatches from the village"
-        lede="First-hand notes on the people MACA stands with — written with care, and with their dignity in mind."
+        lede="First-hand notes on the people PRASM stands with — written with care, and with their dignity in mind."
       />
 
       {/* Featured */}

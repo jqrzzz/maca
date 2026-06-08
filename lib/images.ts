@@ -66,7 +66,7 @@ export const images = {
   },
   founderPortrait: {
     src: "/images/founder/portrait.jpg",
-    alt: "Portrait of MACA's founding doctor in the village.",
+    alt: "Portrait of PRASM's founding doctor in the village.",
     placeholder: true,
     ratio: "1/1",
   },

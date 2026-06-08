@@ -21,7 +21,7 @@ import {
 export const metadata: Metadata = buildMetadata({
   title: "Get Involved",
   description:
-    "Teach, volunteer, donate supplies, or spread the word. Money is only one way to support the Karenni community MACA stands with.",
+    "Teach, volunteer, donate supplies, or spread the word. Money is only one way to support the Karenni community PRASM stands with.",
   path: "/get-involved",
 });
 

@@ -7,13 +7,13 @@
 export const aboutIntro = {
   eyebrow: "Our story",
   title: "It started with one sick child",
-  lede: "MACA grew out of a doctor's visits to a Karenni refugee village in the hills of Mae Hong Son — and the realization that medicine alone wasn't enough.",
+  lede: "PRASM grew out of a doctor's visits to a Karenni refugee village in the hills of Mae Hong Son — and the realization that medicine alone wasn't enough.",
 };
 
 export const founderStory: string[] = [
   "On a visit to the village, our founder — a medical doctor — met a family that had crossed from Myanmar only the day before, their home seized by the army. One of their boys was sick, and they had no way to afford a hospital that charges refugees as if they were tourists.",
   "He did two things. He paid for the care and the journey to reach it. And he did what doctors are trained to do: he built a record — organizing the boy's history the way one doctor hands a patient to the next.",
-  "That record did something unexpected. For a child with no papers, it became a first small proof of existence — a thread of identity where there had been none. MACA is the idea that this can be done again, and properly, for many.",
+  "That record did something unexpected. For a child with no papers, it became a first small proof of existence — a thread of identity where there had been none. PRASM is the idea that this can be done again, and properly, for many.",
 ];
 
 export const village = {

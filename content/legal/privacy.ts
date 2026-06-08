@@ -6,7 +6,7 @@
 export const privacy = {
   lastUpdated: "May 2026",
   intro:
-    "MACA respects your privacy. This site is a simple, mostly static website with no account system. This page explains the little data that is involved.",
+    "PRASM respects your privacy. This site is a simple, mostly static website with no account system. This page explains the little data that is involved.",
   sections: [
     {
       title: "What we collect",

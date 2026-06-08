@@ -28,28 +28,19 @@ export default function OpengraphImage() {
       >
         {/* Mark + wordmark */}
         <div style={{ display: "flex", alignItems: "center" }}>
+          {/* Tetrahedron mark — a single bold facet (Satori-safe CSS triangle,
+              no SVG); the full three-tone mark lives in the header + favicon. */}
           <div
             style={{
               display: "flex",
-              width: 64,
-              height: 64,
-              borderRadius: 18,
-              background: "#B45309",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 24,
+              width: 0,
+              height: 0,
+              borderLeft: "34px solid transparent",
+              borderRight: "34px solid transparent",
+              borderBottom: "60px solid #E78B2E",
+              marginRight: 28,
             }}
-          >
-            <div
-              style={{
-                display: "flex",
-                width: 18,
-                height: 18,
-                borderRadius: 999,
-                background: "#E0A458",
-              }}
-            />
-          </div>
+          />
           <span style={{ fontSize: 44, fontWeight: 600, letterSpacing: -1 }}>
             {site.shortName}
           </span>
@@ -73,7 +64,7 @@ export default function OpengraphImage() {
               display: "flex",
               fontSize: 28,
               marginTop: 24,
-              color: "#E0A458",
+              color: "#E6A24A",
               fontFamily: "Arial, sans-serif",
             }}
           >

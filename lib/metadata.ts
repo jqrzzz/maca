@@ -4,8 +4,8 @@ import { site } from "@/content/site";
 const baseUrl = site.url;
 
 /**
- * Build per-page metadata with sensible MACA defaults + OpenGraph/Twitter.
- * The root layout sets the title template ("%s · MACA Foundation").
+ * Build per-page metadata with sensible PRASM defaults + OpenGraph/Twitter.
+ * The root layout sets the title template ("%s · PRASM Foundation").
  */
 export function buildMetadata({
   title,

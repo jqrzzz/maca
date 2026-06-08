@@ -4,15 +4,15 @@
  */
 
 export const site = {
-  name: "MACA Foundation",
-  shortName: "MACA",
-  // TODO[user]: confirm what "MACA" stands for + final tagline.
+  name: "PRASM Foundation",
+  shortName: "PRASM",
+  // TODO[user]: confirm what "PRASM" stands for + final tagline.
   tagline: "Dignity, identity, and care for the stateless.",
   // One-sentence description used for hero lede fallbacks + meta description.
   description:
-    "MACA supports Karenni and Kayan refugees from Myanmar living off-grid in Mae Hong Son, Thailand — building medical records, restoring identity, and standing with a community the world overlooked.",
+    "PRASM supports Karenni and Kayan refugees from Myanmar living off-grid in Mae Hong Son, Thailand — building medical records, restoring identity, and standing with a community the world overlooked.",
   // Canonical URL — set NEXT_PUBLIC_SITE_URL in the environment before launch.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://maca.example.org",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://prasm.example.org",
   location: {
     region: "Mae Hong Son",
     country: "Thailand",

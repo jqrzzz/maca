@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   MACA Foundation — Design System
+   PRASM Foundation — Design System
    Single source of truth for color, type, spacing, radius, shadow tokens.
    Tailwind v4 CSS-first config: tokens below generate utilities
    (e.g. --color-clay-500 -> bg-clay-500 / text-clay-500).
-   Aesthetic: "Warm & humanitarian" — clay, sand, forest, cream + gold accent.
+   Aesthetic: "Warm & humanitarian" — a Thai-tea-orange clay leads, balanced by
+   forest, sand, cream + a warm gold accent.
    ============================================================================ */
 
 @theme {
-  /* --- Brand: Clay (action / warmth) ------------------------------------ */
-  --color-clay-50: #fbf1e8;
-  --color-clay-100: #f3dcc6;
-  --color-clay-300: #dd9a5c;
-  --color-clay-500: #b45309; /* primary brand */
-  --color-clay-600: #983f07; /* button bg / AA on cream */
-  --color-clay-700: #7c3306; /* small text on light (AA) */
+  /* --- Brand: Clay → tuned to Thai-tea orange (action / warmth) ---------- */
+  --color-clay-50: #fdf2e6;
+  --color-clay-100: #f7ddbf;
+  --color-clay-300: #e89a4e;
+  --color-clay-500: #e78b2e; /* primary brand — signature Thai tea orange */
+  --color-clay-600: #a8480a; /* button bg / AA on cream (5.7:1) */
+  --color-clay-700: #853607; /* small text on light (AA, 8:1) */
 
   /* --- Brand: Forest (deep anchor / dark sections) ---------------------- */
   --color-forest-500: #1f3d2b;
@@ -26,8 +27,8 @@
   --color-sand: #f5efe6; /* alternating section background */
   --color-cream: #fffdf8; /* default page background */
 
-  /* --- Accent (single) -------------------------------------------------- */
-  --color-gold-400: #e0a458;
+  /* --- Accent (single) — warm amber, nudged toward the Thai-tea orange --- */
+  --color-gold-400: #e6a24a;
 
   /* --- Warm neutrals ---------------------------------------------------- */
   --color-ink: #241f1a; /* primary body text (~15:1 on cream) */
@@ -83,9 +84,9 @@
   --color-forest-700: #c8e6d4;
   --color-clay-50: #2a2520;
   --color-clay-100: #3d342a;
-  --color-clay-600: #e0a458;
-  --color-clay-700: #eab86e;
-  --color-gold-400: #f0c878;
+  --color-clay-600: #ea9a45;
+  --color-clay-700: #f0b264;
+  --color-gold-400: #f1be6a;
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.2),
     0 8px 24px -12px rgba(0, 0, 0, 0.4);
   --shadow-lift: 0 12px 40px -16px rgba(0, 0, 0, 0.5);
@@ -160,7 +161,7 @@
 }
 
 /* Scroll-reveal animation (paired with the Reveal client component) */
-@keyframes maca-fade-up {
+@keyframes prasm-fade-up {
   from {
     opacity: 0;
     transform: translateY(14px);
@@ -172,7 +173,7 @@
 }
 
 @utility animate-reveal {
-  animation: maca-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: prasm-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {

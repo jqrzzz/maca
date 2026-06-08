@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = buildMetadata({
   title: "What We Do",
   description:
-    "MACA covers urgent medical care and builds records, supports education and off-grid living — and is building toward identity, digital records, and AI-assisted care.",
+    "PRASM covers urgent medical care and builds records, supports education and off-grid living — and is building toward identity, digital records, and AI-assisted care.",
   path: "/programs",
 });
 

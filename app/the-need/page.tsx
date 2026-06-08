@@ -13,7 +13,7 @@ import { needIntro, needSections, consequences } from "@/content/need";
 export const metadata: Metadata = buildMetadata({
   title: "The Need",
   description:
-    "The families MACA supports fled war in Myanmar and now live without papers in Thailand — shut out of school and healthcare, unable to prove they exist.",
+    "The families PRASM supports fled war in Myanmar and now live without papers in Thailand — shut out of school and healthcare, unable to prove they exist.",
   path: "/the-need",
 });
 

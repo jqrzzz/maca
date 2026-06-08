@@ -2,7 +2,7 @@ import { site } from "@/content/site";
 import { socialList } from "@/content/social";
 
 /**
- * JSON-LD structured data describing MACA as an NGO.
+ * JSON-LD structured data describing PRASM as an NGO.
  * NOTE: keep claims honest — do not add registration/charity identifiers
  * (taxID, nonprofitStatus) unless they are verified. See plan §12.
  */

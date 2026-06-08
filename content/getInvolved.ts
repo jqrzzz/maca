@@ -38,7 +38,7 @@ export const ways: InvolveWay[] = [
   {
     icon: "share",
     title: "Spread the word",
-    body: "Share MACA with people who care. Visibility is its own kind of help for a community the world tends to overlook.",
+    body: "Share PRASM with people who care. Visibility is its own kind of help for a community the world tends to overlook.",
     cta: { label: "Follow & share", href: "/contact" },
   },
 ];
