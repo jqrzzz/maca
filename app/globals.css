@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* next-themes sets a `.dark` class on <html>; make Tailwind's `dark:` variant
+   follow that class instead of the OS `prefers-color-scheme` media query, so
+   utilities track the manual light/dark toggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ============================================================================
    PRASM Foundation — Design System
    Single source of truth for color, type, spacing, radius, shadow tokens.
