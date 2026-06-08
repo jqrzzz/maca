@@ -374,3 +374,44 @@
     animation: none;
   }
 }
+
+/* Intro film (components/intro): "rotate" hint, shown only on portrait phones. */
+.prasm-film-hint {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 84px;
+  transform: translateX(-50%);
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: rgba(20, 20, 20, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f6f4ef;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: prasm-film-hint-out 6s ease forwards;
+}
+@media (max-width: 640px) and (orientation: portrait) {
+  .prasm-film-hint {
+    display: flex;
+  }
+}
+@keyframes prasm-film-hint-out {
+  0%,
+  65% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-film-hint {
+    animation: none;
+    opacity: 0.9;
+  }
+}
