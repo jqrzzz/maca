@@ -12,7 +12,7 @@ import { newsletter } from "@/content/home";
 export const metadata: Metadata = buildMetadata({
   title: "Field Notes",
   description:
-    "Honest dispatches from a Karenni refugee village in Mae Hong Son — on identity, medical care, and off-grid life.",
+    "Honest dispatches from a Kayan refugee village in Mae Hong Son — on identity, medical care, and off-grid life.",
   path: "/field-notes",
 });
 

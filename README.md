@@ -1,6 +1,6 @@
 # PRASM Foundation
 
-The website for **PRASM**, a foundation supporting Karenni & Kayan refugees from
+The website for **PRASM**, a foundation supporting Kayan refugees from
 Myanmar living off-grid in Mae Hong Son, Thailand — telling their story with
 dignity, making it easy to give, and laying the groundwork for future identity
 and medical-records programs.

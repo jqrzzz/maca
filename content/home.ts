@@ -4,7 +4,7 @@
  */
 
 export const hero = {
-  eyebrow: "Karenni & Kayan refugees · Mae Hong Son, Thailand",
+  eyebrow: "Kayan refugees · Mae Hong Son, Thailand",
   title: "A community the world overlooked — refusing to be erased.",
   lede: "PRASM stands with refugee families who fled war in Myanmar and now live without papers in the Thai hills. We help them stay well, prove who they are, and build a future on their own terms.",
 };

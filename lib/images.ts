@@ -24,7 +24,7 @@ export type MediaRef = {
 export const images = {
   heroMain: {
     src: "/images/hero/main.jpg",
-    alt: "Karenni villagers gathered together in the hills of Mae Hong Son at golden hour.",
+    alt: "Kayan villagers gathered together in the hills of Mae Hong Son at golden hour.",
     placeholder: true,
     ratio: "16/10",
   },

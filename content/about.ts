@@ -7,7 +7,7 @@
 export const aboutIntro = {
   eyebrow: "Our story",
   title: "It started with one sick child",
-  lede: "PRASM grew out of a doctor's visits to a Karenni refugee village in the hills of Mae Hong Son — and the realization that medicine alone wasn't enough.",
+  lede: "PRASM grew out of a doctor's visits to a Kayan refugee village in the hills of Mae Hong Son — and the realization that medicine alone wasn't enough.",
 };
 
 export const founderStory: string[] = [
