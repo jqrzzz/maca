@@ -1,4 +1,4 @@
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Montserrat } from "next/font/google";
 
 /**
  * Self-hosted at build time by next/font (no runtime network calls, zero CLS).
@@ -22,4 +22,13 @@ export const inter = Inter({
   weight: ["400", "500", "600"],
 });
 
-export const fontVariables = `${fraunces.variable} ${inter.variable}`;
+// Logo wordmark — a geometric sans in the spirit of Gotham. Scoped to the
+// PRASM mark only (headings stay Fraunces, body stays Inter).
+export const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+  weight: ["600", "700"],
+});
+
+export const fontVariables = `${fraunces.variable} ${inter.variable} ${montserrat.variable}`;

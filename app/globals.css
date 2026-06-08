@@ -38,6 +38,7 @@
   /* --- Fonts (CSS vars set by next/font in layout) ---------------------- */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-logo: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 
   /* --- Fluid type scale (1.25 ratio) ------------------------------------ */
   --text-display: clamp(2.75rem, 1.6rem + 4.2vw, 4.5rem);

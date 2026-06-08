@@ -57,7 +57,7 @@ export function Logo({
       </svg>
       <span
         className={cn(
-          "font-display text-xl leading-none font-semibold tracking-tight",
+          "font-logo text-xl leading-none font-semibold tracking-[0.02em]",
           textColor,
         )}
       >
