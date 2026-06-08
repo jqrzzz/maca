@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { siteJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Splash } from "@/components/Splash";
 
 const analyticsEnabled =
   process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
@@ -59,6 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontVariables} h-full antialiased`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col bg-cream">
+        <Splash />
         <ThemeProvider>
           <a
             href="#main"

@@ -182,3 +182,150 @@
     animation: none !important;
   }
 }
+
+/* ----------------------------------------------------------------------------
+   Brand splash (components/Splash.tsx) — first-load intro, once per session.
+   A warm, dawn-like glow + a prism that settles and gently breathes: life,
+   warmth, hope. Repeat views / reduced-motion are hidden before paint.
+   ---------------------------------------------------------------------------- */
+.prasm-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(
+    125% 125% at 50% 38%,
+    #234633 0%,
+    #16301f 46%,
+    #0d1d12 100%
+  );
+  animation: prasm-splash-out 2.2s ease-in-out forwards;
+}
+.prasm-splash-skip .prasm-splash {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-splash {
+    display: none;
+  }
+}
+
+.prasm-splash__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+.prasm-splash__markwrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.prasm-splash__glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(231, 139, 46, 0.5) 0%,
+    rgba(231, 139, 46, 0.16) 38%,
+    rgba(231, 139, 46, 0) 70%
+  );
+  animation: prasm-splash-glow 3s ease-in-out infinite;
+}
+.prasm-splash__ring {
+  position: absolute;
+  width: 116px;
+  height: 116px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(242, 168, 90, 0.45);
+  opacity: 0;
+  animation: prasm-splash-ring 2.6s ease-out 0.5s;
+}
+.prasm-splash__mark {
+  position: relative;
+  transform-origin: 50% 60%;
+  animation:
+    prasm-splash-mark 0.9s cubic-bezier(0.16, 1, 0.3, 1) both,
+    prasm-splash-breathe 3s ease-in-out 0.9s infinite;
+}
+.prasm-splash__word {
+  font-family: var(--font-logo), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: 0.2em;
+  padding-left: 0.2em; /* balance the tracking for optical centering */
+  color: #fffdf8;
+  opacity: 0;
+  animation: prasm-splash-word 0.8s ease-out 0.45s both;
+}
+
+@keyframes prasm-splash-out {
+  0%,
+  60% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes prasm-splash-mark {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes prasm-splash-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(0) scale(1.035);
+  }
+}
+@keyframes prasm-splash-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.94);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.06);
+  }
+}
+@keyframes prasm-splash-ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  18% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.3);
+  }
+}
+@keyframes prasm-splash-word {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
