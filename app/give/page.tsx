@@ -24,7 +24,7 @@ import { giveFaqs } from "@/content/faqs";
 export const metadata: Metadata = buildMetadata({
   title: "Ways to Give",
   description:
-    "Give to MACA by card, PayPal, Patreon, or crypto — or donate supplies in kind. Every gift, in any form, restores care and dignity.",
+    "Give to PRASM by card, PayPal, Patreon, or crypto — or donate supplies in kind. Every gift, in any form, restores care and dignity.",
   path: "/give",
 });
 

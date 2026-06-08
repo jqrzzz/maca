@@ -8,7 +8,7 @@ import { privacy } from "@/content/legal/privacy";
 export const metadata: Metadata = buildMetadata({
   title: "Privacy",
   description:
-    "How MACA handles the small amount of data this website involves.",
+    "How PRASM handles the small amount of data this website involves.",
   path: "/privacy",
 });
 

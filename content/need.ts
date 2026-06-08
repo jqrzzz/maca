@@ -6,7 +6,7 @@
 export const needIntro = {
   eyebrow: "The need",
   title: "Invisible, but not powerless",
-  lede: "The families MACA supports fled a war that took their homes. In Thailand they are safe from the fighting — but without papers, they fall through every system built to help.",
+  lede: "The families PRASM supports fled a war that took their homes. In Thailand they are safe from the fighting — but without papers, they fall through every system built to help.",
 };
 
 export type NeedSection = {
@@ -42,7 +42,7 @@ export const needSections: NeedSection[] = [
     title: "This is not a story of helplessness",
     body: [
       "The village is off-grid and largely self-sufficient: solar pumps the water, gardens and animals provide food, and neighbors hold one another up through deep tribal solidarity.",
-      "What's missing isn't will or dignity — it's a few things outsiders can provide: a way to be seen, a way to be treated when sick, and a way for children to learn. That's where MACA comes in.",
+      "What's missing isn't will or dignity — it's a few things outsiders can provide: a way to be seen, a way to be treated when sick, and a way for children to learn. That's where PRASM comes in.",
     ],
   },
 ];

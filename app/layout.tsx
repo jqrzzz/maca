@@ -7,8 +7,9 @@ import { site } from "@/content/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { organizationJsonLd } from "@/lib/seo";
+import { siteJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Splash } from "@/components/Splash";
 
 const analyticsEnabled =
   process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
@@ -21,12 +22,30 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  category: "Nonprofit",
+  alternates: { canonical: "/" },
+  formatDetection: { telephone: false, address: false, email: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
     url: site.url,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
@@ -41,6 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontVariables} h-full antialiased`} suppressHydrationWarning>
       <body className="flex min-h-full flex-col bg-cream">
+        <Splash />
         <ThemeProvider>
           <a
             href="#main"
@@ -48,7 +68,7 @@ export default function RootLayout({
           >
             Skip to content
           </a>
-          <JsonLd data={organizationJsonLd()} />
+          <JsonLd data={siteJsonLd()} />
           <Header />
           <main id="main" className="flex-1">
             {children}

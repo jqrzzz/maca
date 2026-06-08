@@ -6,9 +6,10 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
- * Branded social-share card, generated at build time.
- * Uses system fonts + simple boxes only (Satori is strict about flex/SVG),
- * so it has no external dependencies and renders reliably.
+ * Branded social-share card (1200×630), generated at build time and served as
+ * og:image / twitter:image for every route. Kept dependency-free (next/og's
+ * built-in font, inline SVG mark) so it renders reliably and the logo shows up
+ * across WhatsApp, iMessage, Slack, X, LinkedIn, Facebook, etc.
  */
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -20,50 +21,37 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #1F3D2B 0%, #112417 100%)",
-          padding: "80px",
+          background: "linear-gradient(135deg, #1F3D2B 0%, #0E2014 100%)",
+          padding: 84,
           color: "#FFFDF8",
-          fontFamily: "Georgia, serif",
         }}
       >
         {/* Mark + wordmark */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div
-            style={{
-              display: "flex",
-              width: 64,
-              height: 64,
-              borderRadius: 18,
-              background: "#B45309",
-              alignItems: "center",
-              justifyContent: "center",
-              marginRight: 24,
-            }}
+          <svg
+            width="88"
+            height="88"
+            viewBox="0 0 40 40"
+            style={{ marginRight: 26 }}
           >
-            <div
-              style={{
-                display: "flex",
-                width: 18,
-                height: 18,
-                borderRadius: 999,
-                background: "#E0A458",
-              }}
-            />
-          </div>
-          <span style={{ fontSize: 44, fontWeight: 600, letterSpacing: -1 }}>
+            <polygon points="20,6 6,34 34,34" fill="#E78B2E" />
+            <polygon points="20,6 6,34 20,24.67" fill="#F2A85A" />
+            <polygon points="6,34 34,34 20,24.67" fill="#C46A1C" />
+          </svg>
+          <span style={{ fontSize: 48, fontWeight: 700, letterSpacing: 2 }}>
             {site.shortName}
           </span>
         </div>
 
-        {/* Headline */}
+        {/* Headline + place */}
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               display: "flex",
-              fontSize: 64,
+              fontSize: 62,
               fontWeight: 600,
-              lineHeight: 1.1,
-              maxWidth: 920,
+              lineHeight: 1.12,
+              maxWidth: 960,
             }}
           >
             {site.tagline}
@@ -71,10 +59,11 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              fontSize: 28,
-              marginTop: 24,
-              color: "#E0A458",
-              fontFamily: "Arial, sans-serif",
+              alignItems: "center",
+              marginTop: 30,
+              fontSize: 26,
+              color: "#E6A24A",
+              letterSpacing: 1,
             }}
           >
             {site.location.region}, {site.location.country}

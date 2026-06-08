@@ -4,14 +4,14 @@
  */
 
 export const hero = {
-  eyebrow: "Karenni & Kayan refugees · Mae Hong Son, Thailand",
+  eyebrow: "Kayan refugees · Mae Hong Son, Thailand",
   title: "A community the world overlooked — refusing to be erased.",
-  lede: "MACA stands with refugee families who fled war in Myanmar and now live without papers in the Thai hills. We help them stay well, prove who they are, and build a future on their own terms.",
+  lede: "PRASM stands with refugee families who fled war in Myanmar and now live without papers in the Thai hills. We help them stay well, prove who they are, and build a future on their own terms.",
 };
 
 export const mission = {
   statement:
-    "We believe no one should be invisible. MACA restores care, identity, and dignity to people the system can't see.",
+    "We believe no one should be invisible. PRASM restores care, identity, and dignity to people the system can't see.",
   values: ["Dignity", "Self-reliance", "Solidarity"],
 };
 
@@ -46,7 +46,7 @@ export const founderNote = {
   quote:
     "I'm a doctor. The first thing I could give this family wasn't money — it was a record. For a child with no papers, a medical history became the first proof that he exists.",
   // TODO[user]: confirm how to attribute the founder publicly.
-  attribution: "MACA's founding doctor",
+  attribution: "PRASM's founding doctor",
 };
 
 export const waysToHelp = {

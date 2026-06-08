@@ -49,7 +49,7 @@ export function NewsletterForm({ className }: { className?: string }) {
 
   // Fallback: compose a subscribe email.
   const mailto = `mailto:${config.contact.email}?subject=${encodeURIComponent(
-    "Subscribe to MACA field notes",
+    "Subscribe to PRASM field notes",
   )}&body=${encodeURIComponent(
     "Please add me to your updates. My email: " + (email || "(type your email here)"),
   )}`;

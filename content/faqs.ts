@@ -11,7 +11,7 @@ export const giveFaqs: Faq[] = [
   },
   {
     q: "Are donations tax-deductible?",
-    a: "Not at this time. MACA is still formalizing its legal structure, so we can't promise tax-deductible receipts yet. We'd rather be upfront than imply otherwise.",
+    a: "Not at this time. PRASM is still formalizing its legal structure, so we can't promise tax-deductible receipts yet. We'd rather be upfront than imply otherwise.",
   },
   {
     q: "Is giving by card secure?",

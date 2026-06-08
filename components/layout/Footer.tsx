@@ -53,7 +53,7 @@ export function Footer() {
             grid.
           </p>
           <p>
-            A community-led effort for Karenni &amp; Kayan refugees in{" "}
+            A community-led effort for Kayan refugees in{" "}
             {site.location.region}.
           </p>
         </div>

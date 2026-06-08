@@ -33,7 +33,7 @@ export const note: FieldNote = {
     },
     {
       type: "p",
-      text: "This is the idea MACA is built on. If we can help people be seen — with a record, a history, a name the system recognizes — many other doors begin to open.",
+      text: "This is the idea PRASM is built on. If we can help people be seen — with a record, a history, a name the system recognizes — many other doors begin to open.",
     },
   ],
 };

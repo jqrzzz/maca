@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = buildMetadata({
   title: "Transparency",
   description:
-    "How MACA operates today — founder-led, direct to the community — and an honest note on our current legal status.",
+    "How PRASM operates today — founder-led, direct to the community — and an honest note on our current legal status.",
   path: "/transparency",
 });
 

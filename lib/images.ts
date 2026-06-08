@@ -24,7 +24,7 @@ export type MediaRef = {
 export const images = {
   heroMain: {
     src: "/images/hero/main.jpg",
-    alt: "Karenni villagers gathered together in the hills of Mae Hong Son at golden hour.",
+    alt: "Kayan villagers gathered together in the hills of Mae Hong Son at golden hour.",
     placeholder: true,
     ratio: "16/10",
   },
@@ -66,7 +66,7 @@ export const images = {
   },
   founderPortrait: {
     src: "/images/founder/portrait.jpg",
-    alt: "Portrait of MACA's founding doctor in the village.",
+    alt: "Portrait of PRASM's founding doctor in the village.",
     placeholder: true,
     ratio: "1/1",
   },

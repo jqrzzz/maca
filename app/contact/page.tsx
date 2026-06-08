@@ -10,7 +10,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
   description:
-    "Reach MACA on Instagram or Telegram, by email, or through the form. We'd love to hear how you'd like to help.",
+    "Reach PRASM on Instagram or Telegram, by email, or through the form. We'd love to hear how you'd like to help.",
   path: "/contact",
 });
 

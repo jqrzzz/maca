@@ -1,6 +1,6 @@
-# MACA Foundation
+# PRASM Foundation
 
-The website for **MACA**, a foundation supporting Karenni & Kayan refugees from
+The website for **PRASM**, a foundation supporting Kayan refugees from
 Myanmar living off-grid in Mae Hong Son, Thailand — telling their story with
 dignity, making it easy to give, and laying the groundwork for future identity
 and medical-records programs.
@@ -51,7 +51,7 @@ npm run format     # prettier --write .
 ## Before launch
 
 See the checklist in the project plan. In short: set real donation links +
-crypto addresses, add consented photography, finalize the tagline / what "MACA"
+crypto addresses, add consented photography, finalize the tagline / what "PRASM"
 stands for, confirm contact channels, replace placeholder impact stats, review
 the Transparency & Privacy copy, set `NEXT_PUBLIC_SITE_URL`, and run a
 Lighthouse/axe pass.

@@ -8,13 +8,13 @@
 export const transparencyIntro = {
   eyebrow: "Transparency",
   title: "How we operate",
-  lede: "Trust is everything when you're asking people to give. Here's how MACA works today — plainly, without overstating what we are.",
+  lede: "Trust is everything when you're asking people to give. Here's how PRASM works today — plainly, without overstating what we are.",
 };
 
 export const howWeOperate: { title: string; body: string }[] = [
   {
     title: "Founder-led and direct",
-    body: "MACA is a small, founder-led effort. Support reaches the community directly rather than passing through layers of overhead.",
+    body: "PRASM is a small, founder-led effort. Support reaches the community directly rather than passing through layers of overhead.",
   },
   {
     title: "On the ground",
@@ -45,11 +45,11 @@ export const whereSupportGoes: { label: string; body: string }[] = [
   },
 ];
 
-// TODO[user]: confirm and replace with MACA's true legal status.
+// TODO[user]: confirm and replace with PRASM's true legal status.
 export const statusStatement = {
   title: "An honest note on our status",
   body: [
-    "MACA is an emerging, community-focused initiative. We are still formalizing our legal and organizational structure.",
+    "PRASM is an emerging, community-focused initiative. We are still formalizing our legal and organizational structure.",
     "That means we cannot currently promise tax-deductible receipts, and we don't publish audited financials yet. We'd rather tell you that plainly than imply otherwise. As our structure formalizes, this page will be updated.",
     "If you'd like documentation of how a specific gift was used, just ask — we're happy to account for it.",
   ],

@@ -13,7 +13,7 @@ import { aboutIntro, founderStory, village, values } from "@/content/about";
 export const metadata: Metadata = buildMetadata({
   title: "Our Story",
   description:
-    "How MACA grew out of a doctor's visits to a Karenni refugee village — and the realization that medicine alone wasn't enough.",
+    "How PRASM grew out of a doctor's visits to a Kayan refugee village — and the realization that medicine alone wasn't enough.",
   path: "/about",
 });
 
