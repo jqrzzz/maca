@@ -70,6 +70,28 @@
 }
 
 /* ----------------------------------------------------------------------------
+   Dark mode overrides (class-based via next-themes)
+   ---------------------------------------------------------------------------- */
+.dark {
+  --color-cream: #1a1815;
+  --color-sand: #242019;
+  --color-ink: #f5efe6;
+  --color-stone: #a8a198;
+  --color-line: #3d3832;
+  --color-forest-500: #8fc5a3;
+  --color-forest-600: #a8d4b8;
+  --color-forest-700: #c8e6d4;
+  --color-clay-50: #2a2520;
+  --color-clay-100: #3d342a;
+  --color-clay-600: #e0a458;
+  --color-clay-700: #eab86e;
+  --color-gold-400: #f0c878;
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.2),
+    0 8px 24px -12px rgba(0, 0, 0, 0.4);
+  --shadow-lift: 0 12px 40px -16px rgba(0, 0, 0, 0.5);
+}
+
+/* ----------------------------------------------------------------------------
    Base styles
    ---------------------------------------------------------------------------- */
 @layer base {

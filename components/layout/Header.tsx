@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn";
 import { primaryNav, donateCta } from "@/content/nav";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Logo } from "./Logo";
 import { MobileNav } from "./MobileNav";
 
@@ -59,6 +60,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Button
             href={donateCta.href}
             variant="primary"
