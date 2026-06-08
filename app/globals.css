@@ -334,3 +334,43 @@
     transform: translateY(0);
   }
 }
+
+/* ----------------------------------------------------------------------------
+   Hero backdrop (components/HeroBackdrop.tsx) — slow drifting warm glows behind
+   the migration particles. Particles are drawn on a canvas; these are the soft
+   atmospheric layers. Motion is disabled for reduced-motion.
+   ---------------------------------------------------------------------------- */
+@keyframes prasm-hero-glow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(-3%, 3%, 0) scale(1.1);
+    opacity: 1;
+  }
+}
+@keyframes prasm-hero-glow-2 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.12);
+    opacity: 0.95;
+  }
+}
+.prasm-hero-glow {
+  animation: prasm-hero-glow 19s ease-in-out infinite;
+}
+.prasm-hero-glow-2 {
+  animation: prasm-hero-glow-2 23s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-hero-glow,
+  .prasm-hero-glow-2 {
+    animation: none;
+  }
+}
