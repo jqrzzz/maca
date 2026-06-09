@@ -5,7 +5,7 @@ import {
   Package,
   Share2,
 } from "lucide-react";
-import { PageHero } from "@/components/Hero";
+import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";

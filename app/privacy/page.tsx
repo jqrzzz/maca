@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/Hero";
+import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Prose } from "@/components/ui/Prose";
 import { buildMetadata } from "@/lib/metadata";

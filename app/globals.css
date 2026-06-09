@@ -460,3 +460,60 @@
   background: rgba(20, 20, 20, 0.85);
   border-color: rgba(255, 255, 255, 0.45);
 }
+
+/* Film contained within the hero box (components/Hero.tsx). */
+.prasm-film-boxed {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #0a0a0a;
+  animation: prasm-film-fade 0.4s ease both;
+}
+/* Drop the close control below the transparent sticky header when boxed. */
+.prasm-film-boxed .prasm-film-close {
+  top: 84px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-film-boxed {
+    animation: none;
+  }
+}
+
+/* Hero's big centered play button + inviting pulse ring. */
+.prasm-hero-play {
+  cursor: pointer;
+}
+.prasm-hero-play__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 253, 248, 0.5);
+  pointer-events: none;
+  animation: prasm-hero-pulse 2.8s ease-out infinite;
+}
+@media (min-width: 768px) {
+  .prasm-hero-play__ring {
+    width: 6rem;
+    height: 6rem;
+  }
+}
+@keyframes prasm-hero-pulse {
+  0% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.85);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-hero-play__ring {
+    animation: none;
+    opacity: 0;
+  }
+}

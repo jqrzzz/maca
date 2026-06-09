@@ -1,8 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { Container } from "@/components/ui/Container";
-import { HeroWatch } from "@/components/HeroWatch";
 import { Button, type ButtonProps } from "@/components/ui/Button";
 import { Figure } from "@/components/Figure";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import { PrasmIntro } from "@/components/intro/PrasmIntro";
 import { cn } from "@/lib/cn";
 import type { MediaRef } from "@/lib/images";
 
@@ -14,7 +17,9 @@ type HeroAction = {
 };
 
 /**
- * Home hero — full-bleed image with a warm scrim and overlaid copy.
+ * Home hero — animated ambient backdrop with overlaid copy. A big centered
+ * play button (and a small one by the CTAs) opens the intro film *in place*,
+ * contained within the hero box; closing returns to the hero.
  */
 export function Hero({
   eyebrow,
@@ -29,6 +34,9 @@ export function Hero({
   image?: MediaRef;
   actions: HeroAction[];
 }) {
+  const [playing, setPlaying] = useState(false);
+  const play = () => setPlaying(true);
+
   return (
     <section className="relative isolate overflow-hidden">
       {/* Background — animated ambient backdrop (or a photo, if provided) */}
@@ -45,8 +53,37 @@ export function Hero({
         />
       </div>
 
+      {/* Big centered play button */}
+      {!playing && (
+        <button
+          type="button"
+          onClick={play}
+          aria-label="Play the film"
+          className="prasm-hero-play group absolute top-[40%] left-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+        >
+          <span aria-hidden className="prasm-hero-play__ring" />
+          <span className="relative flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border border-cream/50 bg-cream/10 backdrop-blur-sm transition-all duration-300 group-hover:scale-105 group-hover:border-cream group-hover:bg-cream/20 md:h-24 md:w-24">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="#fffdf8"
+              aria-hidden
+              className="ml-1 md:h-8 md:w-8"
+            >
+              <path d="M6 4.5 19 12 6 19.5z" />
+            </svg>
+          </span>
+        </button>
+      )}
+
       <Container className="flex min-h-[88vh] flex-col justify-end pt-32 pb-20 md:min-h-[90vh] md:pb-28">
-        <div className="max-w-2xl">
+        <div
+          className={cn(
+            "max-w-2xl transition-opacity duration-500",
+            playing && "pointer-events-none opacity-0",
+          )}
+        >
           <p className="mb-4 text-sm font-semibold tracking-[0.12em] text-gold-400 uppercase">
             {eyebrow}
           </p>
@@ -65,40 +102,33 @@ export function Hero({
               </Button>
             ))}
           </div>
-          <HeroWatch />
+          <button
+            type="button"
+            onClick={play}
+            aria-label="Play the film"
+            className="group mt-7 inline-flex items-center gap-3 text-sm font-semibold tracking-[0.03em] text-cream/85 transition-colors hover:text-cream"
+          >
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cream/40 bg-cream/5 transition-colors group-hover:border-cream group-hover:bg-cream/15">
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
+                <path d="M3 2.2 10 6 3 9.8z" />
+              </svg>
+            </span>
+            Watch the film
+          </button>
         </div>
       </Container>
-    </section>
-  );
-}
 
-/**
- * Interior page hero — compact, on cream, no background image.
- */
-export function PageHero({
-  eyebrow,
-  title,
-  lede,
-  className,
-}: {
-  eyebrow?: string;
-  title: string;
-  lede?: string;
-  className?: string;
-}) {
-  return (
-    <section className={cn("border-b border-line bg-sand", className)}>
-      <Container className="py-16 md:py-24">
-        <div className="max-w-3xl">
-          {eyebrow && (
-            <p className="mb-3 text-[0.8125rem] font-semibold tracking-[0.12em] text-clay-600 uppercase">
-              {eyebrow}
-            </p>
-          )}
-          <h1 className="text-h1">{title}</h1>
-          {lede && <p className="text-lede mt-5 text-stone">{lede}</p>}
+      {/* The film, contained within the hero box */}
+      {playing && (
+        <div
+          className="prasm-film-boxed"
+          role="dialog"
+          aria-modal="true"
+          aria-label="PRASM — a warm introduction"
+        >
+          <PrasmIntro onClose={() => setPlaying(false)} />
         </div>
-      </Container>
+      )}
     </section>
   );
 }
