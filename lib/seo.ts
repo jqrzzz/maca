@@ -1,5 +1,6 @@
 import { site } from "@/content/site";
 import { socialList } from "@/content/social";
+import type { Faq } from "@/content/faqs";
 
 /**
  * Structured data (schema.org JSON-LD) describing PRASM. Rendered once in the
@@ -49,5 +50,18 @@ export function siteJsonLd() {
   return {
     "@context": "https://schema.org",
     "@graph": [organizationJsonLd(), websiteJsonLd()],
+  };
+}
+
+/** FAQPage schema so questions can surface as Google rich results. */
+export function faqJsonLd(faqs: Faq[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 }

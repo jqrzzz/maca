@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { footerNav } from "@/content/nav";
+import { footerNav, legalNav } from "@/content/nav";
 import { site } from "@/content/site";
 import { Logo } from "./Logo";
 import { SocialLinks } from "./SocialLinks";
@@ -47,14 +47,27 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-cream/15 pt-8 text-xs text-cream/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} {site.name}. Built with care, off the
+        <div className="mt-14 border-t border-cream/15 pt-8 text-xs text-cream/55">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              © {new Date().getFullYear()} {site.name} · {site.location.region},{" "}
+              {site.location.country}
+            </p>
+            <nav aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-2">
+              {legalNav.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="transition-colors hover:text-cream"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+          <p className="mt-5 text-cream/45">
+            A community-led effort for Kayan refugees — built with care, off the
             grid.
-          </p>
-          <p>
-            A community-led effort for Kayan refugees in{" "}
-            {site.location.region}.
           </p>
         </div>
       </Container>

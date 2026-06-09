@@ -9,6 +9,8 @@ import {
   transparencyIntro,
   howWeOperate,
   whereSupportGoes,
+  leadership,
+  howWeReport,
   statusStatement,
 } from "@/content/transparency";
 
@@ -64,9 +66,31 @@ export default function TransparencyPage() {
         </div>
       </Section>
 
-      {/* Honest status statement */}
+      {/* Leadership & how we report */}
       <Section tone="cream">
-        <div className="mx-auto max-w-2xl rounded-[20px] border-l-4 border-gold-400 bg-sand p-8">
+        <SectionHeading
+          eyebrow="Who & how"
+          title="Leadership & accountability"
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {[leadership, howWeReport].map((block, i) => (
+            <Reveal key={block.title} delay={i * 80}>
+              <div className="h-full rounded-[20px] border border-line bg-cream p-6 shadow-soft">
+                <h3 className="text-h3 text-clay-700">{block.title}</h3>
+                <div className="mt-3 space-y-3 text-stone">
+                  {block.body.map((para, j) => (
+                    <p key={j}>{para}</p>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* Honest status statement */}
+      <Section tone="sand">
+        <div className="mx-auto max-w-2xl rounded-[20px] border-l-4 border-gold-400 bg-cream p-8">
           <h2 className="text-h3">{statusStatement.title}</h2>
           <div className="mt-4 space-y-4 text-stone">
             {statusStatement.body.map((para, i) => (

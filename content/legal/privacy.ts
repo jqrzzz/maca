@@ -22,6 +22,12 @@ export const privacy = {
       ],
     },
     {
+      title: "Cookies",
+      body: [
+        "This site does not use advertising or tracking cookies, and our analytics (when enabled) are cookieless. We may use a small amount of local browser storage for essentials — for example, remembering your light/dark theme and whether you've already seen the intro. That stays on your device and isn't shared with us. Because we don't set tracking cookies, you won't see a cookie-consent banner.",
+      ],
+    },
+    {
       title: "Third-party services",
       body: [
         "Donation links take you to third-party providers (Stripe, PayPal, Patreon) and crypto wallets. Those services have their own privacy policies, which govern any data you share with them.",

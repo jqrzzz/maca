@@ -41,8 +41,16 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     title: "Support",
     links: [
       { label: "Ways to Give", href: "/give" },
+      { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
-      { label: "Privacy", href: "/privacy" },
     ],
   },
+];
+
+/** Legal / policy links — rendered in the footer's bottom bar. */
+export const legalNav: NavLink[] = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+  { label: "Donation Policy", href: "/donation-policy" },
+  { label: "Accessibility", href: "/accessibility" },
 ];

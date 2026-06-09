@@ -13,9 +13,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/field-notes",
     "/give",
     "/get-involved",
+    "/faq",
     "/transparency",
     "/contact",
     "/privacy",
+    "/terms",
+    "/donation-policy",
+    "/accessibility",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: new Date(),

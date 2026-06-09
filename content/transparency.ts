@@ -45,6 +45,23 @@ export const whereSupportGoes: { label: string; body: string }[] = [
   },
 ];
 
+export const leadership = {
+  title: "Leadership & governance",
+  body: [
+    "PRASM is led by its founder — a doctor whose visits to the village began this work — supported by a small circle of volunteers and the families themselves.",
+    "As we formalize, we intend to add named leadership, advisors, and basic governance, and to publish them here. We'd rather introduce real, accountable people than hide behind a logo. If you'd like to know who you're talking to, just ask.",
+  ],
+};
+// TODO[user]: when consent allows, replace with the named founder + advisors/board.
+
+export const howWeReport = {
+  title: "How we report",
+  body: [
+    "We don't yet publish audited financials, and we won't pretend otherwise. What we can offer now is openness: ongoing field notes from the village, a plain account of where support goes, and a direct answer whenever you ask how a specific gift was used.",
+    "As the work grows, we plan to share regular updates and a simple yearly summary of what your support made possible.",
+  ],
+};
+
 // TODO[user]: confirm and replace with PRASM's true legal status.
 export const statusStatement = {
   title: "An honest note on our status",
