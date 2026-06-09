@@ -323,7 +323,11 @@ My lean is listed first where I have one.
   can't be first. Say the word if your heart's elsewhere.
 - **Entity path** (from our last talk): own Thai foundation vs. fiscal
   sponsorship vs. a US 501(c)(3) sponsor. Gates tax receipts and the
-  "registered" language on the site.
+  "registered" language on the site. → Researched: see
+  [`docs/governance/entity-options.md`](governance/entity-options.md). Lead
+  suggestion is a **US fiscal sponsor now**, a Thai presence (FPO or foundation)
+  next — but it hinges on two facts only you know: where most donors are, and
+  whether the founder is Thai or foreign.
 - **AI tooling for the engine room:** default to the strongest general model,
   with a private/local option reserved for Tier 2. (Recommendation, not urgent.)
 - **When to cross into Stage B** (backend): my advice — not until Stage A has
@@ -331,6 +335,8 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.7** — June 2026 — researched the entity/legal-structure decision
+  (`docs/governance/entity-options.md`) and added the governance & policy suite.
 - **v0.6** — June 2026 — added the grants tracker (`scripts/grants-tracker/`),
   the field-notes RSS feed (`/feed.xml`), and a validated starter ICD-10
   reference (`docs/clinical/`).
