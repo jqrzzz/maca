@@ -302,10 +302,12 @@ In order:
    see [`scripts/field-to-story/`](../scripts/field-to-story)._
 3. **Bake in the approval checklist:** consent tag, safety/location check, voice
    check. ✅ _Done — deterministic scans in
-   [`checks.ts`](../scripts/field-to-story/checks.ts)._
+   [`scripts/lib/checks.ts`](../scripts/lib/checks.ts), shared by both tools._
 4. **One real run:** take an actual field visit end to end; publish one field
-   note, send one update; learn and refine the voice and templates.
+   note, send one update; learn and refine the voice and templates. _(Needs a
+   real voice note + an API key — over to the founder.)_
 5. **Grants copilot (v0)** once the Story Bank exists — it reuses it directly.
+   ✅ _Done — see [`scripts/grants/`](../scripts/grants)._
 
 Then reassess: has Stage A earned a Stage B backend?
 
@@ -327,6 +329,8 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.4** — June 2026 — added the Grants copilot and extracted the shared
+  drafting lib (`scripts/grants/`, `scripts/lib/`), Stage A item 5.
 - **v0.3** — June 2026 — built the Field-to-Story tool + baked-in approval
   checklist (`scripts/field-to-story/`), Stage A items 2–3.
 - **v0.2** — June 2026 — stood up the Story Bank (`content/storyBank/`), Stage A
