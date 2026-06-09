@@ -2,9 +2,9 @@
  * Field-to-Story (v0) — CLI runner.
  *
  * Turns a field-input JSON file into three grounded DRAFTS (field note, donor
- * update, social caption) using the Story Bank for grounding and the Claude API
- * for drafting. Defaults to a DRY RUN (assemble the prompt + scan the input, no
- * API call); pass --live (with ANTHROPIC_API_KEY) to generate the drafts.
+ * update, social caption), grounded in the Story Bank and drafted by Claude.
+ * Defaults to a DRY RUN (assemble the prompt + scan the input, no API call);
+ * pass --live (with ANTHROPIC_API_KEY) to generate the drafts.
  *
  * Nothing is ever published. Output is written to drafts/<date>-<slug>/ for a
  * human to review against the checklist. See ./README.md.
@@ -14,26 +14,19 @@
 import fs from "node:fs";
 import path from "node:path";
 import { buildSystemPrompt, buildUserPrompt, draftSchema } from "./prompt";
-import {
-  runChecks,
-  MANUAL_CHECKS,
-  formatFindings,
-  type Finding,
-} from "./checks";
+import { runChecks, formatFindings, type Finding } from "../lib/checks";
+import { callClaude } from "../lib/claude";
+import { loadLocalEnv, slugify } from "../lib/util";
 import type { DraftBundle, FieldInput } from "./types";
 
-const MODEL = process.env.FIELD_TO_STORY_MODEL ?? "claude-opus-4-8";
-
-/** Load KEY=VALUE pairs from .env.local (e.g. ANTHROPIC_API_KEY) without a dep. */
-function loadLocalEnv(file = ".env.local"): void {
-  if (!fs.existsSync(file)) return;
-  for (const line of fs.readFileSync(file, "utf8").split("\n")) {
-    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
-    if (m && process.env[m[1]] === undefined) {
-      process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
-    }
-  }
-}
+/** The human-in-the-loop checklist — always required, scans or no scans. */
+const FIELD_MANUAL_CHECKS: string[] = [
+  "No detail (place name, landmark, road, view) could locate the village.",
+  "No person is named or shown beyond the consent on file; any quote from a real person is consented.",
+  "Every figure traces to a VERIFIED fact (not a placeholder).",
+  "Reads in PRASM's voice — dignity first, no pity, no overclaim.",
+  "A human has approved this before anything is published or sent.",
+];
 
 type Args = { input: string; out: string; live: boolean };
 
@@ -72,43 +65,12 @@ Usage:
 Drafts are for human review only — never auto-published. See scripts/field-to-story/README.md.`);
 }
 
-function slugify(s: string): string {
-  return (
-    s
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 50) || "draft"
-  );
-}
-
 function loadInput(file: string): FieldInput {
   const data = JSON.parse(fs.readFileSync(file, "utf8")) as FieldInput;
   if (typeof data.raw !== "string" || !data.raw.trim()) {
     throw new Error(`Input ${file} must have a non-empty "raw" field.`);
   }
   return data;
-}
-
-async function generate(system: string, user: string): Promise<DraftBundle> {
-  const { default: Anthropic } = await import("@anthropic-ai/sdk");
-  const client = new Anthropic();
-  const res = await client.messages.create({
-    model: MODEL,
-    max_tokens: 16000,
-    thinking: { type: "adaptive" },
-    output_config: {
-      effort: "high",
-      format: { type: "json_schema", schema: draftSchema },
-    },
-    system,
-    messages: [{ role: "user", content: user }],
-  });
-  const block = res.content.find((b) => b.type === "text");
-  if (!block || block.type !== "text") {
-    throw new Error("No text block in the model response.");
-  }
-  return JSON.parse(block.text) as DraftBundle;
 }
 
 function renderFieldNoteTs(b: DraftBundle, slug: string, date: string): string {
@@ -164,7 +126,7 @@ function renderReview(o: {
     "",
     "Manual checks (always required):",
     "",
-    MANUAL_CHECKS.map((c) => `- [ ] ${c}`).join("\n"),
+    FIELD_MANUAL_CHECKS.map((c) => `- [ ] ${c}`).join("\n"),
     "",
   ];
 
@@ -235,7 +197,12 @@ async function main(): Promise<void> {
   let sections: { label: string; text: string }[];
 
   if (live) {
-    bundle = await generate(system, user);
+    bundle = await callClaude<DraftBundle>({
+      system,
+      user,
+      schema: draftSchema,
+      model: process.env.FIELD_TO_STORY_MODEL,
+    });
     fs.writeFileSync(
       path.join(outDir, "response.json"),
       JSON.stringify(bundle, null, 2),
@@ -271,11 +238,13 @@ async function main(): Promise<void> {
   );
 
   console.log(`\nField-to-Story ${live ? "(live)" : "(dry run)"} → ${outDir}`);
-  console.log(`Model: ${live ? MODEL : "— (no API call)"}`);
+  console.log(
+    `Model: ${live ? (process.env.FIELD_TO_STORY_MODEL ?? "claude-opus-4-8") : "— (no API call)"}`,
+  );
   console.log(`\nChecklist scan (${live ? "drafts" : "field input"}):`);
   console.log(formatFindings(findings));
   console.log("\nManual checks (always required):");
-  for (const c of MANUAL_CHECKS) console.log(`  [ ] ${c}`);
+  for (const c of FIELD_MANUAL_CHECKS) console.log(`  [ ] ${c}`);
   console.log(
     `\nReview ${path.join(outDir, "review.md")} — nothing is published until a human approves.`,
   );

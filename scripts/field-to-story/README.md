@@ -81,10 +81,11 @@ In `drafts/<date>-<slug>/`:
 
 - **Grounded only.** The prompt is built entirely from the Story Bank; the model is
   told never to invent facts, numbers, names, quotes, or outcomes.
-- **Checklist baked in.** [`checks.ts`](./checks.ts) runs deterministic scans (it
-  does not trust the model) for location leaks, possible un-consented names, voice
-  slips, and figures that resemble placeholder/unverified values — on your input in
-  a dry run, and on the drafts in a live run. It flags; it never green-lights.
+- **Checklist baked in.** The deterministic scans in
+  [`scripts/lib/checks.ts`](../lib/checks.ts) do not trust the model — they flag
+  location leaks, possible un-consented names, voice slips, honesty overclaims, and
+  figures that resemble placeholder/unverified values, on your input in a dry run
+  and on the drafts in a live run. They flag; they never green-light.
 - **Human approves.** Every draft is marked _not for publication_ until a person
   signs off. See [`docs/concept.md`](../../docs/concept.md) → Red lines.
 
@@ -93,7 +94,9 @@ In `drafts/<date>-<slug>/`:
 | File                | Role                                                            |
 | ------------------- | --------------------------------------------------------------- |
 | `run.ts`            | CLI entry — parse args, load input, dry-run/live, write output. |
-| `prompt.ts`         | Builds the grounding prompt from the Story Bank + the schema.   |
-| `checks.ts`         | The deterministic approval checklist.                           |
+| `prompt.ts`         | Builds the field-note prompt + the schema.                      |
 | `types.ts`          | Input + draft-bundle types.                                     |
 | `sample-input.json` | A clearly-marked sample field note for the dry run.             |
+
+The grounding block, the deterministic checklist, and the Claude call are shared
+with the Grants copilot and live in [`scripts/lib/`](../lib).

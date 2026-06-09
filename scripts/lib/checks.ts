@@ -1,11 +1,11 @@
 /**
- * Field-to-Story (v0) — the approval checklist, baked in.
+ * The approval checklist, baked in — shared by every drafting tool.
  *
- * Deterministic scans that DO NOT trust the model: they look for location
- * leaks, possible un-consented names, voice slips, and figures that resemble
- * unverified/placeholder values. Scans run on the founder's raw input (dry run)
- * and on the generated drafts (live). They flag for a human — they never green-
- * light publishing. The MANUAL_CHECKS always apply on top.
+ * Deterministic scans that DO NOT trust the model: location leaks, possible
+ * un-consented names, voice slips, figures that resemble unverified/placeholder
+ * values, and honesty overclaims (registration / tax-deductibility PRASM can't
+ * claim yet). Scans flag for a human; they never green-light publishing. Each
+ * tool layers its own manual checklist on top.
  */
 import { facts } from "@/content/storyBank";
 
@@ -18,6 +18,22 @@ const AVOID_WORDS = [
   "beneficiary",
   "beneficiaries",
   "the poor",
+];
+
+// Phrases that would overclaim PRASM's legal status (it is not yet registered).
+const OVERCLAIM_PATTERNS: { re: RegExp; label: string }[] = [
+  { re: /\btax[-\s]?deductible\b/i, label: "tax-deductible" },
+  { re: /\btax[-\s]?exempt\b/i, label: "tax-exempt" },
+  { re: /\b501\s?\(?c\)?\s?\(?3\)?\b/i, label: "501(c)(3)" },
+  {
+    re: /\bregistered\s+(?:charity|ngo|non-?profit|foundation)\b/i,
+    label: "registered charity/NGO",
+  },
+  {
+    re: /\baudited\s+(?:financials|accounts|statements)\b/i,
+    label: "audited financials",
+  },
+  { re: /\bcharitable\s+status\b/i, label: "charitable status" },
 ];
 
 // Title-case tokens that are safe to see paired (place/region/org words).
@@ -105,6 +121,13 @@ function scanAvoidWords(section: string, text: string): Finding[] {
   }));
 }
 
+function scanOverclaim(section: string, text: string): Finding[] {
+  return OVERCLAIM_PATTERNS.filter((p) => p.re.test(text)).map((p) => ({
+    section,
+    note: `Honesty — mentions "${p.label}"; PRASM is not yet registered. Confirm this is an honest disclosure ("not yet"), not a claim.`,
+  }));
+}
+
 function scanLocation(section: string, text: string): Finding[] {
   const out: Finding[] = [];
   if (/\b\d{1,3}\.\d{4,}\b/.test(text) || /\b\d{1,3}\s?°/.test(text)) {
@@ -154,6 +177,7 @@ export function runChecks(
   for (const { label, text } of sections) {
     findings.push(
       ...scanAvoidWords(label, text),
+      ...scanOverclaim(label, text),
       ...scanLocation(label, text),
       ...scanNames(label, text),
       ...scanFigures(label, text),
@@ -161,15 +185,6 @@ export function runChecks(
   }
   return findings;
 }
-
-/** The human-in-the-loop checklist — always required, scans or no scans. */
-export const MANUAL_CHECKS: string[] = [
-  "No detail (place name, landmark, road, view) could locate the village.",
-  "No person is named or shown beyond the consent on file; any quote from a real person is consented.",
-  "Every figure traces to a VERIFIED fact (not a placeholder).",
-  "Reads in PRASM's voice — dignity first, no pity, no overclaim.",
-  "A human has approved this before anything is published or sent.",
-];
 
 export function formatFindings(findings: Finding[]): string {
   if (!findings.length) return "  no automated flags";
