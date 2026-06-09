@@ -51,6 +51,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
 export const legalNav: NavLink[] = [
   { label: "Privacy", href: "/privacy" },
   { label: "Safeguarding", href: "/safeguarding" },
+  { label: "Governance", href: "/governance" },
   { label: "Terms", href: "/terms" },
   { label: "Donation Policy", href: "/donation-policy" },
   { label: "Accessibility", href: "/accessibility" },
