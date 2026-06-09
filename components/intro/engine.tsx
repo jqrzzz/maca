@@ -200,6 +200,7 @@ export function Stage({
   loop = true,
   autoplay = true,
   onClose,
+  onEnded,
   children,
 }: {
   width?: number;
@@ -209,6 +210,7 @@ export function Stage({
   loop?: boolean;
   autoplay?: boolean;
   onClose?: () => void;
+  onEnded?: () => void;
   children: ReactNode;
 }) {
   const [time, setTime] = useState(0);
@@ -219,6 +221,7 @@ export function Stage({
   const stageRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
+  const endedRef = useRef(false);
 
   // Auto-scale the fixed-size canvas to fit the container (minus the bar).
   useEffect(() => {
@@ -295,6 +298,14 @@ export function Stage({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [duration, onClose]);
+
+  // Fire onEnded once when a non-looping film reaches the end.
+  useEffect(() => {
+    if (!loop && time >= duration && !endedRef.current) {
+      endedRef.current = true;
+      onEnded?.();
+    }
+  }, [time, loop, duration, onEnded]);
 
   const displayTime = hoverTime != null ? hoverTime : time;
   const ctxValue = useMemo<TimelineValue>(

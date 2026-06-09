@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button, type ButtonProps } from "@/components/ui/Button";
 import { Figure } from "@/components/Figure";
@@ -35,7 +35,27 @@ export function Hero({
   actions: HeroAction[];
 }) {
   const [playing, setPlaying] = useState(false);
-  const play = () => setPlaying(true);
+  const [closing, setClosing] = useState(false);
+  const closeTimer = useRef<number | null>(null);
+
+  const play = () => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+    setClosing(false);
+    setPlaying(true);
+  };
+  // Cross-fade out: the film fades away as the hero copy fades back in.
+  const close = () => {
+    if (closeTimer.current) return;
+    setClosing(true);
+    closeTimer.current = window.setTimeout(() => {
+      setPlaying(false);
+      setClosing(false);
+      closeTimer.current = null;
+    }, 450);
+  };
 
   return (
     <section className="relative isolate overflow-hidden">
@@ -81,7 +101,7 @@ export function Hero({
         <div
           className={cn(
             "max-w-2xl transition-opacity duration-500",
-            playing && "pointer-events-none opacity-0",
+            playing && !closing && "pointer-events-none opacity-0",
           )}
         >
           <p className="mb-4 text-sm font-semibold tracking-[0.12em] text-gold-400 uppercase">
@@ -118,12 +138,12 @@ export function Hero({
       {/* The film, contained within the hero box */}
       {playing && (
         <div
-          className="prasm-film-boxed"
+          className={cn("prasm-film-boxed", closing && "is-closing")}
           role="dialog"
           aria-modal="true"
           aria-label="PRASM — a warm introduction"
         >
-          <PrasmIntro onClose={() => setPlaying(false)} />
+          <PrasmIntro loop={false} onClose={close} onEnded={close} />
         </div>
       )}
     </section>

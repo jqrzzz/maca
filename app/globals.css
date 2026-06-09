@@ -473,6 +473,15 @@
 .prasm-film-boxed .prasm-film-close {
   top: 84px;
 }
+/* On close/finish, the film fades out as the hero copy fades back in. */
+.prasm-film-boxed.is-closing {
+  animation: prasm-film-fade-out 0.45s ease forwards;
+}
+@keyframes prasm-film-fade-out {
+  to {
+    opacity: 0;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .prasm-film-boxed {
     animation: none;

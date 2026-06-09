@@ -978,14 +978,24 @@ const SCENES: SceneDef[] = [
 ];
 const DURATION = 95.5;
 
-export function PrasmIntro({ onClose }: { onClose?: () => void }) {
+export function PrasmIntro({
+  onClose,
+  onEnded,
+  loop,
+}: {
+  onClose?: () => void;
+  onEnded?: () => void;
+  loop?: boolean;
+}) {
   return (
     <Stage
       width={W}
       height={H}
       duration={DURATION}
       background={C.cream}
+      loop={loop}
       onClose={onClose}
+      onEnded={onEnded}
     >
       {SCENES.map((s, i) => {
         const SceneComp = s.C;
