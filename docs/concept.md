@@ -130,7 +130,8 @@ Each entry: **what · why here · the loop · what it needs · risks · stage.**
 - **Needs.** Donor records — semi-manual in Stage A, a simple CRM in Stage B.
 - **Risks.** Tier-1 PII (→ [Data and privacy model](#data-and-privacy-model)). A
   human always owns tone. Never spammy.
-- **Stage.** A (manual) → B.
+- **Stage.** A (manual) → B. ✅ _v0 thank-you drafter built — see
+  [`scripts/donor-thanks/`](../scripts/donor-thanks)._
 
 ### 3.4 Identity & Case Registry
 
@@ -329,6 +330,8 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.5** — June 2026 — added the donor-thanks drafter
+  (`scripts/donor-thanks/`), the donor-stewardship thread (§3.3).
 - **v0.4** — June 2026 — added the Grants copilot and extracted the shared
   drafting lib (`scripts/grants/`, `scripts/lib/`), Stage A item 5.
 - **v0.3** — June 2026 — built the Field-to-Story tool + baked-in approval
