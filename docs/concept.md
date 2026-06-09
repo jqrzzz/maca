@@ -162,7 +162,8 @@ Each entry: **what · why here · the loop · what it needs · risks · stage.**
 - **Needs.** Mostly Stage A/B. Inventory and logistics fit a light backend well.
 - **Risks.** **AI is reference, never a clinician** — no diagnosis, no treatment
   decisions. Patient data is Tier 2.
-- **Stage.** A → B.
+- **Stage.** A → B. ✅ _Starter ICD-10 reference built (validated codes) — see
+  [`docs/clinical/icd10-field-reference.md`](clinical/icd10-field-reference.md)._
 
 ### 3.6 Institutional Memory — the Story Bank
 
@@ -330,6 +331,9 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.6** — June 2026 — added the grants tracker (`scripts/grants-tracker/`),
+  the field-notes RSS feed (`/feed.xml`), and a validated starter ICD-10
+  reference (`docs/clinical/`).
 - **v0.5** — June 2026 — added the donor-thanks drafter
   (`scripts/donor-thanks/`), the donor-stewardship thread (§3.3).
 - **v0.4** — June 2026 — added the Grants copilot and extracted the shared
