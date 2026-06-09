@@ -12,6 +12,7 @@ import {
   leadership,
   howWeReport,
   statusStatement,
+  registrationDetails,
 } from "@/content/transparency";
 
 export const metadata: Metadata = buildMetadata({
@@ -100,6 +101,24 @@ export default function TransparencyPage() {
           <Button href="/contact" variant="outline" className="mt-6">
             Ask us anything
           </Button>
+        </div>
+
+        <div className="mx-auto mt-6 max-w-2xl rounded-[20px] border border-line bg-cream p-8">
+          <h3 className="text-h3 text-clay-700">Registration &amp; status</h3>
+          <dl className="mt-5 divide-y divide-line text-sm">
+            {registrationDetails.map((row) => (
+              <div
+                key={row.label}
+                className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              >
+                <dt className="font-medium text-forest-700">{row.label}</dt>
+                <dd className="text-stone sm:text-right">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-5 text-xs text-stone">
+            We keep this current as our registration progresses.
+          </p>
         </div>
       </Section>
     </>

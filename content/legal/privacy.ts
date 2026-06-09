@@ -4,7 +4,7 @@
  */
 
 export const privacy = {
-  lastUpdated: "May 2026",
+  lastUpdated: "June 2026",
   intro:
     "PRASM respects your privacy. This site is a simple, mostly static website with no account system. This page explains the little data that is involved.",
   sections: [
@@ -38,6 +38,19 @@ export const privacy = {
       title: "How we use your information",
       body: [
         "We use what you send only to respond to you, coordinate support, and — if you ask for it — keep you updated. We do not sell your information, ever.",
+      ],
+    },
+    {
+      title: "Photos & stories of the community",
+      body: [
+        "The people in our photos and stories are real. We share their images and words only with informed consent, and we protect identities wherever there's any risk — using first names or none, and never publishing details that could locate or endanger an undocumented community. Anyone featured can ask us to stop using their image or story at any time. For more, see our Safeguarding policy.",
+      ],
+    },
+    {
+      title: "Your rights & Thailand's PDPA",
+      body: [
+        "We operate in Thailand and aim to handle personal data in line with Thailand's Personal Data Protection Act (PDPA). We collect only what we need, for the purposes described here, and keep it no longer than necessary.",
+        "You can ask us to access, correct, or delete the personal data you've shared, withdraw consent, or object to a particular use — just contact us and we'll respond. If we ever handle sensitive information (for example, in our identity or medical work in the community), we treat it with extra care and additional consent.",
       ],
     },
     {

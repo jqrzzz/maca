@@ -71,3 +71,18 @@ export const statusStatement = {
     "If you'd like documentation of how a specific gift was used, just ask — we're happy to account for it.",
   ],
 };
+
+/**
+ * Registration & status facts, shown as a plain table on the Transparency page.
+ * Honest placeholders today — fill these in as the Thai foundation registration
+ * completes. TODO[user]: replace "value" fields below with real details.
+ */
+export const registrationDetails: { label: string; value: string }[] = [
+  { label: "Legal status", value: "Emerging initiative — registration in progress" },
+  { label: "Operating in", value: "Mae Hong Son, Thailand" },
+  { label: "Registered name", value: "To be confirmed" },
+  { label: "Registration number", value: "Pending" },
+  { label: "Registered office", value: "To be confirmed" },
+  { label: "Tax-deductible receipts", value: "Not available yet" },
+  { label: "Governing board", value: "Founder-led; advisors to be named" },
+];
