@@ -296,7 +296,7 @@ In order:
 
 1. **Stand up the Story Bank** as a structured content module — voice, key
    facts, cleared stories, people + consent status. The spine everything grounds
-   on.
+   on. ✅ _Done — see [`content/storyBank/`](../content/storyBank)._
 2. **Field-to-Story tool (v0):** a local script — voice/notes in, three drafts
    out (field note, donor update, caption) — reusing the Story Bank.
 3. **Bake in the approval checklist:** consent tag, safety/location check, voice
@@ -325,4 +325,6 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.2** — June 2026 — stood up the Story Bank (`content/storyBank/`), Stage A
+  item 1.
 - **v0.1** — June 2026 — first draft.
