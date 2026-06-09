@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "draft": "tsx scripts/field-to-story/run.ts",
     "grant": "tsx scripts/grants/run.ts",
-    "thanks": "tsx scripts/donor-thanks/run.ts"
+    "thanks": "tsx scripts/donor-thanks/run.ts",
+    "grants:status": "tsx scripts/grants-tracker/run.ts"
   },
   "engines": {
     "node": ">=20.9 <23"

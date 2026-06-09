@@ -1,0 +1,38 @@
+[
+  {
+    "funder": "Borderlands Small Grants Fund (SAMPLE)",
+    "status": "drafting",
+    "amount": "USD 2,000–10,000",
+    "deadline": "2026-06-19",
+    "url": "",
+    "notes": "Sample — due soon; draft in progress via `npm run grant`."
+  },
+  {
+    "funder": "Hill Health Microgrant (SAMPLE)",
+    "status": "researching",
+    "amount": "USD 5,000",
+    "deadline": "2026-06-01",
+    "notes": "Sample — overdue (past deadline, not yet submitted)."
+  },
+  {
+    "funder": "Mountain Relief Fund (SAMPLE)",
+    "status": "researching",
+    "amount": "USD 8,000",
+    "deadline": "2026-09-30",
+    "notes": "Sample — plenty of time."
+  },
+  {
+    "funder": "A Family Foundation (SAMPLE)",
+    "status": "applied",
+    "amount": "USD 3,000",
+    "deadline": "2026-05-01",
+    "notes": "Sample — submitted, awaiting reply."
+  },
+  {
+    "funder": "Past Opportunity (SAMPLE)",
+    "status": "won",
+    "amount": "USD 1,500",
+    "deadline": "2026-02-01",
+    "notes": "Sample — funded."
+  }
+]
