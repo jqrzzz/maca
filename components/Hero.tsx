@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { HeroWatch } from "@/components/HeroWatch";
 import { Button, type ButtonProps } from "@/components/ui/Button";
 import { Figure } from "@/components/Figure";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
@@ -22,14 +22,12 @@ export function Hero({
   lede,
   image,
   actions,
-  watchHref,
 }: {
   eyebrow: string;
   title: string;
   lede: string;
   image?: MediaRef;
   actions: HeroAction[];
-  watchHref?: string;
 }) {
   return (
     <section className="relative isolate overflow-hidden">
@@ -67,19 +65,7 @@ export function Hero({
               </Button>
             ))}
           </div>
-          {watchHref && (
-            <Link
-              href={watchHref}
-              className="group mt-7 inline-flex items-center gap-3 text-sm font-semibold tracking-[0.03em] text-cream/85 transition-colors hover:text-cream"
-            >
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cream/40 transition-colors group-hover:border-cream group-hover:bg-cream/10">
-                <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
-                  <path d="M3 2.2 10 6 3 9.8z" />
-                </svg>
-              </span>
-              Watch our story
-            </Link>
-          )}
+          <HeroWatch />
         </div>
       </Container>
     </section>

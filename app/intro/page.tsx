@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
-import { PrasmIntro } from "@/components/intro/PrasmIntro";
+import { IntroFilmPage } from "@/components/intro/IntroFilmPage";
 
 export const metadata: Metadata = buildMetadata({
   title: "A Warm Introduction",
@@ -10,5 +10,5 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function IntroPage() {
-  return <PrasmIntro />;
+  return <IntroFilmPage />;
 }

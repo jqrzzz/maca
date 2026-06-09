@@ -199,6 +199,7 @@ export function Stage({
   background = "#f6f4ef",
   loop = true,
   autoplay = true,
+  onClose,
   children,
 }: {
   width?: number;
@@ -207,6 +208,7 @@ export function Stage({
   background?: string;
   loop?: boolean;
   autoplay?: boolean;
+  onClose?: () => void;
   children: ReactNode;
 }) {
   const [time, setTime] = useState(0);
@@ -218,16 +220,7 @@ export function Stage({
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
 
-  // Lock page scroll while the full-screen film is mounted.
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, []);
-
-  // Auto-scale the fixed-size canvas to fit the viewport (minus the bar).
+  // Auto-scale the fixed-size canvas to fit the container (minus the bar).
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
@@ -281,7 +274,7 @@ export function Stage({
     };
   }, [playing, duration, loop]);
 
-  // Keyboard: space = play/pause, ←/→ = seek, 0 = reset.
+  // Keyboard: space = play/pause, ←/→ = seek, 0 = reset, Esc = close.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement | null)?.tagName;
@@ -295,11 +288,13 @@ export function Stage({
         setTime((t) => clamp(t + (e.shiftKey ? 1 : 0.1), 0, duration));
       } else if (e.key === "0" || e.code === "Home") {
         setTime(0);
+      } else if (e.key === "Escape" && onClose) {
+        onClose();
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [duration]);
+  }, [duration, onClose]);
 
   const displayTime = hoverTime != null ? hoverTime : time;
   const ctxValue = useMemo<TimelineValue>(
@@ -311,9 +306,8 @@ export function Stage({
     <div
       ref={stageRef}
       style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
-        zIndex: 60,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -321,6 +315,27 @@ export function Stage({
         fontFamily: "var(--font-inter), system-ui, sans-serif",
       }}
     >
+      {onClose && (
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          title="Close (Esc)"
+          className="prasm-film-close"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          >
+            <path d="M3 3l10 10M13 3 3 13" />
+          </svg>
+        </button>
+      )}
       <div
         style={{
           flex: 1,

@@ -415,3 +415,48 @@
     opacity: 0.9;
   }
 }
+
+/* Dismissible film overlay (components/intro/FilmOverlay.tsx) + close button. */
+.prasm-film-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: #0a0a0a;
+  animation: prasm-film-fade 0.4s ease both;
+}
+@keyframes prasm-film-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-film-overlay {
+    animation: none;
+  }
+}
+.prasm-film-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: rgba(20, 20, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f6f4ef;
+  cursor: pointer;
+  transition:
+    background 150ms,
+    border-color 150ms;
+}
+.prasm-film-close:hover {
+  background: rgba(20, 20, 20, 0.85);
+  border-color: rgba(255, 255, 255, 0.45);
+}
