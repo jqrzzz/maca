@@ -56,11 +56,10 @@ entity calmly.
 US **private foundations** that grant to a non-US org like PRASM must either do an
 **equivalency determination** (a qualified practitioner certifies you're
 equivalent to a US public charity — heavier, but then no per-grant reporting) or
-exercise **expenditure responsibility** (lighter to start, but requires oversight
-
-- reporting). US **public charities** (including a fiscal sponsor or a Friends-of)
-  grant abroad under the lighter **"discretion and control" + recordkeeping**
-  standard. Net: a US fiscal sponsor smooths this for you too.
+exercise **expenditure responsibility** (lighter to start, but requires ongoing
+oversight and reporting). US **public charities** (including a fiscal sponsor or
+a Friends-of) grant abroad under the lighter **discretion-and-control plus
+recordkeeping** standard. Net: a US fiscal sponsor smooths this for you too.
 
 ## How the recommendation changes by scenario
 
