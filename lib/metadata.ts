@@ -29,7 +29,12 @@ export function buildMetadata({
   return {
     title,
     description: desc,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      types: {
+        "application/rss+xml": new URL("/feed.xml", baseUrl).toString(),
+      },
+    },
     openGraph: {
       type: "website",
       siteName: site.name,
