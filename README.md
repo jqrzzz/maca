@@ -9,6 +9,10 @@ and medical-records programs.
 > No backend. The identity registry, medical records, and AI features are
 > future phases, teased on the site's roadmap.
 
+> **The longer game:** how those future phases fit together — a tiny team
+> amplified by AI, with the people always the face and AI in the engine room —
+> is sketched in [`docs/concept.md`](docs/concept.md).
+
 ## Tech stack
 
 - [Next.js 16](https://nextjs.org) (App Router) + React 19 + TypeScript (strict)
