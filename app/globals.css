@@ -483,37 +483,38 @@
 .prasm-hero-play {
   cursor: pointer;
 }
-.prasm-hero-play__ring {
+.prasm-hero-play__glow {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 165%;
+  height: 165%;
   transform: translate(-50%, -50%);
   border-radius: 9999px;
-  border: 1px solid rgba(255, 253, 248, 0.5);
+  background: radial-gradient(
+    circle,
+    rgba(231, 139, 46, 0.6) 0%,
+    rgba(231, 139, 46, 0.22) 42%,
+    rgba(231, 139, 46, 0) 70%
+  );
+  filter: blur(6px);
   pointer-events: none;
-  animation: prasm-hero-pulse 2.8s ease-out infinite;
+  animation: prasm-hero-glow-pulse 3.8s ease-in-out infinite;
 }
-@media (min-width: 768px) {
-  .prasm-hero-play__ring {
-    width: 6rem;
-    height: 6rem;
-  }
-}
-@keyframes prasm-hero-pulse {
-  0% {
-    opacity: 0.5;
-    transform: translate(-50%, -50%) scale(1);
-  }
+@keyframes prasm-hero-glow-pulse {
+  0%,
   100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1.85);
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.16);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .prasm-hero-play__ring {
+  .prasm-hero-play__glow {
     animation: none;
-    opacity: 0;
+    opacity: 0.6;
   }
 }

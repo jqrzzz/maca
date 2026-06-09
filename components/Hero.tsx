@@ -53,23 +53,23 @@ export function Hero({
         />
       </div>
 
-      {/* Big centered play button */}
+      {/* Big play button — top-right over the dots, with a slow orange glow */}
       {!playing && (
         <button
           type="button"
           onClick={play}
           aria-label="Play the film"
-          className="prasm-hero-play group absolute top-[40%] left-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+          className="prasm-hero-play group absolute top-24 right-6 z-20 md:top-28 md:right-14"
         >
-          <span aria-hidden className="prasm-hero-play__ring" />
-          <span className="relative flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border border-cream/50 bg-cream/10 backdrop-blur-sm transition-all duration-300 group-hover:scale-105 group-hover:border-cream group-hover:bg-cream/20 md:h-24 md:w-24">
+          <span aria-hidden className="prasm-hero-play__glow" />
+          <span className="relative flex h-20 w-20 items-center justify-center rounded-full border border-cream/60 bg-cream/15 backdrop-blur-sm transition-all duration-300 group-hover:scale-105 group-hover:border-cream group-hover:bg-cream/25 md:h-24 md:w-24">
             <svg
-              width="26"
-              height="26"
+              width="28"
+              height="28"
               viewBox="0 0 24 24"
               fill="#fffdf8"
               aria-hidden
-              className="ml-1 md:h-8 md:w-8"
+              className="ml-1"
             >
               <path d="M6 4.5 19 12 6 19.5z" />
             </svg>
@@ -89,7 +89,7 @@ export function Hero({
           </p>
           <h1 className="text-display text-cream">{title}</h1>
           <p className="text-lede mt-6 max-w-xl text-cream/90">{lede}</p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             {actions.map((action, i) => (
               <Button
                 key={action.href}
@@ -101,20 +101,17 @@ export function Hero({
                 {action.label}
               </Button>
             ))}
-          </div>
-          <button
-            type="button"
-            onClick={play}
-            aria-label="Play the film"
-            className="group mt-7 inline-flex items-center gap-3 text-sm font-semibold tracking-[0.03em] text-cream/85 transition-colors hover:text-cream"
-          >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-cream/40 bg-cream/5 transition-colors group-hover:border-cream group-hover:bg-cream/15">
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
+            <button
+              type="button"
+              onClick={play}
+              aria-label="Play the film"
+              className="inline-flex h-12 w-12 items-center justify-center rounded-full border-[1.5px] border-cream/45 bg-cream/5 text-cream transition-colors hover:border-cream hover:bg-cream/15"
+            >
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
                 <path d="M3 2.2 10 6 3 9.8z" />
               </svg>
-            </span>
-            Watch the film
-          </button>
+            </button>
+          </div>
         </div>
       </Container>
 
