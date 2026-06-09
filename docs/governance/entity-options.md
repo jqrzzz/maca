@@ -41,6 +41,61 @@ Why staged: it buys legitimacy and deductibility in weeks instead of the **12+
 months** a Thai foundation can now take, while you build the board and decide the
 entity calmly.
 
+## Tailored to your donor base
+
+You've told me: **donors in Korea today, and you're targeting the US, UK, Europe,
+and Canada.** That's a **multi-country** base, which sharpens the play. The blunt
+truth: **no single registration makes you tax-deductible in all those
+countries.** You don't chase deductibility everywhere — you cover the biggest,
+easiest markets through **cross-border giving intermediaries** and accept that a
+few donors won't get a local deduction yet.
+
+How each market can get a deduction **without you registering in each country**:
+
+| Donor market        | Route to a deduction                                                                                                                                                                                                                              | Effort / cost                                                                         |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **USA**             | A US 501(c)(3) intermediary — an Asia-focused one like **Give2Asia** (built for US donors funding Thai/Asian projects; handles cross-border compliance + receipts), a comprehensive **fiscal sponsor** (e.g. PPF), or listing on **GlobalGiving** | Fiscal sponsor: weeks, ~5–10%. Give2Asia / GlobalGiving: vetting + track record first |
+| **UK**              | **GlobalGiving** passes **Gift Aid** to UK donors giving in GBP; otherwise a UK "friends of" / CAF route                                                                                                                                          | GlobalGiving ~5% + 3% processing                                                      |
+| **Europe (EU/EEA)** | **Transnational Giving Europe** ("Giving Europe") — 19 countries, donor gets a home-country deduction — but it routes donors to **European-recognised** orgs, so you'd need a European partner/host in the network                                | ~5% fee; revisit when EU giving is material                                           |
+| **Canada**          | Needs a **Canadian qualified donee / charity intermediary** — no quick plug-in for a foreign project                                                                                                                                              | Revisit when Canadian giving is material                                              |
+| **South Korea**     | Hard: Korean deductions require the recipient be a government-**designated donation organization**; a small foreign cause won't easily qualify. Korean donors can still give via your international channel **without** a KR deduction for now    | Don't chase KR designation yet                                                        |
+| **Thailand**        | Only via Thai **Section 47(7)** approved-charity status (separate, later)                                                                                                                                                                         | Later                                                                                 |
+
+**Refined recommendation for your base:**
+
+1. **Now:** a **US fiscal sponsor** (comprehensive / Model A) to switch on
+   US-deductible giving + credibility immediately, with no track-record bar. This
+   is the unblock.
+2. **Soon (as you build a track record + financials):** get listed with
+   **Give2Asia** (US donors + Thai-project expertise) and/or **GlobalGiving** (US
+   deductibility + **UK Gift Aid** + global visibility + a vetting "stamp"). Both
+   require **vetting, ~2 years of financials, and — for GlobalGiving — an
+   "Accelerator" (raise ~$5,000 from ~40 donors)**, so they come _after_ you have
+   a little history.
+3. **Europe / Canada:** address via **TGE** (through a European partner) and a
+   **Canadian intermediary** only once those pools are material.
+4. **Korea:** keep accepting gifts via the international channel; don't invest in
+   Korean designation yet.
+5. **Thailand entity** (FPO vs foundation) stays the separate "operate legally
+   in-country" track — still depends on whether the founder is **Thai or
+   foreign** (the one fact you haven't told me).
+
+**The catch to plan around:** the best platforms (Give2Asia, GlobalGiving) vet
+for a **track record and financial statements you don't have yet** — which is
+exactly why **fiscal-sponsor-first** matters. It gives you deductibility and a
+home for funds _now_, while the field-notes / impact engine builds the history
+those platforms want to see.
+
+_Sources for this section:_
+[Give2Asia FAQ](https://give2asia.org/international-giving-faq/) &
+[tax benefits](https://give2asia.org/tax-benefits/);
+[GlobalGiving — tax-deductibility](https://support.globalgiving.org/hc/en-us/articles/360026159212-Is-my-donation-tax-deductible),
+[fees](https://support.globalgiving.org/hc/en-us/articles/360033731831-What-is-GlobalGiving-s-fee),
+[vetting](https://www.globalgiving.org/aboutus/how-it-works/vetting/);
+[Transnational Giving Europe FAQ](https://www.transnationalgiving.eu/faq);
+[PwC — Korea individual deductions](https://taxsummaries.pwc.com/republic-of-korea/individual/deductions),
+[Giving What We Can — Korea](https://www.givingwhatwecan.org/get-involved/tax-deductibility/korea).
+
 ## The options, compared
 
 | Option                                 | Gets you                                                                      | Donor deduction                                | Setup time / cost                                                                          | Foreign-founder friendly?                                                                       | Watch-outs                                                                   |
