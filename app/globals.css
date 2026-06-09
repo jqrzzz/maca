@@ -415,3 +415,115 @@
     opacity: 0.9;
   }
 }
+
+/* Dismissible film overlay (components/intro/FilmOverlay.tsx) + close button. */
+.prasm-film-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: #0a0a0a;
+  animation: prasm-film-fade 0.4s ease both;
+}
+@keyframes prasm-film-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-film-overlay {
+    animation: none;
+  }
+}
+.prasm-film-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: rgba(20, 20, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f6f4ef;
+  cursor: pointer;
+  transition:
+    background 150ms,
+    border-color 150ms;
+}
+.prasm-film-close:hover {
+  background: rgba(20, 20, 20, 0.85);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Film contained within the hero box (components/Hero.tsx). */
+.prasm-film-boxed {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #0a0a0a;
+  animation: prasm-film-fade 0.4s ease both;
+}
+/* Drop the close control below the transparent sticky header when boxed. */
+.prasm-film-boxed .prasm-film-close {
+  top: 84px;
+}
+/* On close/finish, the film fades out as the hero copy fades back in. */
+.prasm-film-boxed.is-closing {
+  animation: prasm-film-fade-out 0.45s ease forwards;
+}
+@keyframes prasm-film-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-film-boxed {
+    animation: none;
+  }
+}
+
+/* Hero's big centered play button + inviting pulse ring. */
+.prasm-hero-play {
+  cursor: pointer;
+}
+.prasm-hero-play__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 165%;
+  height: 165%;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(231, 139, 46, 0.6) 0%,
+    rgba(231, 139, 46, 0.22) 42%,
+    rgba(231, 139, 46, 0) 70%
+  );
+  filter: blur(6px);
+  pointer-events: none;
+  animation: prasm-hero-glow-pulse 3.8s ease-in-out infinite;
+}
+@keyframes prasm-hero-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.16);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prasm-hero-play__glow {
+    animation: none;
+    opacity: 0.6;
+  }
+}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { MapPin } from "lucide-react";
-import { PageHero } from "@/components/Hero";
+import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { ContactForm } from "@/components/ContactForm";
 import { SocialLinks } from "@/components/layout/SocialLinks";

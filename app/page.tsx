@@ -39,7 +39,6 @@ export default function HomePage() {
         eyebrow={hero.eyebrow}
         title={hero.title}
         lede={hero.lede}
-        watchHref="/intro"
         actions={[
           { label: "Donate", href: "/give" },
           { label: "Our Story", href: "/about" },
