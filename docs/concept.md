@@ -298,9 +298,11 @@ In order:
    facts, cleared stories, people + consent status. The spine everything grounds
    on. ✅ _Done — see [`content/storyBank/`](../content/storyBank)._
 2. **Field-to-Story tool (v0):** a local script — voice/notes in, three drafts
-   out (field note, donor update, caption) — reusing the Story Bank.
+   out (field note, donor update, caption) — reusing the Story Bank. ✅ _Done —
+   see [`scripts/field-to-story/`](../scripts/field-to-story)._
 3. **Bake in the approval checklist:** consent tag, safety/location check, voice
-   check.
+   check. ✅ _Done — deterministic scans in
+   [`checks.ts`](../scripts/field-to-story/checks.ts)._
 4. **One real run:** take an actual field visit end to end; publish one field
    note, send one update; learn and refine the voice and templates.
 5. **Grants copilot (v0)** once the Story Bank exists — it reuses it directly.
@@ -325,6 +327,8 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.3** — June 2026 — built the Field-to-Story tool + baked-in approval
+  checklist (`scripts/field-to-story/`), Stage A items 2–3.
 - **v0.2** — June 2026 — stood up the Story Bank (`content/storyBank/`), Stage A
   item 1.
 - **v0.1** — June 2026 — first draft.
