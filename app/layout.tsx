@@ -46,11 +46,23 @@ export const metadata: Metadata = {
     description: site.description,
     url: site.url,
     locale: "en_US",
+    // Static .png (real extension, no query string) so pickier crawlers like
+    // WhatsApp reliably fetch and render the card.
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+        alt: `${site.name} — ${site.tagline}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
+    images: ["/og.png"],
   },
 };
 
