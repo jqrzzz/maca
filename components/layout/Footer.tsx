@@ -66,7 +66,7 @@ export function Footer() {
             </nav>
           </div>
           <p className="mt-5 text-cream/45">
-            A community-led effort for Kayan refugees — built with care, off the
+            A community-led effort for Kayan refugees, built with care, off the
             grid.
           </p>
         </div>

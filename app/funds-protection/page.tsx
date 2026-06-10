@@ -8,7 +8,7 @@ import { fundsProtection } from "@/content/legal/fundsProtection";
 export const metadata: Metadata = buildMetadata({
   title: "Protecting your gift",
   description:
-    "How PRASM safeguards donations and guards against fraud or diversion — including crypto, in-kind, and wire transfers to a remote border community.",
+    "How PRASM safeguards donations and guards against fraud or diversion, including crypto, in-kind, and wire transfers to a remote border community.",
   path: "/funds-protection",
 });
 

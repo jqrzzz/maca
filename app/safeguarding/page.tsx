@@ -8,7 +8,7 @@ import { safeguarding } from "@/content/legal/safeguarding";
 export const metadata: Metadata = buildMetadata({
   title: "Safeguarding",
   description:
-    "How PRASM protects the children and vulnerable people it works with — our commitment, conduct, and how to raise a concern.",
+    "How PRASM protects the children and vulnerable people it works with: our commitment, conduct, and how to raise a concern.",
   path: "/safeguarding",
 });
 

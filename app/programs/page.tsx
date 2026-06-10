@@ -6,16 +6,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ProgramCard } from "@/components/ProgramCard";
 import { CTASection } from "@/components/CTASection";
 import { buildMetadata } from "@/lib/metadata";
-import {
-  programsIntro,
-  activePrograms,
-  roadmap,
-} from "@/content/programs";
+import { programsIntro, activePrograms, roadmap } from "@/content/programs";
 
 export const metadata: Metadata = buildMetadata({
   title: "What We Do",
   description:
-    "PRASM covers urgent medical care and builds records, supports education and off-grid living — and is building toward identity, digital records, and AI-assisted care.",
+    "PRASM covers urgent medical care and builds records, supports education and off-grid living, and is building toward identity, digital records, and AI-assisted care.",
   path: "/programs",
 });
 
@@ -76,7 +72,7 @@ export default function ProgramsPage() {
       </Section>
 
       <CTASection
-        title="Fund the work — and what comes next"
+        title="Fund the work, and what comes next"
         body="Today it's care, records, and education. Tomorrow it's identity for people the world can't see. Your gift builds both."
         actions={[
           { label: "Donate", href: "/give" },

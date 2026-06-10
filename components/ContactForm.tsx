@@ -89,7 +89,7 @@ export function ContactForm({ className }: { className?: string }) {
   // mailto fallback
   const mailto = `mailto:${config.contact.email}?subject=${encodeURIComponent(
     `Message from ${name || "the PRASM site"}`,
-  )}&body=${encodeURIComponent(`${message}\n\n— ${name} (${email})`)}`;
+  )}&body=${encodeURIComponent(`${message}\n\nFrom ${name} (${email})`)}`;
 
   return (
     <div className={cn("flex flex-col gap-5", className)}>

@@ -8,7 +8,7 @@ import { accessibility } from "@/content/legal/accessibility";
 export const metadata: Metadata = buildMetadata({
   title: "Accessibility",
   description:
-    "Our commitment to an accessible site — what we do, the standard we aim for, and how to report a barrier.",
+    "Our commitment to an accessible site: what we do, the standard we aim for, and how to report a barrier.",
   path: "/accessibility",
 });
 

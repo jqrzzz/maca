@@ -19,8 +19,8 @@ export default function Error({
   return (
     <Container className="flex min-h-[60vh] flex-col items-center justify-center py-24 text-center">
       <h1 className="text-h1">Something went wrong</h1>
-      <p className="text-lede mt-4 max-w-md text-stone">
-        Sorry — an unexpected error occurred. Please try again.
+      <p className="mt-4 max-w-md text-lede text-stone">
+        Sorry, an unexpected error occurred. Please try again.
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button onClick={reset} variant="primary">

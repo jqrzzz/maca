@@ -69,7 +69,7 @@ export function Logo({
   if (!asLink) return inner;
 
   return (
-    <Link href="/" aria-label={`${site.name} — home`} className="inline-flex">
+    <Link href="/" aria-label={`${site.name} home`} className="inline-flex">
       {inner}
     </Link>
   );

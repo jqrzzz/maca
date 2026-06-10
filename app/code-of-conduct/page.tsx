@@ -8,7 +8,7 @@ import { codeOfConduct } from "@/content/legal/codeOfConduct";
 export const metadata: Metadata = buildMetadata({
   title: "Code of conduct",
   description:
-    "How everyone acting in PRASM's name is expected to behave — respect, safety, honesty, and accountability.",
+    "How everyone acting in PRASM's name is expected to behave: respect, safety, honesty, and accountability.",
   path: "/code-of-conduct",
 });
 

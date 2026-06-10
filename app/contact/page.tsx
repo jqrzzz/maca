@@ -20,7 +20,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Let's talk"
-        lede="Whether you want to give, teach, volunteer, send supplies, or just learn more — we'd love to hear from you."
+        lede="Whether you want to give, teach, volunteer, send supplies, or just learn more, we'd love to hear from you."
       />
 
       <Section tone="cream">
@@ -37,7 +37,11 @@ export default function ContactPage() {
             <p className="mt-3 text-stone">
               We&apos;re most responsive on Instagram and Telegram.
             </p>
-            <SocialLinks variant="dark" showLabels className="mt-5 flex-col items-start gap-2" />
+            <SocialLinks
+              variant="dark"
+              showLabels
+              className="mt-5 flex-col items-start gap-2"
+            />
 
             <div className="mt-8 flex items-start gap-3 rounded-[14px] bg-sand p-5">
               <MapPin

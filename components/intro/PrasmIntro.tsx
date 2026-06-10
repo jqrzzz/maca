@@ -29,7 +29,8 @@ const C = {
 const SERIF = "var(--font-fraunces), Georgia, serif";
 const SANS = "var(--font-inter), system-ui, sans-serif";
 // Brand logotype — Montserrat is the free, geometric Gotham substitute.
-const GOTHAM = "var(--font-montserrat), var(--font-inter), system-ui, sans-serif";
+const GOTHAM =
+  "var(--font-montserrat), var(--font-inter), system-ui, sans-serif";
 
 const W = 1920;
 const H = 1080;
@@ -155,20 +156,48 @@ function CenterUnderline({
   strokeW: number;
 }) {
   return (
-    <div style={{ position: "absolute", left: "50%", top: y, transform: "translateX(-50%)" }}>
-      <Underline local={local} delay={delay} x={0} y={0} width={width} color={color} strokeW={strokeW} />
+    <div
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: y,
+        transform: "translateX(-50%)",
+      }}
+    >
+      <Underline
+        local={local}
+        delay={delay}
+        x={0}
+        y={0}
+        width={width}
+        color={color}
+        strokeW={strokeW}
+      />
     </div>
   );
 }
 
 // Soft atmospheric horizon — a low sun glow + faint drifting hills.
-function Atmosphere({ local, tone = "warm" }: { local: number; tone?: "warm" | "dark" }) {
+function Atmosphere({
+  local,
+  tone = "warm",
+}: {
+  local: number;
+  tone?: "warm" | "dark";
+}) {
   const dark = tone === "dark";
   const hill = dark ? "rgba(143,197,163,0.10)" : "rgba(31,61,43,0.07)";
   const hill2 = dark ? "rgba(143,197,163,0.07)" : "rgba(31,61,43,0.05)";
   const sun = dark ? "rgba(240,200,120,0.10)" : "rgba(224,164,88,0.16)";
   return (
-    <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+      }}
+    >
       <div
         style={{
           position: "absolute",
@@ -209,7 +238,13 @@ function Atmosphere({ local, tone = "warm" }: { local: number; tone?: "warm" | "
 function Dot({ size = 9, color = C.gold }: { size?: number; color?: string }) {
   return (
     <span
-      style={{ display: "inline-block", width: size, height: size, borderRadius: "50%", background: color }}
+      style={{
+        display: "inline-block",
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: color,
+      }}
     />
   );
 }
@@ -238,7 +273,15 @@ function Scene({
   const dur = end - start;
   const op = envelope(local, dur, fin, fout);
   return (
-    <div style={{ position: "absolute", inset: 0, zIndex, background: bg || "transparent", opacity: op }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex,
+        background: bg || "transparent",
+        opacity: op,
+      }}
+    >
       {typeof children === "function" ? children(local, dur) : children}
     </div>
   );
@@ -282,7 +325,13 @@ function TitleScene({ local }: { local: number }) {
           </Eyebrow>
         </div>
 
-        <div style={{ position: "relative", marginTop: 40, ...rise(local, 0.8, 1.0, 20) }}>
+        <div
+          style={{
+            position: "relative",
+            marginTop: 40,
+            ...rise(local, 0.8, 1.0, 20),
+          }}
+        >
           <div
             style={{
               fontFamily: GOTHAM,
@@ -295,7 +344,14 @@ function TitleScene({ local }: { local: number }) {
           >
             PRASM
           </div>
-          <CenterUnderline local={local} delay={1.6} y={184} width={560} color={C.gold} strokeW={7} />
+          <CenterUnderline
+            local={local}
+            delay={1.6}
+            y={184}
+            width={560}
+            color={C.gold}
+            strokeW={7}
+          />
         </div>
 
         <div
@@ -335,7 +391,11 @@ function TitleScene({ local }: { local: number }) {
 const MAP_STATS = [
   { v: "3.7M", l: "Displaced inside Myanmar", c: "UNHCR · 2026" },
   { v: "5 in 6", l: "of Kayah State uprooted", c: "≈ 250,000 of 300,000" },
-  { v: "81,000", l: "sheltering at the Thai border", c: "nearly half born there" },
+  {
+    v: "81,000",
+    l: "sheltering at the Thai border",
+    c: "nearly half born there",
+  },
 ];
 function MapScene({ local }: { local: number }) {
   const dots = useMemo(
@@ -357,7 +417,14 @@ function MapScene({ local }: { local: number }) {
   const borderOp = rise(local, 0.4, 1.1, 0).opacity;
 
   return (
-    <div style={{ position: "absolute", inset: 0, background: C.sand, overflow: "hidden" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: C.sand,
+        overflow: "hidden",
+      }}
+    >
       <div style={{ position: "absolute", left: 200, top: 116 }}>
         <Eyebrow local={local} delay={0.2}>
           Where this is happening
@@ -386,7 +453,8 @@ function MapScene({ local }: { local: number }) {
           height: 380,
           borderRadius: "50%",
           opacity: glowL,
-          background: "radial-gradient(circle, rgba(231,139,46,0.13) 0%, rgba(0,0,0,0) 70%)",
+          background:
+            "radial-gradient(circle, rgba(231,139,46,0.13) 0%, rgba(0,0,0,0) 70%)",
         }}
       />
       <div
@@ -398,14 +466,20 @@ function MapScene({ local }: { local: number }) {
           height: 360,
           borderRadius: "50%",
           opacity: glowR,
-          background: "radial-gradient(circle, rgba(31,61,43,0.12) 0%, rgba(0,0,0,0) 70%)",
+          background:
+            "radial-gradient(circle, rgba(31,61,43,0.12) 0%, rgba(0,0,0,0) 70%)",
         }}
       />
 
       <svg
         width="1920"
         height="1080"
-        style={{ position: "absolute", inset: 0, overflow: "visible", opacity: borderOp }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "visible",
+          opacity: borderOp,
+        }}
         fill="none"
       >
         <path
@@ -447,16 +521,46 @@ function MapScene({ local }: { local: number }) {
         );
       })}
 
-      <div style={{ position: "absolute", left: 250, top: 432, ...rise(local, 1.0, 0.9, 14) }}>
-        <div style={{ fontFamily: SANS, fontSize: 30, fontWeight: 600, letterSpacing: "0.18em", color: C.clay700 }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 250,
+          top: 432,
+          ...rise(local, 1.0, 0.9, 14),
+        }}
+      >
+        <div
+          style={{
+            fontFamily: SANS,
+            fontSize: 30,
+            fontWeight: 600,
+            letterSpacing: "0.18em",
+            color: C.clay700,
+          }}
+        >
           MYANMAR
         </div>
-        <div style={{ fontFamily: SANS, fontSize: 22, fontWeight: 400, color: C.stone, marginTop: 8 }}>
+        <div
+          style={{
+            fontFamily: SANS,
+            fontSize: 22,
+            fontWeight: 400,
+            color: C.stone,
+            marginTop: 8,
+          }}
+        >
           Kayah State · Kayan homeland
         </div>
       </div>
 
-      <div style={{ position: "absolute", left: 1545, top: 470, ...rise(local, 1.7, 0.9, 14) }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 1545,
+          top: 470,
+          ...rise(local, 1.7, 0.9, 14),
+        }}
+      >
         <div
           style={{
             position: "absolute",
@@ -481,26 +585,93 @@ function MapScene({ local }: { local: number }) {
           }}
         />
       </div>
-      <div style={{ position: "absolute", right: 200, top: 540, textAlign: "right", ...rise(local, 1.9, 0.9, 14) }}>
-        <div style={{ fontFamily: SANS, fontSize: 30, fontWeight: 600, letterSpacing: "0.12em", color: C.forest700 }}>
+      <div
+        style={{
+          position: "absolute",
+          right: 200,
+          top: 540,
+          textAlign: "right",
+          ...rise(local, 1.9, 0.9, 14),
+        }}
+      >
+        <div
+          style={{
+            fontFamily: SANS,
+            fontSize: 30,
+            fontWeight: 600,
+            letterSpacing: "0.12em",
+            color: C.forest700,
+          }}
+        >
           MAE HONG SON
         </div>
-        <div style={{ fontFamily: SANS, fontSize: 22, fontWeight: 400, color: C.stone, marginTop: 8 }}>
+        <div
+          style={{
+            fontFamily: SANS,
+            fontSize: 22,
+            fontWeight: 400,
+            color: C.stone,
+            marginTop: 8,
+          }}
+        >
           Thailand · where PRASM works
         </div>
       </div>
 
-      <div style={{ position: "absolute", left: 200, right: 200, top: 748, display: "flex", gap: 60 }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 200,
+          right: 200,
+          top: 748,
+          display: "flex",
+          gap: 60,
+        }}
+      >
         {MAP_STATS.map((s, i) => (
           <div
             key={s.l}
-            style={{ flex: 1, borderTop: `2px solid ${C.line}`, paddingTop: 24, ...rise(local, 5.6 + i * 0.35, 0.85, 22) }}
+            style={{
+              flex: 1,
+              borderTop: `2px solid ${C.line}`,
+              paddingTop: 24,
+              ...rise(local, 5.6 + i * 0.35, 0.85, 22),
+            }}
           >
-            <div style={{ fontFamily: SERIF, fontSize: 82, fontWeight: 500, letterSpacing: "-0.02em", color: C.clay600, lineHeight: 1 }}>
+            <div
+              style={{
+                fontFamily: SERIF,
+                fontSize: 82,
+                fontWeight: 500,
+                letterSpacing: "-0.02em",
+                color: C.clay600,
+                lineHeight: 1,
+              }}
+            >
               {s.v}
             </div>
-            <div style={{ fontFamily: SANS, fontSize: 27, fontWeight: 500, color: C.ink, marginTop: 16 }}>{s.l}</div>
-            <div style={{ fontFamily: SANS, fontSize: 21, fontWeight: 400, color: C.stone, marginTop: 6 }}>{s.c}</div>
+            <div
+              style={{
+                fontFamily: SANS,
+                fontSize: 27,
+                fontWeight: 500,
+                color: C.ink,
+                marginTop: 16,
+              }}
+            >
+              {s.l}
+            </div>
+            <div
+              style={{
+                fontFamily: SANS,
+                fontSize: 21,
+                fontWeight: 400,
+                color: C.stone,
+                marginTop: 6,
+              }}
+            >
+              {s.c}
+            </div>
           </div>
         ))}
       </div>
@@ -519,7 +690,8 @@ function MapScene({ local }: { local: number }) {
           ...rise(local, 7.4, 1.0, 18),
         }}
       >
-        And among them, countless children — left fatherless, motherless, or born without papers.
+        And among them, countless children: left fatherless, motherless, or born
+        without papers.
       </div>
     </div>
   );
@@ -528,9 +700,10 @@ function MapScene({ local }: { local: number }) {
 /* ── SCENE 3 — The people ────────────────────────────────────────────────── */
 function PeopleScene({ local }: { local: number }) {
   const lines: ReactNode[] = [
-    <span key="a">In the hills of northern Thailand —</span>,
+    <span key="a">In the hills of northern Thailand,</span>,
     <span key="b">
-      families who fled the war in <span style={{ color: C.clay600 }}>Myanmar</span>.
+      families who fled the war in{" "}
+      <span style={{ color: C.clay600 }}>Myanmar</span>.
     </span>,
   ];
   return (
@@ -572,7 +745,7 @@ function PeopleScene({ local }: { local: number }) {
             ...rise(local, 2.1, 1.0, 18),
           }}
         >
-          Safe from the fighting — but invisible to the systems meant to help.
+          Safe from the fighting, but invisible to the systems meant to help.
         </div>
       </div>
     </div>
@@ -581,9 +754,18 @@ function PeopleScene({ local }: { local: number }) {
 
 /* ── SCENE 4 — The problem ───────────────────────────────────────────────── */
 const PROBLEM_POINTS = [
-  { t: "Stateless", b: "No Thai ID — and often no document at all. Many children have no proof they exist." },
-  { t: "Shut out of school", b: "Without papers, children are turned away from public classrooms." },
-  { t: "Priced out of care", b: "Hospitals charge refugees full foreigner rates, with no insurance." },
+  {
+    t: "Stateless",
+    b: "No Thai ID, and often no document at all. Many children have no proof they exist.",
+  },
+  {
+    t: "Shut out of school",
+    b: "Without papers, children are turned away from public classrooms.",
+  },
+  {
+    t: "Priced out of care",
+    b: "Hospitals charge refugees full foreigner rates, with no insurance.",
+  },
 ];
 function ProblemScene({ local }: { local: number }) {
   return (
@@ -592,7 +774,14 @@ function ProblemScene({ local }: { local: number }) {
         <Eyebrow local={local} delay={0.15}>
           Why it matters
         </Eyebrow>
-        <div style={{ position: "relative", marginTop: 30, width: "fit-content", ...rise(local, 0.5, 0.9, 22) }}>
+        <div
+          style={{
+            position: "relative",
+            marginTop: 30,
+            width: "fit-content",
+            ...rise(local, 0.5, 0.9, 22),
+          }}
+        >
           <div
             style={{
               fontFamily: SERIF,
@@ -613,7 +802,12 @@ function ProblemScene({ local }: { local: number }) {
             return (
               <div
                 key={p.t}
-                style={{ flex: 1, borderTop: `2px solid ${C.line}`, paddingTop: 30, ...rise(local, d, 0.85, 26) }}
+                style={{
+                  flex: 1,
+                  borderTop: `2px solid ${C.line}`,
+                  paddingTop: 30,
+                  ...rise(local, d, 0.85, 26),
+                }}
               >
                 <div style={{ position: "relative", paddingTop: 2 }}>
                   <div
@@ -629,8 +823,26 @@ function ProblemScene({ local }: { local: number }) {
                     }}
                   />
                 </div>
-                <div style={{ fontFamily: SERIF, fontSize: 40, fontWeight: 500, color: C.clay700 }}>{p.t}</div>
-                <div style={{ fontFamily: SANS, fontSize: 27, fontWeight: 400, color: C.stone, marginTop: 16, lineHeight: 1.5 }}>
+                <div
+                  style={{
+                    fontFamily: SERIF,
+                    fontSize: 40,
+                    fontWeight: 500,
+                    color: C.clay700,
+                  }}
+                >
+                  {p.t}
+                </div>
+                <div
+                  style={{
+                    fontFamily: SANS,
+                    fontSize: 27,
+                    fontWeight: 400,
+                    color: C.stone,
+                    marginTop: 16,
+                    lineHeight: 1.5,
+                  }}
+                >
                   {p.b}
                 </div>
               </div>
@@ -647,11 +859,19 @@ function HeartScene({ local }: { local: number }) {
   const lines: ReactNode[] = [
     <span key="a">The first thing I could give this family</span>,
     <span key="b">
-      wasn’t money — it was <span style={{ color: C.goldHi, fontStyle: "italic" }}>a record</span>.
+      wasn’t money. It was{" "}
+      <span style={{ color: C.goldHi, fontStyle: "italic" }}>a record</span>.
     </span>,
   ];
   return (
-    <div style={{ position: "absolute", inset: 0, background: C.forest700, overflow: "hidden" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: C.forest700,
+        overflow: "hidden",
+      }}
+    >
       <div
         style={{
           position: "absolute",
@@ -706,12 +926,29 @@ function HeartScene({ local }: { local: number }) {
             ...rise(local, 3.1, 1.1, 20),
           }}
         >
-          For a child with no papers, a medical history became the first proof that he exists.
+          For a child with no papers, a medical history became the first proof
+          that he exists.
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 20, marginTop: 64, ...rise(local, 4.3, 0.9, 16) }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 20,
+            marginTop: 64,
+            ...rise(local, 4.3, 0.9, 16),
+          }}
+        >
           <span style={{ width: 56, height: 2, background: C.gold }} />
-          <span style={{ fontFamily: SANS, fontSize: 24, fontWeight: 500, letterSpacing: "0.04em", color: C.forestLite }}>
+          <span
+            style={{
+              fontFamily: SANS,
+              fontSize: 24,
+              fontWeight: 500,
+              letterSpacing: "0.04em",
+              color: C.forestLite,
+            }}
+          >
             PRASM’s founding doctor
           </span>
         </div>
@@ -724,7 +961,10 @@ function HeartScene({ local }: { local: number }) {
 const STEPS = [
   { t: "Care now", b: "Cover the hospital visit. Keep the family well." },
   { t: "Identity", b: "Help people prove who they are." },
-  { t: "Records that last", b: "Histories that protect health — and existence." },
+  {
+    t: "Records that last",
+    b: "Histories that protect health, and existence.",
+  },
 ];
 function HowScene({ local }: { local: number }) {
   const drawn = Easing.easeInOutSine(clamp((local - 1.4) / 1.6, 0, 1));
@@ -746,11 +986,20 @@ function HowScene({ local }: { local: number }) {
             ...rise(local, 0.45, 0.9, 22),
           }}
         >
-          Care now — and a path to being seen.
+          Care now, and a path to being seen.
         </div>
 
         <div style={{ position: "relative", marginTop: 96, height: 200 }}>
-          <div style={{ position: "absolute", left: 60, right: 60, top: 27, height: 3, background: C.line }} />
+          <div
+            style={{
+              position: "absolute",
+              left: 60,
+              right: 60,
+              top: 27,
+              height: 3,
+              background: C.line,
+            }}
+          />
           <div
             style={{
               position: "absolute",
@@ -761,11 +1010,24 @@ function HowScene({ local }: { local: number }) {
               width: `calc((100% - 120px) * ${drawn})`,
             }}
           />
-          <div style={{ display: "flex", justifyContent: "space-between", position: "relative" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              position: "relative",
+            }}
+          >
             {STEPS.map((s, i) => {
               const d = 1.0 + i * 0.55;
               return (
-                <div key={s.t} style={{ width: 460, textAlign: "center", ...rise(local, d, 0.85, 18) }}>
+                <div
+                  key={s.t}
+                  style={{
+                    width: 460,
+                    textAlign: "center",
+                    ...rise(local, d, 0.85, 18),
+                  }}
+                >
                   <div
                     style={{
                       width: 56,
@@ -781,10 +1043,27 @@ function HowScene({ local }: { local: number }) {
                   >
                     <Dot size={16} color={C.clay500} />
                   </div>
-                  <div style={{ fontFamily: SERIF, fontSize: 38, fontWeight: 500, color: C.clay700, marginTop: 26 }}>
+                  <div
+                    style={{
+                      fontFamily: SERIF,
+                      fontSize: 38,
+                      fontWeight: 500,
+                      color: C.clay700,
+                      marginTop: 26,
+                    }}
+                  >
                     {s.t}
                   </div>
-                  <div style={{ fontFamily: SANS, fontSize: 25, fontWeight: 400, color: C.stone, marginTop: 12, lineHeight: 1.45 }}>
+                  <div
+                    style={{
+                      fontFamily: SANS,
+                      fontSize: 25,
+                      fontWeight: 400,
+                      color: C.stone,
+                      marginTop: 12,
+                      lineHeight: 1.45,
+                    }}
+                  >
                     {s.b}
                   </div>
                 </div>
@@ -793,7 +1072,15 @@ function HowScene({ local }: { local: number }) {
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", gap: 28, marginTop: 78, ...rise(local, 2.9, 0.9, 16) }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 28,
+            marginTop: 78,
+            ...rise(local, 2.9, 0.9, 16),
+          }}
+        >
           {["Dignity", "Self-reliance", "Solidarity"].map((v) => (
             <span
               key={v}
@@ -840,13 +1127,24 @@ function CommunityScene({ local }: { local: number }) {
             ...rise(local, 0.5, 0.95, 22),
           }}
         >
-          Off-grid by craft and necessity — a community living lightly.
+          Off-grid by craft and necessity: a community living lightly.
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 36, marginTop: 64 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 36,
+            marginTop: 64,
+          }}
+        >
           {COMMUNITY.map((c, i) => (
             <Fragment key={c}>
               {i > 0 && (
-                <span style={{ opacity: rise(local, 1.2 + i * 0.35, 0.6, 0).opacity }}>
+                <span
+                  style={{
+                    opacity: rise(local, 1.2 + i * 0.35, 0.6, 0).opacity,
+                  }}
+                >
                   <Dot size={10} color={C.clay300} />
                 </span>
               )}
@@ -875,14 +1173,27 @@ function CommunityScene({ local }: { local: number }) {
 const HELP = ["Teach", "Volunteer", "Give", "Spread the word"];
 function CloseScene({ local }: { local: number }) {
   return (
-    <div style={{ position: "absolute", inset: 0, background: C.forest700, overflow: "hidden" }}>
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: C.forest700,
+        overflow: "hidden",
+      }}
+    >
       <Atmosphere local={local} tone="dark" />
       <div style={{ ...colWrap, alignItems: "center", textAlign: "center" }}>
         <Eyebrow local={local} delay={0.3} color={C.gold} align="center">
           No one should be invisible
         </Eyebrow>
 
-        <div style={{ position: "relative", marginTop: 36, ...rise(local, 0.7, 1.0, 22) }}>
+        <div
+          style={{
+            position: "relative",
+            marginTop: 36,
+            ...rise(local, 0.7, 1.0, 22),
+          }}
+        >
           <div
             style={{
               fontFamily: SERIF,
@@ -896,27 +1207,73 @@ function CloseScene({ local }: { local: number }) {
           >
             Come stand with us.
           </div>
-          <CenterUnderline local={local} delay={1.6} y={126} width={560} color={C.gold} strokeW={7} />
+          <CenterUnderline
+            local={local}
+            delay={1.6}
+            y={126}
+            width={560}
+            color={C.gold}
+            strokeW={7}
+          />
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 30, marginTop: 78, ...rise(local, 1.9, 0.95, 18) }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 30,
+            marginTop: 78,
+            ...rise(local, 1.9, 0.95, 18),
+          }}
+        >
           {HELP.map((h, i) => (
             <Fragment key={h}>
               {i > 0 && <Dot size={8} color={C.forestLite} />}
-              <span style={{ fontFamily: SANS, fontSize: 30, fontWeight: 500, color: "rgba(245,239,230,0.92)" }}>{h}</span>
+              <span
+                style={{
+                  fontFamily: SANS,
+                  fontSize: 30,
+                  fontWeight: 500,
+                  color: "rgba(245,239,230,0.92)",
+                }}
+              >
+                {h}
+              </span>
             </Fragment>
           ))}
         </div>
 
-        <div style={{ marginTop: 104, display: "flex", flexDirection: "column", alignItems: "center", ...rise(local, 2.9, 1.0, 18) }}>
+        <div
+          style={{
+            marginTop: 104,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            ...rise(local, 2.9, 1.0, 18),
+          }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element -- fixed-size brand mark inside the film canvas */}
           <img
             src="/logo.png"
             alt="PRASM"
-            style={{ width: 78, height: 78, borderRadius: 17, marginBottom: 26, boxShadow: "0 16px 40px -18px rgba(0,0,0,0.6)" }}
+            style={{
+              width: 78,
+              height: 78,
+              borderRadius: 17,
+              marginBottom: 26,
+              boxShadow: "0 16px 40px -18px rgba(0,0,0,0.6)",
+            }}
           />
           <div>
-            <span style={{ fontFamily: GOTHAM, fontSize: 44, fontWeight: 600, letterSpacing: "0.05em", color: C.cream }}>
+            <span
+              style={{
+                fontFamily: GOTHAM,
+                fontSize: 44,
+                fontWeight: 600,
+                letterSpacing: "0.05em",
+                color: C.cream,
+              }}
+            >
               PRASM
             </span>
             <span
@@ -933,7 +1290,15 @@ function CloseScene({ local }: { local: number }) {
               Foundation
             </span>
           </div>
-          <div style={{ fontFamily: SANS, fontSize: 24, fontWeight: 400, color: C.forestLite, marginTop: 22 }}>
+          <div
+            style={{
+              fontFamily: SANS,
+              fontSize: 24,
+              fontWeight: 400,
+              color: C.forestLite,
+              marginTop: 22,
+            }}
+          >
             Mae Hong Son, Thailand&nbsp;&nbsp;·&nbsp;&nbsp;hope@prasm.life
           </div>
         </div>
