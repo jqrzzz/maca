@@ -14,7 +14,9 @@
     "thanks": "tsx scripts/donor-thanks/run.ts",
     "grants:status": "tsx scripts/grants-tracker/run.ts",
     "newsletter": "tsx scripts/supporter-update/run.ts",
-    "impact": "tsx scripts/impact-report/run.ts"
+    "impact": "tsx scripts/impact-report/run.ts",
+    "storybank:lint": "tsx scripts/storybank-lint/run.ts",
+    "translate:extract": "tsx scripts/translation/extract.ts"
   },
   "engines": {
     "node": ">=20.9 <23"
