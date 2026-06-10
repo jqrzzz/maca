@@ -8,7 +8,7 @@
 export const complaints = {
   lastUpdated: "June 2026",
   intro:
-    "If something we've done — or someone acting in our name — has caused concern, we want to hear it. That includes the families and community we serve, our supporters, volunteers, and partners. Feedback makes us better and keeps people safe.",
+    "If something we've done, or someone acting in our name, has caused concern, we want to hear it. That includes the families and community we serve, our supporters, volunteers, and partners. Feedback makes us better and keeps people safe.",
   sections: [
     {
       title: "What you can raise",
@@ -26,14 +26,14 @@ export const complaints = {
     {
       title: "What happens next",
       body: [
-        "We acknowledge what you raise, look into it honestly, and tell you what we found and what we'll do — normally within a few weeks, and sooner if someone may be at risk.",
+        "We acknowledge what you raise, look into it honestly, and tell you what we found and what we'll do. We normally do that within a few weeks, and sooner if someone may be at risk.",
         "Where a child or vulnerable person is at immediate risk, we act straight away and involve the appropriate local authorities or protection services, as set out in our Safeguarding policy.",
       ],
     },
     {
       title: "Speaking up from inside (whistleblowing)",
       body: [
-        "If you volunteer with us, work alongside us, or partner with us and you see something wrong — misuse of funds or goods, a safeguarding breach, dishonesty, anything — we want you to say so, and you are protected when you do. Raise it through the same channels, in confidence; no one will face retaliation for speaking up in good faith, ever.",
+        "If you volunteer with us, work alongside us, or partner with us and you see something wrong (misuse of funds or goods, a safeguarding breach, dishonesty, anything), we want you to say so, and you are protected when you do. Raise it through the same channels, in confidence; no one will face retaliation for speaking up in good faith, ever.",
         "We're honest about a limitation: PRASM is founder-led today, so most concerns come to the founder. If your concern is about the founder, say so when you raise it and we'll arrange for someone independent and trusted to handle it. As our governing board forms, it will become the standing independent route, and we'll update this page.",
       ],
     },
@@ -46,7 +46,7 @@ export const complaints = {
     {
       title: "If you're not satisfied",
       body: [
-        "Tell us — we'd rather know. As our governance formalizes, unresolved concerns will be able to go to our governing board. We'll update this page when that route exists.",
+        "Tell us. We'd rather know. As our governance formalizes, unresolved concerns will be able to go to our governing board. We'll update this page when that route exists.",
       ],
     },
   ],
