@@ -106,9 +106,9 @@ function structuralFindings(p: FunderProfile, d: GrantDraft): Finding[] {
 /** The clean, submittable document (no internal fit note). */
 function renderApplication(p: FunderProfile, d: GrantDraft): string {
   const lines: string[] = [
-    `# ${p.funder} — PRASM application (DRAFT)`,
+    `# ${p.funder}: PRASM application (DRAFT)`,
     "",
-    "> DRAFT — review and edit before submitting.",
+    "> DRAFT. Review and edit before submitting.",
     "",
     "## Summary",
     "",

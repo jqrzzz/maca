@@ -5,7 +5,7 @@
 
 export const hero = {
   eyebrow: "Kayan refugees · Mae Hong Son, Thailand",
-  title: "A community the world overlooked — refusing to be erased.",
+  title: "A community the world overlooked, still refusing to be erased.",
   lede: "PRASM stands with refugee families who fled war in Myanmar and now live without papers in the Thai hills. We help them stay well, prove who they are, and build a future on their own terms.",
 };
 
@@ -22,7 +22,7 @@ export const crisisTeaser = {
   points: [
     {
       title: "Stateless",
-      body: "No Thai ID — and often no document at all. Many children have no proof they exist.",
+      body: "No Thai ID, and often no document at all. Many children have no proof they exist.",
     },
     {
       title: "Shut out of school",
@@ -37,14 +37,14 @@ export const crisisTeaser = {
 
 export const programsTeaser = {
   eyebrow: "What we do",
-  title: "Care now — and a path to being seen",
+  title: "Care now, and a path to being seen",
   lede: "We start with health and survival, and build toward identity and records that last.",
 };
 
 export const founderNote = {
   eyebrow: "From the founder",
   quote:
-    "I'm a doctor. The first thing I could give this family wasn't money — it was a record. For a child with no papers, a medical history became the first proof that he exists.",
+    "I'm a doctor. The first thing I could give this family wasn't money. It was a record. For a child with no papers, a medical history became the first proof that he exists.",
   // TODO[user]: confirm how to attribute the founder publicly.
   attribution: "PRASM's founding doctor",
 };
@@ -74,5 +74,5 @@ export const donateCtaBand = {
 
 export const newsletter = {
   title: "Follow the journey",
-  body: "Occasional field notes from the village — honest updates on the work and the people. No spam, ever.",
+  body: "Occasional field notes from the village, with honest updates on the work and the people. No spam, ever.",
 };
