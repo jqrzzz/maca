@@ -7,12 +7,12 @@ export const note: FieldNote = {
   displayDate: "April 5, 2025",
   tag: "Medical",
   excerpt:
-    "When a boy fell ill, the first thing a doctor could offer wasn't money — it was a record. Organized properly, a medical history guides care and, for someone with no papers, quietly proves a life.",
+    "When a boy fell ill, the first thing a doctor could offer wasn't money. It was a record. Organized properly, a medical history guides care and, for someone with no papers, quietly proves a life.",
   heroImage: "programsMedical",
   body: [
     {
       type: "p",
-      text: "I met a family in my friend's home who had arrived from Myanmar the day before. One of their boys was sick. They wanted to see a doctor, but a clinic or hospital in Thailand charges a refugee the same as a foreign tourist — and there is no insurance to help.",
+      text: "I met a family in my friend's home who had arrived from Myanmar the day before. One of their boys was sick. They wanted to see a doctor, but a clinic or hospital in Thailand charges a refugee the same as a foreign tourist, and there is no insurance to help.",
     },
     {
       type: "p",
@@ -24,11 +24,11 @@ export const note: FieldNote = {
     },
     {
       type: "p",
-      text: "I also paid for the hospital bill and the transport to get there. It's expensive for a Thai family and cheap for a Westerner — price is relative. Thankfully, the examinations found nothing serious. Nothing to worry about.",
+      text: "I also paid for the hospital bill and the transport to get there. It's expensive for a Thai family and cheap for a Westerner. Price is relative. Thankfully, the examinations found nothing serious. Nothing to worry about.",
     },
     {
       type: "p",
-      text: "But the record stayed. For a child with no documents, that piece of paper is a beginning — evidence of who he is and that he was here. Multiply that by a whole community, and you start to see why documentation matters as much as treatment.",
+      text: "But the record stayed. For a child with no documents, that piece of paper is a beginning: evidence of who he is and that he was here. Multiply that by a whole community, and you start to see why documentation matters as much as treatment.",
     },
     {
       type: "quote",

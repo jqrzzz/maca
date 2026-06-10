@@ -7,7 +7,7 @@ export type Faq = { q: string; a: string };
 export const giveFaqs: Faq[] = [
   {
     q: "Where does my donation go?",
-    a: "Directly to the community — medical care and transport, food and essentials, education, and the solar/water infrastructure that keeps the village self-reliant. See our Transparency page for more.",
+    a: "Directly to the community: medical care and transport, food and essentials, education, and the solar/water infrastructure that keeps the village self-reliant. See our Transparency page for more.",
   },
   {
     q: "Are donations tax-deductible?",
@@ -15,7 +15,7 @@ export const giveFaqs: Faq[] = [
   },
   {
     q: "Is giving by card secure?",
-    a: "Yes. Card and PayPal gifts are processed by those providers on their own secure systems — we never see or store your card details.",
+    a: "Yes. Card and PayPal gifts are processed by those providers on their own secure systems. We never see or store your card details.",
   },
   {
     q: "Can I donate things instead of money?",
@@ -35,7 +35,7 @@ export const generalFaqs: Faq[] = [
   },
   {
     q: "Who are the Kayan?",
-    a: "The Kayan are a people from Kayah State in Myanmar. “Karenni” is an English translation sometimes used for the same community — the name they use for themselves is Kayan. Many fled the conflict in Myanmar and now live as refugees along the Thai border.",
+    a: "The Kayan are a people from Kayah State in Myanmar. “Karenni” is an English translation sometimes used for the same community. The name they use for themselves is Kayan. Many fled the conflict in Myanmar and now live as refugees along the Thai border.",
   },
   {
     q: "Is PRASM a registered charity?",
@@ -43,7 +43,7 @@ export const generalFaqs: Faq[] = [
   },
   {
     q: "Are donations tax-deductible?",
-    a: "Not at this time — see our Donation & Refund Policy. We'd rather be upfront than imply otherwise, and we'll update it if that changes.",
+    a: "Not at this time. See our Donation & Refund Policy. We'd rather be upfront than imply otherwise, and we'll update it if that changes.",
   },
   {
     q: "How do I know my gift is used well?",
@@ -51,7 +51,7 @@ export const generalFaqs: Faq[] = [
   },
   {
     q: "How can I help besides giving money?",
-    a: "Plenty of ways — teach or volunteer your skills, donate supplies in kind (medicine, solar gear, tools), or simply share PRASM with people who care. See Get Involved.",
+    a: "Plenty of ways: teach or volunteer your skills, donate supplies in kind (medicine, solar gear, tools), or simply share PRASM with people who care. See Get Involved.",
   },
   {
     q: "Can I visit or volunteer in the village?",
@@ -59,6 +59,6 @@ export const generalFaqs: Faq[] = [
   },
   {
     q: "Why don't you share the village's exact location?",
-    a: "For the community's safety. Many residents are undocumented and vulnerable, so we never publish the precise location — and we ask supporters not to either.",
+    a: "For the community's safety. Many residents are undocumented and vulnerable, so we never publish the precise location, and we ask supporters not to either.",
   },
 ];

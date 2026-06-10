@@ -7,7 +7,7 @@
 export const governanceIntro = {
   eyebrow: "Governance & policies",
   title: "How we're run, and the rules we hold ourselves to",
-  lede: "PRASM is an emerging, founder-led initiative. We're putting clear governance and policies in place from the start — not after — and we'd rather state plainly where we are than imply more.",
+  lede: "PRASM is an emerging, founder-led initiative. We're putting clear governance and policies in place from the start, not after, and we'd rather state plainly where we are than imply more.",
 };
 
 export const howGoverned: { title: string; body: string }[] = [
@@ -39,8 +39,7 @@ export const policySuite: { title: string; href: string; blurb: string }[] = [
   {
     title: "Complaints & feedback",
     href: "/complaints",
-    blurb:
-      "How to raise a concern — for the community, supporters, and partners.",
+    blurb: "How the community, supporters, and partners can raise a concern.",
   },
   {
     title: "Protecting your gift",

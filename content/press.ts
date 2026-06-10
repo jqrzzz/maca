@@ -9,7 +9,7 @@ import { boilerplate } from "@/content/storyBank";
 export const pressIntro = {
   eyebrow: "Press & media",
   title: "Telling this story, safely",
-  lede: "Everything a journalist, blogger, or partner needs to write about PRASM accurately — and the few rules that keep a vulnerable community safe.",
+  lede: "Everything a journalist, blogger, or partner needs to write about PRASM accurately, and the few rules that keep a vulnerable community safe.",
 };
 
 /** Verified-only facts, phrased for direct quotation. */
@@ -32,7 +32,7 @@ export const fastFacts: { label: string; value: string }[] = [
   {
     label: "Status",
     value:
-      "Emerging, founder-led initiative — not yet a registered charity, and we say so plainly",
+      "Emerging, founder-led initiative: not yet a registered charity, and we say so plainly",
   },
   { label: "Languages on site", value: "English (Thai and Burmese planned)" },
 ];
@@ -47,20 +47,20 @@ export const approvedDescriptions: { label: string; text: string }[] = [
 export const mediaGuidelines = {
   title: "Ground rules for covering PRASM",
   intro:
-    "We'll help any honest story — and we ask every writer and photographer to hold the same lines we hold ourselves:",
+    "We'll help any honest story, and we ask every writer and photographer to hold the same lines we hold ourselves:",
   rules: [
-    "Never publish or hint at the village's exact location — many residents are undocumented, and a place name or recognizable landmark can endanger them.",
-    "No names or identifiable images of community members without their informed consent, confirmed through us — especially children.",
+    "Never publish or hint at the village's exact location. Many residents are undocumented, and a place name or recognizable landmark can endanger them.",
+    "No names or identifiable images of community members, especially children, without their informed consent, confirmed through us.",
     "Describe where we work as: " + boilerplate.place + ".",
-    "Dignity over drama: the community is self-reliant and capable — please don't frame people as helpless victims.",
-    "Don't state that PRASM is a registered charity or that donations are tax-deductible — neither is true yet, and we'd rather be quoted accurately.",
+    "Dignity over drama: the community is self-reliant and capable. Please don't frame people as helpless victims.",
+    "Don't state that PRASM is a registered charity or that donations are tax-deductible. Neither is true yet, and we'd rather be quoted accurately.",
   ],
 };
 
 export const whatWeOffer: { title: string; body: string }[] = [
   {
     title: "Interviews",
-    body: "Our founding doctor is available for interviews by arrangement — contact us and we'll find a time across time zones.",
+    body: "Our founding doctor is available for interviews by arrangement. Contact us and we'll find a time across time zones.",
   },
   {
     title: "First-hand material",
@@ -74,7 +74,7 @@ export const whatWeOffer: { title: string; body: string }[] = [
 
 export const assets = {
   title: "Logo & images",
-  body: "Our logo and social card are below. Photography of the community is shared case-by-case under our consent rules — ask us.",
+  body: "Our logo and social card are below. Photography of the community is shared case-by-case under our consent rules. Just ask us.",
   files: [
     { label: "PRASM logo (PNG)", href: "/logo.png" },
     { label: "Social / Open Graph card (PNG)", href: "/og.png" },
