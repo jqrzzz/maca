@@ -72,9 +72,9 @@ function loadEvent(file: string): DonationEvent {
 /** The clean, sendable message (no checklist). */
 function renderMessage(e: DonationEvent, t: ThankYou): string {
   return [
-    `# Thank-you — ${e.donor ?? "supporter"} (DRAFT)`,
+    `# Thank-you: ${e.donor ?? "supporter"} (DRAFT)`,
     "",
-    "> DRAFT — review and edit before sending.",
+    "> DRAFT. Review and edit before sending.",
     "",
     `**Subject:** ${t.subject}`,
     "",

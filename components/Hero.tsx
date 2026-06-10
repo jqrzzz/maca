@@ -62,7 +62,13 @@ export function Hero({
       {/* Background — animated ambient backdrop (or a photo, if provided) */}
       <div className="absolute inset-0 -z-10">
         {image ? (
-          <Figure media={image} rounded="none" priority sizes="100vw" className="h-full" />
+          <Figure
+            media={image}
+            rounded="none"
+            priority
+            sizes="100vw"
+            className="h-full"
+          />
         ) : (
           <HeroBackdrop />
         )}
@@ -108,14 +114,16 @@ export function Hero({
             {eyebrow}
           </p>
           <h1 className="text-display text-cream">{title}</h1>
-          <p className="text-lede mt-6 max-w-xl text-cream/90">{lede}</p>
+          <p className="mt-6 max-w-xl text-lede text-cream/90">{lede}</p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             {actions.map((action, i) => (
               <Button
                 key={action.href}
                 href={action.href}
                 external={action.external}
-                variant={action.variant ?? (i === 0 ? "primary" : "onDarkOutline")}
+                variant={
+                  action.variant ?? (i === 0 ? "primary" : "onDarkOutline")
+                }
                 size="lg"
               >
                 {action.label}
@@ -127,7 +135,13 @@ export function Hero({
               aria-label="Play the film"
               className="inline-flex h-12 w-12 items-center justify-center rounded-full border-[1.5px] border-cream/45 bg-cream/5 text-cream transition-colors hover:border-cream hover:bg-cream/15"
             >
-              <svg width="13" height="13" viewBox="0 0 12 12" fill="currentColor" aria-hidden>
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 12 12"
+                fill="currentColor"
+                aria-hidden
+              >
                 <path d="M3 2.2 10 6 3 9.8z" />
               </svg>
             </button>
@@ -141,7 +155,7 @@ export function Hero({
           className={cn("prasm-film-boxed", closing && "is-closing")}
           role="dialog"
           aria-modal="true"
-          aria-label="PRASM — a warm introduction"
+          aria-label="PRASM: a warm introduction"
         >
           <PrasmIntro loop={false} onClose={close} onEnded={close} />
         </div>

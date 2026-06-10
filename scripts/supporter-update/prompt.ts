@@ -23,17 +23,17 @@ export const updateSchema: Record<string, unknown> = {
 };
 
 const INTRO =
-  "You are the supporter-update writer for PRASM — a small, founder-led initiative supporting Kayan refugees from Myanmar who live, largely undocumented and off-grid, in the hills of Mae Hong Son, Thailand. You write the periodic update that goes to supporters and monthly donors: warm, honest, and built only from what actually happened. You draft; a human reviews and sends — you never send anything.";
+  "You are the supporter-update writer for PRASM, a small, founder-led initiative supporting Kayan refugees from Myanmar who live, largely undocumented and off-grid, in the hills of Mae Hong Son, Thailand. You write the periodic update that goes to supporters and monthly donors: warm, honest, and built only from what actually happened. You draft; a human reviews and sends. You never send anything.";
 
 const OUTPUT_CONTRACT = [
   "OUTPUT",
-  "Build the update ONLY from the FIELD NOTES and FOUNDER HIGHLIGHTS supplied. Summarize and connect them in PRASM's voice — do not invent events, outcomes, numbers, or quotes that aren't in the material. If the material is thin, write a shorter, true update.",
+  "Build the update ONLY from the FIELD NOTES and FOUNDER HIGHLIGHTS supplied. Summarize and connect them in PRASM's voice. Do not invent events, outcomes, numbers, or quotes that aren't in the material. If the material is thin, write a shorter, true update.",
   "",
   "Return ONLY JSON matching the provided schema:",
   bullets([
-    "subject — a short, warm subject line for the period.",
-    "body — the update email, about 150–250 words: open warmly, share what happened (drawing on the notes and highlights), and close with a light pointer to the field notes on the site. No hard ask; gratitude over solicitation. No invented figures.",
-    "social — 1–2 sentences for social media pointing people to the latest field notes (at most one hashtag).",
+    "subject: a short, warm subject line for the period.",
+    "body: the update email, about 150 to 250 words. Open warmly, share what happened (drawing on the notes and highlights), and close with a light pointer to the field notes on the site. No hard ask; gratitude over solicitation. No invented figures.",
+    "social: 1 to 2 sentences for social media pointing people to the latest field notes (at most one hashtag).",
   ]),
 ].join("\n");
 
@@ -69,20 +69,20 @@ export function buildUserPrompt(
   const audience = input.audience ?? "supporters";
 
   const lines: string[] = [
-    `SUPPORTER UPDATE — period: ${period}`,
+    `SUPPORTER UPDATE (period: ${period})`,
     `Audience: ${
       audience === "monthly-donors"
-        ? "monthly donors (people already giving regularly — thank them for carrying the work)"
+        ? "monthly donors (people already giving regularly; thank them for carrying the work)"
         : "general supporters and newsletter subscribers"
     }`,
   ];
-  if (input.sample) lines.push("[SAMPLE INPUT — illustrative]");
+  if (input.sample) lines.push("[SAMPLE INPUT: illustrative]");
   lines.push("");
 
   lines.push("FIELD NOTES PUBLISHED (the real source material):");
   for (const n of notes) {
     lines.push(
-      `- "${n.title}" (${n.displayDate}${n.tag ? `, ${n.tag}` : ""}) — ${n.excerpt}`,
+      `- "${n.title}" (${n.displayDate}${n.tag ? `, ${n.tag}` : ""}): ${n.excerpt}`,
     );
   }
   lines.push("");

@@ -13,7 +13,7 @@ export const note: FieldNote = {
   body: [
     {
       type: "p",
-      text: "The families here came from Myanmar, where their homes were taken over by the army. They crossed into Thailand carrying what they could. They are safe from the fighting now — but they have stepped into a different kind of difficulty.",
+      text: "The families here came from Myanmar, where their homes were taken over by the army. They crossed into Thailand carrying what they could. They are safe from the fighting now, but they have stepped into a different kind of difficulty.",
     },
     {
       type: "p",
@@ -25,7 +25,7 @@ export const note: FieldNote = {
     },
     {
       type: "p",
-      text: "Education is complicated here. Children aren't allowed into public school without Thai ID. There's a school in the refugee camp nearby, but it needs paperwork — a birth proof, a parent's support — and someone to make the journey. For some families, none of that is possible.",
+      text: "Education is complicated here. Children aren't allowed into public school without Thai ID. There's a school in the refugee camp nearby, but it needs paperwork (a birth proof, a parent's support) and someone to make the journey. For some families, none of that is possible.",
     },
     {
       type: "quote",
@@ -33,7 +33,7 @@ export const note: FieldNote = {
     },
     {
       type: "p",
-      text: "This is the idea PRASM is built on. If we can help people be seen — with a record, a history, a name the system recognizes — many other doors begin to open.",
+      text: "This is the idea PRASM is built on. If we can help people be seen, with a record, a history, a name the system recognizes, then many other doors begin to open.",
     },
   ],
 };

@@ -164,6 +164,16 @@ function scanNames(section: string, text: string): Finding[] {
   }));
 }
 
+function scanDashes(section: string, text: string): Finding[] {
+  if (!/[—–]/.test(text)) return [];
+  return [
+    {
+      section,
+      note: "Voice: contains an em or en dash. The house style avoids them; reword with a comma, colon, or a new sentence.",
+    },
+  ];
+}
+
 function scanFigures(section: string, text: string): Finding[] {
   const numbers = text.match(/\d+/g) ?? [];
   return Array.from(new Set(numbers))
@@ -185,6 +195,7 @@ export function runChecks(
       ...scanLocation(label, text),
       ...scanNames(label, text),
       ...scanFigures(label, text),
+      ...scanDashes(label, text),
     );
   }
   return findings;

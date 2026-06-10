@@ -23,7 +23,7 @@ export function buildMetadata({
     width: 1200,
     height: 630,
     type: "image/png",
-    alt: `${site.name} — ${site.tagline}`,
+    alt: `${site.name} | ${site.tagline}`,
   };
 
   return {

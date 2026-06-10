@@ -20,19 +20,19 @@ export const ways: InvolveWay[] = [
   {
     icon: "teach",
     title: "Teach",
-    body: "Languages, skills, fitness — anything genuinely useful. Education is one of the biggest gaps here, and a willing teacher goes a long way.",
+    body: "Languages, skills, fitness, or anything genuinely useful. Education is one of the biggest gaps here, and a willing teacher goes a long way.",
     cta: { label: "Get in touch", href: "/contact" },
   },
   {
     icon: "volunteer",
     title: "Volunteer",
-    body: "Music, farming, building habitats, helping with everyday work in the village — share whatever you're good at, in a good way.",
+    body: "Share whatever you're good at, in a good way: music, farming, building habitats, or helping with everyday work in the village.",
     cta: { label: "Offer your time", href: "/contact" },
   },
   {
     icon: "goods",
     title: "Donate goods",
-    body: "Medicine, clothes, blankets, tools, solar panels, electrical devices, vehicles — practical things a community needs.",
+    body: "Practical things a community needs: medicine, clothes, blankets, tools, solar panels, electrical devices, vehicles.",
     cta: { label: "See what's needed", href: "/give" },
   },
   {
@@ -45,5 +45,5 @@ export const ways: InvolveWay[] = [
 
 export const involveNote = {
   title: "A note on coordinating",
-  body: "The village is remote and off-grid, and we're a small team. Please reach out before planning a visit or a shipment so we can make sure your help lands where it's needed most — safely and with the community's blessing.",
+  body: "The village is remote and off-grid, and we're a small team. Please reach out before planning a visit or a shipment so we can make sure your help lands where it's needed most, safely and with the community's blessing.",
 };

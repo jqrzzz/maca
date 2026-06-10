@@ -38,7 +38,7 @@ export const site = {
   tagline: "Dignity, identity, and care for the stateless.",
   // One-sentence description used for hero lede fallbacks + meta description.
   description:
-    "PRASM supports Kayan refugees from Myanmar living off-grid in Mae Hong Son, Thailand — building medical records, restoring identity, and standing with a community the world overlooked.",
+    "PRASM supports Kayan refugees from Myanmar living off-grid in Mae Hong Son, Thailand. We build medical records, restore identity, and stand with a community the world overlooked.",
   // Canonical origin — see resolveSiteUrl(). Auto-uses the Vercel URL until
   // NEXT_PUBLIC_SITE_URL is set to the custom domain.
   url: resolveSiteUrl(),

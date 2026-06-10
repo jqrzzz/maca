@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = buildMetadata({
   title: "Governance & policies",
   description:
-    "How PRASM is run — founder-led, building toward a board — and the policy suite we hold ourselves to.",
+    "How PRASM is run (founder-led, building toward a board) and the policy suite we hold ourselves to.",
   path: "/governance",
 });
 

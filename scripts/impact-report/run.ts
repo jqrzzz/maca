@@ -53,11 +53,11 @@ function main(): void {
   const notes = getAllFieldNotes().filter((n) => n.date.startsWith(year));
 
   const lines: string[] = [
-    `# PRASM — the year in review, ${year} (DRAFT)`,
+    `# PRASM: the year in review, ${year} (DRAFT)`,
     "",
-    "> **DRAFT — NOT FOR PUBLICATION.** Every " + TODO + " below needs a real,",
+    "> **DRAFT, NOT FOR PUBLICATION.** Every " + TODO + " below needs a real,",
     "> defensible figure or account from the founder before this goes anywhere.",
-    "> Placeholder site stats are marked as placeholders — do not publish them",
+    "> Placeholder site stats are marked as placeholders; do not publish them",
     "> as results.",
     "",
     "## Who we are",
@@ -81,7 +81,7 @@ function main(): void {
     "",
     ...stats.map(
       (s) =>
-        `- ${s.value} — ${s.label}${s.placeholder ? " _(PLACEHOLDER on the site — replace with the real figure)_" : ""}`,
+        `- ${s.value}: ${s.label}${s.placeholder ? " _(PLACEHOLDER on the site; replace with the real figure)_" : ""}`,
     ),
     "",
     "## What we did",
@@ -111,14 +111,14 @@ function main(): void {
     `Pick one or two published field notes to retell briefly (already consented and published):`,
     "",
     ...(notes.length
-      ? notes.map((n) => `- "${n.title}" (${n.displayDate}) — ${n.excerpt}`)
+      ? notes.map((n) => `- "${n.title}" (${n.displayDate}): ${n.excerpt}`)
       : [
-          `- (no field notes dated ${year} yet — list the year's notes here when they exist)`,
+          `- (no field notes dated ${year} yet; list the year's notes here when they exist)`,
         ]),
     "",
     "## What's next",
     "",
-    ...roadmap.items.map((r) => `- **${r.title}** — ${r.summary}`),
+    ...roadmap.items.map((r) => `- **${r.title}**: ${r.summary}`),
     "",
     "## An honest note on our status",
     "",

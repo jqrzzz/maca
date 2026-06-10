@@ -7,7 +7,7 @@ export const note: FieldNote = {
   displayDate: "January 18, 2025",
   tag: "Medical",
   excerpt:
-    "For a refugee, a hospital charges the same as it would a tourist — and there's no insurance to soften it. A single visit can be the difference between getting care and going without.",
+    "For a refugee, a hospital charges the same as it would a tourist, and there's no insurance to soften it. A single visit can be the difference between getting care and going without.",
   heroImage: "needWar",
   body: [
     {
@@ -16,7 +16,7 @@ export const note: FieldNote = {
     },
     {
       type: "p",
-      text: "So a fever, an injury, a worrying symptom in a child — things that should mean a quick trip to a clinic — instead become a calculation about money the family doesn't have.",
+      text: "So a fever, an injury, a worrying symptom in a child. Things that should mean a quick trip to a clinic instead become a calculation about money the family doesn't have.",
     },
     {
       type: "h",
@@ -32,7 +32,7 @@ export const note: FieldNote = {
     },
     {
       type: "p",
-      text: "None of this is complicated. It's simply the difference between a person getting care and going without — and it's exactly what your giving makes possible.",
+      text: "None of this is complicated. It's simply the difference between a person getting care and going without, and it's exactly what your giving makes possible.",
     },
   ],
 };

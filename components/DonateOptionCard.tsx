@@ -43,7 +43,12 @@ export function DonateLinkCard({
       <h3 className="mt-5 text-h3">{title}</h3>
       <p className="mt-2 flex-1 text-stone">{blurb}</p>
       {enabled ? (
-        <Button href={url} external variant="primary" className="mt-6 self-start">
+        <Button
+          href={url}
+          external
+          variant="primary"
+          className="mt-6 self-start"
+        >
           {cta}
           <ExternalLink className="h-4 w-4" aria-hidden />
         </Button>
@@ -109,8 +114,8 @@ export function DonateCryptoCard({
               />
             </div>
             <p className="text-sm text-stone">
-              Scan, or copy the address. Always verify it before sending —
-              transfers are irreversible.
+              Scan, or copy the address. Always verify it before sending.
+              Transfers are irreversible.
             </p>
           </div>
           <div className="mt-4 flex items-center justify-between gap-2 rounded-[14px] bg-sand px-3 py-2.5">
@@ -121,11 +126,7 @@ export function DonateCryptoCard({
           </div>
         </>
       ) : (
-        <p
-          className={cn(
-            "mt-5 text-sm text-stone italic",
-          )}
-        >
+        <p className={cn("mt-5 text-sm text-stone italic")}>
           Add a {symbol} address in the site configuration to enable.
         </p>
       )}

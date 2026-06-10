@@ -24,7 +24,7 @@ import { giveFaqs } from "@/content/faqs";
 export const metadata: Metadata = buildMetadata({
   title: "Ways to Give",
   description:
-    "Give to PRASM by card, PayPal, Patreon, or crypto — or donate supplies in kind. Every gift, in any form, restores care and dignity.",
+    "Give to PRASM by card, PayPal, Patreon, or crypto. Or donate supplies in kind. Every gift, in any form, restores care and dignity.",
   path: "/give",
 });
 
@@ -39,7 +39,7 @@ export default function GivePage() {
       <PageHero
         eyebrow="Ways to give"
         title="Every gift, in any form, is dignity returned"
-        lede="Choose whatever works best for you. Card, PayPal, Patreon, crypto, or supplies in kind — it all reaches the community directly."
+        lede="Choose whatever works best for you. Card, PayPal, Patreon, crypto, or supplies in kind: it all reaches the community directly."
       />
 
       {/* Monetary methods */}
@@ -47,7 +47,7 @@ export default function GivePage() {
         <SectionHeading
           eyebrow="Give money"
           title="Pick a method"
-          lede="One-time or recurring — whatever suits you."
+          lede="One-time or recurring, whatever suits you."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {visibleLinks.map((m, i) => (
@@ -130,7 +130,7 @@ export default function GivePage() {
               strokeWidth={1.5}
               aria-hidden
             />
-            <h2 className="text-h3 mt-4">Western Union</h2>
+            <h2 className="mt-4 text-h3">Western Union</h2>
             <p className="mt-3 text-stone">{westernUnionIntro}</p>
             <dl className="mt-6 inline-block text-left text-sm">
               <div className="flex gap-2">
@@ -156,7 +156,7 @@ export default function GivePage() {
         <div className="mx-auto max-w-2xl rounded-[20px] bg-sand p-8 text-center">
           <h2 className="text-h3">Where does it go?</h2>
           <p className="mt-3 text-stone">
-            Support reaches the community directly — medical care, food,
+            Support reaches the community directly: medical care, food,
             education, and the infrastructure that keeps the village
             self-reliant.
           </p>

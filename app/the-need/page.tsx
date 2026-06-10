@@ -13,7 +13,7 @@ import { needIntro, needSections, consequences } from "@/content/need";
 export const metadata: Metadata = buildMetadata({
   title: "The Need",
   description:
-    "The families PRASM supports fled war in Myanmar and now live without papers in Thailand — shut out of school and healthcare, unable to prove they exist.",
+    "The families PRASM supports fled war in Myanmar and now live without papers in Thailand, shut out of school and healthcare, unable to prove they exist.",
   path: "/the-need",
 });
 
@@ -55,10 +55,7 @@ export default function TheNeedPage() {
 
       {/* Consequences grid */}
       <Section tone="cream">
-        <SectionHeading
-          eyebrow="The cost"
-          title={needSections[2].title}
-        />
+        <SectionHeading eyebrow="The cost" title={needSections[2].title} />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {consequences.map((c, i) => (
             <Reveal key={c.title} delay={i * 80}>
@@ -90,7 +87,7 @@ export default function TheNeedPage() {
       <CTASection
         tone="sand"
         title="Help open a locked door"
-        body="Care, schooling, and a way to be seen — small things that change everything."
+        body="Care, schooling, and a way to be seen: small things that change everything."
         actions={[
           { label: "Donate", href: "/give" },
           { label: "See what we do", href: "/programs" },

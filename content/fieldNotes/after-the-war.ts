@@ -9,12 +9,12 @@ export const note: FieldNote = {
   displayDate: "March 4, 2025",
   tag: "The village",
   excerpt:
-    "On the way to the village we stopped at a ward of wounded patients. The cost of the conflict is written on the people who survived it — and on the children left behind.",
+    "On the way to the village we stopped at a ward of wounded patients. The cost of the conflict is written on the people who survived it, and on the children left behind.",
   heroImage: "villageLife",
   body: [
     {
       type: "p",
-      text: "On the road to the village we stopped at a ward for seriously wounded patients. I met my friend's best friend, who had lost both his eyes and several fingers. There were others without limbs. My friend himself was retired after a gunshot to the belly — lucky, in his words, to still be able to work.",
+      text: "On the road to the village we stopped at a ward for seriously wounded patients. I met my friend's best friend, who had lost both his eyes and several fingers. There were others without limbs. My friend himself was retired after a gunshot to the belly. Lucky, in his words, to still be able to work.",
     },
     {
       type: "p",
@@ -30,7 +30,7 @@ export const note: FieldNote = {
     },
     {
       type: "p",
-      text: "This is the community PRASM stands with — not a place of helplessness, but a place of resilience that simply deserves a few things the rest of us take for granted.",
+      text: "This is the community PRASM stands with: not a place of helplessness, but a place of resilience that simply deserves a few things the rest of us take for granted.",
     },
   ],
 };

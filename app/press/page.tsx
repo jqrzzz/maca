@@ -17,7 +17,7 @@ import {
 export const metadata: Metadata = buildMetadata({
   title: "Press & media kit",
   description:
-    "Facts, approved descriptions, logo, and the ground rules for covering PRASM and the community it serves — safely and accurately.",
+    "Facts, approved descriptions, logo, and the ground rules for covering PRASM and the community it serves, safely and accurately.",
   path: "/press",
 });
 
@@ -55,7 +55,7 @@ export default function PressPage() {
         <SectionHeading
           eyebrow="Copy-paste safe"
           title="Approved descriptions"
-          lede="Use these verbatim — they're accurate at every length."
+          lede="Use these verbatim. They're accurate at every length."
         />
         <div className="mx-auto mt-10 max-w-3xl space-y-6">
           {approvedDescriptions.map((d, i) => (

@@ -9,7 +9,7 @@
 export const safeguarding = {
   lastUpdated: "June 2026",
   intro:
-    "PRASM works with children and families who are refugees — many undocumented and vulnerable. Their safety and dignity come before everything else, including our own storytelling. This is our public commitment, and we're putting it in place from the start, not as an afterthought.",
+    "PRASM works with children and families who are refugees, many of them undocumented and vulnerable. Their safety and dignity come before everything else, including our own storytelling. This is our public commitment, and we're putting it in place from the start, not as an afterthought.",
   sections: [
     {
       title: "Our commitment",
@@ -20,7 +20,7 @@ export const safeguarding = {
     {
       title: "Who this applies to",
       body: [
-        "Everyone acting in PRASM's name — our founder, volunteers, visitors, photographers, and any partner we work with — is expected to follow this policy. Working with us means accepting it.",
+        "Everyone acting in PRASM's name (our founder, volunteers, visitors, photographers, and any partner we work with) is expected to follow this policy. Working with us means accepting it.",
       ],
     },
     {
@@ -32,7 +32,7 @@ export const safeguarding = {
     {
       title: "Photos & stories",
       body: [
-        "We photograph and tell stories only with informed consent — freely given, and able to be withdrawn at any time. We protect identities wherever there's any risk: first names only or none, no identifying details, and never images of children shared in a way that could expose or exploit them. Dignity comes before a compelling image, every time.",
+        "We photograph and tell stories only with informed consent, freely given and able to be withdrawn at any time. We protect identities wherever there's any risk: first names only or none, no identifying details, and never images of children shared in a way that could expose or exploit them. Dignity comes before a compelling image, every time.",
       ],
     },
     {
@@ -44,13 +44,13 @@ export const safeguarding = {
     {
       title: "Raising a concern",
       body: [
-        "If you have a concern about the safety of a child or anyone we work with — or about the conduct of someone connected to PRASM — please tell us straight away through our contact page. We take every concern seriously, act on it promptly, and protect the person who raised it. Where a child is at immediate risk, we involve the appropriate local authorities or protection services.",
+        "If you have a concern about the safety of a child or anyone we work with, or about the conduct of someone connected to PRASM, please tell us straight away through our contact page. We take every concern seriously, act on it promptly, and protect the person who raised it. Where a child is at immediate risk, we involve the appropriate local authorities or protection services.",
       ],
     },
     {
       title: "An honest note",
       body: [
-        "We're a small, emerging initiative — we don't yet have a large compliance department. But we do have clear principles, and we'd rather state them plainly and be held to them. As we grow, we'll formalize this with a named safeguarding lead, volunteer vetting, and a fuller internal policy.",
+        "We're a small, emerging initiative. We don't yet have a large compliance department. But we do have clear principles, and we'd rather state them plainly and be held to them. As we grow, we'll formalize this with a named safeguarding lead, volunteer vetting, and a fuller internal policy.",
       ],
     },
   ],

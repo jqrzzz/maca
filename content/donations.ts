@@ -34,7 +34,7 @@ export const monetaryCopy: MonetaryMethodCopy[] = [
 ];
 
 export const cryptoIntro =
-  "Prefer crypto? Send to one of the wallets below. Always double-check the address — blockchain transfers are irreversible.";
+  "Prefer crypto? Send to one of the wallets below. Always double-check the address: blockchain transfers are irreversible.";
 
 /** In-kind donations the community can use (from the founder's field notes). */
 export const inKind: { items: string[]; note: string } = {

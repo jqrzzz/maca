@@ -7,12 +7,12 @@
 export const codeOfConduct = {
   lastUpdated: "June 2026",
   intro:
-    "Everyone who acts in PRASM's name — our founder, volunteers, visitors, photographers, and partners — is expected to follow this code. It sits alongside our Safeguarding policy and exists to protect the people we serve, our supporters, and each other.",
+    "Everyone who acts in PRASM's name (our founder, volunteers, visitors, photographers, and partners) is expected to follow this code. It sits alongside our Safeguarding policy and exists to protect the people we serve, our supporters, and each other.",
   sections: [
     {
       title: "Respect and dignity",
       body: [
-        "We treat every person — especially the children and families we serve — with respect, never pity. People are partners, not projects. We listen to the community and follow its lead.",
+        "We treat every person, especially the children and families we serve, with respect, never pity. People are partners, not projects. We listen to the community and follow its lead.",
         "We do not discriminate on the basis of ethnicity, religion, gender, age, disability, or status.",
       ],
     },
@@ -33,7 +33,7 @@ export const codeOfConduct = {
     {
       title: "Privacy and consent",
       body: [
-        "We protect the privacy, identity, and safety of the community — never revealing the village's location, and never sharing a person's image or story beyond the consent they have given (see our Privacy and Safeguarding policies).",
+        "We protect the privacy, identity, and safety of the community: we never reveal the village's location, and we never share a person's image or story beyond the consent they have given (see our Privacy and Safeguarding policies).",
       ],
     },
     {

@@ -9,7 +9,7 @@ import { complaints } from "@/content/legal/complaints";
 export const metadata: Metadata = buildMetadata({
   title: "Complaints & feedback",
   description:
-    "How to raise a concern with PRASM — for the community we serve, supporters, volunteers, and partners. Handled in confidence.",
+    "How to raise a concern with PRASM. For the community we serve, supporters, volunteers, and partners. Handled in confidence.",
   path: "/complaints",
 });
 

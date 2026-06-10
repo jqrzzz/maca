@@ -22,7 +22,7 @@ export function FilmOverlay({ onClose }: { onClose: () => void }) {
       className="prasm-film-overlay"
       role="dialog"
       aria-modal="true"
-      aria-label="PRASM — a warm introduction"
+      aria-label="PRASM: a warm introduction"
     >
       <PrasmIntro onClose={onClose} />
     </div>

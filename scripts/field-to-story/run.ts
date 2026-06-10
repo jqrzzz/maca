@@ -88,7 +88,7 @@ function renderFieldNoteTs(b: DraftBundle, slug: string, date: string): string {
     .join("\n");
   return `import type { FieldNote } from "./types";
 
-// DRAFT from scripts/field-to-story — review against the checklist before publishing.
+// DRAFT from scripts/field-to-story. Review against the checklist before publishing.
 // TODO[user]: set heroImage to a real, consented ImageKey (see lib/images.ts).
 export const note: FieldNote = {
   slug: ${JSON.stringify(slug)},

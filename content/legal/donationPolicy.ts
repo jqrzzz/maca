@@ -7,7 +7,7 @@
 export const donationPolicy = {
   lastUpdated: "June 2026",
   intro:
-    "This explains what your gift supports, our current tax status, and how refunds work — plainly. We'd rather be upfront than imply more than we are.",
+    "This explains, plainly, what your gift supports, our current tax status, and how refunds work. We'd rather be upfront than imply more than we are.",
   sections: [
     {
       title: "What your gift supports",
@@ -18,7 +18,7 @@ export const donationPolicy = {
     {
       title: "Voluntary gifts, not purchases",
       body: [
-        "Donations are voluntary contributions. You don't receive goods or services in return, and a gift doesn't entitle you to direct a specific outcome. If you'd like your gift pointed toward a particular need — say, medical care — let us know and we'll do our best to honor it.",
+        "Donations are voluntary contributions. You don't receive goods or services in return, and a gift doesn't entitle you to direct a specific outcome. If you'd like your gift pointed toward a particular need (say, medical care), let us know and we'll do our best to honor it.",
       ],
     },
     {
@@ -36,20 +36,20 @@ export const donationPolicy = {
     {
       title: "Recurring gifts",
       body: [
-        "If you set up a monthly or recurring gift, you can change or cancel it any time — through your Patreon, PayPal, or card-provider account, or by contacting us and we'll help. Cancelling stops future charges; it doesn't refund past gifts.",
+        "If you set up a monthly or recurring gift, you can change or cancel it any time through your Patreon, PayPal, or card-provider account, or contact us and we'll help. Cancelling stops future charges; it doesn't refund past gifts.",
       ],
     },
     {
       title: "Crypto & in-kind gifts",
       body: [
-        "Cryptocurrency transfers are irreversible — always double-check the wallet address before sending. For in-kind donations (medicine, solar gear, tools, and the like), please message us first so we can coordinate what's genuinely needed and how to get it to a remote, off-grid village.",
+        "Cryptocurrency transfers are irreversible, so always double-check the wallet address before sending. For in-kind donations (medicine, solar gear, tools, and the like), please message us first so we can coordinate what's genuinely needed and how to get it to a remote, off-grid village.",
       ],
     },
     {
-      title: "Gifts we accept — and may decline",
+      title: "Gifts we accept (and may decline)",
       body: [
         "We accept monetary gifts through the channels on our Give page, and in-kind gifts by prior arrangement. We reserve the right to decline any gift: where its source is unclear, where it comes with conditions that conflict with our mission, the community's safety, or our values, where accepting it could create legal or sanctions risk, or where an in-kind item genuinely can't be used or transported.",
-        "For large or unusual gifts we may ask simple questions about the source of funds — not out of suspicion, but because protecting the integrity of support to a conflict-affected border is part of protecting the community. See our Protecting Your Gift policy.",
+        "For large or unusual gifts we may ask simple questions about the source of funds, not out of suspicion, but because protecting the integrity of support to a conflict-affected border is part of protecting the community. See our Protecting Your Gift policy.",
       ],
     },
     {
@@ -61,7 +61,7 @@ export const donationPolicy = {
     {
       title: "Accounting & questions",
       body: [
-        "We don't yet publish audited financials, but we believe in accounting for what we receive. If you'd like to know how a specific gift was used, just ask — we're glad to tell you. Questions about this policy? Please contact us.",
+        "We don't yet publish audited financials, but we believe in accounting for what we receive. If you'd like to know how a specific gift was used, just ask. We're glad to tell you. Questions about this policy? Please contact us.",
       ],
     },
   ],

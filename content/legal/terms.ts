@@ -7,12 +7,12 @@
 export const terms = {
   lastUpdated: "June 2026",
   intro:
-    "These terms govern your use of the PRASM website. We've kept them plain. By using this site you agree to them — and to the honest notes below about what we are and what this site is.",
+    "These terms govern your use of the PRASM website. We've kept them plain. By using this site you agree to them, and to the honest notes below about what we are and what this site is.",
   sections: [
     {
       title: "Who we are",
       body: [
-        "PRASM (“PRASM”, “we”, “us”) is a small, founder-led initiative supporting Kayan refugees in Mae Hong Son, Thailand. We are still formalizing our legal and organizational structure — see our Transparency page for an honest account of our current status.",
+        "PRASM (“PRASM”, “we”, “us”) is a small, founder-led initiative supporting Kayan refugees in Mae Hong Son, Thailand. We are still formalizing our legal and organizational structure. See our Transparency page for an honest account of our current status.",
       ],
     },
     {
@@ -26,7 +26,7 @@ export const terms = {
       title: "Content & intellectual property",
       body: [
         "The text, design, logo, and original imagery on this site belong to PRASM or its contributors unless noted otherwise. You're welcome to quote or share our material to help the cause, with attribution; please don't reproduce it in a way that implies endorsement or misrepresents our work.",
-        "Photographs and stories of real people are shared with care and consent. Please do not copy or repost images of individuals — especially children — without our written permission.",
+        "Photographs and stories of real people are shared with care and consent. Please do not copy or repost images of individuals, especially children, without our written permission.",
       ],
     },
     {
@@ -39,13 +39,13 @@ export const terms = {
     {
       title: "Third-party links & services",
       body: [
-        "This site links to third-party services — payment providers, social platforms, and crypto wallets. We don't control them and aren't responsible for their content, terms, or practices.",
+        "This site links to third-party services: payment providers, social platforms, and crypto wallets. We don't control them and aren't responsible for their content, terms, or practices.",
       ],
     },
     {
       title: "Not professional advice",
       body: [
-        "Information here — including field notes about health, identity, and life in the village — is shared to tell an honest story, not as medical, legal, or financial advice. Please don't rely on it as a substitute for a qualified professional.",
+        "Information here (including field notes about health, identity, and life in the village) is shared to tell an honest story, not as medical, legal, or financial advice. Please don't rely on it as a substitute for a qualified professional.",
       ],
     },
     {
@@ -70,7 +70,7 @@ export const terms = {
       title: "Governing law & contact",
       body: [
         // TODO[user]: confirm governing-law jurisdiction once the legal entity is established.
-        "These terms are governed by the laws of Thailand, where we operate, and nothing here limits any rights you may have under mandatory local law. Questions? Please contact us — we're happy to talk.",
+        "These terms are governed by the laws of Thailand, where we operate, and nothing here limits any rights you may have under mandatory local law. Questions? Please contact us. We're happy to talk.",
       ],
     },
   ],

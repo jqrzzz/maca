@@ -76,9 +76,9 @@ function loadInput(file?: string): UpdateInput {
 
 function renderMessage(period: string, u: SupporterUpdate): string {
   return [
-    `# Supporter update — ${period} (DRAFT)`,
+    `# Supporter update: ${period} (DRAFT)`,
     "",
-    "> DRAFT — review and edit before sending.",
+    "> DRAFT. Review and edit before sending.",
     "",
     `**Subject:** ${u.subject}`,
     "",

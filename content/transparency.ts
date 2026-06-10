@@ -8,7 +8,7 @@
 export const transparencyIntro = {
   eyebrow: "Transparency",
   title: "How we operate",
-  lede: "Trust is everything when you're asking people to give. Here's how PRASM works today — plainly, without overstating what we are.",
+  lede: "Trust is everything when you're asking people to give. Here's how PRASM works today: plainly, without overstating what we are.",
 };
 
 export const howWeOperate: { title: string; body: string }[] = [
@@ -48,7 +48,7 @@ export const whereSupportGoes: { label: string; body: string }[] = [
 export const leadership = {
   title: "Leadership & governance",
   body: [
-    "PRASM is led by its founder — a doctor whose visits to the village began this work — supported by a small circle of volunteers and the families themselves.",
+    "PRASM is led by its founder, a doctor whose visits to the village began this work, and supported by a small circle of volunteers and the families themselves.",
     "As we formalize, we intend to add named leadership, advisors, and basic governance, and to publish them here. We'd rather introduce real, accountable people than hide behind a logo. If you'd like to know who you're talking to, just ask.",
   ],
 };
@@ -68,7 +68,7 @@ export const statusStatement = {
   body: [
     "PRASM is an emerging, community-focused initiative. We are still formalizing our legal and organizational structure.",
     "That means we cannot currently promise tax-deductible receipts, and we don't publish audited financials yet. We'd rather tell you that plainly than imply otherwise. As our structure formalizes, this page will be updated.",
-    "If you'd like documentation of how a specific gift was used, just ask — we're happy to account for it.",
+    "If you'd like documentation of how a specific gift was used, just ask. We're happy to account for it.",
   ],
 };
 
@@ -78,7 +78,10 @@ export const statusStatement = {
  * completes. TODO[user]: replace "value" fields below with real details.
  */
 export const registrationDetails: { label: string; value: string }[] = [
-  { label: "Legal status", value: "Emerging initiative — registration in progress" },
+  {
+    label: "Legal status",
+    value: "Emerging initiative (registration in progress)",
+  },
   { label: "Operating in", value: "Mae Hong Son, Thailand" },
   { label: "Registered name", value: "To be confirmed" },
   { label: "Registration number", value: "Pending" },

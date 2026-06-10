@@ -95,11 +95,7 @@ export default function HomePage() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {activePrograms.map((p, i) => (
             <Reveal key={p.slug} delay={i * 70}>
-              <ProgramCard
-                icon={p.icon}
-                title={p.title}
-                summary={p.summary}
-              />
+              <ProgramCard icon={p.icon} title={p.title} summary={p.summary} />
             </Reveal>
           ))}
         </div>
@@ -110,8 +106,8 @@ export default function HomePage() {
             className="font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
           >
             identity, digital records, and AI-assisted care
-          </Link>{" "}
-          — the reason PRASM exists as a foundation.
+          </Link>
+          : the reason PRASM exists as a foundation.
         </p>
       </Section>
 
@@ -152,7 +148,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Life in the hills"
           title="Off-grid, by craft and by necessity"
-          lede="Solar power, hand-woven cloth, gardens and wood fire — a community living lightly."
+          lede="Solar power, hand-woven cloth, gardens and wood fire: a community living lightly."
         />
         <div className="mt-10">
           <PhotoStrip
