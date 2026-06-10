@@ -12,7 +12,9 @@
     "draft": "tsx scripts/field-to-story/run.ts",
     "grant": "tsx scripts/grants/run.ts",
     "thanks": "tsx scripts/donor-thanks/run.ts",
-    "grants:status": "tsx scripts/grants-tracker/run.ts"
+    "grants:status": "tsx scripts/grants-tracker/run.ts",
+    "newsletter": "tsx scripts/supporter-update/run.ts",
+    "impact": "tsx scripts/impact-report/run.ts"
   },
   "engines": {
     "node": ">=20.9 <23"
