@@ -12,7 +12,7 @@ import type { Fact } from "./types";
  */
 const statFacts: Fact[] = stats.map((s) => ({
   id: `stat-${s.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
-  claim: `${s.value} — ${s.label}${s.caption ? ` (${s.caption})` : ""}`,
+  claim: `${s.value}: ${s.label}${s.caption ? ` (${s.caption})` : ""}`,
   status: s.placeholder ? "placeholder" : "verified",
   source: "content/stats.ts",
 }));
@@ -41,14 +41,14 @@ export const facts: Fact[] = [
   {
     id: "statelessness",
     claim:
-      "Most people in the village have no Thai ID, and many children have no identity document at all — leaving them effectively invisible to the systems built to help.",
+      "Most people in the village have no Thai ID, and many children have no identity document at all, leaving them effectively invisible to the systems built to help.",
     status: "verified",
     source: "content/need.ts",
   },
   {
     id: "healthcare-cost",
     claim:
-      "Hospitals charge refugees the full foreigner rate, with no insurance — a single visit can be unaffordable.",
+      "Hospitals charge refugees the full foreigner rate, with no insurance. A single visit can be unaffordable.",
     status: "verified",
     source: "content/need.ts · content/programs.ts",
   },
@@ -92,7 +92,7 @@ export const facts: Fact[] = [
     claim: `PRASM traces its beginning to ${site.foundedYear}.`,
     status: "unverified",
     source: "content/site.ts",
-    note: "Founding year is a TODO in content/site.ts — confirm before stating.",
+    note: "Founding year is a TODO in content/site.ts. Confirm before stating.",
   },
   ...statFacts,
 ];

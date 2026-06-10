@@ -16,6 +16,6 @@ export const people: Person[] = [
     consent: "role-only",
     imageOK: false,
     notes:
-      "Refer to by role, not name, until the founder confirms public attribution (see content/home.ts founderNote and content/about.ts, both flagged TODO). The substance is real — do not embellish it.",
+      "Refer to by role, not name, until the founder confirms public attribution (see content/home.ts founderNote and content/about.ts, both flagged TODO). The substance is real. Do not embellish it.",
   },
 ];

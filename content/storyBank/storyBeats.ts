@@ -10,7 +10,7 @@ export const storyBeats: StoryBeat[] = [
     id: "origin",
     title: "It started with one sick child",
     summary:
-      "On a visit, the founding doctor met a family that had crossed from Myanmar the day before; their boy was sick, and a hospital was unaffordable at foreigner rates. He covered the care and built a medical record — which, for a child with no papers, became a first proof of existence. PRASM is the idea of doing that again, properly, for many.",
+      "On a visit, the founding doctor met a family that had crossed from Myanmar the day before; their boy was sick, and a hospital was unaffordable at foreigner rates. He covered the care and built a medical record, which, for a child with no papers, became a first proof of existence. PRASM is the idea of doing that again, properly, for many.",
     sources: ["content/about.ts", "content/home.ts"],
     themes: ["origin", "identity", "medical", "founder"],
   },
@@ -18,7 +18,7 @@ export const storyBeats: StoryBeat[] = [
     id: "ghosts",
     title: "The people the world calls ghosts",
     summary:
-      "Refugees here carry no Thai ID, and many children have no document at all. On paper they barely exist — and in a world that runs on paper, that locks every door: school, healthcare, protection. Identity is the first problem to solve.",
+      "Refugees here carry no Thai ID, and many children have no document at all. On paper they barely exist, and in a world that runs on paper, that locks every door: school, healthcare, protection. Identity is the first problem to solve.",
     sources: [
       "content/fieldNotes/the-people-the-world-calls-ghosts.ts",
       "content/need.ts",
@@ -29,7 +29,7 @@ export const storyBeats: StoryBeat[] = [
     id: "self-reliance",
     title: "A community living lightly",
     summary:
-      "The village is off-grid by necessity and by craft: solar pumps the water, gardens and animals feed families, fabric is woven by hand, and tribal solidarity holds everyone together. What's missing isn't will or dignity — it's a few things outsiders can provide: a way to be seen, to be treated when sick, and for children to learn.",
+      "The village is off-grid by necessity and by craft: solar pumps the water, gardens and animals feed families, fabric is woven by hand, and tribal solidarity holds everyone together. What's missing isn't will or dignity. It's a few things outsiders can provide: a way to be seen, to be treated when sick, and for children to learn.",
     sources: ["content/about.ts", "content/need.ts"],
     themes: ["self-reliance", "village", "dignity", "solar"],
   },
@@ -37,7 +37,7 @@ export const storyBeats: StoryBeat[] = [
     id: "records-as-proof",
     title: "Building records by hand",
     summary:
-      "The founder builds a proper written medical history for each patient. These histories guide future care and, over time, become quiet proof that a person exists and has been here — the seed of the planned identity and digital-records work.",
+      "The founder builds a proper written medical history for each patient. These histories guide future care and, over time, become quiet proof that a person exists and has been here: the seed of the planned identity and digital-records work.",
     sources: [
       "content/fieldNotes/building-medical-records-by-hand.ts",
       "content/programs.ts",
