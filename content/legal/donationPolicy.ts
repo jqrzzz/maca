@@ -46,6 +46,13 @@ export const donationPolicy = {
       ],
     },
     {
+      title: "Gifts we accept — and may decline",
+      body: [
+        "We accept monetary gifts through the channels on our Give page, and in-kind gifts by prior arrangement. We reserve the right to decline any gift: where its source is unclear, where it comes with conditions that conflict with our mission, the community's safety, or our values, where accepting it could create legal or sanctions risk, or where an in-kind item genuinely can't be used or transported.",
+        "For large or unusual gifts we may ask simple questions about the source of funds — not out of suspicion, but because protecting the integrity of support to a conflict-affected border is part of protecting the community. See our Protecting Your Gift policy.",
+      ],
+    },
+    {
       title: "Security",
       body: [
         "Card and PayPal gifts are processed on the providers' own secure systems. PRASM never sees or stores your card details.",

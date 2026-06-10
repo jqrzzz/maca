@@ -54,6 +54,13 @@ export const privacy = {
       ],
     },
     {
+      title: "How long we keep information",
+      body: [
+        "Only as long as it's useful for the purpose you gave it to us: contact messages while we're corresponding with you, newsletter details until you unsubscribe, and basic donation records as long as good accounting requires. When information stops being needed, we delete it — and you can ask us to delete yours at any time.",
+        "Records from our field work in the community (medical histories, identity documentation) are a separate matter entirely: they're held under much stricter controls, are never part of this website, and are governed by our Safeguarding policy and consent practices.",
+      ],
+    },
+    {
       title: "Contact",
       body: [
         "Questions about privacy, or want your information removed? Just contact us and we'll take care of it.",

@@ -31,6 +31,13 @@ export const complaints = {
       ],
     },
     {
+      title: "Speaking up from inside (whistleblowing)",
+      body: [
+        "If you volunteer with us, work alongside us, or partner with us and you see something wrong — misuse of funds or goods, a safeguarding breach, dishonesty, anything — we want you to say so, and you are protected when you do. Raise it through the same channels, in confidence; no one will face retaliation for speaking up in good faith, ever.",
+        "We're honest about a limitation: PRASM is founder-led today, so most concerns come to the founder. If your concern is about the founder, say so when you raise it and we'll arrange for someone independent and trusted to handle it. As our governing board forms, it will become the standing independent route, and we'll update this page.",
+      ],
+    },
+    {
       title: "Confidentiality and fairness",
       body: [
         "We handle concerns in confidence, protect the person who raised one from any retaliation, and treat anyone a complaint is about fairly while we look into it.",
