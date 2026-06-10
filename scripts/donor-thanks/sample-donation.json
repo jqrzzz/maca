@@ -1,0 +1,10 @@
+{
+  "sample": true,
+  "donor": "Maria",
+  "amount": "USD 50",
+  "method": "Stripe",
+  "firstTime": true,
+  "earmark": "medical care",
+  "note": "Thank you for the work you do. I read the field notes and had to help.",
+  "channel": "email"
+}

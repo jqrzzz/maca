@@ -9,7 +9,10 @@ import {
   transparencyIntro,
   howWeOperate,
   whereSupportGoes,
+  leadership,
+  howWeReport,
   statusStatement,
+  registrationDetails,
 } from "@/content/transparency";
 
 export const metadata: Metadata = buildMetadata({
@@ -64,9 +67,31 @@ export default function TransparencyPage() {
         </div>
       </Section>
 
-      {/* Honest status statement */}
+      {/* Leadership & how we report */}
       <Section tone="cream">
-        <div className="mx-auto max-w-2xl rounded-[20px] border-l-4 border-gold-400 bg-sand p-8">
+        <SectionHeading
+          eyebrow="Who & how"
+          title="Leadership & accountability"
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {[leadership, howWeReport].map((block, i) => (
+            <Reveal key={block.title} delay={i * 80}>
+              <div className="h-full rounded-[20px] border border-line bg-cream p-6 shadow-soft">
+                <h3 className="text-h3 text-clay-700">{block.title}</h3>
+                <div className="mt-3 space-y-3 text-stone">
+                  {block.body.map((para, j) => (
+                    <p key={j}>{para}</p>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      {/* Honest status statement */}
+      <Section tone="sand">
+        <div className="mx-auto max-w-2xl rounded-[20px] border-l-4 border-gold-400 bg-cream p-8">
           <h2 className="text-h3">{statusStatement.title}</h2>
           <div className="mt-4 space-y-4 text-stone">
             {statusStatement.body.map((para, i) => (
@@ -76,6 +101,24 @@ export default function TransparencyPage() {
           <Button href="/contact" variant="outline" className="mt-6">
             Ask us anything
           </Button>
+        </div>
+
+        <div className="mx-auto mt-6 max-w-2xl rounded-[20px] border border-line bg-cream p-8">
+          <h3 className="text-h3 text-clay-700">Registration &amp; status</h3>
+          <dl className="mt-5 divide-y divide-line text-sm">
+            {registrationDetails.map((row) => (
+              <div
+                key={row.label}
+                className="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              >
+                <dt className="font-medium text-forest-700">{row.label}</dt>
+                <dd className="text-stone sm:text-right">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-5 text-xs text-stone">
+            We keep this current as our registration progresses.
+          </p>
         </div>
       </Section>
     </>

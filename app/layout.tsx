@@ -11,8 +11,7 @@ import { siteJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Splash } from "@/components/Splash";
 
-const analyticsEnabled =
-  process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
+const analyticsEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -26,7 +25,10 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   category: "Nonprofit",
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": "/feed.xml" },
+  },
   formatDetection: { telephone: false, address: false, email: false },
   robots: {
     index: true,
@@ -70,7 +72,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fontVariables} h-full antialiased`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${fontVariables} h-full antialiased`}
+      suppressHydrationWarning
+    >
       <body className="flex min-h-full flex-col bg-cream">
         <Splash />
         <ThemeProvider>

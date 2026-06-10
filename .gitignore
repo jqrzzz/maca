@@ -24,6 +24,12 @@
 .DS_Store
 *.pem
 
+# field-to-story working output (drafts for human review, not source)
+/drafts/
+
+# grants tracker — real pipeline is private (funding strategy); template is committed
+/scripts/grants-tracker/pipeline.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*

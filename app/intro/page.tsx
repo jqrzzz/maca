@@ -10,5 +10,11 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function IntroPage() {
-  return <IntroFilmPage />;
+  return (
+    <>
+      {/* The film is full-screen visual; give SRs and the outline a heading. */}
+      <h1 className="sr-only">A warm introduction to PRASM</h1>
+      <IntroFilmPage />
+    </>
+  );
 }
