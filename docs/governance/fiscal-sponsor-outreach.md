@@ -78,8 +78,7 @@ supporters give tax-deductibly while we formalize in Thailand."_
 > account for any gift on request. Sponsorship would let our US supporters give
 > tax-deductibly while we complete our structure in Thailand.
 >
-> **Funding needs:** [fill in — e.g. monthly medical fund, transport,
-> > supplies, school materials; a simple 12-month budget]
+> **Funding needs:** [fill in — a simple 12-month budget]
 
 ## What they'll ask for (due-diligence kit)
 
