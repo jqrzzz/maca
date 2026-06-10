@@ -1,7 +1,36 @@
 /**
- * Small shared utilities for the authoring scripts (Field-to-Story, Grants).
+ * Small shared utilities for the authoring scripts.
  */
 import fs from "node:fs";
+
+/** Render a string list as markdown bullets (shared by the prompt builders). */
+export const bullets = (items: string[]): string =>
+  items.map((i) => `- ${i}`).join("\n");
+
+/**
+ * The value following a CLI flag. Fails loudly when the flag is given without
+ * one (`--input` at the end, or followed by another flag) instead of letting
+ * `undefined` flow into file reads with a confusing error.
+ */
+export function argValue(argv: string[], i: number, flag: string): string {
+  const v = argv[i];
+  if (v === undefined || v.startsWith("-")) {
+    throw new Error(`Missing value for ${flag}`);
+  }
+  return v;
+}
+
+/**
+ * Today as YYYY-MM-DD in the LOCAL timezone. `toISOString()` is UTC — for a
+ * founder in Asia/Bangkok that dates anything drafted before 07:00 as
+ * yesterday.
+ */
+export function todayLocalISO(d = new Date()): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
 
 /** Load KEY=VALUE pairs from .env.local (e.g. ANTHROPIC_API_KEY) without a dep. */
 export function loadLocalEnv(file = ".env.local"): void {

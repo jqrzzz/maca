@@ -16,7 +16,7 @@ import path from "node:path";
 import { buildSystemPrompt, buildUserPrompt, draftSchema } from "./prompt";
 import { runChecks, formatFindings, type Finding } from "../lib/checks";
 import { callClaude } from "../lib/claude";
-import { loadLocalEnv, slugify } from "../lib/util";
+import { argValue, loadLocalEnv, slugify, todayLocalISO } from "../lib/util";
 import type { DraftBundle, FieldInput } from "./types";
 
 /** The human-in-the-loop checklist — always required, scans or no scans. */
@@ -38,8 +38,9 @@ function parseArgs(argv: string[]): Args {
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--input" || a === "-i") args.input = argv[(i += 1)];
-    else if (a === "--out" || a === "-o") args.out = argv[(i += 1)];
+    if (a === "--input" || a === "-i") args.input = argValue(argv, (i += 1), a);
+    else if (a === "--out" || a === "-o")
+      args.out = argValue(argv, (i += 1), a);
     else if (a === "--live") args.live = true;
     else if (a === "--dry-run") args.live = false;
     else if (a === "--help" || a === "-h") {
@@ -176,7 +177,7 @@ async function main(): Promise<void> {
   loadLocalEnv();
   const args = parseArgs(process.argv.slice(2));
   const input = loadInput(args.input);
-  const date = input.date ?? new Date().toISOString().slice(0, 10);
+  const date = input.date ?? todayLocalISO();
   const system = buildSystemPrompt();
   const user = buildUserPrompt(input);
 

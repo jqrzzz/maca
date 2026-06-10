@@ -7,6 +7,7 @@
  */
 import { storyBeats } from "@/content/storyBank";
 import { buildGroundingBlock } from "../lib/grounding";
+import { bullets } from "../lib/util";
 import type { DonationEvent } from "./types";
 
 /** JSON schema for structured output — maps 1:1 to ThankYou. */
@@ -20,8 +21,6 @@ export const thankSchema: Record<string, unknown> = {
   },
   required: ["subject", "body", "shortVersion"],
 };
-
-const bullets = (items: string[]) => items.map((i) => `- ${i}`).join("\n");
 
 const INTRO =
   "You are the donor-relations writer for PRASM — a small, founder-led initiative supporting Kayan refugees from Myanmar who live, largely undocumented and off-grid, in the hills of Mae Hong Son, Thailand. You write warm, honest, personal thank-you notes to people who have supported PRASM. You draft; a human reviews and sends — you never send anything.";

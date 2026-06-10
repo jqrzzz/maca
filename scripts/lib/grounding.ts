@@ -11,8 +11,7 @@ import {
   verifiedFacts,
   unverifiedFacts,
 } from "@/content/storyBank";
-
-const bullets = (items: string[]) => items.map((i) => `- ${i}`).join("\n");
+import { bullets } from "./util";
 
 export function buildGroundingBlock(): string {
   const verified = verifiedFacts().map((f) => f.claim);

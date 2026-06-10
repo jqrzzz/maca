@@ -11,6 +11,10 @@ import { facts } from "@/content/storyBank";
 
 export type Finding = { section: string; note: string };
 
+// NOTE: every scan list below is English-only, matching the current
+// English-only site. When Thai/Burmese content lands (docs/concept.md §3.7),
+// these scans silently pass non-English text — they'll need equivalents in
+// those scripts before drafting in them.
 const AVOID_WORDS = [
   "victims",
   "victim",

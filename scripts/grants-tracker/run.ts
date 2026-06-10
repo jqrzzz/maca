@@ -8,6 +8,7 @@
  * Run via:  npm run grants:status -- [--due <days>] [--file <path>]
  */
 import fs from "node:fs";
+import { argValue } from "../lib/util";
 import type { GrantStatus, Pipeline, PipelineEntry } from "./types";
 
 const DEFAULT_FILES = [
@@ -16,13 +17,13 @@ const DEFAULT_FILES = [
 ];
 
 const OPEN: GrantStatus[] = ["researching", "drafting"];
-const STATUS_LABEL: Record<GrantStatus, string> = {
-  researching: "researching",
-  drafting: "drafting",
-  applied: "applied",
-  won: "won",
-  declined: "declined",
-};
+const STATUSES: GrantStatus[] = [
+  "researching",
+  "drafting",
+  "applied",
+  "won",
+  "declined",
+];
 
 type Args = { file?: string; due?: number };
 
@@ -30,8 +31,9 @@ function parseArgs(argv: string[]): Args {
   const args: Args = {};
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--file" || a === "-f") args.file = argv[(i += 1)];
-    else if (a === "--due" || a === "-d") args.due = Number(argv[(i += 1)]);
+    if (a === "--file" || a === "-f") args.file = argValue(argv, (i += 1), a);
+    else if (a === "--due" || a === "-d")
+      args.due = Number(argValue(argv, (i += 1), a));
     else if (a === "--help" || a === "-h") {
       console.log(`Grants tracker (v0) — report the grants pipeline.
 
@@ -84,9 +86,7 @@ function main(): void {
     acc[e.status] = (acc[e.status] ?? 0) + 1;
     return acc;
   }, {});
-  const countLine = (Object.keys(STATUS_LABEL) as GrantStatus[])
-    .map((s) => `${STATUS_LABEL[s]} ${counts[s] ?? 0}`)
-    .join(" · ");
+  const countLine = STATUSES.map((s) => `${s} ${counts[s] ?? 0}`).join(" · ");
 
   console.log(`\nPRASM grants pipeline — ${file}`);
   console.log(`${pipeline.length} opportunities · ${countLine}`);

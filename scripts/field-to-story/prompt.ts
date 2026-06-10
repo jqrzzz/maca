@@ -6,6 +6,7 @@
  */
 import { storyBeats, beatsByTheme, type StoryBeat } from "@/content/storyBank";
 import { buildGroundingBlock } from "../lib/grounding";
+import { bullets, todayLocalISO } from "../lib/util";
 import type { FieldInput } from "./types";
 
 /** JSON schema for structured output — maps 1:1 to DraftBundle. */
@@ -57,8 +58,6 @@ export const draftSchema: Record<string, unknown> = {
   required: ["fieldNote", "donorUpdate", "social"],
 };
 
-const bullets = (items: string[]) => items.map((i) => `- ${i}`).join("\n");
-
 const INTRO =
   "You are the drafting engine for PRASM — a small, founder-led initiative supporting Kayan refugees from Myanmar who live, largely undocumented and off-grid, in the hills of Mae Hong Son, Thailand. You turn rough field input into publish-ready DRAFTS in PRASM's own voice. You never publish — a human reviews and approves everything you write.";
 
@@ -78,7 +77,7 @@ export function buildSystemPrompt(): string {
 }
 
 export function buildUserPrompt(input: FieldInput): string {
-  const date = input.date ?? new Date().toISOString().slice(0, 10);
+  const date = input.date ?? todayLocalISO();
   const themes = input.themes ?? [];
   const beats: StoryBeat[] = themes.length
     ? Array.from(

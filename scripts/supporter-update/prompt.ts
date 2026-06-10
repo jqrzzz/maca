@@ -7,6 +7,7 @@
  */
 import { getAllFieldNotes, type FieldNote } from "@/content/fieldNotes";
 import { buildGroundingBlock } from "../lib/grounding";
+import { bullets } from "../lib/util";
 import type { UpdateInput } from "./types";
 
 /** JSON schema for structured output — maps 1:1 to SupporterUpdate. */
@@ -20,8 +21,6 @@ export const updateSchema: Record<string, unknown> = {
   },
   required: ["subject", "body", "social"],
 };
-
-const bullets = (items: string[]) => items.map((i) => `- ${i}`).join("\n");
 
 const INTRO =
   "You are the supporter-update writer for PRASM — a small, founder-led initiative supporting Kayan refugees from Myanmar who live, largely undocumented and off-grid, in the hills of Mae Hong Son, Thailand. You write the periodic update that goes to supporters and monthly donors: warm, honest, and built only from what actually happened. You draft; a human reviews and sends — you never send anything.";

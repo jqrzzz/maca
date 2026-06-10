@@ -15,6 +15,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { argValue } from "../lib/util";
 import { boilerplate } from "@/content/storyBank";
 import { stats } from "@/content/stats";
 import { activePrograms, roadmap } from "@/content/programs";
@@ -27,8 +28,9 @@ function parseArgs(argv: string[]): Args {
   const args: Args = { year: String(new Date().getFullYear()), out: "drafts" };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--year" || a === "-y") args.year = argv[(i += 1)];
-    else if (a === "--out" || a === "-o") args.out = argv[(i += 1)];
+    if (a === "--year" || a === "-y") args.year = argValue(argv, (i += 1), a);
+    else if (a === "--out" || a === "-o")
+      args.out = argValue(argv, (i += 1), a);
     else if (a === "--help" || a === "-h") {
       console.log(`Impact-report scaffold (v0) — assemble an honest report skeleton.
 

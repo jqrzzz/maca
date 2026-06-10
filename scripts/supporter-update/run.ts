@@ -22,7 +22,7 @@ import {
 } from "./prompt";
 import { runChecks, formatFindings, type Finding } from "../lib/checks";
 import { callClaude } from "../lib/claude";
-import { loadLocalEnv, slugify } from "../lib/util";
+import { argValue, loadLocalEnv, slugify } from "../lib/util";
 import type { SupporterUpdate, UpdateInput } from "./types";
 
 const UPDATE_MANUAL_CHECKS: string[] = [
@@ -39,8 +39,9 @@ function parseArgs(argv: string[]): Args {
   const args: Args = { out: "drafts", live: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
-    if (a === "--input" || a === "-i") args.input = argv[(i += 1)];
-    else if (a === "--out" || a === "-o") args.out = argv[(i += 1)];
+    if (a === "--input" || a === "-i") args.input = argValue(argv, (i += 1), a);
+    else if (a === "--out" || a === "-o")
+      args.out = argValue(argv, (i += 1), a);
     else if (a === "--live") args.live = true;
     else if (a === "--dry-run") args.live = false;
     else if (a === "--help" || a === "-h") {

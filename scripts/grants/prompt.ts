@@ -6,6 +6,7 @@
  */
 import { storyBeats } from "@/content/storyBank";
 import { buildGroundingBlock } from "../lib/grounding";
+import { bullets } from "../lib/util";
 import type { FunderProfile } from "./types";
 
 /** JSON schema for structured output — maps 1:1 to GrantDraft. */
@@ -31,8 +32,6 @@ export const grantSchema: Record<string, unknown> = {
   },
   required: ["summary", "answers", "statusDisclosure", "fitNote"],
 };
-
-const bullets = (items: string[]) => items.map((i) => `- ${i}`).join("\n");
 
 const INTRO =
   "You are the grants writer for PRASM — a small, founder-led initiative supporting Kayan refugees from Myanmar who live, largely undocumented and off-grid, in the hills of Mae Hong Son, Thailand. You draft funding applications tailored to a specific funder, grounded in PRASM's real story. You draft; a human reviews, refines, and submits — you never submit anything.";
