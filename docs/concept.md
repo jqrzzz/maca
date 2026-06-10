@@ -130,8 +130,10 @@ Each entry: **what · why here · the loop · what it needs · risks · stage.**
 - **Needs.** Donor records — semi-manual in Stage A, a simple CRM in Stage B.
 - **Risks.** Tier-1 PII (→ [Data and privacy model](#data-and-privacy-model)). A
   human always owns tone. Never spammy.
-- **Stage.** A (manual) → B. ✅ _v0 thank-you drafter built — see
-  [`scripts/donor-thanks/`](../scripts/donor-thanks)._
+- **Stage.** A (manual) → B. ✅ _v0 thank-you drafter built
+  ([`scripts/donor-thanks/`](../scripts/donor-thanks)) and v0 supporter-update
+  drafter for recurring donors + newsletter
+  ([`scripts/supporter-update/`](../scripts/supporter-update))._
 
 ### 3.4 Identity & Case Registry
 
@@ -186,7 +188,8 @@ Each entry: **what · why here · the loop · what it needs · risks · stage.**
 
 - **Translation layer** — Thai / Burmese / Kayan / English across comms and
   records. (Distinct from the public-site translation we agreed to leave for
-  last.)
+  last.) _Groundwork laid: `npm run translate:extract` emits a translator-ready
+  worksheet of all site copy._
 - **Donor-facing site assistant** — grounded Q&A about the cause and how to
   help, answering _only_ from approved public content. On-brand, but the easiest
   to get wrong, so: last.
@@ -337,6 +340,12 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.8** — June 2026 — completed the buildable backlog: supporter-update
+  drafter + impact-report scaffold (`scripts/supporter-update/`,
+  `scripts/impact-report/`), press kit (`/press`), policy consolidation
+  (whistleblowing, gift acceptance, retention) + risk register, Story Bank lint
+  - translation extractor, SEO/a11y audit pass, and the fiscal-sponsor outreach
+    pack + site flip runbook (`docs/governance/`).
 - **v0.7** — June 2026 — researched the entity/legal-structure decision
   (`docs/governance/entity-options.md`) and added the governance & policy suite.
 - **v0.6** — June 2026 — added the grants tracker (`scripts/grants-tracker/`),

@@ -52,6 +52,28 @@ npm run format     # prettier --write .
   you drop in a real photo — see
   [`public/images/placeholders/README.md`](public/images/placeholders/README.md).
 
+## Authoring & ops tools
+
+The repo doubles as PRASM's AI-assisted back office — the blueprint is
+[`docs/concept.md`](docs/concept.md). All tools are dev-only (never bundled
+into the site), default to a **dry run**, and never publish or send anything —
+a human approves every output. Live drafting needs `ANTHROPIC_API_KEY` in
+`.env.local`.
+
+| Command                     | What it does                                                  |
+| --------------------------- | ------------------------------------------------------------- |
+| `npm run draft`             | Field-to-Story: a field note → site/donor/social drafts       |
+| `npm run grant`             | Draft a funder-tailored grant application                     |
+| `npm run thanks`            | Draft a donor thank-you                                       |
+| `npm run newsletter`        | Draft the supporter update from real field notes              |
+| `npm run impact`            | Assemble an honest impact-report skeleton (no AI, no figures) |
+| `npm run grants:status`     | Grants-pipeline report (deadlines, overdue)                   |
+| `npm run storybank:lint`    | Check the Story Bank stays honest and consent-safe            |
+| `npm run translate:extract` | Emit a translator-ready CSV of all site copy                  |
+
+Governance and decision documents (entity options, sponsor outreach, board
+recruitment, risk register, audits) live under [`docs/`](docs).
+
 ## Before launch
 
 See the checklist in the project plan. In short: set real donation links +
