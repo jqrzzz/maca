@@ -1,0 +1,82 @@
+/**
+ * Press & media kit content. Boilerplate is imported from the Story Bank so the
+ * approved descriptions can never drift from what the org actually says about
+ * itself. Fast facts are verified-only — no placeholders, no unconfirmed dates.
+ */
+import { site } from "@/content/site";
+import { boilerplate } from "@/content/storyBank";
+
+export const pressIntro = {
+  eyebrow: "Press & media",
+  title: "Telling this story, safely",
+  lede: "Everything a journalist, blogger, or partner needs to write about PRASM accurately — and the few rules that keep a vulnerable community safe.",
+};
+
+/** Verified-only facts, phrased for direct quotation. */
+export const fastFacts: { label: string; value: string }[] = [
+  { label: "Name", value: `${site.name} ("${site.shortName}")` },
+  {
+    label: "What we do",
+    value:
+      "Medical care & transport, education access, off-grid solar/water/food support, and hand-written medical records that double as proof of identity",
+  },
+  {
+    label: "Who we serve",
+    value:
+      "Kayan refugee families from Myanmar living off-grid, largely undocumented, in Mae Hong Son province, Thailand",
+  },
+  {
+    label: "Founded by",
+    value: "A medical doctor (named by role, by choice, for now)",
+  },
+  {
+    label: "Status",
+    value:
+      "Emerging, founder-led initiative — not yet a registered charity, and we say so plainly",
+  },
+  { label: "Languages on site", value: "English (Thai and Burmese planned)" },
+];
+
+/** Approved descriptions at three lengths — copy-paste safe. */
+export const approvedDescriptions: { label: string; text: string }[] = [
+  { label: "One line", text: boilerplate.oneLiner },
+  { label: "Short", text: boilerplate.short },
+  { label: "Standard (~80 words)", text: boilerplate.standard },
+];
+
+export const mediaGuidelines = {
+  title: "Ground rules for covering PRASM",
+  intro:
+    "We'll help any honest story — and we ask every writer and photographer to hold the same lines we hold ourselves:",
+  rules: [
+    "Never publish or hint at the village's exact location — many residents are undocumented, and a place name or recognizable landmark can endanger them.",
+    "No names or identifiable images of community members without their informed consent, confirmed through us — especially children.",
+    "Describe where we work as: " + boilerplate.place + ".",
+    "Dignity over drama: the community is self-reliant and capable — please don't frame people as helpless victims.",
+    "Don't state that PRASM is a registered charity or that donations are tax-deductible — neither is true yet, and we'd rather be quoted accurately.",
+  ],
+};
+
+export const whatWeOffer: { title: string; body: string }[] = [
+  {
+    title: "Interviews",
+    body: "Our founding doctor is available for interviews by arrangement — contact us and we'll find a time across time zones.",
+  },
+  {
+    title: "First-hand material",
+    body: "Our field notes are first-person accounts from the village, free to quote with attribution to PRASM and a link.",
+  },
+  {
+    title: "Fact-checking",
+    body: "Ask us before you print a number. We'll tell you plainly what we can verify and what we can't yet.",
+  },
+];
+
+export const assets = {
+  title: "Logo & images",
+  body: "Our logo and social card are below. Photography of the community is shared case-by-case under our consent rules — ask us.",
+  files: [
+    { label: "PRASM logo (PNG)", href: "/logo.png" },
+    { label: "Social / Open Graph card (PNG)", href: "/og.png" },
+  ],
+};
