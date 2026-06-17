@@ -16,7 +16,7 @@ import { SocialLinks } from "./SocialLinks";
  * - focus moves into the panel on open, returns to trigger on close
  * - body scroll locked while open
  */
-export function MobileNav() {
+export function MobileNav({ overHero = false }: { overHero?: boolean }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -74,7 +74,10 @@ export function MobileNav() {
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
         aria-label={open ? "Close menu" : "Open menu"}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-forest-700 hover:bg-sand lg:hidden"
+        className={cn(
+          "inline-flex h-11 w-11 items-center justify-center rounded-md lg:hidden",
+          overHero ? "text-cream hover:bg-cream/10" : "text-forest-700 hover:bg-sand",
+        )}
       >
         {open ? (
           <X className="h-6 w-6" aria-hidden />
