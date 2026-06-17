@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ExternalLink, Heart, CreditCard, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -70,14 +69,15 @@ export function DonateCryptoCard({
   label,
   network,
   address,
-  qr,
+  qrSvg,
   enabled,
 }: {
   symbol: string;
   label: string;
   network?: string;
   address: string;
-  qr: string;
+  /** Inline SVG QR generated from the address (see lib/qr.ts). */
+  qrSvg?: string;
   enabled: boolean;
 }) {
   return (
@@ -101,18 +101,16 @@ export function DonateCryptoCard({
 
       {enabled ? (
         <>
-          {/* Static QR if provided */}
+          {/* QR generated from the address itself, so it can never drift. */}
           <div className="mt-5 flex items-center gap-4">
-            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-[14px] border border-line bg-sand">
-              {/* Falls back gracefully if the QR image isn't present yet. */}
-              <Image
-                src={qr}
-                alt={`${label} wallet QR code`}
-                fill
-                className="object-contain p-1.5"
-                sizes="96px"
+            {qrSvg && (
+              <div
+                className="h-24 w-24 shrink-0 overflow-hidden rounded-[14px] border border-line bg-white p-1.5"
+                role="img"
+                aria-label={`${label} wallet address QR code`}
+                dangerouslySetInnerHTML={{ __html: qrSvg }}
               />
-            </div>
+            )}
             <p className="text-sm text-stone">
               Scan, or copy the address. Always verify it before sending.
               Transfers are irreversible.

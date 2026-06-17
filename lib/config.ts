@@ -24,8 +24,6 @@ export type CryptoMethod = {
   label: string;
   network?: string;
   address: string;
-  /** Static QR image path (see public/images/crypto). */
-  qr: string;
   enabled: boolean;
 };
 
@@ -56,14 +54,12 @@ export const config = {
       symbol: "BTC",
       label: "Bitcoin",
       address: btc,
-      qr: "/images/crypto/btc.svg",
       enabled: !!btc,
     },
     {
       symbol: "ETH",
       label: "Ethereum",
       address: eth,
-      qr: "/images/crypto/eth.svg",
       enabled: !!eth,
     },
     {
@@ -71,7 +67,6 @@ export const config = {
       label: "Tether",
       network: usdtNetwork,
       address: usdt,
-      qr: "/images/crypto/usdt.svg",
       enabled: !!usdt,
     },
   ] satisfies CryptoMethod[],

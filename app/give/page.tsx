@@ -13,6 +13,7 @@ import {
 } from "@/components/DonateOptionCard";
 import { buildMetadata } from "@/lib/metadata";
 import { config, methodVisible } from "@/lib/config";
+import { qrSvg as makeQrSvg } from "@/lib/qr";
 import {
   monetaryCopy,
   cryptoIntro,
@@ -28,11 +29,19 @@ export const metadata: Metadata = buildMetadata({
   path: "/give",
 });
 
-export default function GivePage() {
+export default async function GivePage() {
   const visibleLinks = monetaryCopy.filter((m) =>
     methodVisible(config.links[m.key].enabled),
   );
-  const visibleCrypto = config.crypto.filter((c) => methodVisible(c.enabled));
+  const visibleCrypto = await Promise.all(
+    config.crypto
+      .filter((c) => methodVisible(c.enabled))
+      .map(async (c) => ({
+        ...c,
+        qrSvg:
+          c.enabled && c.address ? await makeQrSvg(c.address) : undefined,
+      })),
+  );
 
   return (
     <>
@@ -81,7 +90,7 @@ export default function GivePage() {
                   label={c.label}
                   network={c.network}
                   address={c.address}
-                  qr={c.qr}
+                  qrSvg={c.qrSvg}
                   enabled={c.enabled}
                 />
               </Reveal>
