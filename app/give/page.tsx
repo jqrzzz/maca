@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Package, Send } from "lucide-react";
+import { Package, Send, Landmark, ShieldCheck, ExternalLink } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,6 +10,7 @@ import { FAQ } from "@/components/FAQ";
 import {
   DonateLinkCard,
   DonateCryptoCard,
+  DonateContactCard,
 } from "@/components/DonateOptionCard";
 import { buildMetadata } from "@/lib/metadata";
 import { config, methodVisible } from "@/lib/config";
@@ -17,8 +18,10 @@ import { qrSvg as makeQrSvg } from "@/lib/qr";
 import {
   monetaryCopy,
   cryptoIntro,
+  cryptoProcessorIntro,
   inKind,
   westernUnionIntro,
+  bankTransferIntro,
 } from "@/content/donations";
 import { giveFaqs } from "@/content/faqs";
 
@@ -75,27 +78,65 @@ export default async function GivePage() {
       </Section>
 
       {/* Crypto */}
-      {visibleCrypto.length > 0 && (
+      {(visibleCrypto.length > 0 ||
+        methodVisible(config.cryptoProcessor.enabled)) && (
         <Section tone="sand">
           <SectionHeading
             eyebrow="Give crypto"
             title="Donate with cryptocurrency"
             lede={cryptoIntro}
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {visibleCrypto.map((c, i) => (
-              <Reveal key={c.symbol} delay={i * 70}>
-                <DonateCryptoCard
-                  symbol={c.symbol}
-                  label={c.label}
-                  network={c.network}
-                  address={c.address}
-                  qrSvg={c.qrSvg}
-                  enabled={c.enabled}
-                />
-              </Reveal>
-            ))}
-          </div>
+
+          {/* Recommended: hosted processor (auto-convert + receipt) */}
+          {methodVisible(config.cryptoProcessor.enabled) && (
+            <div className="mt-10 flex flex-col items-start gap-5 rounded-[20px] border border-line bg-cream p-6 shadow-soft sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] bg-clay-50 text-clay-600">
+                  <ShieldCheck
+                    className="h-6 w-6"
+                    strokeWidth={1.75}
+                    aria-hidden
+                  />
+                </span>
+                <div>
+                  <h3 className="text-h3">Easiest: hosted crypto checkout</h3>
+                  <p className="mt-1 text-stone">{cryptoProcessorIntro}</p>
+                </div>
+              </div>
+              {config.cryptoProcessor.enabled ? (
+                <Button
+                  href={config.cryptoProcessor.url}
+                  external
+                  variant="primary"
+                  className="shrink-0"
+                >
+                  Give via {config.cryptoProcessor.name}
+                  <ExternalLink className="h-4 w-4" aria-hidden />
+                </Button>
+              ) : (
+                <p className="shrink-0 text-sm text-stone italic">
+                  Add a processor URL to enable.
+                </p>
+              )}
+            </div>
+          )}
+
+          {visibleCrypto.length > 0 && (
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              {visibleCrypto.map((c, i) => (
+                <Reveal key={c.symbol} delay={i * 70}>
+                  <DonateCryptoCard
+                    symbol={c.symbol}
+                    label={c.label}
+                    network={c.network}
+                    address={c.address}
+                    qrSvg={c.qrSvg}
+                    enabled={c.enabled}
+                  />
+                </Reveal>
+              ))}
+            </div>
+          )}
         </Section>
       )}
 
@@ -130,32 +171,33 @@ export default async function GivePage() {
         </div>
       </Section>
 
-      {/* Western Union — only when configured */}
-      {config.westernUnion.enabled && (
+      {/* Bank transfer & Western Union — contact-first, only when configured */}
+      {(config.bankTransfer.enabled || config.westernUnion.enabled) && (
         <Section tone="sand">
-          <div className="mx-auto max-w-2xl rounded-[20px] border border-line bg-cream p-8 text-center">
-            <Send
-              className="mx-auto h-8 w-8 text-clay-600"
-              strokeWidth={1.5}
-              aria-hidden
-            />
-            <h2 className="mt-4 text-h3">Western Union</h2>
-            <p className="mt-3 text-stone">{westernUnionIntro}</p>
-            <dl className="mt-6 inline-block text-left text-sm">
-              <div className="flex gap-2">
-                <dt className="font-semibold text-forest-700">Recipient:</dt>
-                <dd className="text-ink">{config.westernUnion.name}</dd>
-              </div>
-              <div className="mt-1 flex gap-2">
-                <dt className="font-semibold text-forest-700">Location:</dt>
-                <dd className="text-ink">{config.westernUnion.location}</dd>
-              </div>
-            </dl>
-            <div className="mt-6">
-              <Button href="/contact" variant="primary">
-                Contact us first
-              </Button>
-            </div>
+          <SectionHeading
+            eyebrow="Send money directly"
+            title="Bank transfer and Western Union"
+            lede="For larger or international gifts. Contact us first and we'll share current details securely."
+          />
+          <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
+            {config.bankTransfer.enabled && (
+              <DonateContactCard
+                icon={Landmark}
+                title="Bank transfer / wire"
+                blurb={bankTransferIntro}
+              />
+            )}
+            {config.westernUnion.enabled && (
+              <DonateContactCard
+                icon={Send}
+                title="Western Union"
+                blurb={westernUnionIntro}
+                details={[
+                  { label: "Recipient", value: config.westernUnion.name },
+                  { label: "Location", value: config.westernUnion.location },
+                ]}
+              />
+            )}
           </div>
         </Section>
       )}
