@@ -148,16 +148,16 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Life in the hills"
           title="Off-grid, by craft and by necessity"
-          lede="Solar power, hand-woven cloth, gardens and wood fire: a community living lightly."
+          lede="Dirt roads and bamboo homes, gardens and free-roaming chickens, firewood for the cooking fire: a community living lightly off the grid."
         />
         <div className="mt-10">
           <PhotoStrip
             keys={[
-              "villageSolar",
-              "villageWeaving",
+              "villageStreet",
               "villageGarden",
-              "villageWater",
               "villageWoodfire",
+              "villageHomes",
+              "villageAnimals",
               "villageLife",
             ]}
           />
