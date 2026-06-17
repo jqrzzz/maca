@@ -32,6 +32,12 @@ export const policySuite: { title: string; href: string; blurb: string }[] = [
     blurb: "How we protect the children and vulnerable people we work with.",
   },
   {
+    title: "Responsible AI",
+    href: "/responsible-ai",
+    blurb:
+      "How we use AI responsibly: human oversight, data protection, and clear red lines.",
+  },
+  {
     title: "Code of conduct",
     href: "/code-of-conduct",
     blurb: "How everyone acting for PRASM is expected to behave.",

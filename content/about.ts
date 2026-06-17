@@ -60,5 +60,30 @@ export const values = {
       title: "Honesty",
       body: "We tell the truth about what we are, what we're not yet, and where support goes.",
     },
+    {
+      title: "Responsibility",
+      body: "We adopt new tools, including AI, with care and human judgment. Technology serves the people; a person always decides, and safety comes before speed.",
+    },
+    {
+      title: "Stewardship",
+      body: "We treat every gift, every resource, and every piece of personal data as something held in trust: used sparingly, protected, and accounted for.",
+    },
   ],
+};
+
+/**
+ * Mission and vision: the canonical statements of why PRASM exists and the
+ * future it works toward. Surfaced on the About page. REVIEW with the founder.
+ */
+export const missionVision = {
+  eyebrow: "Why we exist",
+  title: "Mission and vision",
+  mission: {
+    label: "Mission",
+    body: "PRASM restores health, dignity, and identity to Kayan refugees living undocumented and off-grid in the hills of Mae Hong Son, Thailand. We cover urgent medical care, support education and self-reliant living, and build a lasting record for each person, so that someone the world cannot see can finally be recognized.",
+  },
+  vision: {
+    label: "Vision",
+    body: "A world where being undocumented no longer means being unseen, unwell, or unschooled. We work toward the day a small, conscientious team, amplified by technology and led by the community, helps a stateless people prove who they are and stand on their own.",
+  },
 };

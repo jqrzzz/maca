@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { ExternalLink, Heart, CreditCard, Wallet } from "lucide-react";
+import { ExternalLink, Heart, CreditCard, Wallet, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { CopyButton } from "@/components/CopyButton";
@@ -70,14 +69,15 @@ export function DonateCryptoCard({
   label,
   network,
   address,
-  qr,
+  qrSvg,
   enabled,
 }: {
   symbol: string;
   label: string;
   network?: string;
   address: string;
-  qr: string;
+  /** Inline SVG QR generated from the address (see lib/qr.ts). */
+  qrSvg?: string;
   enabled: boolean;
 }) {
   return (
@@ -101,18 +101,16 @@ export function DonateCryptoCard({
 
       {enabled ? (
         <>
-          {/* Static QR if provided */}
+          {/* QR generated from the address itself, so it can never drift. */}
           <div className="mt-5 flex items-center gap-4">
-            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-[14px] border border-line bg-sand">
-              {/* Falls back gracefully if the QR image isn't present yet. */}
-              <Image
-                src={qr}
-                alt={`${label} wallet QR code`}
-                fill
-                className="object-contain p-1.5"
-                sizes="96px"
+            {qrSvg && (
+              <div
+                className="h-24 w-24 shrink-0 overflow-hidden rounded-[14px] border border-line bg-white p-1.5"
+                role="img"
+                aria-label={`${label} wallet address QR code`}
+                dangerouslySetInnerHTML={{ __html: qrSvg }}
               />
-            </div>
+            )}
             <p className="text-sm text-stone">
               Scan, or copy the address. Always verify it before sending.
               Transfers are irreversible.
@@ -130,6 +128,48 @@ export function DonateCryptoCard({
           Add a {symbol} address in the site configuration to enable.
         </p>
       )}
+    </div>
+  );
+}
+
+/**
+ * A contact-first money method (bank transfer / wire, Western Union). We never
+ * publish account numbers, so the card invites the donor to reach out for
+ * current details. Optional `details` rows show non-sensitive info only.
+ */
+export function DonateContactCard({
+  icon: Icon,
+  title,
+  blurb,
+  details,
+  cta = "Contact us first",
+}: {
+  icon: LucideIcon;
+  title: string;
+  blurb: string;
+  details?: { label: string; value: string }[];
+  cta?: string;
+}) {
+  return (
+    <div className="flex h-full flex-col rounded-[20px] border border-line bg-cream p-6 shadow-soft">
+      <span className="inline-flex h-12 w-12 items-center justify-center rounded-[14px] bg-clay-50 text-clay-600">
+        <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden />
+      </span>
+      <h3 className="mt-5 text-h3">{title}</h3>
+      <p className="mt-2 flex-1 text-stone">{blurb}</p>
+      {details && details.length > 0 && (
+        <dl className="mt-4 space-y-1 text-sm">
+          {details.map((d) => (
+            <div key={d.label} className="flex gap-2">
+              <dt className="font-semibold text-forest-700">{d.label}:</dt>
+              <dd className="text-ink">{d.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      <Button href="/contact" variant="primary" className="mt-6 self-start">
+        {cta}
+      </Button>
     </div>
   );
 }

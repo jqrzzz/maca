@@ -19,6 +19,11 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  // The home hero is dark; the header sits transparently over it until you
+  // scroll. Use light treatment there so the logo + nav stay legible (the hero
+  // copy is light for the same reason). Interior pages open on a light surface.
+  const overHero = pathname === "/" && !scrolled;
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
@@ -36,7 +41,7 @@ export function Header() {
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4 md:h-20">
-        <Logo variant="dark" />
+        <Logo variant={overHero ? "light" : "dark"} />
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {primaryNav.map((link) => {
@@ -49,8 +54,12 @@ export function Header() {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "rounded-md px-3 py-2 text-[0.9375rem] font-medium transition-colors",
-                  "text-forest-600 hover:text-clay-700",
-                  active && "text-clay-700",
+                  overHero
+                    ? cn("text-cream/85 hover:text-cream", active && "text-cream")
+                    : cn(
+                        "text-forest-600 hover:text-clay-700",
+                        active && "text-clay-700",
+                      ),
                 )}
               >
                 {link.label}
@@ -60,7 +69,9 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
+          <ThemeToggle
+            className={overHero ? "text-cream hover:bg-cream/10" : undefined}
+          />
           <Button
             href={donateCta.href}
             variant="primary"
@@ -69,7 +80,7 @@ export function Header() {
           >
             {donateCta.label}
           </Button>
-          <MobileNav />
+          <MobileNav overHero={overHero} />
         </div>
       </Container>
     </header>

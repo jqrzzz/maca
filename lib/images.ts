@@ -30,8 +30,8 @@ export const images = {
   },
   villageLife: {
     src: "/images/village/daily-life.jpg",
-    alt: "Children playing on open ground in the off-grid village.",
-    placeholder: true,
+    alt: "Children of the village gathered together on open ground by their homes.",
+    placeholder: false,
     ratio: "4/3",
   },
   villageWeaving: {
@@ -42,8 +42,8 @@ export const images = {
   },
   villageGarden: {
     src: "/images/village/garden.jpg",
-    alt: "Vegetable gardens and free-roaming chickens beside bamboo homes.",
-    placeholder: true,
+    alt: "A hen and chicks foraging by a garden plot beside the bamboo homes.",
+    placeholder: false,
     ratio: "4/3",
   },
   villageSolar: {
@@ -54,8 +54,8 @@ export const images = {
   },
   villageWoodfire: {
     src: "/images/village/woodfire.jpg",
-    alt: "A family cooking over a wood fire inside a bamboo kitchen.",
-    placeholder: true,
+    alt: "Firewood stacked beneath a stilt house, fuel for the kitchen fire.",
+    placeholder: false,
     ratio: "4/3",
   },
   villageWater: {
@@ -64,11 +64,29 @@ export const images = {
     placeholder: true,
     ratio: "4/3",
   },
+  villageStreet: {
+    src: "/images/village/street.jpg",
+    alt: "A dirt road running through the off-grid village, past tin-roofed and bamboo homes under a monsoon sky.",
+    placeholder: false,
+    ratio: "4/3",
+  },
+  villageHomes: {
+    src: "/images/village/homes.jpg",
+    alt: "Bamboo and timber stilt houses set among the trees.",
+    placeholder: false,
+    ratio: "4/3",
+  },
+  villageAnimals: {
+    src: "/images/village/animals.jpg",
+    alt: "Pigs in a timber pen, part of everyday village life.",
+    placeholder: false,
+    ratio: "4/3",
+  },
   founderPortrait: {
     src: "/images/founder/portrait.jpg",
-    alt: "Portrait of PRASM's founding doctor in the village.",
-    placeholder: true,
-    ratio: "1/1",
+    alt: "PRASM's founding team together in a village home.",
+    placeholder: false,
+    ratio: "4/3",
   },
   needWar: {
     src: "/images/the-need/displacement.jpg",
@@ -78,9 +96,9 @@ export const images = {
   },
   programsMedical: {
     src: "/images/programs/medical-records.jpg",
-    alt: "A doctor writing a medical record by hand for a patient.",
-    placeholder: true,
-    ratio: "4/3",
+    alt: "A young patient and companion at a hospital exam window, receiving medical paperwork.",
+    placeholder: false,
+    ratio: "4/5",
   },
 } as const;
 

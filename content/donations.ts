@@ -53,3 +53,9 @@ export const inKind: { items: string[]; note: string } = {
 
 export const westernUnionIntro =
   "We can also receive support by Western Union. Please contact us first to confirm the current recipient details before sending.";
+
+export const bankTransferIntro =
+  "For larger or international gifts, a bank transfer or wire is often simplest. Please contact us first and we will share the current account details securely.";
+
+export const cryptoProcessorIntro =
+  "Prefer a simple checkout? Give crypto through a hosted page that converts to local currency and sends you a receipt.";

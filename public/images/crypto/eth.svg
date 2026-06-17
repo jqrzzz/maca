@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Ethereum QR placeholder">
-  <rect width="120" height="120" fill="#F5EFE6"/>
-  <rect x="14" y="14" width="92" height="92" rx="8" fill="none" stroke="#E89A4E" stroke-width="2" stroke-dasharray="5 5"/>
-  <text x="60" y="56" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#853607">ETH</text>
-  <text x="60" y="74" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6B635A">QR placeholder</text>
-</svg>

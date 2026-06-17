@@ -8,7 +8,13 @@ import { Prose } from "@/components/ui/Prose";
 import { CTASection } from "@/components/CTASection";
 import { buildMetadata } from "@/lib/metadata";
 import { images } from "@/lib/images";
-import { aboutIntro, founderStory, village, values } from "@/content/about";
+import {
+  aboutIntro,
+  founderStory,
+  missionVision,
+  village,
+  values,
+} from "@/content/about";
 
 export const metadata: Metadata = buildMetadata({
   title: "Our Story",
@@ -44,8 +50,31 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* The village */}
+      {/* Mission & vision */}
       <Section tone="sand">
+        <SectionHeading
+          eyebrow={missionVision.eyebrow}
+          title={missionVision.title}
+          align="center"
+          className="mx-auto"
+        />
+        <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+          {[missionVision.mission, missionVision.vision].map((m) => (
+            <div
+              key={m.label}
+              className="rounded-[20px] border border-line bg-cream p-8 shadow-soft"
+            >
+              <p className="text-[0.8125rem] font-semibold tracking-[0.12em] text-clay-600 uppercase">
+                {m.label}
+              </p>
+              <p className="mt-4 text-lg leading-relaxed text-ink">{m.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* The village */}
+      <Section tone="cream">
         <SectionHeading
           eyebrow={village.eyebrow}
           title={village.title}
@@ -54,7 +83,7 @@ export default function AboutPage() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {village.points.map((point, i) => (
             <Reveal key={point.title} delay={i * 70}>
-              <div className="h-full rounded-[20px] border border-line bg-cream p-6">
+              <div className="h-full rounded-[20px] border border-line bg-sand p-6">
                 <h3 className="text-h3 text-clay-700">{point.title}</h3>
                 <p className="mt-2 text-stone">{point.body}</p>
               </div>
@@ -64,17 +93,17 @@ export default function AboutPage() {
       </Section>
 
       {/* Values */}
-      <Section tone="cream">
+      <Section tone="sand">
         <SectionHeading
           eyebrow={values.eyebrow}
           title={values.title}
           align="center"
           className="mx-auto"
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {values.items.map((value, i) => (
             <Reveal key={value.title} delay={i * 70}>
-              <div className="h-full rounded-[20px] bg-sand p-6">
+              <div className="h-full rounded-[20px] bg-cream p-6">
                 <h3 className="font-display text-xl font-semibold text-forest-700">
                   {value.title}
                 </h3>

@@ -24,8 +24,6 @@ export type CryptoMethod = {
   label: string;
   network?: string;
   address: string;
-  /** Static QR image path (see public/images/crypto). */
-  qr: string;
   enabled: boolean;
 };
 
@@ -40,6 +38,16 @@ const usdtNetwork = env("NEXT_PUBLIC_CRYPTO_USDT_NETWORK") || "TRC20";
 
 const wuName = env("NEXT_PUBLIC_WU_RECIPIENT_NAME");
 const wuLocation = env("NEXT_PUBLIC_WU_RECIPIENT_LOCATION");
+
+// Optional hosted crypto-donation page (The Giving Block / Engiven / Coinbase
+// Commerce): auto-converts to fiat and issues receipts. Just a URL.
+const cryptoProcessorUrl = env("NEXT_PUBLIC_CRYPTO_PROCESSOR_URL");
+const cryptoProcessorName =
+  env("NEXT_PUBLIC_CRYPTO_PROCESSOR_NAME") || "our crypto donation page";
+
+// Bank transfer / wire is contact-first (we never publish account numbers), so
+// it is a simple on/off flag rather than public values.
+const bankTransferFlag = env("NEXT_PUBLIC_BANK_TRANSFER").toLowerCase();
 
 export const config = {
   /** Show placeholder cards for unconfigured methods only outside production. */
@@ -56,14 +64,12 @@ export const config = {
       symbol: "BTC",
       label: "Bitcoin",
       address: btc,
-      qr: "/images/crypto/btc.svg",
       enabled: !!btc,
     },
     {
       symbol: "ETH",
       label: "Ethereum",
       address: eth,
-      qr: "/images/crypto/eth.svg",
       enabled: !!eth,
     },
     {
@@ -71,15 +77,26 @@ export const config = {
       label: "Tether",
       network: usdtNetwork,
       address: usdt,
-      qr: "/images/crypto/usdt.svg",
       enabled: !!usdt,
     },
   ] satisfies CryptoMethod[],
+
+  /** Hosted crypto-donation page (auto-convert + receipts). Link-out only. */
+  cryptoProcessor: {
+    url: cryptoProcessorUrl,
+    name: cryptoProcessorName,
+    enabled: !!cryptoProcessorUrl,
+  },
 
   westernUnion: {
     name: wuName,
     location: wuLocation,
     enabled: !!(wuName && wuLocation),
+  },
+
+  /** Contact-first bank transfer / wire (details shared privately). */
+  bankTransfer: {
+    enabled: ["1", "true", "on", "yes"].includes(bankTransferFlag),
   },
 
   contact: {

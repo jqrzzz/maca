@@ -38,3 +38,28 @@ That's it — `<Figure>` automatically switches to an optimized `next/image`
 | `the-need/`            | The Need page                    |
 | `programs/`            | Programs page                    |
 | `field-notes/`         | Field note hero images           |
+
+## Status & future upgrade: add more photos later
+
+As of June 2026, these slots show **real photos** of the village:
+`villageLife`, `villageGarden`, `villageWoodfire`, `villageStreet`,
+`villageHomes`, `villageAnimals`, `founderPortrait`, and `programsMedical`.
+
+Still branded placeholders, waiting on a suitable consented photo:
+`heroMain`, `villageWeaving`, `villageSolar`, `villageWater`, and `needWar`
+(displacement / "a family that recently fled conflict").
+
+A larger set of the founder's source photos is in the repo (`IMG2026*.jpg`
+at the project root) and in git history: community gatherings, more village
+scenes, signage, and a hospital visit. Only ~8 of ~50 are in use. To add
+more later:
+
+1. Pick a photo; resize to ~2000px on the long edge and save it under the
+   right `public/images/...` path (see the folder map above).
+2. Point the matching `lib/images.ts` entry at it (or add a new key), set
+   `placeholder: false`, and write an accurate `alt`.
+3. Optional: surface extra photos by adding keys to a `<PhotoStrip>` or a
+   new gallery section (e.g. on The Need, Programs, or Get Involved).
+
+The consent, dignity, and location-safety rules above apply to every photo
+added.

@@ -1,14 +1,14 @@
 # Crypto QR codes
 
-These are **placeholder** QR images. When you set real wallet addresses (via the
-`NEXT_PUBLIC_CRYPTO_*_ADDRESS` env vars), generate a matching QR code for each
-address and replace the corresponding file here:
+QR codes are **generated automatically** from the wallet addresses you set in
+`NEXT_PUBLIC_CRYPTO_*_ADDRESS` (see `lib/qr.ts`, rendered by the crypto cards on
+`/give`). The QR is derived from the address at build time, so it can never drift
+out of sync with the address shown next to it.
 
-- `btc.svg` — Bitcoin address QR
-- `eth.svg` — Ethereum address QR
-- `usdt.svg` — Tether (USDT) address QR — make sure it matches the network
-  set in `NEXT_PUBLIC_CRYPTO_USDT_NETWORK` (e.g. TRC20 vs ERC20)
+There is nothing to maintain in this folder, and no image files to create. To
+change a QR, change the address env var and redeploy.
 
-You can generate a QR from any reputable offline/again-verified tool. **Always
-verify the encoded address matches your real wallet** — crypto transfers are
-irreversible. Keep the same filenames so no code changes are needed.
+**Always double-check the address** you configure: blockchain transfers are
+irreversible. For larger programs, consider a charity crypto processor (e.g. The
+Giving Block, Engiven, or Coinbase Commerce) that auto-converts to fiat and
+issues receipts; see `docs/governance/payments-setup.md`.
