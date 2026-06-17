@@ -1,0 +1,5 @@
+{"id":"P-001","name":"founder","role":"admin","status":"active","joined":"2024-01-01","worksWithVulnerable":true,"onboarding":{"codeOfConduct":"2024-01-01","dataAgreement":"2024-01-01","conflictOfInterest":"2024-01-01","safeguarding":"2024-01-01"}}
+{"id":"P-002","name":"treasurer-volunteer","role":"treasurer","status":"active","joined":"2026-02-01","onboarding":{"codeOfConduct":"2026-02-01","dataAgreement":"2026-02-01","conflictOfInterest":"2026-02-01"}}
+{"id":"P-003","name":"teacher-volunteer","role":"volunteer","status":"active","joined":"2026-03-01","worksWithVulnerable":true,"onboarding":{"codeOfConduct":"2026-03-01","safeguarding":"2026-03-01"}}
+{"id":"P-004","name":"board-member-1","role":"board","status":"active","joined":"2026-05-01","onboarding":{"codeOfConduct":"2026-05-01","dataAgreement":"2026-05-01","conflictOfInterest":"2026-05-01"}}
+{"id":"P-005","name":"past-volunteer","role":"volunteer","status":"inactive","joined":"2025-06-01","onboarding":{"codeOfConduct":"2025-06-01"}}

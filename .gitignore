@@ -30,6 +30,9 @@
 # grants tracker — real pipeline is private (funding strategy); template is committed
 /scripts/grants-tracker/pipeline.json
 
+# team — real roster is private (personal/contact details); sample is committed
+/team/roster.jsonl
+
 # debug
 npm-debug.log*
 yarn-debug.log*
