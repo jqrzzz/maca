@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { Button } from "@/components/ui/Button";
 import { ProgramCard } from "@/components/ProgramCard";
 import { CTASection } from "@/components/CTASection";
 import { buildMetadata } from "@/lib/metadata";
@@ -68,6 +70,12 @@ export default function ProgramsPage() {
               />
             </Reveal>
           ))}
+        </div>
+        <div className="mt-10">
+          <Button href="/ai" variant="outline">
+            How we use AI, responsibly
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Button>
         </div>
       </Section>
 
