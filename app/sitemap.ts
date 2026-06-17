@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/privacy",
     "/safeguarding",
+    "/responsible-ai",
     "/code-of-conduct",
     "/conflict-of-interest",
     "/complaints",

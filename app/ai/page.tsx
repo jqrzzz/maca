@@ -141,6 +141,12 @@ export default function AiPage() {
             </Reveal>
           ))}
         </div>
+        <div className="mt-12">
+          <Button href="/responsible-ai" variant="onDarkOutline">
+            Read our full Responsible AI policy
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Button>
+        </div>
       </Section>
 
       {/* For technology partners */}
