@@ -43,6 +43,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     title: "Support",
     links: [
       { label: "Ways to Give", href: "/give" },
+      { label: "Our supporters", href: "/supporters" },
       { label: "FAQ", href: "/faq" },
       { label: "Contact", href: "/contact" },
     ],
