@@ -30,6 +30,10 @@
 # grants tracker — real pipeline is private (funding strategy); template is committed
 /scripts/grants-tracker/pipeline.json
 
+# finance — real ledger + receipts are private; sample + tooling are committed
+/finance/ledger.jsonl
+/finance/receipts/
+
 # team — real roster is private (personal/contact details); sample is committed
 /team/roster.jsonl
 
