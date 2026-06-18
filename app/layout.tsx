@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -11,6 +11,8 @@ import { siteJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Splash } from "@/components/Splash";
 import { TeamLoginButton } from "@/components/TeamLoginButton";
+import { ServiceWorker } from "@/components/ServiceWorker";
+import { InstallButton } from "@/components/InstallButton";
 
 const analyticsEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
 
@@ -26,6 +28,11 @@ export const metadata: Metadata = {
   creator: site.name,
   publisher: site.name,
   category: "Nonprofit",
+  appleWebApp: {
+    capable: true,
+    title: site.shortName,
+    statusBarStyle: "default",
+  },
   alternates: {
     canonical: "/",
     types: { "application/rss+xml": "/feed.xml" },
@@ -69,6 +76,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fffdf8" },
+    { media: "(prefers-color-scheme: dark)", color: "#16301f" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -94,7 +108,9 @@ export default function RootLayout({
           </main>
           <Footer />
           <TeamLoginButton />
+          <InstallButton />
         </ThemeProvider>
+        <ServiceWorker />
         {analyticsEnabled && (
           <>
             <Analytics />
