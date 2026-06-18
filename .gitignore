@@ -34,6 +34,9 @@
 /finance/ledger.jsonl
 /finance/receipts/
 
+# team — real roster is private (personal/contact details); sample is committed
+/team/roster.jsonl
+
 # debug
 npm-debug.log*
 yarn-debug.log*

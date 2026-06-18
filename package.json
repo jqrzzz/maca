@@ -18,7 +18,9 @@
     "storybank:lint": "tsx scripts/storybank-lint/run.ts",
     "translate:extract": "tsx scripts/translation/extract.ts",
     "finance:check": "tsx scripts/finance/check.ts",
-    "finance:report": "tsx scripts/finance/report.ts"
+    "finance:report": "tsx scripts/finance/report.ts",
+    "team:check": "tsx scripts/team/check.ts",
+    "team:roster": "tsx scripts/team/roster.ts"
   },
   "engines": {
     "node": ">=20.9 <23"
