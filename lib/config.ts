@@ -49,9 +49,26 @@ const cryptoProcessorName =
 // it is a simple on/off flag rather than public values.
 const bankTransferFlag = env("NEXT_PUBLIC_BANK_TRANSFER").toLowerCase();
 
+// Pre-launch preview: when on, donation methods that are not configured yet show
+// a finished-looking demo whose final step is an honest "coming soon" (no real
+// or sendable wallet address is ever shown). A method that IS configured always
+// uses its real action, so going live is automatic, per method. Default on; set
+// NEXT_PUBLIC_DONATIONS_PREVIEW=false to hide unconfigured methods instead.
+const donationsPreview = env("NEXT_PUBLIC_DONATIONS_PREVIEW") !== "false";
+
+// Floating team login + the /preview internal demo. Default on; set
+// NEXT_PUBLIC_INTERNAL_PREVIEW=false to hide.
+const internalPreview = env("NEXT_PUBLIC_INTERNAL_PREVIEW") !== "false";
+
 export const config = {
   /** Show placeholder cards for unconfigured methods only outside production. */
   showPlaceholders: !isProd,
+
+  /** Pre-launch demo for unconfigured donation methods (ends in "coming soon"). */
+  donationsPreview,
+
+  /** Show the floating team login and the /preview internal demo. */
+  internalPreview,
 
   links: {
     patreon: { key: "patreon", url: patreon, enabled: !!patreon },
@@ -106,7 +123,7 @@ export const config = {
   },
 } as const;
 
-/** Should a method render at all? (Configured, or dev placeholders on.) */
+/** Should a method render at all? (Configured, in preview, or dev placeholders.) */
 export function methodVisible(enabled: boolean): boolean {
-  return enabled || config.showPlaceholders;
+  return enabled || config.donationsPreview || config.showPlaceholders;
 }

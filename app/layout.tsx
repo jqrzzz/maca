@@ -10,6 +10,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { siteJsonLd } from "@/lib/seo";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Splash } from "@/components/Splash";
+import { TeamLoginButton } from "@/components/TeamLoginButton";
 
 const analyticsEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true";
 
@@ -92,6 +93,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <TeamLoginButton />
         </ThemeProvider>
         {analyticsEnabled && (
           <>
