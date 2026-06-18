@@ -20,19 +20,31 @@ import {
   Image as ImageIcon,
   Mic,
   ReceiptText,
+  Landmark,
+  Plus,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import {
   demoExpenses,
   demoCaptures,
+  demoGoals,
+  demoTimeline,
+  demoDecisions,
   roleOptions,
   type DemoPerson,
   type DemoCapture,
+  type DemoDecision,
   type Role,
 } from "@/content/previewDemo";
 import { Avatar, card, usd, roleTone } from "./ui";
 
-type Tab = "overview" | "people" | "finance" | "approvals" | "captures";
+type Tab =
+  | "overview"
+  | "people"
+  | "finance"
+  | "approvals"
+  | "captures"
+  | "boardroom";
 type Invite = { name: string; email: string; role: Role };
 
 const tabs: { id: Tab; label: string; icon: React.ElementType; blurb: string }[] = [
@@ -41,6 +53,7 @@ const tabs: { id: Tab; label: string; icon: React.ElementType; blurb: string }[]
   { id: "finance", label: "Finance", icon: Banknote, blurb: "Every expense, with its category and sign-off. Use of funds rolls up from here, and a receipt backs each one." },
   { id: "approvals", label: "Approvals", icon: ClipboardCheck, blurb: "Items waiting for a second person to sign off. Above a threshold, the approver cannot be the person who spent the money." },
   { id: "captures", label: "Field captures", icon: Camera, blurb: "Photos, notes, voice memos, and expenses from field members land here for a person to review before anything is published or recorded." },
+  { id: "boardroom", label: "Boardroom", icon: Landmark, blurb: "The internal space to come back to: goals, the story so far, and governance decisions to revisit and discuss together." },
 ];
 
 const captureIcon: Record<DemoCapture["kind"], React.ElementType> = {
@@ -74,6 +87,20 @@ export function AdminConsole({
   const [role, setRole] = useState<Role>("volunteer");
   const [invite, setInvite] = useState<(Invite & { token: string }) | null>(null);
   const [copied, setCopied] = useState(false);
+
+  // Boardroom: governance notes you can add in the demo (local only)
+  const [notes, setNotes] = useState<DemoDecision[]>(demoDecisions);
+  const [noteText, setNoteText] = useState("");
+  const addNote = () => {
+    if (!noteText.trim()) return;
+    setNotes((prev) => [
+      { id: `D-${Date.now()}`, title: noteText.trim(), status: "proposed", note: "", by: "You", at: "just now" },
+      ...prev,
+    ]);
+    setNoteText("");
+  };
+  const decisionTone = (s: DemoDecision["status"]) =>
+    s === "agreed" ? "forest" : s === "proposed" ? "gold" : "neutral";
 
   const active = tabs.find((t) => t.id === tab)!;
   const activePeople = people.filter((p) => p.status === "active");
@@ -441,6 +468,78 @@ export function AdminConsole({
                   );
                 })}
                 <p className="pt-1 text-xs text-stone">{pendingCaptures.length} pending. Approving a capture is what lets the field-to-story tool turn it into a draft, or a receipt into a ledger entry. A person always decides first.</p>
+              </div>
+            )}
+
+            {/* BOARDROOM */}
+            {tab === "boardroom" && (
+              <div className="space-y-8">
+                {/* Goals */}
+                <section>
+                  <h3 className="font-display text-lg font-semibold text-forest-700">Goals</h3>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    {demoGoals.map((g) => (
+                      <div key={g.title} className={`${card} p-5`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <Badge tone={g.status === "planned" ? "gold" : "forest"}>{g.status}</Badge>
+                          <span className="text-xs text-stone">{g.horizon}</span>
+                        </div>
+                        <h4 className="mt-3 font-medium text-forest-700">{g.title}</h4>
+                        <p className="mt-1 text-sm text-stone">{g.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                {/* Timeline */}
+                <section>
+                  <h3 className="font-display text-lg font-semibold text-forest-700">The story so far</h3>
+                  <ol className="mt-4 border-l border-line pl-6">
+                    {demoTimeline.map((m, i) => (
+                      <li key={i} className="relative pb-6 last:pb-0">
+                        <span className="absolute top-1 -left-[1.6rem] inline-flex h-3 w-3 rounded-full bg-clay-500 ring-4 ring-sand" />
+                        <div className="text-xs font-semibold tracking-wide text-clay-600 uppercase">{m.date}</div>
+                        <div className="mt-0.5 font-medium text-forest-700">{m.title}</div>
+                        <p className="mt-0.5 text-sm text-stone">{m.detail}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+
+                {/* Governance decisions */}
+                <section>
+                  <h3 className="font-display text-lg font-semibold text-forest-700">Governance decisions</h3>
+                  <p className="mt-1 text-sm text-stone">A place to capture what we have agreed and what is still open. Add a note to start a discussion.</p>
+                  <div className={`mt-4 ${card} p-5`}>
+                    <div className="flex flex-col gap-2 sm:flex-row">
+                      <input
+                        value={noteText}
+                        onChange={(e) => setNoteText(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") addNote();
+                        }}
+                        placeholder="Propose a decision or idea to discuss…"
+                        className={`flex-1 ${field}`}
+                      />
+                      <button type="button" onClick={addNote} className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-[14px] bg-clay-600 px-5 text-sm font-medium text-cream hover:bg-clay-700">
+                        <Plus className="h-4 w-4" aria-hidden />
+                        Add note
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-4 space-y-3">
+                    {notes.map((d) => (
+                      <div key={d.id} className={`${card} p-5`}>
+                        <div className="flex items-start justify-between gap-3">
+                          <h4 className="font-medium text-forest-700">{d.title}</h4>
+                          <Badge tone={decisionTone(d.status)}>{d.status}</Badge>
+                        </div>
+                        {d.note && <p className="mt-1.5 text-sm text-stone">{d.note}</p>}
+                        <p className="mt-2 text-xs text-stone">{d.by} · {d.at}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
               </div>
             )}
           </main>
