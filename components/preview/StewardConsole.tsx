@@ -15,6 +15,7 @@ import {
   Star,
   Sparkles,
   Languages,
+  NotebookPen,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -66,6 +67,10 @@ export function StewardConsole({
   const [guardian, setGuardian] = useState(false);
   const [photo, setPhoto] = useState(false);
   const [justAdded, setJustAdded] = useState<string | null>(null);
+  const [sessionNote, setSessionNote] = useState("");
+  const [sessionLog, setSessionLog] = useState<
+    { id: string; text: string; at: string }[]
+  >([]);
 
   const active = list.filter((l) => l.consent === "given");
   const returning = active.filter((l) => l.weeksActive >= 2).length;
@@ -95,6 +100,19 @@ export function StewardConsole({
     setGuardian(false);
     setPhoto(false);
     setTab("learners");
+  };
+
+  const logSession = () => {
+    const text = sessionNote.trim();
+    if (!text) return;
+    const at = new Date().toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    setSessionLog((prev) => [{ id: `s-${Date.now()}`, text, at }, ...prev]);
+    setSessionNote("");
   };
 
   const field =
@@ -300,6 +318,46 @@ export function StewardConsole({
                 They are kept separately, seen only by the founder, and looking
                 is logged.
               </p>
+            </div>
+
+            {/* Session log */}
+            <div className={`${card} p-5`}>
+              <h3 className="font-display text-base font-semibold text-forest-700">
+                Log a session
+              </h3>
+              <p className="mt-1 text-xs text-stone">
+                A quick note: who came, and what they got excited about. It
+                helps us see what is working.
+              </p>
+              <textarea
+                rows={2}
+                value={sessionNote}
+                onChange={(e) => setSessionNote(e.target.value)}
+                placeholder="Six children came. Two love animals; one keeps asking about the river."
+                className={`mt-3 resize-y ${field}`}
+              />
+              <button
+                type="button"
+                onClick={logSession}
+                disabled={!sessionNote.trim()}
+                className="mt-2 inline-flex h-9 items-center gap-2 rounded-[12px] bg-clay-600 px-4 text-sm font-medium text-cream transition-colors hover:bg-clay-700 disabled:opacity-40"
+              >
+                <NotebookPen className="h-4 w-4" aria-hidden />
+                Save note
+              </button>
+              {sessionLog.length > 0 && (
+                <ul className="mt-4 space-y-2">
+                  {sessionLog.map((s) => (
+                    <li
+                      key={s.id}
+                      className="rounded-[12px] border border-line bg-sand/50 p-3"
+                    >
+                      <p className="text-sm text-ink">{s.text}</p>
+                      <p className="mt-1 text-xs text-stone">{s.at}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         )}

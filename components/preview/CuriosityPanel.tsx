@@ -47,8 +47,11 @@ export function CuriosityPanel({
   const delivered = sparkList.filter((s) => s.status === "delivered").length;
 
   const allSparks = [...sparkList, ...live.sparks];
-  const committed = allSparks
-    .filter((s) => s.status === "approved" || s.status === "delivered")
+  const deliveredSum = allSparks
+    .filter((s) => s.status === "delivered")
+    .reduce((n, s) => n + s.cost, 0);
+  const approvedSum = allSparks
+    .filter((s) => s.status === "approved")
     .reduce((n, s) => n + s.cost, 0);
   const awaiting = allSparks.filter((s) => s.status === "proposed").length;
 
@@ -121,13 +124,16 @@ export function CuriosityPanel({
         </p>
         <div className="mt-3 flex flex-wrap gap-2 text-xs">
           <span className="inline-flex items-center rounded-full bg-sand px-3 py-1 font-medium text-forest-700">
-            Committed: {usd(committed)}
+            Delivered: {usd(deliveredSum)}
+          </span>
+          <span className="inline-flex items-center rounded-full bg-sand px-3 py-1 font-medium text-forest-700">
+            Approved: {usd(approvedSum)}
           </span>
           <span className="inline-flex items-center rounded-full bg-sand px-3 py-1 font-medium text-stone">
-            {awaiting} awaiting your approval
+            {awaiting} awaiting you
           </span>
           <span className="inline-flex items-center rounded-full bg-sand px-3 py-1 font-medium text-stone">
-            drawn from the Education budget
+            from the Education budget
           </span>
         </div>
 

@@ -13,6 +13,7 @@ import {
   PartyPopper,
   Volume2,
   VolumeX,
+  Languages,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -65,6 +66,7 @@ export function LearnerApp({
   const [justEarned, setJustEarned] = useState<string | null>(null);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [readAloud, setReadAloud] = useState(false);
+  const [language, setLanguage] = useState("English");
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -129,6 +131,8 @@ export function LearnerApp({
     }, 600);
   };
 
+  const asked = messages.filter((m) => m.from === "kid").length;
+
   return (
     <div className="min-h-[85vh] bg-sand">
       {/* Bar */}
@@ -192,6 +196,9 @@ export function LearnerApp({
               <p className="mt-0.5 text-sm text-stone">
                 {ageBandLabel(learner.ageBand)} · {stickers.length}{" "}
                 {stickers.length === 1 ? "sticker" : "stickers"}
+                {asked > 0
+                  ? ` · ${asked} ${asked === 1 ? "question" : "questions"} today`
+                  : ""}
               </p>
             </div>
           </div>
@@ -229,6 +236,31 @@ export function LearnerApp({
               Read aloud
             </button>
           </div>
+
+          {/* Language */}
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-stone">
+            <Languages className="h-3.5 w-3.5 text-clay-600" aria-hidden />
+            <label htmlFor="kid-lang">
+              Your guide can answer in your language:
+            </label>
+            <select
+              id="kid-lang"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              className="rounded-full border border-line bg-cream px-2.5 py-1 text-xs font-medium text-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
+            >
+              <option>English</option>
+              <option>Kayan</option>
+              <option>Burmese</option>
+              <option>Thai</option>
+            </select>
+          </div>
+          {language !== "English" && (
+            <p className="mt-1.5 text-xs text-stone">
+              Your guide would speak {language} here. This preview answers in
+              English.
+            </p>
+          )}
 
           {/* Stickers */}
           {stickers.length > 0 && (
