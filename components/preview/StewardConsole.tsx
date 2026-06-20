@@ -30,6 +30,7 @@ import {
 import { Avatar, card } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
+import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 
 type Tab = "learners" | "enroll" | "sparks" | "pay";
 
@@ -55,6 +56,7 @@ export function StewardConsole({
   const [tab, setTab] = useState<Tab>("learners");
   const [list, setList] = useState<Learner[]>(seedLearners);
   const [sparkList, setSparkList] = useState<Spark[]>(seedSparks);
+  const live = useCuriosityLive();
 
   // Enroll form
   const [name, setName] = useState("");
@@ -379,6 +381,66 @@ export function StewardConsole({
               real follow-up. The founder approves before anything is bought.
               You suggest; a person decides.
             </p>
+
+            {live.sparks.length > 0 && (
+              <div className={`${card} border-clay-300/50 p-4`}>
+                <div className="flex items-center gap-2">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-clay-600" />
+                  <h3 className="font-display text-sm font-semibold text-forest-700">
+                    Live this session
+                  </h3>
+                </div>
+                <div className="mt-3 space-y-3">
+                  {live.sparks.map((s) => (
+                    <div
+                      key={s.id}
+                      className="rounded-[12px] border border-line bg-sand/50 p-3"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <span className="font-medium text-forest-700">
+                          {s.learner}
+                        </span>
+                        <Badge
+                          tone={
+                            s.status === "approved"
+                              ? "forest"
+                              : s.status === "proposed"
+                                ? "gold"
+                                : "neutral"
+                          }
+                        >
+                          {sparkStatusLabel[s.status]}
+                        </Badge>
+                      </div>
+                      <p className="mt-1 text-sm text-forest-700">
+                        <span className="text-stone">Loves:</span> {s.interest}
+                      </p>
+                      <p className="mt-1 text-sm text-stone">{s.idea}</p>
+                      {s.status === "noticed" ? (
+                        <button
+                          type="button"
+                          onClick={() => setLiveSparkStatus(s.id, "proposed")}
+                          className="mt-3 inline-flex h-9 items-center gap-2 rounded-[12px] bg-clay-600 px-4 text-sm font-medium text-cream transition-colors hover:bg-clay-700"
+                        >
+                          <Sprout className="h-4 w-4" aria-hidden />
+                          Suggest follow-through
+                        </button>
+                      ) : s.status === "proposed" ? (
+                        <p className="mt-2 text-xs text-stone">
+                          Sent to the founder for approval.
+                        </p>
+                      ) : (
+                        <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-forest-700">
+                          <CircleCheck className="h-3.5 w-3.5" aria-hidden />
+                          Approved by the founder.
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {sparkList.map((s) => {
               const who = list.find((l) => l.id === s.learnerId);
               return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import {
   Sparkles,
@@ -24,6 +24,7 @@ import {
 import { Avatar, card } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
+import { useCuriosityLive, earnSticker, noticeSpark } from "./curiosityStore";
 
 type Msg = { id: string; from: "kid" | "guide"; text: string };
 
@@ -52,7 +53,11 @@ export function LearnerApp({
   ]);
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
-  const [stickers, setStickers] = useState<string[]>(learner.stickers);
+  const live = useCuriosityLive();
+  const stickers = useMemo(
+    () => Array.from(new Set([...learner.stickers, ...live.stickers])),
+    [learner.stickers, live.stickers],
+  );
   const [noticed, setNoticed] = useState<string | null>(null);
   const [justEarned, setJustEarned] = useState<string | null>(null);
 
@@ -92,16 +97,17 @@ export function LearnerApp({
       ]);
       if ("sticker" in res && res.sticker) {
         const earned = res.sticker;
-        setStickers((prev) =>
-          prev.includes(earned) ? prev : [...prev, earned],
-        );
         if (!stickers.includes(earned)) {
+          earnSticker(earned);
           setJustEarned(earned);
           if (earnTimer.current) clearTimeout(earnTimer.current);
           earnTimer.current = setTimeout(() => setJustEarned(null), 3500);
         }
       }
-      if ("spark" in res && res.spark) setNoticed(res.spark);
+      if ("spark" in res && res.spark) {
+        setNoticed(res.spark);
+        noticeSpark(learner.explorerName, res.spark);
+      }
       setThinking(false);
     }, 600);
   };

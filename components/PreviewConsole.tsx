@@ -19,6 +19,7 @@ import { MemberApp } from "@/components/preview/MemberApp";
 import { StewardConsole } from "@/components/preview/StewardConsole";
 import { LearnerApp } from "@/components/preview/LearnerApp";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
+import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
 
 type View = "login" | "admin" | "setup" | "member" | "steward" | "learner";
@@ -31,7 +32,7 @@ const fieldCls =
  *  they can be earned live by asking questions. */
 const demoLearner: Learner = {
   id: "L-you",
-  explorerName: "Little Fern",
+  explorerName: "Maple",
   ageBand: "child",
   consent: "given",
   photoConsent: true,
@@ -71,6 +72,12 @@ export function PreviewConsole() {
     }
   };
 
+  // Returning to the login ends the session and resets the live demo state.
+  const signOut = () => {
+    resetCuriosityLive();
+    setView("login");
+  };
+
   // ---- Admin console ----
   if (view === "admin") {
     return (
@@ -82,7 +89,7 @@ export function PreviewConsole() {
           setInvite(m);
           setView("setup");
         }}
-        onSignOut={() => setView("login")}
+        onSignOut={signOut}
         initialTab={adminInitialTab}
         onSwitchPerspective={goPerspective}
       />
@@ -92,7 +99,7 @@ export function PreviewConsole() {
   // ---- Member field app ----
   if (view === "member") {
     return (
-      <MemberApp member={member} onSignOut={() => setView("login")} />
+      <MemberApp member={member} onSignOut={signOut} />
     );
   }
 
@@ -100,7 +107,7 @@ export function PreviewConsole() {
   if (view === "steward") {
     return (
       <StewardConsole
-        onSignOut={() => setView("login")}
+        onSignOut={signOut}
         onSwitch={goPerspective}
       />
     );
@@ -111,7 +118,7 @@ export function PreviewConsole() {
     return (
       <LearnerApp
         learner={demoLearner}
-        onSignOut={() => setView("login")}
+        onSignOut={signOut}
         onSwitch={goPerspective}
       />
     );
