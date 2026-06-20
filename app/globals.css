@@ -183,7 +183,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-reveal {
+  .animate-reveal,
+  .animate-pulse {
     animation: none !important;
   }
 }

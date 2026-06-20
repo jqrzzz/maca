@@ -22,6 +22,7 @@ import {
   ReceiptText,
   Landmark,
   Plus,
+  Sprout,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import {
@@ -37,6 +38,9 @@ import {
   type Role,
 } from "@/content/previewDemo";
 import { Avatar, card, usd, roleTone } from "./ui";
+import { CuriosityPanel } from "./CuriosityPanel";
+import { SessionNotes } from "./SessionNotes";
+import { type Perspective } from "./CuriositySwitcher";
 
 type Tab =
   | "overview"
@@ -44,6 +48,7 @@ type Tab =
   | "finance"
   | "approvals"
   | "captures"
+  | "curiosity"
   | "boardroom";
 type Invite = { name: string; email: string; role: Role };
 
@@ -53,6 +58,7 @@ const tabs: { id: Tab; label: string; icon: React.ElementType; blurb: string }[]
   { id: "finance", label: "Finance", icon: Banknote, blurb: "Every expense, with its category and sign-off. Use of funds rolls up from here, and a receipt backs each one." },
   { id: "approvals", label: "Approvals", icon: ClipboardCheck, blurb: "Items waiting for a second person to sign off. Above a threshold, the approver cannot be the person who spent the money." },
   { id: "captures", label: "Field captures", icon: Camera, blurb: "Photos, notes, voice memos, and expenses from field members land here for a person to review before anything is published or recorded." },
+  { id: "curiosity", label: "Curiosity Program", icon: Sprout, blurb: "The village AI-literacy program: who is learning, how often they come back, the spark-fund follow-through, and the two-layer privacy model. Engagement is what we reward, never a head count." },
   { id: "boardroom", label: "Boardroom", icon: Landmark, blurb: "The internal space to come back to: goals, the story so far, and governance decisions to revisit and discuss together." },
 ];
 
@@ -69,14 +75,18 @@ export function AdminConsole({
   onAddMember,
   onOpenSetup,
   onSignOut,
+  initialTab = "overview",
+  onSwitchPerspective,
 }: {
   me: DemoPerson;
   people: DemoPerson[];
   onAddMember: (m: Invite) => void;
   onOpenSetup: (m: Invite) => void;
   onSignOut: () => void;
+  initialTab?: Tab;
+  onSwitchPerspective?: (p: Perspective) => void;
 }) {
-  const [tab, setTab] = useState<Tab>("overview");
+  const [tab, setTab] = useState<Tab>(initialTab);
   const [signedOff, setSignedOff] = useState<Record<string, boolean>>({});
   const [reviewed, setReviewed] = useState<Record<string, boolean>>({});
 
@@ -542,8 +552,15 @@ export function AdminConsole({
                 </section>
               </div>
             )}
+
+            {/* CURIOSITY PROGRAM */}
+            {tab === "curiosity" && (
+              <CuriosityPanel onSwitch={onSwitchPerspective} />
+            )}
           </main>
         </div>
+
+        <SessionNotes context={`Founder · ${active.label}`} />
       </div>
     </div>
   );

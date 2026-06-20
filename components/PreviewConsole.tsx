@@ -2,18 +2,47 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Lock, ArrowRight, ArrowLeft, UserCog, HardHat } from "lucide-react";
+import {
+  Lock,
+  ArrowRight,
+  ArrowLeft,
+  UserCog,
+  HardHat,
+  Compass,
+  Sparkles,
+} from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { demoPeople, type DemoPerson, type Role } from "@/content/previewDemo";
+import { type Learner } from "@/content/curiosityDemo";
 import { AdminConsole } from "@/components/preview/AdminConsole";
 import { MemberApp } from "@/components/preview/MemberApp";
+import { StewardConsole } from "@/components/preview/StewardConsole";
+import { LearnerApp } from "@/components/preview/LearnerApp";
+import { type Perspective } from "@/components/preview/CuriositySwitcher";
+import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
 
-type View = "login" | "admin" | "setup" | "member";
+type View = "login" | "admin" | "setup" | "member" | "steward" | "learner";
 type Invite = { name: string; email: string; role: Role };
 
 const fieldCls =
   "mt-1.5 w-full rounded-[14px] border border-line bg-sand px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400";
+
+/** A fresh explorer for the learner (kid mode) demo: starts with no stickers so
+ *  they can be earned live by asking questions. */
+const demoLearner: Learner = {
+  id: "L-you",
+  explorerName: "Maple",
+  ageBand: "child",
+  consent: "given",
+  photoConsent: true,
+  joined: "today",
+  weeksActive: 1,
+  sessions: 1,
+  lastActive: "today",
+  stickers: [],
+  tone: "forest",
+};
 
 export function PreviewConsole() {
   const [view, setView] = useState<View>("login");
@@ -23,12 +52,31 @@ export function PreviewConsole() {
     name: "Teacher",
     role: "volunteer",
   });
+  const [adminInitialTab, setAdminInitialTab] = useState<
+    "overview" | "curiosity"
+  >("overview");
 
   const addMember = (m: Invite) =>
     setPeople((prev) => [
       ...prev,
       { name: m.name, role: m.role, status: "active", onboarding: [] },
     ]);
+
+  // Hop between the three Curiosity Program perspectives during a walkthrough.
+  const goPerspective = (p: Perspective) => {
+    if (p === "learner") setView("learner");
+    else if (p === "steward") setView("steward");
+    else {
+      setAdminInitialTab("curiosity");
+      setView("admin");
+    }
+  };
+
+  // Returning to the login ends the session and resets the live demo state.
+  const signOut = () => {
+    resetCuriosityLive();
+    setView("login");
+  };
 
   // ---- Admin console ----
   if (view === "admin") {
@@ -41,7 +89,9 @@ export function PreviewConsole() {
           setInvite(m);
           setView("setup");
         }}
-        onSignOut={() => setView("login")}
+        onSignOut={signOut}
+        initialTab={adminInitialTab}
+        onSwitchPerspective={goPerspective}
       />
     );
   }
@@ -49,7 +99,28 @@ export function PreviewConsole() {
   // ---- Member field app ----
   if (view === "member") {
     return (
-      <MemberApp member={member} onSignOut={() => setView("login")} />
+      <MemberApp member={member} onSignOut={signOut} />
+    );
+  }
+
+  // ---- Village steward (Curiosity Program) ----
+  if (view === "steward") {
+    return (
+      <StewardConsole
+        onSignOut={signOut}
+        onSwitch={goPerspective}
+      />
+    );
+  }
+
+  // ---- Young learner (kid mode) ----
+  if (view === "learner") {
+    return (
+      <LearnerApp
+        learner={demoLearner}
+        onSignOut={signOut}
+        onSwitch={goPerspective}
+      />
     );
   }
 
@@ -131,9 +202,15 @@ export function PreviewConsole() {
           </p>
 
           <div className="mt-6 grid gap-3">
+            <p className="text-xs font-semibold tracking-wide text-stone uppercase">
+              Internal console
+            </p>
             <button
               type="button"
-              onClick={() => setView("admin")}
+              onClick={() => {
+                setAdminInitialTab("overview");
+                setView("admin");
+              }}
               className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
             >
               <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-clay-600 text-cream">
@@ -166,6 +243,50 @@ export function PreviewConsole() {
                 </span>
                 <span className="mt-0.5 block text-xs text-stone">
                   The simple capture app: photos, notes, voice memos, expenses.
+                </span>
+              </span>
+            </button>
+
+            <p className="pt-2 text-xs font-semibold tracking-wide text-stone uppercase">
+              Curiosity Program
+            </p>
+
+            <button
+              type="button"
+              onClick={() => setView("steward")}
+              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-clay-500 text-cream">
+                <Compass className="h-5 w-5" aria-hidden />
+              </span>
+              <span className="min-w-0">
+                <span className="flex items-center gap-1.5 font-medium text-forest-700">
+                  Enter as the village steward{" "}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="mt-0.5 block text-xs text-stone">
+                  The Curiosity Program: welcome learners, see who comes back,
+                  suggest follow-through.
+                </span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setView("learner")}
+              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-gold-400 text-forest-700">
+                <Sparkles className="h-5 w-5" aria-hidden />
+              </span>
+              <span className="min-w-0">
+                <span className="flex items-center gap-1.5 font-medium text-forest-700">
+                  Enter as a young learner{" "}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="mt-0.5 block text-xs text-stone">
+                  Kid mode: a safe, friendly AI to ask anything, earn stickers,
+                  and explore.
                 </span>
               </span>
             </button>
