@@ -341,25 +341,35 @@ Suggested additions to [`risk-register.md`](governance/risk-register.md):
 | **Child-safety failure** with an AI tool (sharpens Risk #9)          | Low               | **Severe** | Kid mode; supervision; named accountable adult; offline-safe                                           |
 | **Profile-data quality** corrupted by pay-for-data                   | Medium            | Medium     | Incentivize engagement not enrollment; minimum-data collection                                         |
 
-## Open decisions for the founder
+## Decisions
 
-My lean is listed first where I have one.
+Settled with the founder (June 2026):
 
-1. **Adopt the "curiosity now, registry later" split?** My strong lean: yes. It
-   is the safest path to the same destination.
-2. **Confirm the flip from "without them knowing" to open and consented.** My
-   lean: yes; openness is what earns the trust the program needs.
-3. **Ong's compensation:** confirm stipend-plus-costs (my lean) over any per-head
-   element, and set the figure against local norms (not invented here).
-4. **Pilot size and logistics:** how many families to start with, and where the
-   shared devices and charging live.
-5. **Should I draft the companion artifacts next?** Candidates: a guardian
-   consent script (plain language, ready to translate), the policy paragraphs for
-   Safeguarding and Responsible AI, and a `§3.8` stub for `concept.md` so the
-   blueprint references this thread. I can do any or all on the working branch.
+1. **Curiosity now, registry later.** Adopted. The safest path to the same
+   destination.
+2. **Open and consented**, not "from a distance." Adopted. Openness is what earns
+   the trust the program needs.
+3. **A role, not a bounty.** The steward is paid a stipend plus costs, with no
+   per-profile element. Adopted.
+
+Still to set:
+
+4. **The steward's stipend figure**, benchmarked to local norms (not invented
+   here).
+5. **Pilot size and logistics** (delegated to the build): see the recommended
+   first pilot in
+   [`governance/curiosity-program-rollout.md`](governance/curiosity-program-rollout.md).
+
+Companion artifacts, now drafted: the §3.8 thread in [`concept.md`](concept.md),
+the [rollout pack](governance/curiosity-program-rollout.md) (a guardian-consent
+script, the kid-mode safety bar, and draft policy language to publish on launch),
+and a clickable demo in `/preview`.
 
 ## Changelog
 
+- **v0.2** · June 2026 · recorded the settled decisions (curiosity now / registry
+  later, open and consented, a role not a bounty); linked the rollout pack, the
+  `concept.md` §3.8 thread, and the `/preview` demo.
 - **v0.1** · June 2026 · first draft: the Curiosity Program, its incentive model,
   the two-track sequencing, the data model, child-safety design, and the path to
   the registry.
