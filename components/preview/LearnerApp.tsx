@@ -25,6 +25,7 @@ import { Avatar, card } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, earnSticker, noticeSpark } from "./curiosityStore";
+import { GuideTip } from "./GuideTip";
 
 type Msg = { id: string; from: "kid" | "guide"; text: string };
 
@@ -151,6 +152,12 @@ export function LearnerApp({
         {onSwitch && (
           <CuriositySwitcher current="learner" onSwitch={onSwitch} />
         )}
+
+        <GuideTip title="You are the learner (kid mode)">
+          Ask a question, try a plant or the sky, to earn a sticker and show
+          what you love. When a spark appears, switch to the Steward to watch it
+          travel to the people who can help.
+        </GuideTip>
 
         {/* Explorer card */}
         <div className={`${card} p-5`}>

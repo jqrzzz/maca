@@ -24,6 +24,7 @@ import {
 import { Avatar, card, usd } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
+import { GuideTip } from "./GuideTip";
 
 export function CuriosityPanel({
   onSwitch,
@@ -32,6 +33,9 @@ export function CuriosityPanel({
 }) {
   const [sparkList, setSparkList] = useState<Spark[]>(seedSparks);
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
+  const [accessLog, setAccessLog] = useState<{ name: string; at: string }[]>(
+    [],
+  );
   const live = useCuriosityLive();
 
   const given = learners.filter((l) => l.consent === "given");
@@ -43,13 +47,28 @@ export function CuriosityPanel({
   const withdrawn = learners.filter((l) => l.consent === "withdrawn").length;
   const delivered = sparkList.filter((s) => s.status === "delivered").length;
 
+  const allSparks = [...sparkList, ...live.sparks];
+  const committed = allSparks
+    .filter((s) => s.status === "approved" || s.status === "delivered")
+    .reduce((n, s) => n + s.cost, 0);
+  const awaiting = allSparks.filter((s) => s.status === "proposed").length;
+
   const approve = (id: string) =>
     setSparkList((prev) =>
       prev.map((s) => (s.id === id ? { ...s, status: "approved" } : s)),
     );
 
-  const toggle = (id: string) =>
+  const toggle = (id: string, name: string) => {
+    const willReveal = !revealed[id];
     setRevealed((prev) => ({ ...prev, [id]: !prev[id] }));
+    if (willReveal) {
+      const at = new Date().toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+      });
+      setAccessLog((log) => [{ name, at }, ...log]);
+    }
+  };
 
   const stats = [
     { label: "Coming back (2+ weeks)", value: String(returning), icon: Star },
@@ -61,6 +80,12 @@ export function CuriosityPanel({
   return (
     <div className="space-y-6">
       {onSwitch && <CuriositySwitcher current="founder" onSwitch={onSwitch} />}
+
+      <GuideTip title="You are the founder">
+        Approve spark-fund follow-through, watch program health (return rate,
+        not a head count), and reveal a private Tier 2 record, which is logged.
+        The steward cannot see Tier 2.
+      </GuideTip>
 
       {/* Program health */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -100,6 +125,17 @@ export function CuriosityPanel({
           anything is bought; an approved spark becomes an Education expense. AI
           and the steward propose; you decide.
         </p>
+        <div className="mt-3 flex flex-wrap gap-2 text-xs">
+          <span className="inline-flex items-center rounded-full bg-sand px-3 py-1 font-medium text-forest-700">
+            Committed: {usd(committed)}
+          </span>
+          <span className="inline-flex items-center rounded-full bg-sand px-3 py-1 font-medium text-stone">
+            {awaiting} awaiting your approval
+          </span>
+          <span className="inline-flex items-center rounded-full bg-sand px-3 py-1 font-medium text-stone">
+            drawn from the Education budget
+          </span>
+        </div>
 
         {live.sparks.length > 0 && (
           <div className="mt-4 rounded-[14px] border border-clay-300/50 bg-clay-50/50 p-4">
@@ -248,7 +284,7 @@ export function CuriosityPanel({
                   {priv && (
                     <button
                       type="button"
-                      onClick={() => toggle(l.id)}
+                      onClick={() => toggle(l.id, l.explorerName)}
                       className="inline-flex h-9 items-center gap-2 rounded-[12px] border border-line px-3 text-sm font-medium text-forest-700 transition-colors hover:bg-sand"
                     >
                       {isOpen ? (
@@ -292,6 +328,22 @@ export function CuriosityPanel({
             );
           })}
         </div>
+
+        {accessLog.length > 0 && (
+          <div className="mt-5 rounded-[12px] bg-sand p-3">
+            <p className="flex items-center gap-1.5 text-xs font-semibold text-forest-700">
+              <Lock className="h-3.5 w-3.5" aria-hidden />
+              Tier 2 access log (this session)
+            </p>
+            <ul className="mt-2 space-y-1">
+              {accessLog.map((e, i) => (
+                <li key={i} className="text-xs text-stone">
+                  Viewed the private record for {e.name} · {e.at}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

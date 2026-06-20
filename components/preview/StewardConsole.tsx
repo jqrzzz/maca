@@ -31,6 +31,7 @@ import { Avatar, card } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
+import { GuideTip } from "./GuideTip";
 
 type Tab = "learners" | "enroll" | "sparks" | "pay";
 
@@ -142,6 +143,12 @@ export function StewardConsole({
         {onSwitch && (
           <CuriositySwitcher current="steward" onSwitch={onSwitch} />
         )}
+
+        <GuideTip title="You are Ong, the village steward">
+          Interests from kid-mode sessions arrive in the Sparks tab as a live
+          list. Suggest follow-through and the founder approves it. You see the
+          celebratory details only, never the private Tier 2 record.
+        </GuideTip>
 
         <div className="flex items-start gap-2.5 rounded-[14px] bg-clay-50 px-4 py-3 text-sm text-clay-700 ring-1 ring-clay-100 ring-inset">
           <span aria-hidden>•</span>

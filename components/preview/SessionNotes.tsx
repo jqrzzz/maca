@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   NotebookPen,
   X,
@@ -99,15 +106,28 @@ export function SessionNotes({ context = "Preview" }: { context?: string }) {
   const [draft, setDraft] = useState("");
   const [copied, setCopied] = useState(false);
 
-  // Close on Escape while open (setState lives in the callback, not the effect).
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    launcherRef.current?.focus();
+  }, []);
+
+  // Move focus into the panel when it opens.
+  useEffect(() => {
+    if (open) textareaRef.current?.focus();
+  }, [open]);
+
+  // Close on Escape while open.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
+  }, [open, close]);
 
   const add = () => {
     const text = draft.trim();
@@ -167,6 +187,7 @@ export function SessionNotes({ context = "Preview" }: { context?: string }) {
     <>
       {/* Floating launcher */}
       <button
+        ref={launcherRef}
         type="button"
         onClick={() => setOpen(true)}
         aria-label="Open session notes"
@@ -192,7 +213,7 @@ export function SessionNotes({ context = "Preview" }: { context?: string }) {
           <button
             type="button"
             aria-label="Close notes"
-            onClick={() => setOpen(false)}
+            onClick={close}
             className="absolute inset-0 bg-ink/30"
           />
           <div className="absolute top-0 right-0 flex h-full w-full max-w-sm flex-col bg-cream shadow-lift">
@@ -208,7 +229,7 @@ export function SessionNotes({ context = "Preview" }: { context?: string }) {
               </div>
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={close}
                 aria-label="Close"
                 className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-stone transition-colors hover:bg-sand hover:text-clay-700"
               >
@@ -219,6 +240,7 @@ export function SessionNotes({ context = "Preview" }: { context?: string }) {
             {/* Composer */}
             <div className="border-b border-line p-4">
               <textarea
+                ref={textareaRef}
                 rows={3}
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
