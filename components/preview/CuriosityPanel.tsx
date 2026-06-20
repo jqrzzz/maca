@@ -22,8 +22,13 @@ import {
   type Spark,
 } from "@/content/curiosityDemo";
 import { Avatar, card, usd } from "./ui";
+import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 
-export function CuriosityPanel() {
+export function CuriosityPanel({
+  onSwitch,
+}: {
+  onSwitch?: (p: Perspective) => void;
+}) {
   const [sparkList, setSparkList] = useState<Spark[]>(seedSparks);
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
 
@@ -53,6 +58,8 @@ export function CuriosityPanel() {
 
   return (
     <div className="space-y-6">
+      {onSwitch && <CuriositySwitcher current="founder" onSwitch={onSwitch} />}
+
       {/* Program health */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => {

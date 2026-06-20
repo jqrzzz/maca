@@ -10,6 +10,7 @@ import {
   Users,
   WifiOff,
   Sprout,
+  PartyPopper,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -21,6 +22,8 @@ import {
   type Learner,
 } from "@/content/curiosityDemo";
 import { Avatar, card } from "./ui";
+import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
+import { SessionNotes } from "./SessionNotes";
 
 type Msg = { id: string; from: "kid" | "guide"; text: string };
 
@@ -34,9 +37,11 @@ function answer(input: string) {
 export function LearnerApp({
   learner,
   onSignOut,
+  onSwitch,
 }: {
   learner: Learner;
   onSignOut: () => void;
+  onSwitch?: (p: Perspective) => void;
 }) {
   const [messages, setMessages] = useState<Msg[]>([
     {
@@ -49,9 +54,11 @@ export function LearnerApp({
   const [thinking, setThinking] = useState(false);
   const [stickers, setStickers] = useState<string[]>(learner.stickers);
   const [noticed, setNoticed] = useState<string | null>(null);
+  const [justEarned, setJustEarned] = useState<string | null>(null);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const earnTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -63,6 +70,7 @@ export function LearnerApp({
   useEffect(
     () => () => {
       if (timer.current) clearTimeout(timer.current);
+      if (earnTimer.current) clearTimeout(earnTimer.current);
     },
     [],
   );
@@ -83,9 +91,15 @@ export function LearnerApp({
         { id: `g-${Date.now()}`, from: "guide", text: res.reply },
       ]);
       if ("sticker" in res && res.sticker) {
+        const earned = res.sticker;
         setStickers((prev) =>
-          prev.includes(res.sticker!) ? prev : [...prev, res.sticker!],
+          prev.includes(earned) ? prev : [...prev, earned],
         );
+        if (!stickers.includes(earned)) {
+          setJustEarned(earned);
+          if (earnTimer.current) clearTimeout(earnTimer.current);
+          earnTimer.current = setTimeout(() => setJustEarned(null), 3500);
+        }
       }
       if ("spark" in res && res.spark) setNoticed(res.spark);
       setThinking(false);
@@ -128,6 +142,10 @@ export function LearnerApp({
       </header>
 
       <div className="mx-auto max-w-2xl px-4 py-6">
+        {onSwitch && (
+          <CuriositySwitcher current="learner" onSwitch={onSwitch} />
+        )}
+
         {/* Explorer card */}
         <div className={`${card} p-5`}>
           <div className="flex items-center gap-4">
@@ -169,7 +187,7 @@ export function LearnerApp({
               {stickers.map((s) => (
                 <span
                   key={s}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-gold-400/15 px-3 py-1 text-xs font-semibold text-clay-700 ring-1 ring-gold-400/30 ring-inset"
+                  className="inline-flex animate-reveal items-center gap-1.5 rounded-full bg-gold-400/15 px-3 py-1 text-xs font-semibold text-clay-700 ring-1 ring-gold-400/30 ring-inset"
                 >
                   <Star className="h-3.5 w-3.5" aria-hidden /> {s}
                 </span>
@@ -177,6 +195,19 @@ export function LearnerApp({
             </div>
           )}
         </div>
+
+        {/* Sticker just earned */}
+        {justEarned && (
+          <div className="mt-4 flex animate-reveal items-center gap-3 rounded-[16px] border border-gold-400/40 bg-gold-400/10 p-3">
+            <PartyPopper
+              className="h-5 w-5 shrink-0 text-clay-600"
+              aria-hidden
+            />
+            <p className="text-sm font-medium text-forest-700">
+              New sticker earned: {justEarned}!
+            </p>
+          </div>
+        )}
 
         {/* Spark noticed, openly */}
         {noticed && (
@@ -280,6 +311,8 @@ export function LearnerApp({
             is not connected to a live model, and nothing here is saved or sent.
           </p>
         </div>
+
+        <SessionNotes context="Learner (kid mode)" />
       </div>
     </div>
   );

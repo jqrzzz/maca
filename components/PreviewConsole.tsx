@@ -18,6 +18,7 @@ import { AdminConsole } from "@/components/preview/AdminConsole";
 import { MemberApp } from "@/components/preview/MemberApp";
 import { StewardConsole } from "@/components/preview/StewardConsole";
 import { LearnerApp } from "@/components/preview/LearnerApp";
+import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { card } from "@/components/preview/ui";
 
 type View = "login" | "admin" | "setup" | "member" | "steward" | "learner";
@@ -50,12 +51,25 @@ export function PreviewConsole() {
     name: "Teacher",
     role: "volunteer",
   });
+  const [adminInitialTab, setAdminInitialTab] = useState<
+    "overview" | "curiosity"
+  >("overview");
 
   const addMember = (m: Invite) =>
     setPeople((prev) => [
       ...prev,
       { name: m.name, role: m.role, status: "active", onboarding: [] },
     ]);
+
+  // Hop between the three Curiosity Program perspectives during a walkthrough.
+  const goPerspective = (p: Perspective) => {
+    if (p === "learner") setView("learner");
+    else if (p === "steward") setView("steward");
+    else {
+      setAdminInitialTab("curiosity");
+      setView("admin");
+    }
+  };
 
   // ---- Admin console ----
   if (view === "admin") {
@@ -69,6 +83,8 @@ export function PreviewConsole() {
           setView("setup");
         }}
         onSignOut={() => setView("login")}
+        initialTab={adminInitialTab}
+        onSwitchPerspective={goPerspective}
       />
     );
   }
@@ -82,13 +98,22 @@ export function PreviewConsole() {
 
   // ---- Village steward (Curiosity Program) ----
   if (view === "steward") {
-    return <StewardConsole onSignOut={() => setView("login")} />;
+    return (
+      <StewardConsole
+        onSignOut={() => setView("login")}
+        onSwitch={goPerspective}
+      />
+    );
   }
 
   // ---- Young learner (kid mode) ----
   if (view === "learner") {
     return (
-      <LearnerApp learner={demoLearner} onSignOut={() => setView("login")} />
+      <LearnerApp
+        learner={demoLearner}
+        onSignOut={() => setView("login")}
+        onSwitch={goPerspective}
+      />
     );
   }
 
@@ -170,9 +195,15 @@ export function PreviewConsole() {
           </p>
 
           <div className="mt-6 grid gap-3">
+            <p className="text-xs font-semibold tracking-wide text-stone uppercase">
+              Internal console
+            </p>
             <button
               type="button"
-              onClick={() => setView("admin")}
+              onClick={() => {
+                setAdminInitialTab("overview");
+                setView("admin");
+              }}
               className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
             >
               <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-clay-600 text-cream">
@@ -208,6 +239,10 @@ export function PreviewConsole() {
                 </span>
               </span>
             </button>
+
+            <p className="pt-2 text-xs font-semibold tracking-wide text-stone uppercase">
+              Curiosity Program
+            </p>
 
             <button
               type="button"

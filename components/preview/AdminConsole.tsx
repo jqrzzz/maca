@@ -39,6 +39,8 @@ import {
 } from "@/content/previewDemo";
 import { Avatar, card, usd, roleTone } from "./ui";
 import { CuriosityPanel } from "./CuriosityPanel";
+import { SessionNotes } from "./SessionNotes";
+import { type Perspective } from "./CuriositySwitcher";
 
 type Tab =
   | "overview"
@@ -73,14 +75,18 @@ export function AdminConsole({
   onAddMember,
   onOpenSetup,
   onSignOut,
+  initialTab = "overview",
+  onSwitchPerspective,
 }: {
   me: DemoPerson;
   people: DemoPerson[];
   onAddMember: (m: Invite) => void;
   onOpenSetup: (m: Invite) => void;
   onSignOut: () => void;
+  initialTab?: Tab;
+  onSwitchPerspective?: (p: Perspective) => void;
 }) {
-  const [tab, setTab] = useState<Tab>("overview");
+  const [tab, setTab] = useState<Tab>(initialTab);
   const [signedOff, setSignedOff] = useState<Record<string, boolean>>({});
   const [reviewed, setReviewed] = useState<Record<string, boolean>>({});
 
@@ -548,9 +554,13 @@ export function AdminConsole({
             )}
 
             {/* CURIOSITY PROGRAM */}
-            {tab === "curiosity" && <CuriosityPanel />}
+            {tab === "curiosity" && (
+              <CuriosityPanel onSwitch={onSwitchPerspective} />
+            )}
           </main>
         </div>
+
+        <SessionNotes context={`Founder · ${active.label}`} />
       </div>
     </div>
   );

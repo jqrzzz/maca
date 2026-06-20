@@ -28,6 +28,8 @@ import {
   type AvatarTone,
 } from "@/content/curiosityDemo";
 import { Avatar, card } from "./ui";
+import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
+import { SessionNotes } from "./SessionNotes";
 
 type Tab = "learners" | "enroll" | "sparks" | "pay";
 
@@ -43,7 +45,13 @@ const consentTone = (c: Learner["consent"]) =>
 
 const tones: AvatarTone[] = ["clay", "forest", "gold"];
 
-export function StewardConsole({ onSignOut }: { onSignOut: () => void }) {
+export function StewardConsole({
+  onSignOut,
+  onSwitch,
+}: {
+  onSignOut: () => void;
+  onSwitch?: (p: Perspective) => void;
+}) {
   const [tab, setTab] = useState<Tab>("learners");
   const [list, setList] = useState<Learner[]>(seedLearners);
   const [sparkList, setSparkList] = useState<Spark[]>(seedSparks);
@@ -129,6 +137,10 @@ export function StewardConsole({ onSignOut }: { onSignOut: () => void }) {
       </header>
 
       <div className="mx-auto max-w-2xl px-4 py-6">
+        {onSwitch && (
+          <CuriositySwitcher current="steward" onSwitch={onSwitch} />
+        )}
+
         <div className="flex items-start gap-2.5 rounded-[14px] bg-clay-50 px-4 py-3 text-sm text-clay-700 ring-1 ring-clay-100 ring-inset">
           <span aria-hidden>•</span>
           <p>
@@ -447,6 +459,8 @@ export function StewardConsole({ onSignOut }: { onSignOut: () => void }) {
             </div>
           </div>
         )}
+
+        <SessionNotes context="Steward" />
       </div>
     </div>
   );
