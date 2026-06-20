@@ -288,6 +288,7 @@ export type KidReply = {
   reply: string;
   sticker?: string;
   spark?: string;
+  followups?: string[];
 };
 
 export const kidReplies: KidReply[] = [
@@ -307,18 +308,21 @@ export const kidReplies: KidReply[] = [
       "Plants are amazing! They drink water through their roots, deep in the soil, then carry it all the way up to the leaves. In sunlight the leaves make their own food, and they breathe out the oxygen we need. What is your favorite plant where you live?",
     sticker: "Plant Explorer",
     spark: "Plants and growing things",
+    followups: ["How do birds build nests?", "What is in the water?"],
   },
   {
     keywords: ["sky", "blue", "cloud", "rain", "rainbow"],
     reply:
       "Good question! Sunlight is made of many colors mixed together. The air scatters the blue light all around, so it reaches your eyes from every direction and the sky looks blue. At sunset the light travels farther and you see reds and oranges. What does your sky look like right now?",
     sticker: "Sky Watcher",
+    followups: ["What are stars made of?", "How do birds fly up there?"],
   },
   {
     keywords: ["elephant", "animal", "tiger", "dog", "cat", "fish", "buffalo"],
     reply:
       "Animals are wonderful to wonder about! Elephants, for example, are very smart and gentle, they remember their friends for years and talk to each other with rumbles too low for us to hear. Which animal would you most like to learn about?",
     sticker: "Animal Friend",
+    followups: ["How do birds fly?", "Why do we sleep?"],
   },
   {
     keywords: ["bird", "wing", "feather"],
@@ -326,42 +330,49 @@ export const kidReplies: KidReply[] = [
       "Birds are built to fly! Their bones are light, almost hollow, and their wings push the air down so the air pushes them up. Some birds fly for days without stopping. Have you watched a bird take off? What did you notice first?",
     sticker: "Sky Watcher",
     spark: "Birds and flying",
+    followups: ["What are stars?", "Tell me about the ocean"],
   },
   {
     keywords: ["star", "moon", "space", "planet", "night"],
     reply:
       "Stars are giant balls of glowing gas, so far away that their light travels for years before it reaches your eyes. Our Sun is a star too, just very close. When you look up at night, some of that light began its journey long before you were born. What do you wonder about space?",
     sticker: "Star Gazer",
+    followups: ["Why is the sky blue?", "How do rivers flow?"],
   },
   {
     keywords: ["water", "river", "swim", "ocean", "puddle"],
     reply:
       "Water is amazing! The same water can be a liquid you drink, hard cold ice, or steam that floats away as a cloud. Rivers carry it down from the hills all the way to the sea, then it rises into the sky and falls again as rain. Where does the water near you come from?",
     sticker: "Water Watcher",
+    followups: ["What animals live in water?", "Why do we dream?"],
   },
   {
     keywords: ["number", "numbers", "count", "counting", "math", "plus"],
     reply:
       "You are doing math just by wondering! Numbers are a way to count and compare everything around you. Here is a puzzle: if you pick five mangoes and give two to a friend, how many do you have left? Take your time.",
     sticker: "Number Friend",
+    followups: ["Can you tell me about music?", "How does my heart work?"],
   },
   {
     keywords: ["music", "song", "sing", "drum", "dance", "sound"],
     reply:
       "Music is sound with a pattern. When you hum, the air wiggles fast or slow, and your ears turn those wiggles into a tune. Tap a steady beat on your knee, that is rhythm, the heartbeat of a song. What do you like to sing?",
     sticker: "Music Maker",
+    followups: ["What are bones for?", "Count to ten with me"],
   },
   {
     keywords: ["body", "heart", "bones", "blood", "brain", "muscle"],
     reply:
       "Your body is a wonderful machine. Your heart is a pump about the size of your fist, and it beats all day and night to send blood everywhere you need it. Put your hand on your chest, can you feel it working? What part of the body makes you curious?",
     sticker: "Body Explorer",
+    followups: ["Why do we sleep?", "How do animals move?"],
   },
   {
     keywords: ["sleep", "dream", "tired", "nap"],
     reply:
       "Good thing to wonder about! When you sleep, your body rests and your brain tidies up everything you learned that day, a little like sorting after a busy market. Dreams are your brain playing with those memories. What did you learn today?",
     sticker: "Big Wonderer",
+    followups: ["Can stars be seen at night?", "How does my brain work?"],
   },
 ];
 

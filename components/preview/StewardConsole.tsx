@@ -13,6 +13,8 @@ import {
   Camera,
   ArrowRight,
   Star,
+  Sparkles,
+  Languages,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -216,6 +218,17 @@ export function StewardConsole({
               explore, never a sign-up count.
             </p>
 
+            {onSwitch && (
+              <button
+                type="button"
+                onClick={() => onSwitch("learner")}
+                className="flex w-full items-center justify-center gap-2 rounded-[14px] bg-clay-600 px-4 py-3 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-clay-700"
+              >
+                <Sparkles className="h-4 w-4" aria-hidden />
+                Start a learning session
+              </button>
+            )}
+
             {/* List */}
             <div className="space-y-3">
               {list.map((l) => {
@@ -294,6 +307,36 @@ export function StewardConsole({
         {/* ENROLL */}
         {tab === "enroll" && (
           <div className="mt-5 space-y-4">
+            <details className="rounded-[16px] border border-gold-400/40 bg-gold-400/10 p-4">
+              <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-forest-700">
+                <Languages className="h-4 w-4 text-clay-600" aria-hidden />
+                What to say to the family (in their language)
+              </summary>
+              <ul className="mt-3 space-y-1.5 text-sm text-stone">
+                <li>
+                  This is a small learning club. Your child can ask a friendly,
+                  safe helper anything they wonder about, and a grown-up is
+                  always there.
+                </li>
+                <li>
+                  To begin we keep only a name or nickname and an age group.
+                  Nothing more without your agreement.
+                </li>
+                <li>
+                  If you like, we will print and frame a photo of your child for
+                  you to keep.
+                </li>
+                <li>
+                  When your child keeps getting excited about something, we
+                  notice it openly and tell you, so we can bring something
+                  helpful.
+                </li>
+                <li>
+                  It is free and voluntary. Nothing depends on sharing anything
+                  private, and you can stop or remove their record any time.
+                </li>
+              </ul>
+            </details>
             <div className={`${card} p-5`}>
               <h2 className="font-display text-lg font-semibold text-forest-700">
                 Welcome a new explorer

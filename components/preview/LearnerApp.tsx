@@ -11,6 +11,8 @@ import {
   WifiOff,
   Sprout,
   PartyPopper,
+  Volume2,
+  VolumeX,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -61,6 +63,8 @@ export function LearnerApp({
   );
   const [noticed, setNoticed] = useState<string | null>(null);
   const [justEarned, setJustEarned] = useState<string | null>(null);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [readAloud, setReadAloud] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -77,9 +81,20 @@ export function LearnerApp({
     () => () => {
       if (timer.current) clearTimeout(timer.current);
       if (earnTimer.current) clearTimeout(earnTimer.current);
+      window.speechSynthesis?.cancel();
     },
     [],
   );
+
+  // Read an answer aloud, for children who cannot yet read.
+  const speak = (text: string) => {
+    const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
+    if (!synth) return;
+    synth.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    synth.speak(utterance);
+  };
 
   const ask = (raw: string) => {
     const text = raw.trim();
@@ -108,6 +123,8 @@ export function LearnerApp({
         setNoticed(res.spark);
         noticeSpark(learner.explorerName, res.spark);
       }
+      setSuggestions("followups" in res && res.followups ? res.followups : []);
+      if (readAloud) speak(res.reply);
       setThinking(false);
     }, 600);
   };
@@ -191,6 +208,26 @@ export function LearnerApp({
             <span className="inline-flex items-center gap-1.5 rounded-full bg-sand px-3 py-1 text-xs font-medium text-stone ring-1 ring-line ring-inset">
               <WifiOff className="h-3.5 w-3.5" aria-hidden /> Works offline
             </span>
+            <button
+              type="button"
+              onClick={() => {
+                if (readAloud) window.speechSynthesis?.cancel();
+                setReadAloud((v) => !v);
+              }}
+              aria-pressed={readAloud}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ring-1 transition-colors ring-inset ${
+                readAloud
+                  ? "bg-clay-600 text-cream ring-clay-600"
+                  : "bg-sand text-stone ring-line hover:bg-cream"
+              }`}
+            >
+              {readAloud ? (
+                <Volume2 className="h-3.5 w-3.5" aria-hidden />
+              ) : (
+                <VolumeX className="h-3.5 w-3.5" aria-hidden />
+              )}
+              Read aloud
+            </button>
           </div>
 
           {/* Stickers */}
@@ -274,18 +311,23 @@ export function LearnerApp({
             )}
           </div>
 
-          {/* Starters */}
-          <div className="flex flex-wrap gap-2 border-t border-line px-4 pt-3">
-            {kidStarters.map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => ask(s)}
-                className="rounded-full border border-line bg-cream px-3 py-1.5 text-xs font-medium text-forest-700 transition-colors hover:bg-sand"
-              >
-                {s}
-              </button>
-            ))}
+          {/* Suggestions / starters */}
+          <div className="border-t border-line px-4 pt-3">
+            <p className="mb-1.5 text-xs font-medium text-stone">
+              {suggestions.length ? "Keep exploring" : "Try asking"}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {(suggestions.length ? suggestions : kidStarters).map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => ask(s)}
+                  className="rounded-full border border-line bg-cream px-3 py-1.5 text-xs font-medium text-forest-700 transition-colors hover:bg-sand"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Composer */}
