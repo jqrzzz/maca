@@ -24,8 +24,8 @@ export type MediaRef = {
 export const images = {
   heroMain: {
     src: "/images/hero/main.jpg",
-    alt: "Kayan villagers gathered together in the hills of Mae Hong Son at golden hour.",
-    placeholder: true,
+    alt: "Children of the community gathered together among the bamboo homes and forested hills of their village.",
+    placeholder: false,
     ratio: "16/10",
   },
   villageLife: {
@@ -34,10 +34,10 @@ export const images = {
     placeholder: false,
     ratio: "4/3",
   },
-  villageWeaving: {
-    src: "/images/village/weaving.jpg",
-    alt: "A woman weaving fabric by hand on a wooden loom.",
-    placeholder: true,
+  villageGathering: {
+    src: "/images/village/gathering.jpg",
+    alt: "A volunteer handing out supplies to families during a visit to the village.",
+    placeholder: false,
     ratio: "4/3",
   },
   villageGarden: {
@@ -46,10 +46,10 @@ export const images = {
     placeholder: false,
     ratio: "4/3",
   },
-  villageSolar: {
-    src: "/images/village/solar.jpg",
-    alt: "Solar panels powering a water pump for the village.",
-    placeholder: true,
+  villageDusk: {
+    src: "/images/village/dusk.jpg",
+    alt: "Tin and bamboo rooftops of the village nestled among the trees as dusk settles over the hills.",
+    placeholder: false,
     ratio: "4/3",
   },
   villageWoodfire: {
@@ -58,10 +58,10 @@ export const images = {
     placeholder: false,
     ratio: "4/3",
   },
-  villageWater: {
-    src: "/images/village/water.jpg",
-    alt: "Villagers filling tanks with water during the dry season.",
-    placeholder: true,
+  villageLane: {
+    src: "/images/village/lane.jpg",
+    alt: "Neighbours and children gathered along the village lane in the evening as cooking smoke drifts between the homes.",
+    placeholder: false,
     ratio: "4/3",
   },
   villageStreet: {
@@ -90,8 +90,8 @@ export const images = {
   },
   needWar: {
     src: "/images/the-need/displacement.jpg",
-    alt: "A family that recently crossed into Thailand after fleeing conflict in Myanmar.",
-    placeholder: true,
+    alt: "Mothers and children of displaced families gathered together in their hillside village in Mae Hong Son.",
+    placeholder: false,
     ratio: "16/10",
   },
   programsMedical: {

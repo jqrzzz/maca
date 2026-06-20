@@ -164,6 +164,9 @@ export default function HomePage() {
               "villageHomes",
               "villageAnimals",
               "villageLife",
+              "villageLane",
+              "villageDusk",
+              "villageGathering",
             ]}
           />
         </div>
