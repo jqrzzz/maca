@@ -363,7 +363,8 @@ Still to set:
 Companion artifacts, now drafted: the §3.8 thread in [`concept.md`](concept.md),
 the [rollout pack](governance/curiosity-program-rollout.md) (a guardian-consent
 script, the kid-mode safety bar, and draft policy language to publish on launch),
-and a clickable demo in `/preview`.
+and a clickable demo in `/preview` (walk it with
+[`preview-demo.md`](preview-demo.md)).
 
 ## Changelog
 
