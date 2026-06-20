@@ -5,6 +5,8 @@ import Link from "next/link";
 import {
   Sparkles,
   Send,
+  Mic,
+  Square,
   Star,
   ShieldCheck,
   Users,
@@ -39,6 +41,30 @@ function answer(input: string) {
   return hit ?? { reply: kidFallback };
 }
 
+/** Minimal shape of the browser's speech-recognition API (not in lib.dom). */
+type SpeechRecognitionLike = {
+  lang: string;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onresult: (event: {
+    results: ArrayLike<ArrayLike<{ transcript: string }>>;
+  }) => void;
+  onend: () => void;
+  onerror: () => void;
+  start: () => void;
+  stop: () => void;
+};
+
+function createRecognition(): SpeechRecognitionLike | null {
+  if (typeof window === "undefined") return null;
+  const w = window as unknown as {
+    SpeechRecognition?: new () => SpeechRecognitionLike;
+    webkitSpeechRecognition?: new () => SpeechRecognitionLike;
+  };
+  const Ctor = w.SpeechRecognition ?? w.webkitSpeechRecognition;
+  return Ctor ? new Ctor() : null;
+}
+
 export function LearnerApp({
   learner,
   onSignOut,
@@ -67,10 +93,13 @@ export function LearnerApp({
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [readAloud, setReadAloud] = useState(false);
   const [language, setLanguage] = useState("English");
+  const [listening, setListening] = useState(false);
+  const [voiceHint, setVoiceHint] = useState<string | null>(null);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const earnTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -84,6 +113,7 @@ export function LearnerApp({
       if (timer.current) clearTimeout(timer.current);
       if (earnTimer.current) clearTimeout(earnTimer.current);
       window.speechSynthesis?.cancel();
+      recognitionRef.current?.stop();
     },
     [],
   );
@@ -129,6 +159,32 @@ export function LearnerApp({
       if (readAloud) speak(res.reply);
       setThinking(false);
     }, 600);
+  };
+
+  // Let a child speak a question. Pairs with read-aloud for a full voice loop.
+  const toggleListen = () => {
+    if (listening) {
+      recognitionRef.current?.stop();
+      return;
+    }
+    const recognition = createRecognition();
+    if (!recognition) {
+      setVoiceHint("Voice input is not available in this browser.");
+      return;
+    }
+    setVoiceHint(null);
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = (event) => {
+      const transcript = event.results?.[0]?.[0]?.transcript ?? "";
+      if (transcript) ask(transcript);
+    };
+    recognition.onend = () => setListening(false);
+    recognition.onerror = () => setListening(false);
+    recognitionRef.current = recognition;
+    setListening(true);
+    recognition.start();
   };
 
   const asked = messages.filter((m) => m.from === "kid").length;
@@ -378,6 +434,23 @@ export function LearnerApp({
               className="min-w-0 flex-1 rounded-[14px] border border-line bg-sand px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
             />
             <button
+              type="button"
+              onClick={toggleListen}
+              aria-label={listening ? "Stop listening" : "Ask with your voice"}
+              aria-pressed={listening}
+              className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] transition-colors ${
+                listening
+                  ? "animate-pulse bg-clay-600 text-cream"
+                  : "border border-line bg-cream text-forest-700 hover:bg-sand"
+              }`}
+            >
+              {listening ? (
+                <Square className="h-5 w-5" aria-hidden />
+              ) : (
+                <Mic className="h-5 w-5" aria-hidden />
+              )}
+            </button>
+            <button
               type="submit"
               aria-label="Send"
               disabled={!input.trim() || thinking}
@@ -386,6 +459,9 @@ export function LearnerApp({
               <Send className="h-5 w-5" aria-hidden />
             </button>
           </form>
+          {voiceHint && (
+            <p className="px-3 pb-3 text-xs text-stone">{voiceHint}</p>
+          )}
         </div>
 
         <div className="mt-3 flex items-start gap-2 rounded-[14px] bg-clay-50 px-4 py-2.5 text-xs text-clay-700 ring-1 ring-clay-100 ring-inset">
