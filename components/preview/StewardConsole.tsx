@@ -16,6 +16,7 @@ import {
   Sparkles,
   Languages,
   NotebookPen,
+  Printer,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -394,6 +395,15 @@ export function StewardConsole({
                   private, and you can stop or remove their record any time.
                 </li>
               </ul>
+              <a
+                href="/preview/consent"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+              >
+                <Printer className="h-4 w-4" aria-hidden />
+                Open a printable consent card
+              </a>
             </details>
             <div className={`${card} p-5`}>
               <h2 className="font-display text-lg font-semibold text-forest-700">
