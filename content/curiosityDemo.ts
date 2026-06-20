@@ -321,14 +321,14 @@ export const kidReplies: KidReply[] = [
     sticker: "Animal Friend",
   },
   {
-    keywords: ["bird", "fly", "wing", "feather"],
+    keywords: ["bird", "wing", "feather"],
     reply:
       "Birds are built to fly! Their bones are light, almost hollow, and their wings push the air down so the air pushes them up. Some birds fly for days without stopping. Have you watched a bird take off? What did you notice first?",
     sticker: "Sky Watcher",
     spark: "Birds and flying",
   },
   {
-    keywords: ["star", "moon", "space", "planet", "sun", "night"],
+    keywords: ["star", "moon", "space", "planet", "night"],
     reply:
       "Stars are giant balls of glowing gas, so far away that their light travels for years before it reaches your eyes. Our Sun is a star too, just very close. When you look up at night, some of that light began its journey long before you were born. What do you wonder about space?",
     sticker: "Star Gazer",
@@ -340,7 +340,7 @@ export const kidReplies: KidReply[] = [
     sticker: "Water Watcher",
   },
   {
-    keywords: ["number", "numbers", "count", "counting", "math", "add", "plus"],
+    keywords: ["number", "numbers", "count", "counting", "math", "plus"],
     reply:
       "You are doing math just by wondering! Numbers are a way to count and compare everything around you. Here is a puzzle: if you pick five mangoes and give two to a friend, how many do you have left? Take your time.",
     sticker: "Number Friend",

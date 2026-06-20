@@ -23,7 +23,6 @@ import {
   ageBandLabel,
   sparkStatusLabel,
   type Learner,
-  type Spark,
   type AgeBand,
   type AvatarTone,
 } from "@/content/curiosityDemo";
@@ -56,7 +55,7 @@ export function StewardConsole({
 }) {
   const [tab, setTab] = useState<Tab>("learners");
   const [list, setList] = useState<Learner[]>(seedLearners);
-  const [sparkList, setSparkList] = useState<Spark[]>(seedSparks);
+  const sparkList = seedSparks;
   const live = useCuriosityLive();
 
   // Enroll form
@@ -95,11 +94,6 @@ export function StewardConsole({
     setPhoto(false);
     setTab("learners");
   };
-
-  const propose = (id: string) =>
-    setSparkList((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, status: "proposed" } : s)),
-    );
 
   const field =
     "w-full rounded-[14px] border border-line bg-cream px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400";
@@ -448,6 +442,9 @@ export function StewardConsole({
               </div>
             )}
 
+            <h3 className="pt-1 text-sm font-semibold text-forest-700">
+              Earlier this month
+            </h3>
             {sparkList.map((s) => {
               const who = list.find((l) => l.id === s.learnerId);
               return (
@@ -472,18 +469,7 @@ export function StewardConsole({
                     <span className="text-stone">Loves:</span> {s.interest}
                   </p>
                   <p className="mt-1 text-sm text-stone">{s.idea}</p>
-                  {s.status === "noticed" ? (
-                    <button
-                      type="button"
-                      onClick={() => propose(s.id)}
-                      className="mt-3 inline-flex h-9 items-center gap-2 rounded-[12px] bg-clay-600 px-4 text-sm font-medium text-cream transition-colors hover:bg-clay-700"
-                    >
-                      <Sprout className="h-4 w-4" aria-hidden />
-                      Suggest follow-through
-                    </button>
-                  ) : (
-                    <p className="mt-2 text-xs text-stone">{s.note}</p>
-                  )}
+                  <p className="mt-2 text-xs text-stone">{s.note}</p>
                 </div>
               );
             })}

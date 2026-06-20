@@ -56,14 +56,18 @@ const ideaFor: Record<string, { idea: string; cost: number }> = {
   },
 };
 
-export function earnSticker(name: string): void {
-  if (state.stickers.includes(name)) return;
+export function earnSticker(name: string): boolean {
+  if (state.stickers.includes(name)) return false;
   state = { ...state, stickers: [...state.stickers, name] };
   emit();
+  return true;
 }
 
 export function noticeSpark(learner: string, interest: string): void {
-  if (state.sparks.some((s) => s.interest === interest)) return;
+  if (
+    state.sparks.some((s) => s.learner === learner && s.interest === interest)
+  )
+    return;
   const meta = ideaFor[interest] ?? {
     idea: "Something to help them explore this further",
     cost: 12,

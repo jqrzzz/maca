@@ -98,8 +98,7 @@ export function LearnerApp({
       ]);
       if ("sticker" in res && res.sticker) {
         const earned = res.sticker;
-        if (!stickers.includes(earned)) {
-          earnSticker(earned);
+        if (earnSticker(earned)) {
           setJustEarned(earned);
           if (earnTimer.current) clearTimeout(earnTimer.current);
           earnTimer.current = setTimeout(() => setJustEarned(null), 3500);
@@ -240,6 +239,7 @@ export function LearnerApp({
         <div className={`mt-4 ${card} flex flex-col overflow-hidden`}>
           <div
             ref={scrollRef}
+            aria-live="polite"
             className="max-h-[42vh] min-h-[220px] space-y-3 overflow-y-auto p-4"
           >
             {messages.map((m) =>
@@ -261,10 +261,7 @@ export function LearnerApp({
               ),
             )}
             {thinking && (
-              <div
-                className="flex items-center gap-2.5 text-stone"
-                aria-live="polite"
-              >
+              <div className="flex items-center gap-2.5 text-stone">
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-clay-50 text-clay-600">
                   <Sparkles className="h-4 w-4" aria-hidden />
                 </span>

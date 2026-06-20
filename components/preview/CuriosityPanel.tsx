@@ -19,7 +19,6 @@ import {
   sparks as seedSparks,
   ageBandLabel,
   sparkStatusLabel,
-  type Spark,
 } from "@/content/curiosityDemo";
 import { Avatar, card, usd } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
@@ -31,7 +30,7 @@ export function CuriosityPanel({
 }: {
   onSwitch?: (p: Perspective) => void;
 }) {
-  const [sparkList, setSparkList] = useState<Spark[]>(seedSparks);
+  const sparkList = seedSparks;
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
   const [accessLog, setAccessLog] = useState<{ name: string; at: string }[]>(
     [],
@@ -52,11 +51,6 @@ export function CuriosityPanel({
     .filter((s) => s.status === "approved" || s.status === "delivered")
     .reduce((n, s) => n + s.cost, 0);
   const awaiting = allSparks.filter((s) => s.status === "proposed").length;
-
-  const approve = (id: string) =>
-    setSparkList((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, status: "approved" } : s)),
-    );
 
   const toggle = (id: string, name: string) => {
     const willReveal = !revealed[id];
@@ -198,7 +192,10 @@ export function CuriosityPanel({
           </div>
         )}
 
-        <div className="mt-5 space-y-3">
+        <h4 className="mt-5 text-sm font-semibold text-forest-700">
+          Earlier this month
+        </h4>
+        <div className="mt-3 space-y-3">
           {sparkList.map((s) => {
             const who = learners.find((l) => l.id === s.learnerId);
             const tone =
@@ -224,20 +221,6 @@ export function CuriosityPanel({
                   </div>
                   <p className="mt-1 text-sm text-stone">{s.idea}</p>
                 </div>
-                {s.status === "proposed" ? (
-                  <button
-                    type="button"
-                    onClick={() => approve(s.id)}
-                    className="inline-flex h-9 shrink-0 items-center gap-2 rounded-[12px] bg-clay-600 px-4 text-sm font-medium text-cream transition-colors hover:bg-clay-700"
-                  >
-                    <CircleCheck className="h-4 w-4" aria-hidden />
-                    Approve
-                  </button>
-                ) : s.status === "approved" ? (
-                  <Badge tone="forest">
-                    <CircleCheck className="h-3.5 w-3.5" aria-hidden /> Approved
-                  </Badge>
-                ) : null}
               </div>
             );
           })}

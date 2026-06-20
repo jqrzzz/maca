@@ -108,11 +108,32 @@ export function SessionNotes({ context = "Preview" }: { context?: string }) {
 
   const launcherRef = useRef<HTMLButtonElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const close = useCallback(() => {
     setOpen(false);
     launcherRef.current?.focus();
   }, []);
+
+  // Keep Tab focus inside the dialog while it is open.
+  const onPanelKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "Tab") return;
+    const panel = panelRef.current;
+    if (!panel) return;
+    const items = panel.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+    );
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
 
   // Move focus into the panel when it opens.
   useEffect(() => {
@@ -216,7 +237,11 @@ export function SessionNotes({ context = "Preview" }: { context?: string }) {
             onClick={close}
             className="absolute inset-0 bg-ink/30"
           />
-          <div className="absolute top-0 right-0 flex h-full w-full max-w-sm flex-col bg-cream shadow-lift">
+          <div
+            ref={panelRef}
+            onKeyDown={onPanelKeyDown}
+            className="absolute top-0 right-0 flex h-full w-full max-w-sm flex-col bg-cream shadow-lift"
+          >
             <div className="flex items-start justify-between gap-3 border-b border-line p-4">
               <div>
                 <h2 className="font-display text-lg font-semibold text-forest-700">
