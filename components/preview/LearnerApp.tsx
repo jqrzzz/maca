@@ -32,7 +32,12 @@ import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, earnSticker, noticeSpark } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
 
-type Msg = { id: string; from: "kid" | "guide"; text: string };
+type Msg = {
+  id: string;
+  from: "kid" | "guide";
+  text: string;
+  simple?: string;
+};
 
 /** Match a child's message to a safe, canned reply (demo only, no model call). */
 function answer(input: string) {
@@ -95,6 +100,7 @@ export function LearnerApp({
   const [language, setLanguage] = useState("English");
   const [listening, setListening] = useState(false);
   const [voiceHint, setVoiceHint] = useState<string | null>(null);
+  const [simplified, setSimplified] = useState<Record<string, boolean>>({});
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -141,7 +147,12 @@ export function LearnerApp({
     timer.current = setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        { id: `g-${Date.now()}`, from: "guide", text: res.reply },
+        {
+          id: `g-${Date.now()}`,
+          from: "guide",
+          text: res.reply,
+          simple: "simple" in res ? res.simple : undefined,
+        },
       ]);
       if ("sticker" in res && res.sticker) {
         const earned = res.sticker;
@@ -159,6 +170,16 @@ export function LearnerApp({
       if (readAloud) speak(res.reply);
       setThinking(false);
     }, 600);
+  };
+
+  // Offer a shorter, plainer version of an answer on request.
+  const simplify = (id: string, simple: string) => {
+    setMessages((prev) => [
+      ...prev,
+      { id: `g-${Date.now()}`, from: "guide", text: simple },
+    ]);
+    setSimplified((prev) => ({ ...prev, [id]: true }));
+    if (readAloud) speak(simple);
   };
 
   // Let a child speak a question. Pairs with read-aloud for a full voice loop.
@@ -373,9 +394,20 @@ export function LearnerApp({
                   <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-clay-50 text-clay-600">
                     <Sparkles className="h-4 w-4" aria-hidden />
                   </span>
-                  <p className="max-w-[85%] rounded-[16px] rounded-tl-sm bg-sand px-4 py-2.5 text-sm leading-relaxed text-ink">
-                    {m.text}
-                  </p>
+                  <div className="max-w-[85%]">
+                    <p className="rounded-[16px] rounded-tl-sm bg-sand px-4 py-2.5 text-sm leading-relaxed text-ink">
+                      {m.text}
+                    </p>
+                    {m.simple && !simplified[m.id] && (
+                      <button
+                        type="button"
+                        onClick={() => simplify(m.id, m.simple!)}
+                        className="mt-1.5 text-xs font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+                      >
+                        Say it simpler
+                      </button>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <div key={m.id} className="flex justify-end">

@@ -289,6 +289,8 @@ export type KidReply = {
   sticker?: string;
   spark?: string;
   followups?: string[];
+  /** A shorter, plainer restatement, offered on request. */
+  simple?: string;
 };
 
 export const kidReplies: KidReply[] = [
@@ -309,6 +311,8 @@ export const kidReplies: KidReply[] = [
     sticker: "Plant Explorer",
     spark: "Plants and growing things",
     followups: ["How do birds build nests?", "What is in the water?"],
+    simple:
+      "Plants drink water through their roots and use sunshine to make food. They give us the air we breathe.",
   },
   {
     keywords: ["sky", "blue", "cloud", "rain", "rainbow"],
@@ -316,6 +320,8 @@ export const kidReplies: KidReply[] = [
       "Good question! Sunlight is made of many colors mixed together. The air scatters the blue light all around, so it reaches your eyes from every direction and the sky looks blue. At sunset the light travels farther and you see reds and oranges. What does your sky look like right now?",
     sticker: "Sky Watcher",
     followups: ["What are stars made of?", "How do birds fly up there?"],
+    simple:
+      "The sky looks blue because the air spreads the blue part of sunlight all around you.",
   },
   {
     keywords: ["elephant", "animal", "tiger", "dog", "cat", "fish", "buffalo"],
@@ -323,6 +329,8 @@ export const kidReplies: KidReply[] = [
       "Animals are wonderful to wonder about! Elephants, for example, are very smart and gentle, they remember their friends for years and talk to each other with rumbles too low for us to hear. Which animal would you most like to learn about?",
     sticker: "Animal Friend",
     followups: ["How do birds fly?", "Why do we sleep?"],
+    simple:
+      "Animals are living things that move, eat, and grow. Elephants are big, smart, and gentle.",
   },
   {
     keywords: ["bird", "wing", "feather"],
@@ -331,6 +339,8 @@ export const kidReplies: KidReply[] = [
     sticker: "Sky Watcher",
     spark: "Birds and flying",
     followups: ["What are stars?", "Tell me about the ocean"],
+    simple:
+      "Birds have light bodies and strong wings, so they push on the air and fly.",
   },
   {
     keywords: ["star", "moon", "space", "planet", "night"],
@@ -338,6 +348,8 @@ export const kidReplies: KidReply[] = [
       "Stars are giant balls of glowing gas, so far away that their light travels for years before it reaches your eyes. Our Sun is a star too, just very close. When you look up at night, some of that light began its journey long before you were born. What do you wonder about space?",
     sticker: "Star Gazer",
     followups: ["Why is the sky blue?", "How do rivers flow?"],
+    simple:
+      "Stars are huge balls of glowing gas, very far away. The Sun is our closest star.",
   },
   {
     keywords: ["water", "river", "swim", "ocean", "puddle"],
@@ -345,6 +357,8 @@ export const kidReplies: KidReply[] = [
       "Water is amazing! The same water can be a liquid you drink, hard cold ice, or steam that floats away as a cloud. Rivers carry it down from the hills all the way to the sea, then it rises into the sky and falls again as rain. Where does the water near you come from?",
     sticker: "Water Watcher",
     followups: ["What animals live in water?", "Why do we dream?"],
+    simple:
+      "Water can be a liquid, hard ice, or floaty steam. Rivers carry it to the sea.",
   },
   {
     keywords: ["number", "numbers", "count", "counting", "math", "plus"],
@@ -352,6 +366,8 @@ export const kidReplies: KidReply[] = [
       "You are doing math just by wondering! Numbers are a way to count and compare everything around you. Here is a puzzle: if you pick five mangoes and give two to a friend, how many do you have left? Take your time.",
     sticker: "Number Friend",
     followups: ["Can you tell me about music?", "How does my heart work?"],
+    simple:
+      "Numbers help us count and compare things. Five take away two leaves three.",
   },
   {
     keywords: ["music", "song", "sing", "drum", "dance", "sound"],
@@ -359,6 +375,8 @@ export const kidReplies: KidReply[] = [
       "Music is sound with a pattern. When you hum, the air wiggles fast or slow, and your ears turn those wiggles into a tune. Tap a steady beat on your knee, that is rhythm, the heartbeat of a song. What do you like to sing?",
     sticker: "Music Maker",
     followups: ["What are bones for?", "Count to ten with me"],
+    simple:
+      "Music is sound with a beat. When you hum, the air wiggles and your ears hear a tune.",
   },
   {
     keywords: ["body", "heart", "bones", "blood", "brain", "muscle"],
@@ -366,6 +384,8 @@ export const kidReplies: KidReply[] = [
       "Your body is a wonderful machine. Your heart is a pump about the size of your fist, and it beats all day and night to send blood everywhere you need it. Put your hand on your chest, can you feel it working? What part of the body makes you curious?",
     sticker: "Body Explorer",
     followups: ["Why do we sleep?", "How do animals move?"],
+    simple:
+      "Your body is like a machine. Your heart pumps blood all day so you can run and play.",
   },
   {
     keywords: ["sleep", "dream", "tired", "nap"],
@@ -373,6 +393,8 @@ export const kidReplies: KidReply[] = [
       "Good thing to wonder about! When you sleep, your body rests and your brain tidies up everything you learned that day, a little like sorting after a busy market. Dreams are your brain playing with those memories. What did you learn today?",
     sticker: "Big Wonderer",
     followups: ["Can stars be seen at night?", "How does my brain work?"],
+    simple:
+      "When you sleep, your body rests and your brain tidies up what you learned. Dreams are your brain playing.",
   },
 ];
 
