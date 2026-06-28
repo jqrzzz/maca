@@ -12,6 +12,7 @@ import {
   Users,
   Gift,
   HeartHandshake,
+  FileText,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import {
@@ -107,6 +108,15 @@ export function CuriosityPanel({
             </li>
           ))}
         </ol>
+        <a
+          href="/preview/overview"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+        >
+          <FileText className="h-4 w-4" aria-hidden />
+          Open the one-page overview (for funders)
+        </a>
       </details>
 
       {/* Program health */}
