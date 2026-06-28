@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Users,
   Gift,
+  HeartHandshake,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import {
@@ -24,6 +25,7 @@ import { Avatar, card, usd } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
+import { ownerSteps } from "@/content/onboarding";
 
 export function CuriosityPanel({
   onSwitch,
@@ -83,6 +85,29 @@ export function CuriosityPanel({
         not a head count), and reveal a private Tier 2 record, which is logged.
         The steward cannot see Tier 2.
       </GuideTip>
+
+      {/* How to introduce this to Ong (for the owner at the sit-down) */}
+      <details className="rounded-[16px] border border-gold-400/40 bg-gold-400/10 p-4">
+        <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-forest-700">
+          <HeartHandshake className="h-4 w-4 text-clay-600" aria-hidden />
+          How to introduce this to Ong
+        </summary>
+        <ol className="mt-3 space-y-2.5">
+          {ownerSteps.map((step, i) => (
+            <li key={step.title} className="flex gap-3">
+              <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-clay-600 text-xs font-semibold text-cream">
+                {i + 1}
+              </span>
+              <div>
+                <div className="text-sm font-medium text-forest-700">
+                  {step.title}
+                </div>
+                <div className="mt-0.5 text-sm text-stone">{step.body}</div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </details>
 
       {/* Program health */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

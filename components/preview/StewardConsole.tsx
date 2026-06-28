@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   Compass,
+  BookOpen,
   Users,
   UserPlus,
   Sprout,
@@ -35,10 +36,12 @@ import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
+import { StewardGuide } from "./StewardGuide";
 
-type Tab = "learners" | "enroll" | "sparks" | "pay";
+type Tab = "guide" | "learners" | "enroll" | "sparks" | "pay";
 
 const tabs: { id: Tab; label: string; icon: React.ElementType }[] = [
+  { id: "guide", label: "Guide", icon: BookOpen },
   { id: "learners", label: "Learners", icon: Users },
   { id: "enroll", label: "Enroll", icon: UserPlus },
   { id: "sparks", label: "Sparks", icon: Sprout },
@@ -57,7 +60,7 @@ export function StewardConsole({
   onSignOut: () => void;
   onSwitch?: (p: Perspective) => void;
 }) {
-  const [tab, setTab] = useState<Tab>("learners");
+  const [tab, setTab] = useState<Tab>("guide");
   const [list, setList] = useState<Learner[]>(seedLearners);
   const sparkList = seedSparks;
   const live = useCuriosityLive();
@@ -196,6 +199,22 @@ export function StewardConsole({
             );
           })}
         </div>
+
+        {/* GUIDE */}
+        {tab === "guide" && (
+          <div className="mt-5 space-y-3">
+            <StewardGuide />
+            <a
+              href="/preview/steward-guide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+            >
+              <Printer className="h-4 w-4" aria-hidden />
+              Open a printable version
+            </a>
+          </div>
+        )}
 
         {/* LEARNERS */}
         {tab === "learners" && (
