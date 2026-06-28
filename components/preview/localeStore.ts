@@ -3,62 +3,134 @@
 import { useSyncExternalStore } from "react";
 import { translate, type Locale, type StringKey } from "@/content/i18n";
 
-/**
- * The chosen language for the demo, shared across views and kept for the session
- * (localStorage), read through useSyncExternalStore so it stays SSR-safe.
- */
+/* ---------------------------------------------------------------------------
+ * Chosen language for the demo, shared across views and kept for the session.
+ * ------------------------------------------------------------------------- */
 
 const KEY = "prasm.preview.locale.v1";
-const listeners = new Set<() => void>();
-let current: Locale = "en";
-let ready = false;
+const localeListeners = new Set<() => void>();
+let currentLocale: Locale = "en";
+let localeReady = false;
 
-function read(): Locale {
+function readLocale(): Locale {
   try {
     const v = window.localStorage.getItem(KEY);
     if (v === "en" || v === "th" || v === "my" || v === "kayan") return v;
   } catch {
-    /* ignore unreadable storage */
+    /* ignore */
   }
   return "en";
 }
 
-function getSnapshot(): Locale {
-  if (!ready) {
-    current = read();
-    ready = true;
+function localeSnapshot(): Locale {
+  if (!localeReady) {
+    currentLocale = readLocale();
+    localeReady = true;
   }
-  return current;
+  return currentLocale;
 }
 
-function getServerSnapshot(): Locale {
-  return "en";
-}
-
-function subscribe(cb: () => void): () => void {
-  listeners.add(cb);
+function localeSubscribe(cb: () => void): () => void {
+  localeListeners.add(cb);
   return () => {
-    listeners.delete(cb);
+    localeListeners.delete(cb);
   };
 }
 
 export function useLocale(): Locale {
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  return useSyncExternalStore(localeSubscribe, localeSnapshot, () => "en");
 }
 
 export function setLocale(locale: Locale): void {
-  current = locale;
-  ready = true;
+  currentLocale = locale;
+  localeReady = true;
   try {
     window.localStorage.setItem(KEY, locale);
   } catch {
-    /* ignore unwritable storage */
+    /* ignore */
   }
-  listeners.forEach((cb) => cb());
+  localeListeners.forEach((cb) => cb());
 }
 
-/** A translator bound to the current locale, with English fallback. */
+/* ---------------------------------------------------------------------------
+ * Live translation overrides. Words captured during a walkthrough (for example
+ * from Ong) layer on top of the static translations so the app updates instantly.
+ * They persist for the session and can be exported into the worksheet.
+ * ------------------------------------------------------------------------- */
+
+type Overrides = Record<Locale, Partial<Record<StringKey, string>>>;
+
+const O_KEY = "prasm.preview.translations.v1";
+const EMPTY_OVERRIDES: Overrides = { en: {}, th: {}, my: {}, kayan: {} };
+const overrideListeners = new Set<() => void>();
+let overrides: Overrides = EMPTY_OVERRIDES;
+let overridesReady = false;
+
+function readOverrides(): Overrides {
+  try {
+    const raw = window.localStorage.getItem(O_KEY);
+    if (raw) return { ...EMPTY_OVERRIDES, ...(JSON.parse(raw) as Overrides) };
+  } catch {
+    /* ignore */
+  }
+  return EMPTY_OVERRIDES;
+}
+
+function overridesSnapshot(): Overrides {
+  if (!overridesReady) {
+    overrides = readOverrides();
+    overridesReady = true;
+  }
+  return overrides;
+}
+
+function overridesSubscribe(cb: () => void): () => void {
+  overrideListeners.add(cb);
+  return () => {
+    overrideListeners.delete(cb);
+  };
+}
+
+export function useOverrides(): Overrides {
+  return useSyncExternalStore(
+    overridesSubscribe,
+    overridesSnapshot,
+    () => EMPTY_OVERRIDES,
+  );
+}
+
+export function setOverride(
+  locale: Locale,
+  key: StringKey,
+  value: string,
+): void {
+  overrides = {
+    ...overrides,
+    [locale]: { ...overrides[locale], [key]: value },
+  };
+  overridesReady = true;
+  try {
+    window.localStorage.setItem(O_KEY, JSON.stringify(overrides));
+  } catch {
+    /* ignore */
+  }
+  overrideListeners.forEach((cb) => cb());
+}
+
+export function clearOverrides(locale: Locale): void {
+  overrides = { ...overrides, [locale]: {} };
+  try {
+    window.localStorage.setItem(O_KEY, JSON.stringify(overrides));
+  } catch {
+    /* ignore */
+  }
+  overrideListeners.forEach((cb) => cb());
+}
+
+/* A translator for the current locale: captured overrides first, then the
+   static translation, then English. */
 export function useT(): (key: StringKey) => string {
   const locale = useLocale();
-  return (key: StringKey) => translate(locale, key);
+  const ov = useOverrides();
+  return (key: StringKey) => ov[locale]?.[key] || translate(locale, key);
 }

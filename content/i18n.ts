@@ -41,6 +41,7 @@ export const en = {
   "learner.languageLabel": "Your guide can answer in your language:",
   "learner.languageNote":
     "When {language} is added, the app and your guide will speak it. For now it shows English.",
+  "learner.helpTranslate": "Help us say it in {language}",
 
   "learner.earned": "New sticker earned: {sticker}!",
   "learner.noticed":

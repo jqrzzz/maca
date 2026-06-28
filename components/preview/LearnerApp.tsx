@@ -31,15 +31,9 @@ import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, earnSticker, noticeSpark } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
-import { useLocale, setLocale } from "./localeStore";
-import {
-  translate,
-  fill,
-  localeLabel,
-  locales,
-  type Locale,
-  type StringKey,
-} from "@/content/i18n";
+import { useLocale, setLocale, useT } from "./localeStore";
+import { TranslationHelper } from "./TranslationHelper";
+import { fill, localeLabel, locales, type Locale } from "@/content/i18n";
 
 type Msg = {
   id: string;
@@ -89,7 +83,7 @@ export function LearnerApp({
   onSwitch?: (p: Perspective) => void;
 }) {
   const locale = useLocale();
-  const t = (key: StringKey) => translate(locale, key);
+  const t = useT();
 
   const [messages, setMessages] = useState<Msg[]>([
     {
@@ -112,6 +106,7 @@ export function LearnerApp({
   const [listening, setListening] = useState(false);
   const [voiceHint, setVoiceHint] = useState<string | null>(null);
   const [simplified, setSimplified] = useState<Record<string, boolean>>({});
+  const [translateOpen, setTranslateOpen] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -343,11 +338,23 @@ export function LearnerApp({
             </select>
           </div>
           {locale !== "en" && (
-            <p className="mt-1.5 text-xs text-stone">
-              {fill(t("learner.languageNote"), {
-                language: localeLabel(locale),
-              })}
-            </p>
+            <div className="mt-1.5 flex flex-wrap items-center gap-2">
+              <p className="text-xs text-stone">
+                {fill(t("learner.languageNote"), {
+                  language: localeLabel(locale),
+                })}
+              </p>
+              <button
+                type="button"
+                onClick={() => setTranslateOpen(true)}
+                className="inline-flex items-center gap-1.5 rounded-full bg-clay-600 px-3 py-1 text-xs font-medium text-cream transition-colors hover:bg-clay-700"
+              >
+                <Languages className="h-3.5 w-3.5" aria-hidden />
+                {fill(t("learner.helpTranslate"), {
+                  language: localeLabel(locale),
+                })}
+              </button>
+            </div>
           )}
 
           {/* Stickers */}
@@ -512,6 +519,11 @@ export function LearnerApp({
           <p>{t("learner.previewNote")}</p>
         </div>
 
+        <TranslationHelper
+          open={translateOpen}
+          onClose={() => setTranslateOpen(false)}
+          locale={locale}
+        />
         <SessionNotes context="Learner (kid mode)" />
       </div>
     </div>
