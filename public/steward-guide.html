@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The steward's guide: Curiosity Program</title>
+    <meta
+      name="description"
+      content="A simple, read-aloud guide for the village steward: what it is, why it helps, what you do each visit, and how to practice a first session."
+    />
+    <style>
+      :root {
+        --cream: #fbf7f0;
+        --sand: #f1e8d8;
+        --line: #e3d7c2;
+        --ink: #2b2620;
+        --stone: #6f655a;
+        --clay: #b4541f;
+        --clay-700: #8f3f15;
+        --clay-50: #f6e9df;
+        --forest: #2f5d50;
+        --forest-50: #e6efe9;
+        --gold: #c8911f;
+        --gold-50: #f9efd6;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family:
+          ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        line-height: 1.65;
+        font-size: 18px;
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 28px 20px 80px;
+      }
+      .icon {
+        width: 1.25em;
+        height: 1.25em;
+        stroke: currentColor;
+        stroke-width: 1.9;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex: 0 0 auto;
+      }
+      header.masthead {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 18px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: var(--clay-50);
+        color: var(--clay);
+        flex: 0 0 auto;
+      }
+      .badge .icon {
+        width: 28px;
+        height: 28px;
+      }
+      h1 {
+        font-size: 27px;
+        line-height: 1.15;
+        margin: 0;
+        color: var(--forest);
+      }
+      .masthead p {
+        margin: 2px 0 0;
+        color: var(--stone);
+        font-size: 15px;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 18px 0 6px;
+      }
+      .btn {
+        font: inherit;
+        font-size: 15px;
+        font-weight: 600;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--forest);
+        border-radius: 12px;
+        padding: 9px 15px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn:hover {
+        background: var(--sand);
+      }
+      .btn.primary {
+        background: var(--clay);
+        color: #fff;
+        border-color: var(--clay);
+      }
+      .btn.primary:hover {
+        background: var(--clay-700);
+      }
+      .btn .icon {
+        width: 18px;
+        height: 18px;
+      }
+      .langnote {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: var(--gold-50);
+        border: 1px solid #ecd9a8;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 15px;
+        margin: 16px 0;
+        color: var(--clay-700);
+      }
+      .lede {
+        font-size: 19px;
+        margin: 20px 0;
+      }
+      h2 {
+        font-size: 21px;
+        color: var(--forest);
+        margin: 34px 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      h2 .icon {
+        width: 22px;
+        height: 22px;
+        color: var(--clay);
+      }
+      .two {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr 1fr;
+      }
+      .tile {
+        background: var(--sand);
+        border-radius: 16px;
+        padding: 16px 18px;
+      }
+      .tile h3 {
+        margin: 0 0 4px;
+        font-size: 17px;
+        color: var(--forest);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .tile h3 .icon {
+        width: 20px;
+        height: 20px;
+        color: var(--clay);
+      }
+      .tile p {
+        margin: 0;
+        font-size: 16px;
+        color: var(--stone);
+      }
+      ol.steps {
+        list-style: none;
+        counter-reset: step;
+        margin: 0;
+        padding: 0;
+      }
+      ol.steps > li {
+        counter-increment: step;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin: 10px 0;
+      }
+      ol.steps > li::before {
+        content: counter(step);
+        flex: 0 0 auto;
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        background: var(--clay);
+        color: #fff;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .step-ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: var(--clay-50);
+        color: var(--clay);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+      .step-ic .icon {
+        width: 20px;
+        height: 20px;
+      }
+      .step-text {
+        flex: 1;
+      }
+      .rules {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .rule {
+        background: var(--clay-50);
+        border: 1px solid rgba(180, 84, 31, 0.25);
+        border-radius: 16px;
+        padding: 14px 16px;
+      }
+      .rule .ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--clay);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+      }
+      .rule p {
+        margin: 0;
+        font-size: 15.5px;
+        color: var(--clay-700);
+      }
+      .supported {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: var(--forest-50);
+        border-radius: 16px;
+        padding: 16px 18px;
+        margin-top: 12px;
+      }
+      .supported .ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--forest);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+      .supported h3 {
+        margin: 0 0 2px;
+        color: var(--forest);
+        font-size: 17px;
+      }
+      .supported p {
+        margin: 0;
+        color: var(--stone);
+        font-size: 16px;
+      }
+      .rehearsal {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 6px 18px 16px;
+      }
+      .rstep {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--sand);
+      }
+      .rstep:last-child {
+        border-bottom: none;
+      }
+      .rhead {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .rhead .step-ic {
+        width: 38px;
+        height: 38px;
+      }
+      .rhead h3 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--forest);
+        flex: 1;
+      }
+      .rstep .do {
+        margin: 10px 0 0;
+        font-size: 16px;
+      }
+      .say {
+        margin-top: 10px;
+        border-left: 4px solid var(--clay);
+        background: var(--sand);
+        border-radius: 0 12px 12px 0;
+        padding: 10px 14px;
+      }
+      .say .label {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--stone);
+      }
+      .say .quote {
+        margin: 2px 0 0;
+        font-style: italic;
+        color: var(--forest);
+      }
+      .safety {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 10px;
+        background: var(--forest-50);
+        color: var(--forest);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .safety .icon {
+        width: 16px;
+        height: 16px;
+      }
+      .next {
+        background: var(--sand);
+        border-radius: 16px;
+        padding: 14px 18px;
+        margin-top: 14px;
+      }
+      .next p.k {
+        margin: 0 0 6px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--stone);
+      }
+      .next ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .next li {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+        margin: 7px 0;
+        font-size: 16px;
+      }
+      .next li .icon {
+        width: 18px;
+        height: 18px;
+        color: var(--clay);
+        margin-top: 4px;
+      }
+      .saybtn {
+        flex: 0 0 auto;
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--clay);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .saybtn:hover {
+        background: var(--sand);
+      }
+      .saybtn .icon {
+        width: 18px;
+        height: 18px;
+      }
+      .owner {
+        margin-top: 46px;
+        border-top: 2px dashed var(--line);
+        padding-top: 22px;
+      }
+      .owner h2 {
+        margin-top: 6px;
+      }
+      .owner ol {
+        padding-left: 0;
+        list-style: none;
+        counter-reset: o;
+      }
+      .owner li {
+        counter-increment: o;
+        display: flex;
+        gap: 12px;
+        margin: 12px 0;
+      }
+      .owner li::before {
+        content: counter(o);
+        flex: 0 0 auto;
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background: var(--forest);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .owner .t {
+        font-weight: 700;
+        color: var(--forest);
+      }
+      .owner .b {
+        color: var(--stone);
+        font-size: 16px;
+      }
+      footer {
+        margin-top: 40px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        font-size: 14px;
+        color: var(--stone);
+      }
+      @media (max-width: 620px) {
+        body {
+          font-size: 17px;
+        }
+        .two,
+        .rules {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 23px;
+        }
+      }
+      @media print {
+        .toolbar,
+        .saybtn {
+          display: none;
+        }
+        body {
+          background: #fff;
+        }
+        ol.steps > li,
+        .rehearsal,
+        .tile,
+        .rule {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Icon symbol set -->
+    <svg style="display: none" aria-hidden="true">
+      <symbol id="i-spark" viewBox="0 0 24 24">
+        <path
+          d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"
+        />
+      </symbol>
+      <symbol id="i-sprout" viewBox="0 0 24 24">
+        <path d="M7 20h10" />
+        <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+        <path
+          d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"
+        />
+        <path
+          d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"
+        />
+      </symbol>
+      <symbol id="i-users" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path
+          d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+        />
+        <path d="m9 12 2 2 4-4" />
+      </symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+        <path d="M12 19v3" />
+      </symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24">
+        <path
+          d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A1.4 1.4 0 0 1 5.4 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"
+        />
+        <path d="M16 9a5 5 0 0 1 0 6" />
+        <path d="M19.4 5.6a9 9 0 0 1 0 12.7" />
+      </symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24">
+        <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+        <path
+          d="M18.4 2.6a1 1 0 0 1 3 3l-9 9a2 2 0 0 1-.9.5l-2.9.8a.5.5 0 0 1-.6-.6l.8-2.9a2 2 0 0 1 .5-.9z"
+        />
+      </symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24">
+        <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24">
+        <path
+          d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+        />
+      </symbol>
+      <symbol id="i-gift" viewBox="0 0 24 24">
+        <rect x="3" y="8" width="18" height="4" rx="1" />
+        <path d="M12 8v13" />
+        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+      </symbol>
+      <symbol id="i-userplus" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M19 8v6" />
+        <path d="M22 11h-6" />
+      </symbol>
+      <symbol id="i-printer" viewBox="0 0 24 24">
+        <path d="M6 9V2h12v7" />
+        <path
+          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+        />
+        <rect x="6" y="14" width="12" height="8" />
+      </symbol>
+      <symbol id="i-stop" viewBox="0 0 24 24">
+        <rect x="5" y="5" width="14" height="14" rx="2" />
+      </symbol>
+    </svg>
+
+    <div class="wrap">
+      <header class="masthead">
+        <span class="badge"><svg class="icon"><use href="#i-spark" /></svg></span>
+        <div>
+          <h1>The steward's guide</h1>
+          <p>Curiosity Program</p>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <button class="btn primary" id="readAll" type="button">
+          <svg class="icon"><use href="#i-volume" /></svg>
+          Read this aloud
+        </button>
+        <button class="btn" id="stopBtn" type="button">
+          <svg class="icon"><use href="#i-stop" /></svg>
+          Stop
+        </button>
+        <button class="btn" id="printBtn" type="button">
+          <svg class="icon"><use href="#i-printer" /></svg>
+          Print
+        </button>
+      </div>
+
+      <div class="langnote">
+        <svg class="icon" style="margin-top: 2px"><use href="#i-spark" /></svg>
+        <span
+          >This is the English version. Your language (Thai, Burmese, or Kayan)
+          will be added with your help.</span
+        >
+      </div>
+
+      <p class="lede" data-say="You are the village steward. Here is what this is, why it helps, and what you do. You do not need to be a teacher or know about computers.">
+        You are the village steward. Here is what this is, why it helps, and what
+        you do. You do not need to be a teacher or know about computers.
+      </p>
+
+      <!-- What it is / Why it helps -->
+      <div class="two">
+        <div class="tile">
+          <h3><svg class="icon"><use href="#i-spark" /></svg> What it is</h3>
+          <p
+            data-say="What it is. A learning club. Children sit with a friendly, safe helper on a tablet and ask about anything they wonder about. A grown-up is always there."
+          >
+            A learning club. Children sit with a friendly, safe helper on a tablet
+            and ask about anything they wonder about. A grown-up is always there.
+          </p>
+        </div>
+        <div class="tile">
+          <h3><svg class="icon"><use href="#i-sprout" /></svg> Why it helps</h3>
+          <p
+            data-say="Why it helps. There is no teacher out here, but children are full of questions. The helper answers them and never gets tired. When a child keeps loving something, we bring them something to grow it."
+          >
+            There is no teacher out here, but children are full of questions. The
+            helper answers them and never gets tired. When a child keeps loving
+            something, we bring them something to grow it.
+          </p>
+        </div>
+      </div>
+
+      <!-- Routine -->
+      <h2><svg class="icon"><use href="#i-spark" /></svg> What you do, each visit</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-users" /></svg></span>
+          <span class="step-text">Gather a few children at the common spot.</span>
+          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Gather a few children at the common spot.">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-shield" /></svg></span>
+          <span class="step-text"
+            >Make sure another trusted grown-up is there with you.</span
+          >
+          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Make sure another trusted grown-up is there with you.">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-mic" /></svg></span>
+          <span class="step-text"
+            >Hand them the tablet. Let them ask, by typing or by speaking.</span
+          >
+          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Hand them the tablet. Let them ask, by typing or by speaking.">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-volume" /></svg></span>
+          <span class="step-text"
+            >Let them hear the answers and keep exploring.</span
+          >
+          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Let them hear the answers and keep exploring.">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-pen" /></svg></span>
+          <span class="step-text"
+            >Write one short note: who came, and what excited them.</span
+          >
+          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Write one short note: who came, and what excited them.">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+      </ol>
+
+      <!-- Rules -->
+      <h2><svg class="icon"><use href="#i-shield" /></svg> Three rules to keep</h2>
+      <div class="rules">
+        <div class="rule">
+          <span class="ic"><svg class="icon"><use href="#i-heart" /></svg></span>
+          <p
+            data-say="Rule one. Consent belongs to the family. Always ask first, and they can say no."
+          >
+            Consent belongs to the family. Always ask first, and they can say no.
+          </p>
+        </div>
+        <div class="rule">
+          <span class="ic"><svg class="icon"><use href="#i-users" /></svg></span>
+          <p data-say="Rule two. A grown-up is always with the children.">
+            A grown-up is always with the children.
+          </p>
+        </div>
+        <div class="rule">
+          <span class="ic"><svg class="icon"><use href="#i-lock" /></svg></span>
+          <p data-say="Rule three. Private things about people stay private.">
+            Private things about people stay private.
+          </p>
+        </div>
+      </div>
+
+      <!-- Supported -->
+      <div class="supported">
+        <span class="ic"><svg class="icon"><use href="#i-gift" /></svg></span>
+        <div>
+          <h3>You are supported</h3>
+          <p
+            data-say="You are supported. This is a real role, with a stipend for the role, not a payment for each child. The helper does the answering. Your job is to make it safe, welcoming, and fun."
+          >
+            This is a real role, with a stipend for the role, not a payment for
+            each child. The helper does the answering. Your job is to make it
+            safe, welcoming, and fun.
+          </p>
+        </div>
+      </div>
+
+      <!-- Rehearsal -->
+      <h2><svg class="icon"><use href="#i-spark" /></svg> Practice a visit, step by step</h2>
+      <p style="margin-top: 0; color: var(--stone); font-size: 16px">
+        A calm walk-through of one visit, so you know just what to do. Read it as
+        many times as you like.
+      </p>
+      <div class="rehearsal">
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-heart" /></svg></span>
+            <h3>1. Get consent first</h3>
+            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Get consent first. Gather a few children at the common spot, and make sure another trusted grown-up is with you. Ask each family first, in their language. They are free to say no, and nothing is lost if they do. You can say: This is a free learning club for curious children. Would you like yours to join today?">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            Gather a few children at the common spot, and make sure another
+            trusted grown-up is with you. Ask each family first, in their
+            language. They are free to say no, and nothing is lost if they do.
+          </p>
+          <div class="say">
+            <div class="label">What you can say</div>
+            <p class="quote">
+              "This is a free learning club for curious children. Would you like
+              yours to join today?"
+            </p>
+          </div>
+          <span class="safety"
+            ><svg class="icon"><use href="#i-shield" /></svg> A parent agrees
+            first, and a grown-up always stays.</span
+          >
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-userplus" /></svg></span>
+            <h3>2. Welcome the explorer</h3>
+            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Welcome the explorer. Add the child with a name or a nickname and an age group. If the family likes, take a welcome photo to print and frame as a gift. You can say: What name would you like to use here?">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            Add the child with a name or a nickname and an age group. If the
+            family likes, take a welcome photo to print and frame as a gift.
+          </p>
+          <div class="say">
+            <div class="label">What you can say</div>
+            <p class="quote">"What name would you like to use here?"</p>
+          </div>
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-mic" /></svg></span>
+            <h3>3. Hand over the tablet</h3>
+            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Hand over the tablet. Let the child ask anything they wonder about, by typing or by speaking. Turn on read aloud so they can hear the answers. The helper is kind and never grows tired. You can say: Ask anything you are curious about.">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            Let the child ask anything they wonder about, by typing or by
+            speaking. Turn on read aloud so they can hear the answers. The helper
+            is kind and never grows tired.
+          </p>
+          <div class="say">
+            <div class="label">What you can say</div>
+            <p class="quote">"Ask anything you are curious about."</p>
+          </div>
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-sprout" /></svg></span>
+            <h3>4. Notice a spark</h3>
+            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Notice a spark. When a child keeps lighting up about one thing, the app notices it openly. It will appear later in your Sparks list to suggest a small follow-up. You can say: You really love this. Let us tell the grown-up who helps you, so we can bring you more.">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            When a child keeps lighting up about one thing, the app notices it
+            openly. It will appear later in your Sparks list to suggest a small
+            follow-up.
+          </p>
+          <div class="say">
+            <div class="label">What you can say</div>
+            <p class="quote">
+              "You really love this. Let us tell the grown-up who helps you, so we
+              can bring you more."
+            </p>
+          </div>
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-pen" /></svg></span>
+            <h3>5. Write one short note</h3>
+            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Write one short note. Before you finish, write one line: who came, and what excited them. That is all the record we keep.">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            Before you finish, write one line: who came, and what excited them.
+            That is all the record we keep.
+          </p>
+        </div>
+      </div>
+
+      <div class="next">
+        <p class="k">After the visit</p>
+        <ul>
+          <li>
+            <svg class="icon"><use href="#i-sprout" /></svg>
+            You suggest a spark for a child who keeps lighting up.
+          </li>
+          <li>
+            <svg class="icon"><use href="#i-sprout" /></svg>
+            The founder approves it before anything is bought.
+          </li>
+          <li>
+            <svg class="icon"><use href="#i-sprout" /></svg>
+            We bring something small to help them grow it.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Owner section -->
+      <div class="owner">
+        <h2>
+          <svg class="icon"><use href="#i-heart" /></svg>
+          For the person introducing this
+        </h2>
+        <p style="margin-top: 0; color: var(--stone); font-size: 16px">
+          A short way to walk the steward through it, in his world.
+        </p>
+        <ol>
+          <li>
+            <div>
+              <div class="t">Start with his hands, not a talk</div>
+              <div class="b">
+                Let him use kid mode himself first, by voice. Once it answers him,
+                the purpose is obvious.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">Explain it in his world</div>
+              <div class="b">
+                No teacher out here; curious children get to learn; when we see
+                what a child loves, we bring something to grow it; you are the one
+                who makes it happen.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">Keep the job small</div>
+              <div class="b">
+                Walk through the five-step weekly routine above. That is the whole
+                job.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">Three safety rules</div>
+              <div class="b">
+                Consent belongs to the family; a grown-up is always present;
+                private things about people stay private.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">Make him the language partner</div>
+              <div class="b">
+                Ask for the words in his language. It gives him ownership, and
+                gets us real Kayan, which we never guess.
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">He does not need to understand the technology</div>
+              <div class="b">
+                Aim for confidence, a clear role, and trust, not technical
+                understanding. The tool is just a tool he is good at using.
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <footer>
+        Curiosity Program steward guide. A friendly orientation, not a test. This
+        page works offline once opened, and nothing you do here is saved or sent.
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var synth = window.speechSynthesis || null;
+        function speak(text) {
+          if (!synth || !text) return;
+          synth.cancel();
+          var u = new SpeechSynthesisUtterance(text);
+          u.rate = 0.95;
+          synth.speak(u);
+        }
+        document.addEventListener("click", function (e) {
+          var b = e.target.closest("[data-say]");
+          if (b && b.classList.contains("saybtn")) {
+            speak(b.getAttribute("data-say"));
+          }
+        });
+        var readAll = document.getElementById("readAll");
+        if (readAll) {
+          readAll.addEventListener("click", function () {
+            var nodes = document.querySelectorAll("[data-say]");
+            var parts = [];
+            nodes.forEach(function (n) {
+              parts.push(n.getAttribute("data-say"));
+            });
+            speak(parts.join(" "));
+          });
+        }
+        var stopBtn = document.getElementById("stopBtn");
+        if (stopBtn)
+          stopBtn.addEventListener("click", function () {
+            if (synth) synth.cancel();
+          });
+        var printBtn = document.getElementById("printBtn");
+        if (printBtn)
+          printBtn.addEventListener("click", function () {
+            window.print();
+          });
+      })();
+    </script>
+  </body>
+</html>
