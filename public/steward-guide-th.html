@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The steward's guide: Curiosity Program</title>
+    <title>คู่มือผู้ดูแล: โครงการ Curiosity</title>
     <meta
       name="description"
-      content="A simple, read-aloud guide for the village steward: what it is, why it helps, what you do each visit, and how to practice a first session."
+      content="คู่มือง่าย ๆ อ่านออกเสียงได้ สำหรับผู้ดูแลประจำหมู่บ้าน: คืออะไร ช่วยได้อย่างไร แต่ละครั้งทำอะไร และวิธีฝึกการเยี่ยมครั้งแรก"
     />
     <style>
       :root {
@@ -34,15 +34,15 @@
         background: var(--cream);
         color: var(--ink);
         font-family:
-          ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        line-height: 1.65;
+          ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Thai",
+          Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.75;
         font-size: 18px;
       }
       .wrap {
         max-width: 760px;
         margin: 0 auto;
-        padding: 28px 20px 80px;
+        padding: 22px 20px 80px;
       }
       .icon {
         width: 1.25em;
@@ -99,7 +99,7 @@
       }
       h1 {
         font-size: 27px;
-        line-height: 1.15;
+        line-height: 1.3;
         margin: 0;
         color: var(--forest);
       }
@@ -347,13 +347,10 @@
       .say .label {
         font-size: 13px;
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
         color: var(--stone);
       }
       .say .quote {
         margin: 2px 0 0;
-        font-style: italic;
         color: var(--forest);
       }
       .safety {
@@ -380,10 +377,8 @@
       }
       .next p.k {
         margin: 0 0 6px;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
         color: var(--stone);
       }
       .next ul {
@@ -402,7 +397,7 @@
         width: 18px;
         height: 18px;
         color: var(--clay);
-        margin-top: 4px;
+        margin-top: 6px;
       }
       .saybtn {
         flex: 0 0 auto;
@@ -503,7 +498,7 @@
     </style>
   </head>
   <body>
-    <!-- Icon symbol set -->
+    <!-- ชุดไอคอน -->
     <svg style="display: none" aria-hidden="true">
       <symbol id="i-spark" viewBox="0 0 24 24">
         <path
@@ -585,247 +580,247 @@
 
     <div class="wrap">
       <div class="langswitch">
-        <a href="/steward-guide.html" class="active" aria-current="page"
-          >English</a
+        <a href="/steward-guide.html">English</a>
+        <a href="/steward-guide-th.html" class="active" aria-current="page"
+          >ไทย</a
         >
-        <a href="/steward-guide-th.html">ไทย</a>
       </div>
 
       <header class="masthead">
         <span class="badge"><svg class="icon"><use href="#i-spark" /></svg></span>
         <div>
-          <h1>The steward's guide</h1>
-          <p>Curiosity Program</p>
+          <h1>คู่มือผู้ดูแล</h1>
+          <p>โครงการ Curiosity</p>
         </div>
       </header>
 
       <div class="toolbar">
         <button class="btn primary" id="readAll" type="button">
           <svg class="icon"><use href="#i-volume" /></svg>
-          Read this aloud
+          อ่านออกเสียง
         </button>
         <button class="btn" id="stopBtn" type="button">
           <svg class="icon"><use href="#i-stop" /></svg>
-          Stop
+          หยุด
         </button>
         <button class="btn" id="printBtn" type="button">
           <svg class="icon"><use href="#i-printer" /></svg>
-          Print
+          พิมพ์
         </button>
       </div>
 
       <div class="langnote">
         <svg class="icon" style="margin-top: 2px"><use href="#i-spark" /></svg>
         <span
-          >This is the English version. Your language (Thai, Burmese, or Kayan)
-          will be added with your help.</span
+          >นี่คือฉบับภาษาไทย เป็นฉบับร่างที่แปลด้วยความช่วยเหลือของ AI
+          กรุณาให้เจ้าของภาษาตรวจทานก่อนนำไปใช้จริงกับครอบครัว</span
         >
       </div>
 
-      <p class="lede" data-say="You are the village steward. Here is what this is, why it helps, and what you do. You do not need to be a teacher or know about computers.">
-        You are the village steward. Here is what this is, why it helps, and what
-        you do. You do not need to be a teacher or know about computers.
+      <p
+        class="lede"
+        data-say="คุณคือผู้ดูแลประจำหมู่บ้าน นี่คือสิ่งที่โครงการนี้เป็น เหตุผลที่มันช่วยได้ และสิ่งที่คุณต้องทำ คุณไม่จำเป็นต้องเป็นครูหรือรู้เรื่องคอมพิวเตอร์"
+      >
+        คุณคือผู้ดูแลประจำหมู่บ้าน นี่คือสิ่งที่โครงการนี้เป็น เหตุผลที่มันช่วยได้
+        และสิ่งที่คุณต้องทำ คุณไม่จำเป็นต้องเป็นครูหรือรู้เรื่องคอมพิวเตอร์
       </p>
 
-      <!-- What it is / Why it helps -->
+      <!-- คืออะไร / ช่วยได้อย่างไร -->
       <div class="two">
         <div class="tile">
-          <h3><svg class="icon"><use href="#i-spark" /></svg> What it is</h3>
+          <h3><svg class="icon"><use href="#i-spark" /></svg> คืออะไร</h3>
           <p
-            data-say="What it is. A learning club. Children sit with a friendly, safe helper on a tablet and ask about anything they wonder about. A grown-up is always there."
+            data-say="คืออะไร ชมรมการเรียนรู้ เด็ก ๆ นั่งกับผู้ช่วยที่เป็นมิตรและปลอดภัยบนแท็บเล็ต แล้วถามเรื่องอะไรก็ได้ที่สงสัย มีผู้ใหญ่อยู่ด้วยเสมอ"
           >
-            A learning club. Children sit with a friendly, safe helper on a tablet
-            and ask about anything they wonder about. A grown-up is always there.
+            ชมรมการเรียนรู้ เด็ก ๆ นั่งกับผู้ช่วยที่เป็นมิตรและปลอดภัยบนแท็บเล็ต
+            แล้วถามเรื่องอะไรก็ได้ที่สงสัย มีผู้ใหญ่อยู่ด้วยเสมอ
           </p>
         </div>
         <div class="tile">
-          <h3><svg class="icon"><use href="#i-sprout" /></svg> Why it helps</h3>
+          <h3><svg class="icon"><use href="#i-sprout" /></svg> ช่วยได้อย่างไร</h3>
           <p
-            data-say="Why it helps. There is no teacher out here, but children are full of questions. The helper answers them and never gets tired. When a child keeps loving something, we bring them something to grow it."
+            data-say="ช่วยได้อย่างไร ที่นี่ไม่มีครู แต่เด็ก ๆ เต็มไปด้วยคำถาม ผู้ช่วยตอบได้โดยไม่มีเหนื่อย เมื่อเด็กชอบอะไรเป็นพิเศษ เราจะนำสิ่งของมาช่วยให้เขาได้เรียนรู้ต่อ"
           >
-            There is no teacher out here, but children are full of questions. The
-            helper answers them and never gets tired. When a child keeps loving
-            something, we bring them something to grow it.
+            ที่นี่ไม่มีครู แต่เด็ก ๆ เต็มไปด้วยคำถาม
+            ผู้ช่วยตอบได้โดยไม่มีเหนื่อย เมื่อเด็กชอบอะไรเป็นพิเศษ
+            เราจะนำสิ่งของมาช่วยให้เขาได้เรียนรู้ต่อ
           </p>
         </div>
       </div>
 
-      <!-- Routine -->
-      <h2><svg class="icon"><use href="#i-spark" /></svg> What you do, each visit</h2>
+      <!-- สิ่งที่คุณทำ -->
+      <h2><svg class="icon"><use href="#i-spark" /></svg> สิ่งที่คุณทำในแต่ละครั้ง</h2>
       <ol class="steps">
         <li>
           <span class="step-ic"><svg class="icon"><use href="#i-users" /></svg></span>
-          <span class="step-text">Gather a few children at the common spot.</span>
-          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Gather a few children at the common spot.">
+          <span class="step-text">รวมเด็ก ๆ สองสามคนที่จุดนัดพบ</span>
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="รวมเด็ก ๆ สองสามคนที่จุดนัดพบ">
             <svg class="icon"><use href="#i-volume" /></svg>
           </button>
         </li>
         <li>
           <span class="step-ic"><svg class="icon"><use href="#i-shield" /></svg></span>
           <span class="step-text"
-            >Make sure another trusted grown-up is there with you.</span
+            >ให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ</span
           >
-          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Make sure another trusted grown-up is there with you.">
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ">
             <svg class="icon"><use href="#i-volume" /></svg>
           </button>
         </li>
         <li>
           <span class="step-ic"><svg class="icon"><use href="#i-mic" /></svg></span>
           <span class="step-text"
-            >Hand them the tablet. Let them ask, by typing or by speaking.</span
+            >ส่งแท็บเล็ตให้เด็ก ให้เขาถาม ไม่ว่าจะพิมพ์หรือพูด</span
           >
-          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Hand them the tablet. Let them ask, by typing or by speaking.">
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ส่งแท็บเล็ตให้เด็ก ให้เขาถาม ไม่ว่าจะพิมพ์หรือพูด">
             <svg class="icon"><use href="#i-volume" /></svg>
           </button>
         </li>
         <li>
           <span class="step-ic"><svg class="icon"><use href="#i-volume" /></svg></span>
-          <span class="step-text"
-            >Let them hear the answers and keep exploring.</span
-          >
-          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Let them hear the answers and keep exploring.">
+          <span class="step-text">ให้เขาฟังคำตอบและสำรวจต่อไป</span>
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ให้เขาฟังคำตอบและสำรวจต่อไป">
             <svg class="icon"><use href="#i-volume" /></svg>
           </button>
         </li>
         <li>
           <span class="step-ic"><svg class="icon"><use href="#i-pen" /></svg></span>
           <span class="step-text"
-            >Write one short note: who came, and what excited them.</span
+            >เขียนบันทึกสั้น ๆ หนึ่งบรรทัด: ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น</span
           >
-          <button class="saybtn" type="button" aria-label="Read aloud" data-say="Write one short note: who came, and what excited them.">
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="เขียนบันทึกสั้น ๆ หนึ่งบรรทัด ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น">
             <svg class="icon"><use href="#i-volume" /></svg>
           </button>
         </li>
       </ol>
 
-      <!-- Rules -->
-      <h2><svg class="icon"><use href="#i-shield" /></svg> Three rules to keep</h2>
+      <!-- กฎ -->
+      <h2><svg class="icon"><use href="#i-shield" /></svg> กฎสามข้อที่ต้องรักษา</h2>
       <div class="rules">
         <div class="rule">
           <span class="ic"><svg class="icon"><use href="#i-heart" /></svg></span>
           <p
-            data-say="Rule one. Consent belongs to the family. Always ask first, and they can say no."
+            data-say="กฎข้อหนึ่ง การยินยอมเป็นของครอบครัว ขออนุญาตก่อนเสมอ และเขาปฏิเสธได้"
           >
-            Consent belongs to the family. Always ask first, and they can say no.
+            การยินยอมเป็นของครอบครัว ขออนุญาตก่อนเสมอ และเขาปฏิเสธได้
           </p>
         </div>
         <div class="rule">
           <span class="ic"><svg class="icon"><use href="#i-users" /></svg></span>
-          <p data-say="Rule two. A grown-up is always with the children.">
-            A grown-up is always with the children.
+          <p data-say="กฎข้อสอง มีผู้ใหญ่อยู่กับเด็ก ๆ เสมอ">
+            มีผู้ใหญ่อยู่กับเด็ก ๆ เสมอ
           </p>
         </div>
         <div class="rule">
           <span class="ic"><svg class="icon"><use href="#i-lock" /></svg></span>
-          <p data-say="Rule three. Private things about people stay private.">
-            Private things about people stay private.
+          <p data-say="กฎข้อสาม เรื่องส่วนตัวของแต่ละคนต้องเก็บเป็นความลับ">
+            เรื่องส่วนตัวของแต่ละคนต้องเก็บเป็นความลับ
           </p>
         </div>
       </div>
 
-      <!-- Supported -->
+      <!-- ได้รับการสนับสนุน -->
       <div class="supported">
         <span class="ic"><svg class="icon"><use href="#i-gift" /></svg></span>
         <div>
-          <h3>You are supported</h3>
+          <h3>คุณได้รับการสนับสนุน</h3>
           <p
-            data-say="You are supported. This is a real role, with a stipend for the role, not a payment for each child. The helper does the answering. Your job is to make it safe, welcoming, and fun."
+            data-say="คุณได้รับการสนับสนุน นี่คือบทบาทจริง มีค่าตอบแทนสำหรับบทบาทนี้ ไม่ใช่การจ่ายต่อเด็กหนึ่งคน ผู้ช่วยเป็นผู้ตอบคำถาม หน้าที่ของคุณคือทำให้ปลอดภัย อบอุ่น และสนุก"
           >
-            This is a real role, with a stipend for the role, not a payment for
-            each child. The helper does the answering. Your job is to make it
-            safe, welcoming, and fun.
+            นี่คือบทบาทจริง มีค่าตอบแทนสำหรับบทบาทนี้ ไม่ใช่การจ่ายต่อเด็กหนึ่งคน
+            ผู้ช่วยเป็นผู้ตอบคำถาม หน้าที่ของคุณคือทำให้ปลอดภัย อบอุ่น และสนุก
           </p>
         </div>
       </div>
 
-      <!-- Rehearsal -->
-      <h2><svg class="icon"><use href="#i-spark" /></svg> Practice a visit, step by step</h2>
+      <!-- ฝึกการเยี่ยม -->
+      <h2><svg class="icon"><use href="#i-spark" /></svg> ฝึกการเยี่ยมหนึ่งครั้ง ทีละขั้นตอน</h2>
       <p style="margin-top: 0; color: var(--stone); font-size: 16px">
-        A calm walk-through of one visit, so you know just what to do. Read it as
-        many times as you like.
+        การเดินผ่านการเยี่ยมหนึ่งครั้งอย่างใจเย็น เพื่อให้คุณรู้ว่าต้องทำอะไร
+        อ่านกี่ครั้งก็ได้ตามต้องการ
       </p>
       <div class="rehearsal">
         <div class="rstep">
           <div class="rhead">
             <span class="step-ic"><svg class="icon"><use href="#i-heart" /></svg></span>
-            <h3>1. Get consent first</h3>
-            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Get consent first. Gather a few children at the common spot, and make sure another trusted grown-up is with you. Ask each family first, in their language. They are free to say no, and nothing is lost if they do. You can say: This is a free learning club for curious children. Would you like yours to join today?">
+            <h3>1. ขอความยินยอมก่อน</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ขอความยินยอมก่อน รวมเด็ก ๆ สองสามคนที่จุดนัดพบ และให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ ขออนุญาตแต่ละครอบครัวก่อน เป็นภาษาของเขา เขามีสิทธิ์ปฏิเสธได้ และไม่มีอะไรเสียหายถ้าเขาปฏิเสธ สิ่งที่คุณพูดได้: นี่คือชมรมการเรียนรู้ฟรีสำหรับเด็กที่อยากรู้อยากเห็น อยากให้ลูกของคุณเข้าร่วมวันนี้ไหม">
               <svg class="icon"><use href="#i-volume" /></svg>
             </button>
           </div>
           <p class="do">
-            Gather a few children at the common spot, and make sure another
-            trusted grown-up is with you. Ask each family first, in their
-            language. They are free to say no, and nothing is lost if they do.
+            รวมเด็ก ๆ สองสามคนที่จุดนัดพบ
+            และให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ ขออนุญาตแต่ละครอบครัวก่อน
+            เป็นภาษาของเขา เขามีสิทธิ์ปฏิเสธได้ และไม่มีอะไรเสียหายถ้าเขาปฏิเสธ
           </p>
           <div class="say">
-            <div class="label">What you can say</div>
+            <div class="label">สิ่งที่คุณพูดได้</div>
             <p class="quote">
-              "This is a free learning club for curious children. Would you like
-              yours to join today?"
+              "นี่คือชมรมการเรียนรู้ฟรีสำหรับเด็กที่อยากรู้อยากเห็น
+              อยากให้ลูกของคุณเข้าร่วมวันนี้ไหม"
             </p>
           </div>
           <span class="safety"
-            ><svg class="icon"><use href="#i-shield" /></svg> A parent agrees
-            first, and a grown-up always stays.</span
+            ><svg class="icon"><use href="#i-shield" /></svg>
+            ผู้ปกครองยินยอมก่อน และมีผู้ใหญ่อยู่ด้วยเสมอ</span
           >
         </div>
 
         <div class="rstep">
           <div class="rhead">
             <span class="step-ic"><svg class="icon"><use href="#i-userplus" /></svg></span>
-            <h3>2. Welcome the explorer</h3>
-            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Welcome the explorer. Add the child with a name or a nickname and an age group. If the family likes, take a welcome photo to print and frame as a gift. You can say: What name would you like to use here?">
+            <h3>2. ต้อนรับนักสำรวจ</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ต้อนรับนักสำรวจ เพิ่มเด็กด้วยชื่อหรือชื่อเล่นและช่วงอายุ ถ้าครอบครัวต้องการ ถ่ายรูปต้อนรับเพื่อพิมพ์และใส่กรอบเป็นของขวัญ สิ่งที่คุณพูดได้: อยากใช้ชื่ออะไรดี">
               <svg class="icon"><use href="#i-volume" /></svg>
             </button>
           </div>
           <p class="do">
-            Add the child with a name or a nickname and an age group. If the
-            family likes, take a welcome photo to print and frame as a gift.
+            เพิ่มเด็กด้วยชื่อหรือชื่อเล่นและช่วงอายุ ถ้าครอบครัวต้องการ
+            ถ่ายรูปต้อนรับเพื่อพิมพ์และใส่กรอบเป็นของขวัญ
           </p>
           <div class="say">
-            <div class="label">What you can say</div>
-            <p class="quote">"What name would you like to use here?"</p>
+            <div class="label">สิ่งที่คุณพูดได้</div>
+            <p class="quote">"อยากใช้ชื่ออะไรดี"</p>
           </div>
         </div>
 
         <div class="rstep">
           <div class="rhead">
             <span class="step-ic"><svg class="icon"><use href="#i-mic" /></svg></span>
-            <h3>3. Hand over the tablet</h3>
-            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Hand over the tablet. Let the child ask anything they wonder about, by typing or by speaking. Turn on read aloud so they can hear the answers. The helper is kind and never grows tired. You can say: Ask anything you are curious about.">
+            <h3>3. ส่งแท็บเล็ตให้เด็ก</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ส่งแท็บเล็ตให้เด็ก ให้เด็กถามอะไรก็ได้ที่สงสัย ไม่ว่าจะพิมพ์หรือพูด เปิดการอ่านออกเสียงเพื่อให้เขาได้ยินคำตอบ ผู้ช่วยใจดีและไม่มีเหนื่อย สิ่งที่คุณพูดได้: ถามอะไรก็ได้ที่หนูอยากรู้">
               <svg class="icon"><use href="#i-volume" /></svg>
             </button>
           </div>
           <p class="do">
-            Let the child ask anything they wonder about, by typing or by
-            speaking. Turn on read aloud so they can hear the answers. The helper
-            is kind and never grows tired.
+            ให้เด็กถามอะไรก็ได้ที่สงสัย ไม่ว่าจะพิมพ์หรือพูด
+            เปิดการอ่านออกเสียงเพื่อให้เขาได้ยินคำตอบ ผู้ช่วยใจดีและไม่มีเหนื่อย
           </p>
           <div class="say">
-            <div class="label">What you can say</div>
-            <p class="quote">"Ask anything you are curious about."</p>
+            <div class="label">สิ่งที่คุณพูดได้</div>
+            <p class="quote">"ถามอะไรก็ได้ที่หนูอยากรู้"</p>
           </div>
         </div>
 
         <div class="rstep">
           <div class="rhead">
             <span class="step-ic"><svg class="icon"><use href="#i-sprout" /></svg></span>
-            <h3>4. Notice a spark</h3>
-            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Notice a spark. When a child keeps lighting up about one thing, the app notices it openly. It will appear later in your Sparks list to suggest a small follow-up. You can say: You really love this. Let us tell the grown-up who helps you, so we can bring you more.">
+            <h3>4. สังเกตประกายความสนใจ</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="สังเกตประกายความสนใจ เมื่อเด็กตื่นเต้นกับเรื่องใดเรื่องหนึ่งซ้ำ ๆ แอปจะสังเกตเห็นอย่างเปิดเผย มันจะปรากฏในรายการประกายความสนใจของคุณภายหลัง เพื่อแนะนำสิ่งเล็ก ๆ ที่จะต่อยอด สิ่งที่คุณพูดได้: หนูชอบเรื่องนี้จริง ๆ นะ เราจะบอกผู้ใหญ่ที่ช่วยดูแลหนู เพื่อหาอะไรมาให้หนูเพิ่ม">
               <svg class="icon"><use href="#i-volume" /></svg>
             </button>
           </div>
           <p class="do">
-            When a child keeps lighting up about one thing, the app notices it
-            openly. It will appear later in your Sparks list to suggest a small
-            follow-up.
+            เมื่อเด็กตื่นเต้นกับเรื่องใดเรื่องหนึ่งซ้ำ ๆ
+            แอปจะสังเกตเห็นอย่างเปิดเผย
+            มันจะปรากฏในรายการประกายความสนใจของคุณภายหลัง
+            เพื่อแนะนำสิ่งเล็ก ๆ ที่จะต่อยอด
           </p>
           <div class="say">
-            <div class="label">What you can say</div>
+            <div class="label">สิ่งที่คุณพูดได้</div>
             <p class="quote">
-              "You really love this. Let us tell the grown-up who helps you, so we
-              can bring you more."
+              "หนูชอบเรื่องนี้จริง ๆ นะ เราจะบอกผู้ใหญ่ที่ช่วยดูแลหนู
+              เพื่อหาอะไรมาให้หนูเพิ่ม"
             </p>
           </div>
         </div>
@@ -833,98 +828,97 @@
         <div class="rstep">
           <div class="rhead">
             <span class="step-ic"><svg class="icon"><use href="#i-pen" /></svg></span>
-            <h3>5. Write one short note</h3>
-            <button class="saybtn" type="button" aria-label="Read aloud" data-say="Write one short note. Before you finish, write one line: who came, and what excited them. That is all the record we keep.">
+            <h3>5. เขียนบันทึกสั้น ๆ หนึ่งบรรทัด</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="เขียนบันทึกสั้น ๆ หนึ่งบรรทัด ก่อนจบ เขียนหนึ่งบรรทัด ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น นั่นคือบันทึกทั้งหมดที่เราเก็บ">
               <svg class="icon"><use href="#i-volume" /></svg>
             </button>
           </div>
           <p class="do">
-            Before you finish, write one line: who came, and what excited them.
-            That is all the record we keep.
+            ก่อนจบ เขียนหนึ่งบรรทัด: ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น
+            นั่นคือบันทึกทั้งหมดที่เราเก็บ
           </p>
         </div>
       </div>
 
       <div class="next">
-        <p class="k">After the visit</p>
+        <p class="k">หลังการเยี่ยม</p>
         <ul>
           <li>
             <svg class="icon"><use href="#i-sprout" /></svg>
-            You suggest a spark for a child who keeps lighting up.
+            คุณแนะนำประกายความสนใจสำหรับเด็กที่ตื่นเต้นอย่างต่อเนื่อง
           </li>
           <li>
             <svg class="icon"><use href="#i-sprout" /></svg>
-            The founder approves it before anything is bought.
+            ผู้ก่อตั้งอนุมัติก่อนซื้อสิ่งใด
           </li>
           <li>
             <svg class="icon"><use href="#i-sprout" /></svg>
-            We bring something small to help them grow it.
+            เรานำสิ่งเล็ก ๆ มาช่วยให้เขาต่อยอด
           </li>
         </ul>
       </div>
 
-      <!-- Owner section -->
+      <!-- สำหรับผู้แนะนำ -->
       <div class="owner">
         <h2>
           <svg class="icon"><use href="#i-heart" /></svg>
-          For the person introducing this
+          สำหรับผู้ที่แนะนำคู่มือนี้
         </h2>
         <p style="margin-top: 0; color: var(--stone); font-size: 16px">
-          A short way to walk the steward through it, in his world.
+          วิธีสั้น ๆ ในการพาผู้ดูแลทำความเข้าใจ ในแบบของเขา
         </p>
         <ol>
           <li>
             <div>
-              <div class="t">Start with his hands, not a talk</div>
+              <div class="t">เริ่มจากให้เขาได้ลองมือ ไม่ใช่การบรรยาย</div>
               <div class="b">
-                Let him use kid mode himself first, by voice. Once it answers him,
-                the purpose is obvious.
+                ให้เขาลองใช้โหมดเด็กด้วยตัวเองก่อน โดยใช้เสียง เมื่อมันตอบเขา
+                จุดประสงค์ก็ชัดเจนทันที
               </div>
             </div>
           </li>
           <li>
             <div>
-              <div class="t">Explain it in his world</div>
+              <div class="t">อธิบายในแบบโลกของเขา</div>
               <div class="b">
-                No teacher out here; curious children get to learn; when we see
-                what a child loves, we bring something to grow it; you are the one
-                who makes it happen.
+                ที่นี่ไม่มีครู เด็กที่อยากรู้อยากเห็นได้เรียนรู้
+                เมื่อเราเห็นว่าเด็กชอบอะไร เรานำสิ่งนั้นมาต่อยอด
+                คุณคือคนที่ทำให้สิ่งนี้เกิดขึ้น
               </div>
             </div>
           </li>
           <li>
             <div>
-              <div class="t">Keep the job small</div>
+              <div class="t">ทำให้งานเล็กเข้าไว้</div>
               <div class="b">
-                Walk through the five-step weekly routine above. That is the whole
-                job.
+                เดินผ่านขั้นตอนประจำสัปดาห์ห้าขั้นด้านบน นั่นคืองานทั้งหมด
               </div>
             </div>
           </li>
           <li>
             <div>
-              <div class="t">Three safety rules</div>
+              <div class="t">กฎความปลอดภัยสามข้อ</div>
               <div class="b">
-                Consent belongs to the family; a grown-up is always present;
-                private things about people stay private.
+                การยินยอมเป็นของครอบครัว มีผู้ใหญ่อยู่ด้วยเสมอ
+                เรื่องส่วนตัวของแต่ละคนเก็บเป็นความลับ
               </div>
             </div>
           </li>
           <li>
             <div>
-              <div class="t">Make him the language partner</div>
+              <div class="t">ให้เขาเป็นคู่หูด้านภาษา</div>
               <div class="b">
-                Ask for the words in his language. It gives him ownership, and
-                gets us real Kayan, which we never guess.
+                ขอคำศัพท์ในภาษาของเขา มันทำให้เขารู้สึกเป็นเจ้าของ
+                และเราได้ภาษากะยันจริง ๆ ที่เราไม่เดาเอง
               </div>
             </div>
           </li>
           <li>
             <div>
-              <div class="t">He does not need to understand the technology</div>
+              <div class="t">เขาไม่จำเป็นต้องเข้าใจเทคโนโลยี</div>
               <div class="b">
-                Aim for confidence, a clear role, and trust, not technical
-                understanding. The tool is just a tool he is good at using.
+                มุ่งที่ความมั่นใจ บทบาทที่ชัดเจน และความไว้ใจ
+                ไม่ใช่ความเข้าใจทางเทคนิค เครื่องมือก็เป็นแค่เครื่องมือที่เขาใช้ได้ดี
               </div>
             </div>
           </li>
@@ -932,8 +926,9 @@
       </div>
 
       <footer>
-        Curiosity Program steward guide. A friendly orientation, not a test. This
-        page works offline once opened, and nothing you do here is saved or sent.
+        คู่มือผู้ดูแลโครงการ Curiosity เป็นการแนะแนวที่เป็นมิตร ไม่ใช่การทดสอบ
+        หน้านี้ใช้งานแบบออฟไลน์ได้เมื่อเปิดแล้ว
+        และสิ่งที่คุณทำที่นี่จะไม่ถูกบันทึกหรือส่งออกไป
       </footer>
     </div>
 
@@ -944,7 +939,8 @@
           if (!synth || !text) return;
           synth.cancel();
           var u = new SpeechSynthesisUtterance(text);
-          u.rate = 0.95;
+          u.lang = "th-TH";
+          u.rate = 0.92;
           synth.speak(u);
         }
         document.addEventListener("click", function (e) {
