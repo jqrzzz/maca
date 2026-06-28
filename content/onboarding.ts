@@ -51,6 +51,69 @@ export const stewardGuide = {
   },
 };
 
+/**
+ * A calm, step-by-step rehearsal of one visit, so the steward can practice
+ * before the real thing. It mirrors the live demo flow: consent, welcome, the
+ * child asks, a spark is noticed, a short note. Each step has what to do and,
+ * where it helps, a short line to say (the lines worth translating first).
+ */
+export type SessionStep = {
+  icon: string;
+  title: string;
+  /** What the steward does at this step. */
+  you: string;
+  /** A short line the steward can say, ideally in the family's language. */
+  say?: string;
+  /** A safety reminder that belongs with this step. */
+  safety?: string;
+};
+
+export const firstSession = {
+  intro:
+    "A calm walk-through of one visit, so you know just what to do. Practice it as many times as you like. Nothing here is saved.",
+  steps: [
+    {
+      icon: "consent",
+      title: "Get consent first",
+      you: "Gather a few children at the common spot, and make sure another trusted grown-up is with you. Ask each family first, in their language. They are free to say no, and nothing is lost if they do.",
+      say: "This is a free learning club for curious children. Would you like yours to join today?",
+      safety: "A parent agrees first, and a grown-up always stays.",
+    },
+    {
+      icon: "welcome",
+      title: "Welcome the explorer",
+      you: "Add the child with a name or a nickname and an age group. If the family likes, take a welcome photo to print and frame as a gift.",
+      say: "What name would you like to use here?",
+    },
+    {
+      icon: "speak",
+      title: "Hand over the tablet",
+      you: "Let the child ask anything they wonder about, by typing or by speaking. Turn on read aloud so they can hear the answers. The helper is kind and never grows tired.",
+      say: "Ask anything you are curious about.",
+    },
+    {
+      icon: "sprout",
+      title: "Notice a spark",
+      you: "When a child keeps lighting up about one thing, the app notices it openly. It will appear later in your Sparks list to suggest a small follow-up.",
+      say: "You really love this. Let us tell the grown-up who helps you, so we can bring you more.",
+    },
+    {
+      icon: "note",
+      title: "Write one short note",
+      you: "Before you finish, write one line: who came, and what excited them. That is all the record we keep.",
+    },
+  ] as SessionStep[],
+  done: {
+    heading: "That is the whole visit",
+    body: "You did it. A calm, happy visit is the whole job.",
+    next: [
+      "You suggest a spark for a child who keeps lighting up.",
+      "The founder approves it before anything is bought.",
+      "We bring something small to help them grow it.",
+    ],
+  },
+};
+
 export type OwnerStep = { title: string; body: string };
 
 export const ownerSteps: OwnerStep[] = [

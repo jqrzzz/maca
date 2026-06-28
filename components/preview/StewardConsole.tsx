@@ -18,6 +18,7 @@ import {
   Languages,
   NotebookPen,
   Printer,
+  PlayCircle,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -212,15 +213,26 @@ export function StewardConsole({
         {tab === "guide" && (
           <div className="mt-5 space-y-3">
             <StewardGuide />
-            <a
-              href="/preview/steward-guide"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
-            >
-              <Printer className="h-4 w-4" aria-hidden />
-              Open a printable version
-            </a>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+              <a
+                href="/preview/run-through"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 items-center gap-2 rounded-[14px] bg-clay-600 px-5 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-clay-700"
+              >
+                <PlayCircle className="h-4 w-4" aria-hidden />
+                Practice a first session
+              </a>
+              <a
+                href="/preview/steward-guide"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+              >
+                <Printer className="h-4 w-4" aria-hidden />
+                Open a printable version
+              </a>
+            </div>
           </div>
         )}
 
