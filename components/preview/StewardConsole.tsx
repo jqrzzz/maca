@@ -19,6 +19,7 @@ import {
   NotebookPen,
   Printer,
   PlayCircle,
+  Wallet,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -39,14 +40,16 @@ import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
 import { StewardGuide } from "./StewardGuide";
 import { WelcomePhoto } from "./WelcomePhoto";
+import { StewardWallet } from "./StewardWallet";
 
-type Tab = "guide" | "learners" | "enroll" | "sparks" | "pay";
+type Tab = "guide" | "learners" | "enroll" | "sparks" | "money" | "pay";
 
 const tabs: { id: Tab; label: string; icon: React.ElementType }[] = [
   { id: "guide", label: "Guide", icon: BookOpen },
   { id: "learners", label: "Learners", icon: Users },
   { id: "enroll", label: "Enroll", icon: UserPlus },
   { id: "sparks", label: "Sparks", icon: Sprout },
+  { id: "money", label: "Money", icon: Wallet },
   { id: "pay", label: "How I'm paid", icon: HeartHandshake },
 ];
 
@@ -689,6 +692,9 @@ export function StewardConsole({
             </div>
           </div>
         )}
+
+        {/* MONEY */}
+        {tab === "money" && <StewardWallet />}
 
         <SessionNotes context="Steward" />
       </div>

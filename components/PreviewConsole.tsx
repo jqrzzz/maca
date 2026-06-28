@@ -10,6 +10,7 @@ import {
   HardHat,
   Compass,
   Sparkles,
+  BookOpen,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { demoPeople, type DemoPerson, type Role } from "@/content/previewDemo";
@@ -290,6 +291,27 @@ export function PreviewConsole() {
                 </span>
               </span>
             </button>
+
+            <a
+              href="/steward-guide.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-[16px] border border-dashed border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-sand text-clay-600">
+                <BookOpen className="h-5 w-5" aria-hidden />
+              </span>
+              <span className="min-w-0">
+                <span className="flex items-center gap-1.5 font-medium text-forest-700">
+                  Open the steward guide{" "}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="mt-0.5 block text-xs text-stone">
+                  A read-aloud explanation and onboarding to show, print, or
+                  share. Opens in a new tab.
+                </span>
+              </span>
+            </a>
           </div>
         </div>
         <Link
