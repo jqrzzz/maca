@@ -41,13 +41,15 @@ That's it — `<Figure>` automatically switches to an optimized `next/image`
 
 ## Status & future upgrade: add more photos later
 
-As of June 2026, these slots show **real photos** of the village:
-`villageLife`, `villageGarden`, `villageWoodfire`, `villageStreet`,
-`villageHomes`, `villageAnimals`, `founderPortrait`, and `programsMedical`.
+As of June 2026, every registered slot shows a **real photo** of the village:
+`heroMain`, `villageLife`, `villageGarden`, `villageWoodfire`, `villageStreet`,
+`villageHomes`, `villageAnimals`, `villageLane`, `villageDusk`,
+`villageGathering`, `founderPortrait`, `needWar`, and `programsMedical`.
 
-Still branded placeholders, waiting on a suitable consented photo:
-`heroMain`, `villageWeaving`, `villageSolar`, `villageWater`, and `needWar`
-(displacement / "a family that recently fled conflict").
+No branded placeholders remain. The earlier `villageWeaving`, `villageSolar`,
+and `villageWater` slots were renamed to `villageGathering`, `villageDusk`, and
+`villageLane` because the photo set had no weaving / solar / water-collection
+shots; each now points at a real, accurately described village photo.
 
 A larger set of the founder's source photos is in the repo (`IMG2026*.jpg`
 at the project root) and in git history: community gatherings, more village

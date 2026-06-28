@@ -15,6 +15,7 @@ import {
 import { buildMetadata } from "@/lib/metadata";
 import { config, methodVisible } from "@/lib/config";
 import { qrSvg as makeQrSvg } from "@/lib/qr";
+import { site } from "@/content/site";
 import {
   monetaryCopy,
   cryptoIntro,
@@ -33,6 +34,11 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function GivePage() {
+  const preview = config.donationsPreview;
+  // Decorative QR for the preview crypto cards (points at this page, never a
+  // wallet address), so a card looks complete without showing a sendable address.
+  const previewQr = preview ? await makeQrSvg(`${site.url}/give`) : undefined;
+
   const visibleLinks = monetaryCopy.filter((m) =>
     methodVisible(config.links[m.key].enabled),
   );
@@ -71,6 +77,7 @@ export default async function GivePage() {
                 cta={m.cta}
                 url={config.links[m.key].url}
                 enabled={config.links[m.key].enabled}
+                preview={!config.links[m.key].enabled && preview}
               />
             </Reveal>
           ))}
@@ -79,7 +86,8 @@ export default async function GivePage() {
 
       {/* Crypto */}
       {(visibleCrypto.length > 0 ||
-        methodVisible(config.cryptoProcessor.enabled)) && (
+        config.cryptoProcessor.enabled ||
+        config.showPlaceholders) && (
         <Section tone="sand">
           <SectionHeading
             eyebrow="Give crypto"
@@ -88,7 +96,7 @@ export default async function GivePage() {
           />
 
           {/* Recommended: hosted processor (auto-convert + receipt) */}
-          {methodVisible(config.cryptoProcessor.enabled) && (
+          {(config.cryptoProcessor.enabled || config.showPlaceholders) && (
             <div className="mt-10 flex flex-col items-start gap-5 rounded-[20px] border border-line bg-cream p-6 shadow-soft sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-4">
                 <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] bg-clay-50 text-clay-600">
@@ -132,6 +140,8 @@ export default async function GivePage() {
                     address={c.address}
                     qrSvg={c.qrSvg}
                     enabled={c.enabled}
+                    preview={!c.enabled && preview}
+                    previewQrSvg={previewQr}
                   />
                 </Reveal>
               ))}

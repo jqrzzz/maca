@@ -194,6 +194,43 @@ Each entry: **what · why here · the loop · what it needs · risks · stage.**
   help, answering _only_ from approved public content. On-brand, but the easiest
   to get wrong, so: last.
 
+### 3.8 Curiosity Program (education and AI literacy)
+
+- **What.** The first program we run _with_ the village, not only _for_ it:
+  children, teens, and adults meet AI in a safe, supervised "kid mode," get
+  curious, and use it to learn. Genuine engagement, captured gently, becomes the
+  on-ramp to the Identity & Case Registry (§3.4) and a picture of what each
+  learner loves, so we can bring real, targeted help (a botany kit for the child
+  who keeps asking how plants drink).
+- **Why here.** It turns the most visionary, highest-stakes thread (§3.4) into
+  something we can start safely and soon, because the literacy work needs almost
+  no sensitive data. It builds the trust and consent the registry will later
+  depend on, and it is the clearest proof the mission grows people, not just
+  records them.
+- **The loop.** Guardian consent → a welcome (a printed, framed photo, given as a
+  gift) → supervised kid-mode sessions (offline ok) → what sparks the learner,
+  surfaced openly and minimally → targeted follow-through from a small "spark
+  fund," a human approving each → a learner who keeps coming back → only later,
+  and only on a secure backend, a registry record.
+- **Needs.** Incentives that reward sustained engagement, never a head count: a
+  stipend for the steward rather than a per-profile bounty, recognition and help
+  for families rather than cash. A constrained, supervised kid mode. Guardian
+  consent that is explicit and revocable. The two-layer data model (celebratory
+  Tier 0, private Tier 2). The registry half waits for the Stage B/C backend.
+- **Risks.** The sharpest in the project: coercive incentives with families who
+  have few options, surveillance of minors if interests are profiled quietly
+  instead of openly, and a registry of undocumented children that is catastrophic
+  if it leaks (Risk #1). Held by sequencing (literacy now, registry later),
+  openness and consent, non-cash family incentives, and Tier 2 least privilege.
+  The published Safeguarding promise (no one acting for PRASM "offers money,
+  gifts, or help in exchange for anything") stays true by keeping incentives
+  organizational, transparent, and non-contingent.
+- **Stage.** B → C. The literacy pilot is near-term and lean; the registry is
+  Stage C behind a secure backend. Full proposal in
+  [`curiosity-program.md`](curiosity-program.md), the rollout pack in
+  [`governance/curiosity-program-rollout.md`](governance/curiosity-program-rollout.md),
+  and a clickable demo in `/preview`.
+
 ## Architecture & stages
 
 Design rule: **each stage is useful on its own and earns the next.** We never
@@ -340,6 +377,11 @@ My lean is listed first where I have one.
 
 ## Changelog
 
+- **v0.9** · June 2026 · added the Curiosity Program thread (§3.8): education and
+  AI literacy as the safe on-ramp to the registry, with a full proposal
+  (`curiosity-program.md`), a pilot rollout pack
+  (`governance/curiosity-program-rollout.md`), and a clickable demo in
+  `/preview`.
 - **v0.8** — June 2026 — completed the buildable backlog: supporter-update
   drafter + impact-report scaffold (`scripts/supporter-update/`,
   `scripts/impact-report/`), press kit (`/press`), policy consolidation

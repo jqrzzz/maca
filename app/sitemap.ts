@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ai",
     "/field-notes",
     "/give",
+    "/supporters",
     "/get-involved",
     "/faq",
     "/transparency",

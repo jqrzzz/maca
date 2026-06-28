@@ -2,6 +2,7 @@ import { ExternalLink, Heart, CreditCard, Wallet, type LucideIcon } from "lucide
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { CopyButton } from "@/components/CopyButton";
+import { ComingSoonButton } from "@/components/ComingSoon";
 import { cn } from "@/lib/cn";
 
 const linkIcons = {
@@ -22,6 +23,7 @@ export function DonateLinkCard({
   cta,
   url,
   enabled,
+  preview = false,
 }: {
   methodKey: "patreon" | "stripe" | "paypal";
   title: string;
@@ -29,6 +31,8 @@ export function DonateLinkCard({
   cta: string;
   url: string;
   enabled: boolean;
+  /** Pre-launch demo: show the method as live, but route the action to "coming soon". */
+  preview?: boolean;
 }) {
   const Icon = linkIcons[methodKey];
   return (
@@ -37,7 +41,7 @@ export function DonateLinkCard({
         <span className="inline-flex h-12 w-12 items-center justify-center rounded-[14px] bg-clay-50 text-clay-600">
           <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden />
         </span>
-        {!enabled && <Badge tone="neutral">Not yet configured</Badge>}
+        {!enabled && !preview && <Badge tone="neutral">Not yet configured</Badge>}
       </div>
       <h3 className="mt-5 text-h3">{title}</h3>
       <p className="mt-2 flex-1 text-stone">{blurb}</p>
@@ -51,6 +55,10 @@ export function DonateLinkCard({
           {cta}
           <ExternalLink className="h-4 w-4" aria-hidden />
         </Button>
+      ) : preview ? (
+        <ComingSoonButton variant="primary" className="mt-6 self-start">
+          {cta}
+        </ComingSoonButton>
       ) : (
         <p className="mt-6 text-sm text-stone italic">
           Add this link in the site configuration to enable.
@@ -71,6 +79,8 @@ export function DonateCryptoCard({
   address,
   qrSvg,
   enabled,
+  preview = false,
+  previewQrSvg,
 }: {
   symbol: string;
   label: string;
@@ -79,6 +89,10 @@ export function DonateCryptoCard({
   /** Inline SVG QR generated from the address (see lib/qr.ts). */
   qrSvg?: string;
   enabled: boolean;
+  /** Pre-launch demo: show a finished-looking card whose action says "coming soon". */
+  preview?: boolean;
+  /** Decorative QR for the preview state (never a wallet address). */
+  previewQrSvg?: string;
 }) {
   return (
     <div className="flex h-full flex-col rounded-[20px] border border-line bg-cream p-6 shadow-soft">
@@ -96,7 +110,7 @@ export function DonateCryptoCard({
             </Badge>
           )}
         </div>
-        {!enabled && <Badge tone="neutral">Not configured</Badge>}
+        {!enabled && !preview && <Badge tone="neutral">Not configured</Badge>}
       </div>
 
       {enabled ? (
@@ -122,6 +136,30 @@ export function DonateCryptoCard({
             </code>
             <CopyButton value={address} className="shrink-0" />
           </div>
+        </>
+      ) : preview ? (
+        <>
+          <div className="mt-5 flex items-center gap-4">
+            {previewQrSvg && (
+              <div
+                className="h-24 w-24 shrink-0 overflow-hidden rounded-[14px] border border-line bg-white p-1.5 opacity-90"
+                aria-hidden
+                dangerouslySetInnerHTML={{ __html: previewQrSvg }}
+              />
+            )}
+            <p className="text-sm text-stone">
+              Give {label} directly to the foundation. The wallet address opens at
+              launch; transfers are irreversible, so always verify it first.
+            </p>
+          </div>
+          <ComingSoonButton
+            variant="primary"
+            className="mt-4 self-start"
+            title="Crypto giving is coming soon"
+            message="We're finishing secure crypto giving, so the wallet isn't live yet. We never show an address until it's verified, to protect your gift. Reach out and we'll let you know the moment it opens."
+          >
+            Show wallet address
+          </ComingSoonButton>
         </>
       ) : (
         <p className={cn("mt-5 text-sm text-stone italic")}>
