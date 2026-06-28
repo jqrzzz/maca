@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   Compass,
+  BookOpen,
   Users,
   UserPlus,
   Sprout,
@@ -13,6 +14,11 @@ import {
   Camera,
   ArrowRight,
   Star,
+  Sparkles,
+  Languages,
+  NotebookPen,
+  Printer,
+  PlayCircle,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -31,10 +37,13 @@ import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
+import { StewardGuide } from "./StewardGuide";
+import { WelcomePhoto } from "./WelcomePhoto";
 
-type Tab = "learners" | "enroll" | "sparks" | "pay";
+type Tab = "guide" | "learners" | "enroll" | "sparks" | "pay";
 
 const tabs: { id: Tab; label: string; icon: React.ElementType }[] = [
+  { id: "guide", label: "Guide", icon: BookOpen },
   { id: "learners", label: "Learners", icon: Users },
   { id: "enroll", label: "Enroll", icon: UserPlus },
   { id: "sparks", label: "Sparks", icon: Sprout },
@@ -53,7 +62,7 @@ export function StewardConsole({
   onSignOut: () => void;
   onSwitch?: (p: Perspective) => void;
 }) {
-  const [tab, setTab] = useState<Tab>("learners");
+  const [tab, setTab] = useState<Tab>("guide");
   const [list, setList] = useState<Learner[]>(seedLearners);
   const sparkList = seedSparks;
   const live = useCuriosityLive();
@@ -63,7 +72,15 @@ export function StewardConsole({
   const [age, setAge] = useState<AgeBand>("child");
   const [guardian, setGuardian] = useState(false);
   const [photo, setPhoto] = useState(false);
-  const [justAdded, setJustAdded] = useState<string | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [justAdded, setJustAdded] = useState<{
+    name: string;
+    photo: boolean;
+  } | null>(null);
+  const [sessionNote, setSessionNote] = useState("");
+  const [sessionLog, setSessionLog] = useState<
+    { id: string; text: string; at: string }[]
+  >([]);
 
   const active = list.filter((l) => l.consent === "given");
   const returning = active.filter((l) => l.weeksActive >= 2).length;
@@ -85,14 +102,30 @@ export function StewardConsole({
       lastActive: "not yet",
       stickers: [],
       tone: tones[list.length % tones.length],
+      welcomePhoto: photo ? (photoUrl ?? undefined) : undefined,
     };
     setList((prev) => [learner, ...prev]);
-    setJustAdded(learner.explorerName);
+    setJustAdded({ name: learner.explorerName, photo: !!learner.welcomePhoto });
     setName("");
     setAge("child");
     setGuardian(false);
     setPhoto(false);
+    // Ownership of the object URL transfers to the learner record; do not revoke.
+    setPhotoUrl(null);
     setTab("learners");
+  };
+
+  const logSession = () => {
+    const text = sessionNote.trim();
+    if (!text) return;
+    const at = new Date().toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    setSessionLog((prev) => [{ id: `s-${Date.now()}`, text, at }, ...prev]);
+    setSessionNote("");
   };
 
   const field =
@@ -176,6 +209,33 @@ export function StewardConsole({
           })}
         </div>
 
+        {/* GUIDE */}
+        {tab === "guide" && (
+          <div className="mt-5 space-y-3">
+            <StewardGuide />
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+              <a
+                href="/preview/run-through"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 items-center gap-2 rounded-[14px] bg-clay-600 px-5 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-clay-700"
+              >
+                <PlayCircle className="h-4 w-4" aria-hidden />
+                Practice a first session
+              </a>
+              <a
+                href="/preview/steward-guide"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+              >
+                <Printer className="h-4 w-4" aria-hidden />
+                Open a printable version
+              </a>
+            </div>
+          </div>
+        )}
+
         {/* LEARNERS */}
         {tab === "learners" && (
           <div className="mt-5 space-y-4">
@@ -186,8 +246,10 @@ export function StewardConsole({
                   aria-hidden
                 />
                 <span>
-                  <strong>{justAdded}</strong> is welcomed. Their framed photo
-                  can be printed as a gift.
+                  <strong>{justAdded.name}</strong> is welcomed.
+                  {justAdded.photo
+                    ? " Their welcome photo is ready to print and frame as a gift."
+                    : ""}
                 </span>
               </div>
             )}
@@ -216,6 +278,17 @@ export function StewardConsole({
               explore, never a sign-up count.
             </p>
 
+            {onSwitch && (
+              <button
+                type="button"
+                onClick={() => onSwitch("learner")}
+                className="flex w-full items-center justify-center gap-2 rounded-[14px] bg-clay-600 px-4 py-3 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-clay-700"
+              >
+                <Sparkles className="h-4 w-4" aria-hidden />
+                Start a learning session
+              </button>
+            )}
+
             {/* List */}
             <div className="space-y-3">
               {list.map((l) => {
@@ -226,10 +299,19 @@ export function StewardConsole({
                     className={`${card} p-4 ${faded ? "opacity-60" : ""}`}
                   >
                     <div className="flex items-start gap-3">
-                      <Avatar
-                        name={l.explorerName}
-                        className="h-10 w-10 text-sm"
-                      />
+                      {l.welcomePhoto ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={l.welcomePhoto}
+                          alt={`Welcome photo of ${l.explorerName}`}
+                          className="h-10 w-10 shrink-0 rounded-[10px] border border-line object-cover"
+                        />
+                      ) : (
+                        <Avatar
+                          name={l.explorerName}
+                          className="h-10 w-10 text-sm"
+                        />
+                      )}
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="font-medium text-forest-700">
@@ -288,12 +370,91 @@ export function StewardConsole({
                 is logged.
               </p>
             </div>
+
+            {/* Session log */}
+            <div className={`${card} p-5`}>
+              <h3 className="font-display text-base font-semibold text-forest-700">
+                Log a session
+              </h3>
+              <p className="mt-1 text-xs text-stone">
+                A quick note: who came, and what they got excited about. It
+                helps us see what is working.
+              </p>
+              <textarea
+                rows={2}
+                value={sessionNote}
+                onChange={(e) => setSessionNote(e.target.value)}
+                placeholder="Six children came. Two love animals; one keeps asking about the river."
+                className={`mt-3 resize-y ${field}`}
+              />
+              <button
+                type="button"
+                onClick={logSession}
+                disabled={!sessionNote.trim()}
+                className="mt-2 inline-flex h-9 items-center gap-2 rounded-[12px] bg-clay-600 px-4 text-sm font-medium text-cream transition-colors hover:bg-clay-700 disabled:opacity-40"
+              >
+                <NotebookPen className="h-4 w-4" aria-hidden />
+                Save note
+              </button>
+              {sessionLog.length > 0 && (
+                <ul className="mt-4 space-y-2">
+                  {sessionLog.map((s) => (
+                    <li
+                      key={s.id}
+                      className="rounded-[12px] border border-line bg-sand/50 p-3"
+                    >
+                      <p className="text-sm text-ink">{s.text}</p>
+                      <p className="mt-1 text-xs text-stone">{s.at}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         )}
 
         {/* ENROLL */}
         {tab === "enroll" && (
           <div className="mt-5 space-y-4">
+            <details className="rounded-[16px] border border-gold-400/40 bg-gold-400/10 p-4">
+              <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-forest-700">
+                <Languages className="h-4 w-4 text-clay-600" aria-hidden />
+                What to say to the family (in their language)
+              </summary>
+              <ul className="mt-3 space-y-1.5 text-sm text-stone">
+                <li>
+                  This is a small learning club. Your child can ask a friendly,
+                  safe helper anything they wonder about, and a grown-up is
+                  always there.
+                </li>
+                <li>
+                  To begin we keep only a name or nickname and an age group.
+                  Nothing more without your agreement.
+                </li>
+                <li>
+                  If you like, we will print and frame a photo of your child for
+                  you to keep.
+                </li>
+                <li>
+                  When your child keeps getting excited about something, we
+                  notice it openly and tell you, so we can bring something
+                  helpful.
+                </li>
+                <li>
+                  It is free and voluntary. Nothing depends on sharing anything
+                  private, and you can stop or remove their record any time.
+                </li>
+              </ul>
+              <a
+                href="/preview/consent"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+              >
+                <Printer className="h-4 w-4" aria-hidden />
+                Open a printable consent card
+              </a>
+            </details>
             <div className={`${card} p-5`}>
               <h2 className="font-display text-lg font-semibold text-forest-700">
                 Welcome a new explorer
@@ -346,7 +507,14 @@ export function StewardConsole({
                   <input
                     type="checkbox"
                     checked={photo}
-                    onChange={(e) => setPhoto(e.target.checked)}
+                    onChange={(e) => {
+                      const on = e.target.checked;
+                      setPhoto(on);
+                      if (!on && photoUrl) {
+                        URL.revokeObjectURL(photoUrl);
+                        setPhotoUrl(null);
+                      }
+                    }}
                     className="mt-0.5 h-4 w-4 accent-clay-600"
                   />
                   <span className="text-forest-700">
@@ -354,6 +522,13 @@ export function StewardConsole({
                     gift (optional).
                   </span>
                 </label>
+                {photo && (
+                  <WelcomePhoto
+                    name={name}
+                    url={photoUrl}
+                    onChange={setPhotoUrl}
+                  />
+                )}
               </div>
 
               <button

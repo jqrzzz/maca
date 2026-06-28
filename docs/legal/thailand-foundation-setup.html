@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Opening a Foundation in Thailand: a working checklist</title>
+    <style>
+      :root {
+        --cream: #fbf7f0;
+        --sand: #f1e8d8;
+        --line: #e3d7c2;
+        --ink: #2b2620;
+        --stone: #6f655a;
+        --clay: #b4541f;
+        --clay-700: #8f3f15;
+        --clay-50: #f6e9df;
+        --forest: #2f5d50;
+        --forest-50: #e6efe9;
+        --gold: #c8911f;
+        --gold-50: #f9efd6;
+        --red: #a3341f;
+        --red-50: #f7e6e1;
+        --blue: #2f5470;
+        --blue-50: #e5edf3;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family:
+          ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        line-height: 1.6;
+        font-size: 16px;
+      }
+      .wrap {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 32px 20px 80px;
+      }
+      header.masthead {
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 20px;
+        margin-bottom: 8px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--clay);
+        font-weight: 700;
+        margin: 0 0 6px;
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 1.2;
+        margin: 0 0 8px;
+        color: var(--forest);
+      }
+      .lede {
+        font-size: 17px;
+        color: var(--stone);
+        margin: 0;
+      }
+      .meta {
+        margin-top: 12px;
+        font-size: 13px;
+        color: var(--stone);
+      }
+      .disclaimer {
+        background: var(--gold-50);
+        border: 1px solid #ecd9a8;
+        border-left: 5px solid var(--gold);
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin: 22px 0;
+        font-size: 14.5px;
+      }
+      .disclaimer strong {
+        color: var(--clay-700);
+      }
+      h2 {
+        font-size: 22px;
+        color: var(--forest);
+        margin: 40px 0 6px;
+        scroll-margin-top: 16px;
+      }
+      h2 .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: var(--clay);
+        color: #fff;
+        font-size: 15px;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+      h3 {
+        font-size: 17px;
+        color: var(--ink);
+        margin: 24px 0 6px;
+      }
+      p.section-intro {
+        color: var(--stone);
+        margin: 4px 0 14px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 6px 18px 14px;
+        margin: 14px 0;
+      }
+      ul.checklist {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      ul.checklist > li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--sand);
+      }
+      ul.checklist > li:last-child {
+        border-bottom: none;
+      }
+      ul.checklist input[type="checkbox"] {
+        margin-top: 4px;
+        width: 18px;
+        height: 18px;
+        accent-color: var(--clay);
+        flex: 0 0 auto;
+        cursor: pointer;
+      }
+      .item-body {
+        flex: 1;
+      }
+      .item-title {
+        font-weight: 600;
+      }
+      .item-note {
+        color: var(--stone);
+        font-size: 14px;
+        margin-top: 2px;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 999px;
+        margin-left: 8px;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+      .t-need {
+        background: var(--forest-50);
+        color: var(--forest);
+      }
+      .t-stop {
+        background: var(--red-50);
+        color: var(--red);
+      }
+      .t-confirm {
+        background: var(--gold-50);
+        color: var(--clay-700);
+      }
+      .t-note {
+        background: var(--blue-50);
+        color: var(--blue);
+      }
+      .callout {
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin: 16px 0;
+        font-size: 14.5px;
+      }
+      .callout.stop {
+        background: var(--red-50);
+        border: 1px solid #e8c3b8;
+      }
+      .callout.key {
+        background: var(--forest-50);
+        border: 1px solid #c4ddd0;
+      }
+      .callout.note {
+        background: var(--blue-50);
+        border: 1px solid #c5d6e2;
+      }
+      .callout b {
+        color: var(--ink);
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        font-size: 13px;
+        color: var(--stone);
+        background: var(--sand);
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin: 18px 0;
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      nav.toc {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px 18px;
+        margin: 18px 0 8px;
+      }
+      nav.toc p {
+        margin: 0 0 8px;
+        font-weight: 700;
+        color: var(--forest);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      nav.toc ol {
+        margin: 0;
+        padding-left: 20px;
+        columns: 2;
+      }
+      nav.toc a {
+        color: var(--clay-700);
+        text-decoration: none;
+      }
+      nav.toc a:hover {
+        text-decoration: underline;
+      }
+      .progress-wrap {
+        position: sticky;
+        top: 0;
+        background: var(--cream);
+        padding: 10px 0;
+        z-index: 5;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 8px;
+      }
+      .progress-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--stone);
+      }
+      .bar {
+        flex: 1;
+        height: 8px;
+        background: var(--sand);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .bar > i {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: var(--clay);
+        transition: width 0.2s ease;
+      }
+      .btn {
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--forest);
+        border-radius: 10px;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: var(--sand);
+      }
+      table.fees {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 14.5px;
+      }
+      table.fees th,
+      table.fees td {
+        text-align: left;
+        padding: 9px 10px;
+        border-bottom: 1px solid var(--sand);
+      }
+      table.fees th {
+        color: var(--forest);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .sources {
+        font-size: 14px;
+      }
+      .sources li {
+        margin: 6px 0;
+      }
+      .sources a {
+        color: var(--clay-700);
+      }
+      footer {
+        margin-top: 48px;
+        padding-top: 18px;
+        border-top: 2px solid var(--line);
+        font-size: 13px;
+        color: var(--stone);
+      }
+      @media (max-width: 600px) {
+        nav.toc ol {
+          columns: 1;
+        }
+        h1 {
+          font-size: 25px;
+        }
+      }
+      @media print {
+        .progress-wrap,
+        .btn,
+        nav.toc {
+          display: none;
+        }
+        body {
+          background: #fff;
+        }
+        .card,
+        .callout {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="masthead">
+        <p class="eyebrow">Internal working draft</p>
+        <h1>Opening a foundation in Thailand</h1>
+        <p class="lede">
+          A plain-language checklist for setting up the foundation and for the
+          Korean doctor's right to take part, so we can see what is needed, what
+          is not, and what we still have to confirm with a Thai lawyer.
+        </p>
+        <p class="meta">
+          Prepared June 2026 &middot; Status: draft for review &middot; Two
+          tracks inside: the organization and the person.
+        </p>
+      </header>
+
+      <div class="disclaimer">
+        <strong>This is not legal advice.</strong> It is an internal orientation
+        built from public guidance by Thai law firms and the Medical Council of
+        Thailand, to help us ask the right questions. Rules, fees, and processing
+        times change, and a registrar's practice can differ from the written
+        rule. Before acting, engage a licensed Thai lawyer (and, for anything
+        clinical, the Medical Council) and confirm every point marked
+        &ldquo;confirm&rdquo; below.
+      </div>
+
+      <div class="legend" aria-label="Legend">
+        <span><span class="tag t-need">Needed</span> a real requirement</span>
+        <span
+          ><span class="tag t-stop">Barrier</span> a hard limit or blocker</span
+        >
+        <span
+          ><span class="tag t-confirm">Confirm</span> verify with counsel</span
+        >
+        <span
+          ><span class="tag t-note">Note</span> context, not a to-do</span
+        >
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-row">
+          <span id="count">0 of 0</span>
+          <span class="bar"><i id="barFill"></i></span>
+          <button class="btn" id="resetBtn" type="button">Reset</button>
+          <button class="btn" id="printBtn" type="button">Print</button>
+        </div>
+      </div>
+
+      <nav class="toc">
+        <p>On this page</p>
+        <ol>
+          <li><a href="#big-picture">The big picture: two tracks</a></li>
+          <li><a href="#part-a">A. Register the foundation</a></li>
+          <li><a href="#part-b">B. The Korean doctor</a></li>
+          <li><a href="#part-c">C. Keep it compliant</a></li>
+          <li><a href="#part-d">D. Decisions to confirm</a></li>
+          <li><a href="#sources">Sources</a></li>
+        </ol>
+      </nav>
+
+      <!-- BIG PICTURE -->
+      <section id="big-picture">
+        <h2><span class="num">0</span>The big picture: two tracks</h2>
+        <p class="section-intro">
+          Keep two questions separate. They follow different laws and different
+          offices.
+        </p>
+        <div class="callout key">
+          <b>Track 1, the organization.</b> Can we register a Thai foundation for
+          this mission, and on what terms? This is the Civil and Commercial Code
+          and the Ministry of Interior.
+        </div>
+        <div class="callout key">
+          <b>Track 2, the person.</b> What may the Korean doctor lawfully do
+          here? This splits again: <b>governing or running</b> the foundation (a
+          work-permit question) versus <b>personally treating patients</b> (a
+          medical-license question, and the harder one).
+        </div>
+        <div class="callout note">
+          <b>The one thing to internalize:</b> the doctor does <b>not</b> need a
+          Thai medical license to found, fund, govern, or run the foundation, or
+          to lead education, training, and program design. He <b>does</b> need
+          one to personally diagnose or treat patients in Thailand. Design the
+          role around that line and most of the difficulty disappears.
+        </div>
+      </section>
+
+      <!-- PART A -->
+      <section id="part-a">
+        <h2><span class="num">A</span>Register the foundation</h2>
+        <p class="section-intro">
+          Legal basis: Civil and Commercial Code, Sections 110 to 136, and the
+          Ministerial Regulations on the Registration of Foundations B.E. 2545
+          (2002). Filed through the District Office where the foundation will sit,
+          then approved by the Ministry of Interior.
+        </p>
+
+        <h3>The core requirements</h3>
+        <div class="card">
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id="a1" />
+              <label class="item-body" for="a1">
+                <span class="item-title"
+                  >A clear charitable purpose<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Public benefit only, no profit distribution. Education, child
+                  welfare, public health, and similar purposes fit well and may
+                  qualify for the lower funding tier below.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a2" />
+              <label class="item-body" for="a2">
+                <span class="item-title"
+                  >A name that includes &ldquo;Foundation&rdquo;<span
+                    class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Needs a Thai version (&ldquo;Munnithi&rdquo;), and is checked
+                  for similarity against existing foundations.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a3" />
+              <label class="item-body" for="a3">
+                <span class="item-title"
+                  >At least 3 committee members, all natural persons<span
+                    class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >No company can sit on the board. Names, addresses, and
+                  occupations of all committee members go into the file.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a4" />
+              <label class="item-body" for="a4">
+                <span class="item-title"
+                  >At least one Thai committee member<span class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >No statute strictly demands it, but in practice at least one
+                  Thai member (often a Thai-majority board) strongly eases
+                  approval. The Ministry scrutinizes majority-foreign or
+                  fully-foreign boards closely.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a5" />
+              <label class="item-body" for="a5">
+                <span class="item-title"
+                  >A registered fund of 500,000 THB (or 250,000 THB for
+                  charitable purposes)<span class="tag t-need">Needed</span></span
+                >
+                <span class="item-note"
+                  >General rule: 500,000 THB in assets, at least 250,000 THB in
+                  cash. For social work, education, public health, religion,
+                  sport, or research, a reduced 250,000 THB total with at least
+                  100,000 THB in cash is commonly cited. Confirm which tier our
+                  purpose falls in.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a6" />
+              <label class="item-body" for="a6">
+                <span class="item-title"
+                  >A registered office address<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Proof of ownership or a lease, plus the owner's consent for the
+                  address to be used.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a7" />
+              <label class="item-body" for="a7">
+                <span class="item-title"
+                  >Bylaws and governance rules, in Thai<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Objectives, how the committee is appointed and removed, how
+                  funds are managed, and what happens to assets if the foundation
+                  dissolves.</span
+                >
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <h3>The filing process</h3>
+        <div class="card">
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id="a8" />
+              <label class="item-body" for="a8">
+                <span class="item-title"
+                  >Submit the application to the District Office<span
+                    class="tag t-note"
+                    >Note</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Where the principal office is located. The District Office
+                  checks the file and forwards it to the Ministry of
+                  Interior.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a9" />
+              <label class="item-body" for="a9">
+                <span class="item-title"
+                  >Inter-ministry review where relevant<span class="tag t-note"
+                    >Note</span
+                  ></span
+                >
+                <span class="item-note"
+                  >If objectives touch another ministry's area (for example
+                  health or education), the application is referred there for
+                  comment before final approval.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a10" />
+              <label class="item-body" for="a10">
+                <span class="item-title"
+                  >Plan for 6 to 12 months<span class="tag t-note">Note</span></span
+                >
+                <span class="item-note"
+                  >Approval commonly takes six months to a year. Build this into
+                  any timeline for the doctor's role or program launch.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="a11" />
+              <label class="item-body" for="a11">
+                <span class="item-title"
+                  >Collect the registration certificate<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >The foundation becomes a legal entity only once the registrar
+                  issues the certificate.</span
+                >
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="callout note">
+          <b>On foreign control.</b> Some advisors flag foreign-ownership limits
+          (a figure of 49 percent of assets is sometimes cited) and extra
+          scrutiny of foreign-led nonprofits. How this applies to a charitable
+          foundation, as opposed to a business, is exactly the kind of point to
+          put to a Thai lawyer rather than assume.
+        </div>
+      </section>
+
+      <!-- PART B -->
+      <section id="part-b">
+        <h2><span class="num">B</span>The Korean doctor</h2>
+        <p class="section-intro">
+          Three layers, from easiest to hardest: taking a seat on the board,
+          working here for the foundation, and personally practicing medicine.
+        </p>
+
+        <h3>As a founder, committee member, or advisor</h3>
+        <div class="card">
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id="b1" />
+              <label class="item-body" for="b1">
+                <span class="item-title"
+                  >A foreigner may be a founder and committee member<span
+                    class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Allowed. Foreigners can serve as founders, board members, and
+                  managers of a Thai foundation.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="b2" />
+              <label class="item-body" for="b2">
+                <span class="item-title"
+                  >Police or criminal-record clearance<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Foreign committee members are typically asked for proof of
+                  identity and a criminal-record clearance from their home
+                  country or embassy.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="b3" />
+              <label class="item-body" for="b3">
+                <span class="item-title"
+                  >A security interview with officials<span class="tag t-note"
+                    >Note</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Foreign directors are often interviewed by government officers
+                  as part of the review.</span
+                >
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <h3>To work for the foundation in Thailand</h3>
+        <div class="callout stop">
+          <b>Unpaid does not mean exempt.</b> Thai law treats almost any work,
+          paid or not, as &ldquo;work.&rdquo; Performing duties for the
+          foundation inside Thailand, even as a volunteer director, needs a work
+          permit and the right visa. Working without one risks heavy fines (5,000
+          to 100,000 THB), up to five years in prison, deportation, and a ban.
+        </div>
+        <div class="card">
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id="b4" />
+              <label class="item-body" for="b4">
+                <span class="item-title"
+                  >The right non-immigrant visa<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Foundation and NGO work commonly uses the Non-Immigrant
+                  &ldquo;O&rdquo; (including volunteer) visa; some roles use
+                  Non-B. The foundation sponsors the application.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="b5" />
+              <label class="item-body" for="b5">
+                <span class="item-title"
+                  >A work permit naming the foundation and the role<span
+                    class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Applied for at the Ministry of Labour once the foundation
+                  exists and the visa is in hand. The permit lists the specific
+                  duties allowed.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="b6" />
+              <label class="item-body" for="b6">
+                <span class="item-title"
+                  >How many Thai staff a foundation must employ to sponsor a
+                  foreign work permit<span class="tag t-confirm">Confirm</span></span
+                >
+                <span class="item-note"
+                  >Companies face a rule of about 4 Thai employees and 2,000,000
+                  THB capital per foreign permit. A foundation has no
+                  &ldquo;registered capital&rdquo; in that sense, and some
+                  employer types are treated differently. The exact requirement
+                  for a foundation is not crisply public; confirm it with the
+                  Labour Department or a lawyer before promising a permit.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="b7" />
+              <label class="item-body" for="b7">
+                <span class="item-title"
+                  >Whether a non-resident board member even needs one<span
+                    class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >If the doctor governs from abroad and only visits for
+                  meetings, the analysis differs from living and working here.
+                  Confirm where his line of &ldquo;work&rdquo; begins.</span
+                >
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <h3>To personally practice medicine</h3>
+        <div class="callout stop">
+          <b>This is the hard barrier.</b> A foreign medical degree and a Korean
+          license do not allow treating patients in Thailand. To practice, the
+          doctor must register with the Medical Council of Thailand and pass all
+          three parts of the Thai national licensing exam. Parts 1 and 2 are in
+          English; <b>Part 3 is in Thai</b>, so working Thai is effectively
+          required.
+        </div>
+        <div class="card">
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id="b8" />
+              <label class="item-body" for="b8">
+                <span class="item-title"
+                  >Full license route: Medical Council exams<span
+                    class="tag t-stop"
+                    >Barrier</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Degree from a recognized school, membership of the Council, and
+                  all three exam parts passed. A long road, and Part 3 is in
+                  Thai.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="b9" />
+              <label class="item-body" for="b9">
+                <span class="item-title"
+                  >Temporary or consultant license, narrow route<span
+                    class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >A temporary license can be granted only when a Thai government
+                  agency requests the doctor, to work in a government hospital,
+                  renewable about a year, and not for private practice. Often
+                  limited to consulting. Confirm if any partner hospital could
+                  sponsor this.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="b10" />
+              <label class="item-body" for="b10">
+                <span class="item-title"
+                  >Design the doctor's role as non-clinical<span
+                    class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Strategy, training, program and curriculum design,
+                  supervision, fundraising, and partnerships are open to him now.
+                  Any direct patient care should run through Thai-licensed
+                  clinicians or a licensed partner facility.</span
+                >
+              </label>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PART C -->
+      <section id="part-c">
+        <h2><span class="num">C</span>Keep it compliant after registration</h2>
+        <p class="section-intro">
+          A foundation is an ongoing obligation, not a one-time filing.
+        </p>
+        <div class="card">
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id="c1" />
+              <label class="item-body" for="c1">
+                <span class="item-title"
+                  >Get a Tax ID within 60 days<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Register for a tax identification number at the provincial
+                  Revenue Department office within 60 days of
+                  registration.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="c2" />
+              <label class="item-body" for="c2">
+                <span class="item-title"
+                  >Keep books and file annually<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Maintain accounts, prepare audited financial statements, and
+                  file with the Revenue Department under the Revenue Code. Late or
+                  missing filings carry penalties.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="c3" />
+              <label class="item-body" for="c3">
+                <span class="item-title"
+                  >Report committee and rule changes<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Changes to committee members, the bylaws, or the office are
+                  registered with the registrar.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="c4" />
+              <label class="item-body" for="c4">
+                <span class="item-title"
+                  >Stay inside the stated objectives<span class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Activities and spending must match the registered purposes. A
+                  foundation cannot quietly drift into commercial or unrelated
+                  work.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="c5" />
+              <label class="item-body" for="c5">
+                <span class="item-title"
+                  >Renew the doctor's visa and work permit on time<span
+                    class="tag t-need"
+                    >Needed</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Both are time-limited and tied to the foundation as sponsor.
+                  Track renewal dates well ahead.</span
+                >
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <h3>Rough cost and time picture</h3>
+        <div class="card">
+          <table class="fees">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Rough picture (confirm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Registered fund to set aside</td>
+                <td>250,000 to 500,000 THB, depending on tier</td>
+              </tr>
+              <tr>
+                <td>Registration timeline</td>
+                <td>About 6 to 12 months</td>
+              </tr>
+              <tr>
+                <td>Tax ID after registration</td>
+                <td>Within 60 days</td>
+              </tr>
+              <tr>
+                <td>Government and legal fees</td>
+                <td>
+                  Get a written quote from counsel; government fees are modest,
+                  professional fees vary
+                </td>
+              </tr>
+              <tr>
+                <td>Doctor's visa and work permit</td>
+                <td>Set up after the foundation exists, then renewed annually</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PART D -->
+      <section id="part-d">
+        <h2><span class="num">D</span>Decisions to confirm with a Thai lawyer</h2>
+        <p class="section-intro">
+          The short list to take into a first legal consultation. Resolving these
+          shapes everything else.
+        </p>
+        <div class="card">
+          <ul class="checklist">
+            <li>
+              <input type="checkbox" id="d1" />
+              <label class="item-body" for="d1">
+                <span class="item-title"
+                  >Is any direct patient care planned at all?<span
+                    class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >If yes, the licensing barrier and a licensed Thai clinical
+                  partner move to the top of the plan. If no, the doctor's path
+                  is far simpler.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="d2" />
+              <label class="item-body" for="d2">
+                <span class="item-title"
+                  >Which funding tier applies, 250,000 or 500,000 THB?<span
+                    class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Depends on how the objectives are written and classified.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="d3" />
+              <label class="item-body" for="d3">
+                <span class="item-title"
+                  >Who are the Thai committee members?<span class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Identify trusted Thai members early; it shapes approval odds
+                  and governance.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="d4" />
+              <label class="item-body" for="d4">
+                <span class="item-title"
+                  >What does a foundation need to sponsor the doctor's work
+                  permit?<span class="tag t-confirm">Confirm</span></span
+                >
+                <span class="item-note"
+                  >Thai-staff expectation, documents, and visa class for a
+                  foundation specifically.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="d5" />
+              <label class="item-body" for="d5">
+                <span class="item-title"
+                  >Where will the registered office be?<span class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >This sets the District Office and registrar, and their local
+                  practice.</span
+                >
+              </label>
+            </li>
+            <li>
+              <input type="checkbox" id="d6" />
+              <label class="item-body" for="d6">
+                <span class="item-title"
+                  >How will funding sources be documented for the Ministry?<span
+                    class="tag t-confirm"
+                    >Confirm</span
+                  ></span
+                >
+                <span class="item-note"
+                  >Foreign-led nonprofits are asked to show objectives, funding,
+                  and public benefit to Thailand clearly.</span
+                >
+              </label>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SOURCES -->
+      <section id="sources">
+        <h2><span class="num">i</span>Sources</h2>
+        <p class="section-intro">
+          Public guidance used to build this draft. Secondary sources, for
+          orientation only; verify against current law and a licensed adviser.
+        </p>
+        <ul class="sources">
+          <li>
+            Medical Council of Thailand, foreign practitioner registration:
+            <a href="https://tmc.or.th/En/how-foreign_en.php"
+              >tmc.or.th/En/how-foreign_en.php</a
+            >
+          </li>
+          <li>
+            Thailand government portal, foreign doctors and consultation rules:
+            <a href="https://www.thailand.go.th/issue-focus-detail/007_035"
+              >thailand.go.th</a
+            >
+          </li>
+          <li>
+            Siam Legal, setting up a foundation in Thailand:
+            <a
+              href="https://www.siam-legal.com/Business-in-Thailand/thailand-foundation.php"
+              >siam-legal.com</a
+            >
+          </li>
+          <li>
+            Acclime Thailand, foundation establishment:
+            <a href="https://thailand.acclime.com/formation/foundation/"
+              >thailand.acclime.com</a
+            >
+          </li>
+          <li>
+            ThaiLawOnline, setting up a foundation and volunteer visas:
+            <a href="https://www.thailawonline.com/setting-up-a-foundation-in-thailand/"
+              >thailawonline.com</a
+            >
+          </li>
+          <li>
+            Belaws, work permits and Thai-staff requirements:
+            <a href="https://belaws.com/thailand/work-permits-ultimate-guide/"
+              >belaws.com</a
+            >
+          </li>
+          <li>
+            Tilleke &amp; Gibbins, penalties for working without a permit:
+            <a
+              href="https://www.tilleke.com/insights/foreigners-beware-penalties-working-without-permit-may-be-dire/"
+              >tilleke.com</a
+            >
+          </li>
+          <li>
+            Integrity Legal, volunteering and work permits in Thailand:
+            <a
+              href="https://www.legal.co.th/resources/visa-immigration-law/thailand-immigration-law/volunteering-and-work-permits-thailand/"
+              >legal.co.th</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>
+          Internal working draft, prepared June 2026 for discussion. Not legal
+          advice. Engage a licensed Thai lawyer and the Medical Council before
+          acting on anything here. Your progress on this checklist is saved only
+          in this browser.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var KEY = "th-foundation-checklist-v1";
+        var boxes = Array.prototype.slice.call(
+          document.querySelectorAll('input[type="checkbox"]'),
+        );
+        var countEl = document.getElementById("count");
+        var fillEl = document.getElementById("barFill");
+
+        function load() {
+          try {
+            return JSON.parse(localStorage.getItem(KEY) || "{}");
+          } catch (e) {
+            return {};
+          }
+        }
+        function save(state) {
+          try {
+            localStorage.setItem(KEY, JSON.stringify(state));
+          } catch (e) {}
+        }
+        function refresh() {
+          var done = boxes.filter(function (b) {
+            return b.checked;
+          }).length;
+          countEl.textContent = done + " of " + boxes.length + " checked";
+          fillEl.style.width =
+            (boxes.length ? (done / boxes.length) * 100 : 0) + "%";
+        }
+
+        var state = load();
+        boxes.forEach(function (b) {
+          if (state[b.id]) b.checked = true;
+          b.addEventListener("change", function () {
+            state[b.id] = b.checked;
+            save(state);
+            refresh();
+          });
+        });
+        refresh();
+
+        document
+          .getElementById("resetBtn")
+          .addEventListener("click", function () {
+            boxes.forEach(function (b) {
+              b.checked = false;
+            });
+            save({});
+            refresh();
+          });
+        document
+          .getElementById("printBtn")
+          .addEventListener("click", function () {
+            window.print();
+          });
+      })();
+    </script>
+  </body>
+</html>

@@ -5,12 +5,17 @@ import Link from "next/link";
 import {
   Sparkles,
   Send,
+  Mic,
+  Square,
   Star,
   ShieldCheck,
   Users,
   WifiOff,
   Sprout,
   PartyPopper,
+  Volume2,
+  VolumeX,
+  Languages,
   LogOut,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -26,14 +31,46 @@ import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, earnSticker, noticeSpark } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
+import { useLocale, setLocale, useT } from "./localeStore";
+import { TranslationHelper } from "./TranslationHelper";
+import { fill, localeLabel, locales, type Locale } from "@/content/i18n";
 
-type Msg = { id: string; from: "kid" | "guide"; text: string };
+type Msg = {
+  id: string;
+  from: "kid" | "guide";
+  text: string;
+  simple?: string;
+};
 
 /** Match a child's message to a safe, canned reply (demo only, no model call). */
 function answer(input: string) {
   const text = input.toLowerCase();
   const hit = kidReplies.find((r) => r.keywords.some((k) => text.includes(k)));
   return hit ?? { reply: kidFallback };
+}
+
+/** Minimal shape of the browser's speech-recognition API (not in lib.dom). */
+type SpeechRecognitionLike = {
+  lang: string;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onresult: (event: {
+    results: ArrayLike<ArrayLike<{ transcript: string }>>;
+  }) => void;
+  onend: () => void;
+  onerror: () => void;
+  start: () => void;
+  stop: () => void;
+};
+
+function createRecognition(): SpeechRecognitionLike | null {
+  if (typeof window === "undefined") return null;
+  const w = window as unknown as {
+    SpeechRecognition?: new () => SpeechRecognitionLike;
+    webkitSpeechRecognition?: new () => SpeechRecognitionLike;
+  };
+  const Ctor = w.SpeechRecognition ?? w.webkitSpeechRecognition;
+  return Ctor ? new Ctor() : null;
 }
 
 export function LearnerApp({
@@ -45,11 +82,14 @@ export function LearnerApp({
   onSignOut: () => void;
   onSwitch?: (p: Perspective) => void;
 }) {
+  const locale = useLocale();
+  const t = useT();
+
   const [messages, setMessages] = useState<Msg[]>([
     {
       id: "welcome",
       from: "guide",
-      text: `Hi ${learner.explorerName}! I am your curiosity guide. Ask me anything you wonder about.`,
+      text: fill(t("learner.welcome"), { name: learner.explorerName }),
     },
   ]);
   const [input, setInput] = useState("");
@@ -61,10 +101,17 @@ export function LearnerApp({
   );
   const [noticed, setNoticed] = useState<string | null>(null);
   const [justEarned, setJustEarned] = useState<string | null>(null);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [readAloud, setReadAloud] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [voiceHint, setVoiceHint] = useState<string | null>(null);
+  const [simplified, setSimplified] = useState<Record<string, boolean>>({});
+  const [translateOpen, setTranslateOpen] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const earnTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({
@@ -77,9 +124,21 @@ export function LearnerApp({
     () => () => {
       if (timer.current) clearTimeout(timer.current);
       if (earnTimer.current) clearTimeout(earnTimer.current);
+      window.speechSynthesis?.cancel();
+      recognitionRef.current?.stop();
     },
     [],
   );
+
+  // Read an answer aloud, for children who cannot yet read.
+  const speak = (text: string) => {
+    const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
+    if (!synth) return;
+    synth.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    synth.speak(utterance);
+  };
 
   const ask = (raw: string) => {
     const text = raw.trim();
@@ -94,7 +153,12 @@ export function LearnerApp({
     timer.current = setTimeout(() => {
       setMessages((prev) => [
         ...prev,
-        { id: `g-${Date.now()}`, from: "guide", text: res.reply },
+        {
+          id: `g-${Date.now()}`,
+          from: "guide",
+          text: res.reply,
+          simple: "simple" in res ? res.simple : undefined,
+        },
       ]);
       if ("sticker" in res && res.sticker) {
         const earned = res.sticker;
@@ -108,9 +172,49 @@ export function LearnerApp({
         setNoticed(res.spark);
         noticeSpark(learner.explorerName, res.spark);
       }
+      setSuggestions("followups" in res && res.followups ? res.followups : []);
+      if (readAloud) speak(res.reply);
       setThinking(false);
     }, 600);
   };
+
+  // Offer a shorter, plainer version of an answer on request.
+  const simplify = (id: string, simple: string) => {
+    setMessages((prev) => [
+      ...prev,
+      { id: `g-${Date.now()}`, from: "guide", text: simple },
+    ]);
+    setSimplified((prev) => ({ ...prev, [id]: true }));
+    if (readAloud) speak(simple);
+  };
+
+  // Let a child speak a question. Pairs with read-aloud for a full voice loop.
+  const toggleListen = () => {
+    if (listening) {
+      recognitionRef.current?.stop();
+      return;
+    }
+    const recognition = createRecognition();
+    if (!recognition) {
+      setVoiceHint("Voice input is not available in this browser.");
+      return;
+    }
+    setVoiceHint(null);
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+    recognition.onresult = (event) => {
+      const transcript = event.results?.[0]?.[0]?.transcript ?? "";
+      if (transcript) ask(transcript);
+    };
+    recognition.onend = () => setListening(false);
+    recognition.onerror = () => setListening(false);
+    recognitionRef.current = recognition;
+    setListening(true);
+    recognition.start();
+  };
+
+  const asked = messages.filter((m) => m.from === "kid").length;
 
   return (
     <div className="min-h-[85vh] bg-sand">
@@ -123,9 +227,9 @@ export function LearnerApp({
             </span>
             <div className="leading-tight">
               <div className="text-sm font-medium text-forest-700">
-                Curiosity
+                {t("learner.title")}
               </div>
-              <div className="text-xs text-stone">Kid mode</div>
+              <div className="text-xs text-stone">{t("learner.subtitle")}</div>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -133,7 +237,7 @@ export function LearnerApp({
               href="/"
               className="hidden text-sm text-stone hover:text-forest-700 sm:inline"
             >
-              Back to site
+              {t("common.backToSite")}
             </Link>
             <button
               type="button"
@@ -152,10 +256,8 @@ export function LearnerApp({
           <CuriositySwitcher current="learner" onSwitch={onSwitch} />
         )}
 
-        <GuideTip title="You are the learner (kid mode)">
-          Ask a question, try a plant or the sky, to earn a sticker and show
-          what you love. When a spark appears, switch to the Steward to watch it
-          travel to the people who can help.
+        <GuideTip title={t("learner.tipTitle")}>
+          {t("learner.tipBody")}
         </GuideTip>
 
         {/* Explorer card */}
@@ -170,11 +272,14 @@ export function LearnerApp({
                 <h1 className="font-display text-xl font-semibold text-forest-700">
                   {learner.explorerName}
                 </h1>
-                <Badge tone="forest">Explorer</Badge>
+                <Badge tone="forest">{t("learner.explorer")}</Badge>
               </div>
               <p className="mt-0.5 text-sm text-stone">
                 {ageBandLabel(learner.ageBand)} · {stickers.length}{" "}
                 {stickers.length === 1 ? "sticker" : "stickers"}
+                {asked > 0
+                  ? ` · ${asked} ${asked === 1 ? "question" : "questions"} today`
+                  : ""}
               </p>
             </div>
           </div>
@@ -182,16 +287,75 @@ export function LearnerApp({
           {/* Safety + offline cues */}
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-forest-500/10 px-3 py-1 text-xs font-medium text-forest-700 ring-1 ring-forest-500/20 ring-inset">
-              <ShieldCheck className="h-3.5 w-3.5" aria-hidden /> Kid mode
+              <ShieldCheck className="h-3.5 w-3.5" aria-hidden />{" "}
+              {t("learner.cueKidMode")}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-sand px-3 py-1 text-xs font-medium text-stone ring-1 ring-line ring-inset">
-              <Users className="h-3.5 w-3.5" aria-hidden /> A grown-up is with
-              you
+              <Users className="h-3.5 w-3.5" aria-hidden />{" "}
+              {t("learner.cueGrownup")}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-sand px-3 py-1 text-xs font-medium text-stone ring-1 ring-line ring-inset">
-              <WifiOff className="h-3.5 w-3.5" aria-hidden /> Works offline
+              <WifiOff className="h-3.5 w-3.5" aria-hidden />{" "}
+              {t("learner.cueOffline")}
             </span>
+            <button
+              type="button"
+              onClick={() => {
+                if (readAloud) window.speechSynthesis?.cancel();
+                setReadAloud((v) => !v);
+              }}
+              aria-pressed={readAloud}
+              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ring-1 transition-colors ring-inset ${
+                readAloud
+                  ? "bg-clay-600 text-cream ring-clay-600"
+                  : "bg-sand text-stone ring-line hover:bg-cream"
+              }`}
+            >
+              {readAloud ? (
+                <Volume2 className="h-3.5 w-3.5" aria-hidden />
+              ) : (
+                <VolumeX className="h-3.5 w-3.5" aria-hidden />
+              )}
+              {t("learner.readAloud")}
+            </button>
           </div>
+
+          {/* Language */}
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-stone">
+            <Languages className="h-3.5 w-3.5 text-clay-600" aria-hidden />
+            <label htmlFor="kid-lang">{t("learner.languageLabel")}</label>
+            <select
+              id="kid-lang"
+              value={locale}
+              onChange={(e) => setLocale(e.target.value as Locale)}
+              className="rounded-full border border-line bg-cream px-2.5 py-1 text-xs font-medium text-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
+            >
+              {locales.map((l) => (
+                <option key={l.code} value={l.code}>
+                  {l.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          {locale !== "en" && (
+            <div className="mt-1.5 flex flex-wrap items-center gap-2">
+              <p className="text-xs text-stone">
+                {fill(t("learner.languageNote"), {
+                  language: localeLabel(locale),
+                })}
+              </p>
+              <button
+                type="button"
+                onClick={() => setTranslateOpen(true)}
+                className="inline-flex items-center gap-1.5 rounded-full bg-clay-600 px-3 py-1 text-xs font-medium text-cream transition-colors hover:bg-clay-700"
+              >
+                <Languages className="h-3.5 w-3.5" aria-hidden />
+                {fill(t("learner.helpTranslate"), {
+                  language: localeLabel(locale),
+                })}
+              </button>
+            </div>
+          )}
 
           {/* Stickers */}
           {stickers.length > 0 && (
@@ -216,7 +380,7 @@ export function LearnerApp({
               aria-hidden
             />
             <p className="text-sm font-medium text-forest-700">
-              New sticker earned: {justEarned}!
+              {fill(t("learner.earned"), { sticker: justEarned })}
             </p>
           </div>
         )}
@@ -228,9 +392,7 @@ export function LearnerApp({
               <Sprout className="h-5 w-5" aria-hidden />
             </span>
             <p className="text-sm text-clay-700">
-              We noticed you love <strong>{noticed.toLowerCase()}</strong>. We
-              will tell the grown-up who helps you, so we can bring you
-              something fun to explore it more.
+              {fill(t("learner.noticed"), { spark: noticed.toLowerCase() })}
             </p>
           </div>
         )}
@@ -248,9 +410,20 @@ export function LearnerApp({
                   <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-clay-50 text-clay-600">
                     <Sparkles className="h-4 w-4" aria-hidden />
                   </span>
-                  <p className="max-w-[85%] rounded-[16px] rounded-tl-sm bg-sand px-4 py-2.5 text-sm leading-relaxed text-ink">
-                    {m.text}
-                  </p>
+                  <div className="max-w-[85%]">
+                    <p className="rounded-[16px] rounded-tl-sm bg-sand px-4 py-2.5 text-sm leading-relaxed text-ink">
+                      {m.text}
+                    </p>
+                    {m.simple && !simplified[m.id] && (
+                      <button
+                        type="button"
+                        onClick={() => simplify(m.id, m.simple!)}
+                        className="mt-1.5 text-xs font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
+                      >
+                        {t("learner.simpler")}
+                      </button>
+                    )}
+                  </div>
                 </div>
               ) : (
                 <div key={m.id} className="flex justify-end">
@@ -274,18 +447,25 @@ export function LearnerApp({
             )}
           </div>
 
-          {/* Starters */}
-          <div className="flex flex-wrap gap-2 border-t border-line px-4 pt-3">
-            {kidStarters.map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => ask(s)}
-                className="rounded-full border border-line bg-cream px-3 py-1.5 text-xs font-medium text-forest-700 transition-colors hover:bg-sand"
-              >
-                {s}
-              </button>
-            ))}
+          {/* Suggestions / starters */}
+          <div className="border-t border-line px-4 pt-3">
+            <p className="mb-1.5 text-xs font-medium text-stone">
+              {suggestions.length
+                ? t("learner.keepExploring")
+                : t("learner.tryAsking")}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {(suggestions.length ? suggestions : kidStarters).map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => ask(s)}
+                  className="rounded-full border border-line bg-cream px-3 py-1.5 text-xs font-medium text-forest-700 transition-colors hover:bg-sand"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Composer */}
@@ -299,10 +479,27 @@ export function LearnerApp({
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me anything you wonder about…"
+              placeholder={t("learner.placeholder")}
               aria-label="Ask a question"
               className="min-w-0 flex-1 rounded-[14px] border border-line bg-sand px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
             />
+            <button
+              type="button"
+              onClick={toggleListen}
+              aria-label={listening ? "Stop listening" : "Ask with your voice"}
+              aria-pressed={listening}
+              className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] transition-colors ${
+                listening
+                  ? "animate-pulse bg-clay-600 text-cream"
+                  : "border border-line bg-cream text-forest-700 hover:bg-sand"
+              }`}
+            >
+              {listening ? (
+                <Square className="h-5 w-5" aria-hidden />
+              ) : (
+                <Mic className="h-5 w-5" aria-hidden />
+              )}
+            </button>
             <button
               type="submit"
               aria-label="Send"
@@ -312,16 +509,21 @@ export function LearnerApp({
               <Send className="h-5 w-5" aria-hidden />
             </button>
           </form>
+          {voiceHint && (
+            <p className="px-3 pb-3 text-xs text-stone">{voiceHint}</p>
+          )}
         </div>
 
         <div className="mt-3 flex items-start gap-2 rounded-[14px] bg-clay-50 px-4 py-2.5 text-xs text-clay-700 ring-1 ring-clay-100 ring-inset">
           <span aria-hidden>•</span>
-          <p>
-            Preview: this is a friendly demo with safe, ready-made answers. It
-            is not connected to a live model, and nothing here is saved or sent.
-          </p>
+          <p>{t("learner.previewNote")}</p>
         </div>
 
+        <TranslationHelper
+          open={translateOpen}
+          onClose={() => setTranslateOpen(false)}
+          locale={locale}
+        />
         <SessionNotes context="Learner (kid mode)" />
       </div>
     </div>
