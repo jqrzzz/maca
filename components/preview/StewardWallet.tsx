@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Wallet,
   ArrowDownLeft,
@@ -48,6 +48,29 @@ export function StewardWallet() {
   const [receiptUrl, setReceiptUrl] = useState<string | null>(null);
   const receiptInput = useRef<HTMLInputElement>(null);
 
+  const parsedAmount = Math.round(Number(amount));
+  const canSave = Number.isFinite(parsedAmount) && parsedAmount > 0;
+
+  // Revoke any live object URLs when the view unmounts. It is tab-gated, so it
+  // unmounts when the steward switches tabs; read latest values through a ref.
+  const live = useRef<{ staged: string | null; entries: WalletEntry[] }>({
+    staged: null,
+    entries: [],
+  });
+  useEffect(() => {
+    live.current = { staged: receiptUrl, entries };
+  });
+  useEffect(
+    () => () => {
+      if (live.current.staged) URL.revokeObjectURL(live.current.staged);
+      for (const e of live.current.entries) {
+        if (e.receiptUrl?.startsWith("blob:"))
+          URL.revokeObjectURL(e.receiptUrl);
+      }
+    },
+    [],
+  );
+
   const totals = walletTotals(entries);
   const byCategory = spentByCategory(entries);
   const breakdown = Object.entries(byCategory).sort((a, b) => b[1] - a[1]);
@@ -76,14 +99,12 @@ export function StewardWallet() {
   };
 
   const save = () => {
-    if (!composer) return;
-    const value = Math.round(Number(amount));
-    if (!Number.isFinite(value) || value <= 0) return;
+    if (!composer || !canSave) return;
     const entry: WalletEntry = {
       id: `W-${Date.now()}`,
       direction: composer,
       date: todayLabel(),
-      amount: value,
+      amount: parsedAmount,
       category,
       note: note.trim(),
       receiptUrl: composer === "out" ? (receiptUrl ?? undefined) : undefined,
@@ -240,7 +261,7 @@ export function StewardWallet() {
             <button
               type="button"
               onClick={save}
-              disabled={!(Number(amount) > 0)}
+              disabled={!canSave}
               className="inline-flex h-10 items-center gap-2 rounded-[14px] bg-clay-600 px-5 text-sm font-medium text-cream transition-colors hover:bg-clay-700 disabled:opacity-40"
             >
               <Check className="h-4 w-4" aria-hidden />
@@ -284,79 +305,86 @@ export function StewardWallet() {
         <h3 className="font-display text-lg font-semibold text-forest-700">
           Every entry
         </h3>
-        <ul className="mt-3 space-y-3">
-          {entries.map((e) => {
-            const isIn = e.direction === "in";
-            return (
-              <li key={e.id} className={`flex gap-3 ${card} p-4`}>
-                {e.receiptUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={e.receiptUrl}
-                    alt="Receipt"
-                    className="h-12 w-12 shrink-0 rounded-[12px] border border-line object-cover"
-                  />
-                ) : (
-                  <span
-                    className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[12px] ${
-                      isIn
-                        ? "bg-forest-500/10 text-forest-700"
-                        : "bg-clay-50 text-clay-600"
-                    }`}
-                  >
-                    {isIn ? (
-                      <ArrowDownLeft className="h-5 w-5" aria-hidden />
-                    ) : (
-                      <ArrowUpRight className="h-5 w-5" aria-hidden />
-                    )}
-                  </span>
-                )}
-
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="font-medium text-forest-700">
-                      {e.category}
-                    </span>
+        {entries.length === 0 ? (
+          <div className={`mt-3 ${card} p-6 text-center text-sm text-stone`}>
+            No entries yet. Use the buttons above to record money you received
+            or spent.
+          </div>
+        ) : (
+          <ul className="mt-3 space-y-3">
+            {entries.map((e) => {
+              const isIn = e.direction === "in";
+              return (
+                <li key={e.id} className={`flex gap-3 ${card} p-4`}>
+                  {e.receiptUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={e.receiptUrl}
+                      alt="Receipt"
+                      className="h-12 w-12 shrink-0 rounded-[12px] border border-line object-cover"
+                    />
+                  ) : (
                     <span
-                      className={`shrink-0 font-semibold tabular-nums ${
-                        isIn ? "text-forest-700" : "text-clay-700"
+                      className={`inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[12px] ${
+                        isIn
+                          ? "bg-forest-500/10 text-forest-700"
+                          : "bg-clay-50 text-clay-600"
                       }`}
                     >
-                      {isIn ? "+" : "-"}
-                      {thb(e.amount)}
-                    </span>
-                  </div>
-                  {e.note && (
-                    <p className="mt-0.5 text-sm text-stone">{e.note}</p>
-                  )}
-                  <div className="mt-2 flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-stone">{e.date}</span>
                       {isIn ? (
-                        <Badge tone="forest">Received</Badge>
-                      ) : e.status === "approved" ? (
-                        <Badge tone="forest">
-                          <CircleCheck className="h-3.5 w-3.5" aria-hidden />
-                          Approved
-                        </Badge>
+                        <ArrowDownLeft className="h-5 w-5" aria-hidden />
                       ) : (
-                        <Badge tone="gold">Logged</Badge>
+                        <ArrowUpRight className="h-5 w-5" aria-hidden />
                       )}
+                    </span>
+                  )}
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="font-medium text-forest-700">
+                        {e.category}
+                      </span>
+                      <span
+                        className={`shrink-0 font-semibold tabular-nums ${
+                          isIn ? "text-forest-700" : "text-clay-700"
+                        }`}
+                      >
+                        {isIn ? "+" : "-"}
+                        {thb(e.amount)}
+                      </span>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => remove(e.id)}
-                      aria-label="Delete entry"
-                      className="inline-flex h-8 w-8 items-center justify-center rounded-md text-stone transition-colors hover:bg-sand hover:text-clay-700"
-                    >
-                      <Trash2 className="h-4 w-4" aria-hidden />
-                    </button>
+                    {e.note && (
+                      <p className="mt-0.5 text-sm text-stone">{e.note}</p>
+                    )}
+                    <div className="mt-2 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-stone">{e.date}</span>
+                        {isIn ? (
+                          <Badge tone="forest">Received</Badge>
+                        ) : e.status === "approved" ? (
+                          <Badge tone="forest">
+                            <CircleCheck className="h-3.5 w-3.5" aria-hidden />
+                            Approved
+                          </Badge>
+                        ) : (
+                          <Badge tone="gold">Logged</Badge>
+                        )}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => remove(e.id)}
+                        aria-label="Delete entry"
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-md text-stone transition-colors hover:bg-sand hover:text-clay-700"
+                      >
+                        <Trash2 className="h-4 w-4" aria-hidden />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
 
       <div className="flex items-start gap-2 rounded-[14px] bg-clay-50 px-4 py-3 text-xs text-clay-700 ring-1 ring-clay-100 ring-inset">
