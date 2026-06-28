@@ -37,6 +37,7 @@ import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
 import { StewardGuide } from "./StewardGuide";
+import { WelcomePhoto } from "./WelcomePhoto";
 
 type Tab = "guide" | "learners" | "enroll" | "sparks" | "pay";
 
@@ -70,7 +71,11 @@ export function StewardConsole({
   const [age, setAge] = useState<AgeBand>("child");
   const [guardian, setGuardian] = useState(false);
   const [photo, setPhoto] = useState(false);
-  const [justAdded, setJustAdded] = useState<string | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [justAdded, setJustAdded] = useState<{
+    name: string;
+    photo: boolean;
+  } | null>(null);
   const [sessionNote, setSessionNote] = useState("");
   const [sessionLog, setSessionLog] = useState<
     { id: string; text: string; at: string }[]
@@ -96,13 +101,16 @@ export function StewardConsole({
       lastActive: "not yet",
       stickers: [],
       tone: tones[list.length % tones.length],
+      welcomePhoto: photo ? (photoUrl ?? undefined) : undefined,
     };
     setList((prev) => [learner, ...prev]);
-    setJustAdded(learner.explorerName);
+    setJustAdded({ name: learner.explorerName, photo: !!learner.welcomePhoto });
     setName("");
     setAge("child");
     setGuardian(false);
     setPhoto(false);
+    // Ownership of the object URL transfers to the learner record; do not revoke.
+    setPhotoUrl(null);
     setTab("learners");
   };
 
@@ -226,8 +234,10 @@ export function StewardConsole({
                   aria-hidden
                 />
                 <span>
-                  <strong>{justAdded}</strong> is welcomed. Their framed photo
-                  can be printed as a gift.
+                  <strong>{justAdded.name}</strong> is welcomed.
+                  {justAdded.photo
+                    ? " Their welcome photo is ready to print and frame as a gift."
+                    : ""}
                 </span>
               </div>
             )}
@@ -277,10 +287,19 @@ export function StewardConsole({
                     className={`${card} p-4 ${faded ? "opacity-60" : ""}`}
                   >
                     <div className="flex items-start gap-3">
-                      <Avatar
-                        name={l.explorerName}
-                        className="h-10 w-10 text-sm"
-                      />
+                      {l.welcomePhoto ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={l.welcomePhoto}
+                          alt={`Welcome photo of ${l.explorerName}`}
+                          className="h-10 w-10 shrink-0 rounded-[10px] border border-line object-cover"
+                        />
+                      ) : (
+                        <Avatar
+                          name={l.explorerName}
+                          className="h-10 w-10 text-sm"
+                        />
+                      )}
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="font-medium text-forest-700">
@@ -476,7 +495,14 @@ export function StewardConsole({
                   <input
                     type="checkbox"
                     checked={photo}
-                    onChange={(e) => setPhoto(e.target.checked)}
+                    onChange={(e) => {
+                      const on = e.target.checked;
+                      setPhoto(on);
+                      if (!on && photoUrl) {
+                        URL.revokeObjectURL(photoUrl);
+                        setPhotoUrl(null);
+                      }
+                    }}
                     className="mt-0.5 h-4 w-4 accent-clay-600"
                   />
                   <span className="text-forest-700">
@@ -484,6 +510,13 @@ export function StewardConsole({
                     gift (optional).
                   </span>
                 </label>
+                {photo && (
+                  <WelcomePhoto
+                    name={name}
+                    url={photoUrl}
+                    onChange={setPhotoUrl}
+                  />
+                )}
               </div>
 
               <button

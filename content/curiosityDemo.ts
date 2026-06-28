@@ -45,6 +45,12 @@ export type Learner = {
   /** Kid-facing milestones, recognition rather than cash. */
   stickers: string[];
   tone: AvatarTone;
+  /**
+   * A welcome photo captured on device, only if the family agreed. In the demo
+   * this is an in-memory object URL that is never uploaded. The real system
+   * would keep it as private, on-device, consent-bound Tier 2 data.
+   */
+  welcomePhoto?: string;
 };
 
 export const learners: Learner[] = [
