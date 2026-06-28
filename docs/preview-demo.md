@@ -6,7 +6,7 @@ the blueprint thread ([`concept.md`](concept.md) §3.8), and the rollout pack
 ([`governance/curiosity-program-rollout.md`](governance/curiosity-program-rollout.md)).
 A living document._
 
-**Status:** Draft v0.1 · June 2026 · Owner: founder
+**Status:** Draft v0.2 · June 2026 · Owner: founder
 
 ## What this is
 
@@ -58,14 +58,38 @@ That is the whole thesis in motion: a curious child, noticed openly, a human
 deciding, and real help on the way, with the people at the centre and AI quietly
 in the engine room.
 
+## More to show in the meeting
+
+Built for the sit-down with Ong and for funder conversations:
+
+- **Capture a language live (kid mode).** Switch the language and tap **Help us
+  say it in {language}**. Ong says a word, you type what he gives, and the app
+  shows his language back at once. **Copy** or **Download** to add it to the
+  translation worksheet. Nothing is guessed, especially Kayan; it falls back to
+  English until a person fills it in.
+- **A welcome photo (steward, Enroll).** When a family wants the framed-photo
+  gift, snap it right there. It previews inside a frame, becomes the learner's
+  picture in the roster, and stays on the device, never uploaded.
+- **Practice a first session (steward, Guide).** A calm, step-by-step rehearsal
+  of one visit (consent, welcome, the child asks, a spark, a note), readable
+  aloud, that Ong can run as many times as he likes. Also at
+  `/preview/run-through`.
+- **A one-page overview (founder).** A printable, honest summary for foundation
+  and donor conversations, at `/preview/overview`. It says plainly that this is a
+  pilot in preparation, not a running service.
+
 ## What is real, and what is demo
 
 - **Real browser features:** the microphone (speech recognition) and read-aloud
-  (speech synthesis) use the browser's own capabilities, and the session-notes
-  pad saves to this browser's local storage so your notes survive a reload.
+  (speech synthesis) use the browser's own capabilities; the camera takes a
+  welcome photo that stays on the device; and the session-notes pad and any
+  translations you capture save to this browser's local storage, so they survive
+  a reload.
 - **Demo only:** the AI answers are safe, ready-made responses, not a live
-  model; all learners, sparks, finances, and people are sample data; the
-  multilingual selector shows the vision but the preview answers in English.
+  model, and all learners, sparks, finances, and people are sample data. The
+  interface is English-first and falls back to English; you can capture real
+  translations live (see below) and they apply at once, but the ready-made AI
+  answers stay in English in the preview.
 
 ## Capturing your feedback
 
@@ -79,7 +103,12 @@ note is tagged with where you were. When you are done, open it and **Download**
 - The **blueprint thread** is [`concept.md`](concept.md) §3.8.
 - The **pilot rollout pack** (consent script, kid-mode safety bar, draft policy
   language) is in [`governance/curiosity-program-rollout.md`](governance/curiosity-program-rollout.md).
-- The **printable consent card** the steward links to is at `/preview/consent`.
+- The **translation worksheet** the live-capture panel feeds is in
+  [`governance/translation-worksheet.md`](governance/translation-worksheet.md).
+- The **printable pages** the demo links to: the consent card at
+  `/preview/consent`, the steward guide at `/preview/steward-guide`, the
+  first-session rehearsal at `/preview/run-through`, and the one-page overview at
+  `/preview/overview`.
 
 ## What it deliberately is not
 
@@ -90,4 +119,7 @@ about being a picture.
 
 ## Changelog
 
+- **v0.2** · June 2026 · added the meeting features (live translation capture,
+  welcome photo, first-session rehearsal, one-page overview) and the printable
+  routes; refreshed what is real vs demo.
 - **v0.1** · June 2026 · first draft of the walkthrough guide.
