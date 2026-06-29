@@ -14,6 +14,11 @@ import { DonorPortal } from "@/components/preview/DonorPortal";
 import { AuthScreen, type AuthRole } from "@/components/preview/AuthScreen";
 import { DemoBar } from "@/components/preview/DemoBar";
 import { Toaster } from "@/components/preview/Toaster";
+import { toast } from "@/components/preview/toast";
+import {
+  resetDemoStudents,
+  type StudentRecord,
+} from "@/components/preview/demoStore";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
@@ -59,6 +64,9 @@ export function PreviewConsole() {
   const [adminInitialTab, setAdminInitialTab] = useState<
     "overview" | "curiosity"
   >("overview");
+  const [activeLearner, setActiveLearner] = useState<StudentRecord | null>(
+    null,
+  );
 
   const addMember = (m: Invite) =>
     setPeople((prev) => [
@@ -91,14 +99,26 @@ export function PreviewConsole() {
 
   // The demo bar can jump to any space, including kid mode.
   const switchTo = (target: string) => {
-    if (target === "learner") setView("learner");
-    else choose(target as AuthRole);
+    if (target === "learner") {
+      setActiveLearner(null);
+      setView("learner");
+    } else choose(target as AuthRole);
   };
 
-  // Returning to the login ends the session and resets the live demo state.
+  // Sign out returns to the front door but keeps the enrolled roster, so the
+  // demo stays continuous (enroll as steward, then sign in as that student).
   const signOut = () => {
     resetCuriosityLive();
     setView("login");
+  };
+
+  // Reset wipes the demo data back to the seed state.
+  const resetDemo = () => {
+    resetDemoStudents();
+    resetCuriosityLive();
+    setActiveLearner(null);
+    setView("login");
+    toast("Demo reset to the start");
   };
 
   let screen: ReactNode;
@@ -125,7 +145,7 @@ export function PreviewConsole() {
   } else if (view === "learner") {
     screen = (
       <LearnerApp
-        learner={demoLearner}
+        learner={activeLearner ?? demoLearner}
         onSignOut={signOut}
         onSwitch={goPerspective}
       />
@@ -203,7 +223,15 @@ export function PreviewConsole() {
       </div>
     );
   } else {
-    screen = <AuthScreen onChoose={choose} />;
+    screen = (
+      <AuthScreen
+        onChoose={choose}
+        onExplorer={(student) => {
+          setActiveLearner(student);
+          setView("learner");
+        }}
+      />
+    );
   }
 
   const showBar = view !== "login" && view !== "setup";
@@ -214,7 +242,12 @@ export function PreviewConsole() {
         {screen}
       </div>
       {showBar && (
-        <DemoBar current={view} onSwitch={switchTo} onReset={signOut} />
+        <DemoBar
+          current={view}
+          onSwitch={switchTo}
+          onSignOut={signOut}
+          onResetData={resetDemo}
+        />
       )}
       <Toaster />
     </>

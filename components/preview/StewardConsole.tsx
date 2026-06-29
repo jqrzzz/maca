@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import {
-  learners as seedLearners,
   sparks as seedSparks,
   stewardComp,
   ageBandLabel,
@@ -37,6 +36,7 @@ import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
 import { StewardGuide } from "./StewardGuide";
 import { EnrollStudent, type EnrollData } from "./EnrollStudent";
+import { useStudents, addStudent, type StudentRecord } from "./demoStore";
 import { StewardWallet } from "./StewardWallet";
 
 type Tab = "guide" | "learners" | "enroll" | "sparks" | "money" | "pay";
@@ -63,7 +63,7 @@ export function StewardConsole({
   onSwitch?: (p: Perspective) => void;
 }) {
   const [tab, setTab] = useState<Tab>("guide");
-  const [list, setList] = useState<Learner[]>(seedLearners);
+  const students = useStudents();
   const sparkList = seedSparks;
   const live = useCuriosityLive();
 
@@ -76,14 +76,14 @@ export function StewardConsole({
     { id: string; text: string; at: string }[]
   >([]);
 
-  const active = list.filter((l) => l.consent === "given");
+  const active = students.filter((l) => l.consent === "given");
   const returning = active.filter((l) => l.weeksActive >= 2).length;
   const thisWeek = active.filter(
     (l) => l.lastActive === "today" || l.lastActive === "yesterday",
   ).length;
 
   const handleEnroll = (data: EnrollData) => {
-    const learner: Learner = {
+    const rec: StudentRecord = {
       id: `L-${Date.now()}`,
       explorerName: data.name,
       ageBand: data.ageBand,
@@ -94,12 +94,14 @@ export function StewardConsole({
       sessions: 0,
       lastActive: "not yet",
       stickers: [],
-      tone: tones[list.length % tones.length],
-      // Ownership of any object URL transfers to the learner record.
+      tone: tones[students.length % tones.length],
+      // Ownership of any object URL transfers to the student record.
       welcomePhoto: data.photoUrl ?? undefined,
+      avatar: data.avatar,
+      pin: data.pin,
     };
-    setList((prev) => [learner, ...prev]);
-    setJustAdded({ name: learner.explorerName, photo: !!learner.welcomePhoto });
+    addStudent(rec);
+    setJustAdded({ name: rec.explorerName, photo: !!rec.welcomePhoto });
   };
 
   const logSession = () => {
@@ -278,7 +280,7 @@ export function StewardConsole({
 
             {/* List */}
             <div className="space-y-3">
-              {list.map((l) => {
+              {students.map((l) => {
                 const faded = l.consent === "withdrawn";
                 return (
                   <div
@@ -475,7 +477,7 @@ export function StewardConsole({
               Earlier this month
             </h3>
             {sparkList.map((s) => {
-              const who = list.find((l) => l.id === s.learnerId);
+              const who = students.find((l) => l.id === s.learnerId);
               return (
                 <div key={s.id} className={`${card} p-4`}>
                   <div className="flex items-center justify-between gap-2">

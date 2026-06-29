@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import {
-  learners,
   learnerPrivate,
   sparks as seedSparks,
   ageBandLabel,
@@ -25,6 +24,7 @@ import {
 import { Avatar, card, usd } from "./ui";
 import { CuriositySwitcher, type Perspective } from "./CuriositySwitcher";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
+import { useStudents } from "./demoStore";
 import { GuideTip } from "./GuideTip";
 import { ownerSteps } from "@/content/onboarding";
 
@@ -39,14 +39,15 @@ export function CuriosityPanel({
     [],
   );
   const live = useCuriosityLive();
+  const students = useStudents();
 
-  const given = learners.filter((l) => l.consent === "given");
+  const given = students.filter((l) => l.consent === "given");
   const returning = given.filter((l) => l.weeksActive >= 2).length;
   const thisWeek = given.filter(
     (l) => l.lastActive === "today" || l.lastActive === "yesterday",
   ).length;
-  const pending = learners.filter((l) => l.consent === "pending").length;
-  const withdrawn = learners.filter((l) => l.consent === "withdrawn").length;
+  const pending = students.filter((l) => l.consent === "pending").length;
+  const withdrawn = students.filter((l) => l.consent === "withdrawn").length;
   const delivered = sparkList.filter((s) => s.status === "delivered").length;
 
   const allSparks = [...sparkList, ...live.sparks];
@@ -238,7 +239,7 @@ export function CuriosityPanel({
         </h4>
         <div className="mt-3 space-y-3">
           {sparkList.map((s) => {
-            const who = learners.find((l) => l.id === s.learnerId);
+            const who = students.find((l) => l.id === s.learnerId);
             const tone =
               s.status === "delivered" || s.status === "approved"
                 ? "forest"

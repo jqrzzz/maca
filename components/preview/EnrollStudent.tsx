@@ -25,6 +25,8 @@ export type EnrollData = {
   name: string;
   ageBand: AgeBand;
   photoUrl: string | null;
+  avatar: string;
+  pin: string;
 };
 
 const steps = [
@@ -71,7 +73,7 @@ export function EnrollStudent({
   const next = () => {
     if (!valid) return;
     if (last) {
-      onEnroll({ name: name.trim(), ageBand, photoUrl });
+      onEnroll({ name: name.trim(), ageBand, photoUrl, avatar, pin });
       setDone(true);
     } else {
       setStep((s) => s + 1);

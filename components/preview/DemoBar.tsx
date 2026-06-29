@@ -11,6 +11,7 @@ import {
   ChevronUp,
   Check,
   LogOut,
+  RotateCcw,
 } from "lucide-react";
 import { toast } from "./toast";
 
@@ -33,11 +34,13 @@ const items: Item[] = [
 export function DemoBar({
   current,
   onSwitch,
-  onReset,
+  onSignOut,
+  onResetData,
 }: {
   current: string;
   onSwitch: (target: string) => void;
-  onReset: () => void;
+  onSignOut: () => void;
+  onResetData: () => void;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -107,14 +110,29 @@ export function DemoBar({
                 type="button"
                 onClick={() => {
                   setOpen(false);
-                  onReset();
+                  onSignOut();
                 }}
-                className="flex w-full items-center gap-3 rounded-[12px] px-2.5 py-2 text-left text-sm text-stone transition-colors hover:bg-sand/70 hover:text-clay-700"
+                className="flex w-full items-center gap-3 rounded-[12px] px-2.5 py-2 text-left text-sm text-forest-700 transition-colors hover:bg-sand/70"
               >
                 <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-sand">
                   <LogOut className="h-4 w-4" aria-hidden />
                 </span>
-                <span className="flex-1 font-medium">Sign out and reset</span>
+                <span className="flex-1 font-medium">Sign out</span>
+                <span className="text-[0.6875rem] text-stone">keeps data</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  onResetData();
+                }}
+                className="flex w-full items-center gap-3 rounded-[12px] px-2.5 py-2 text-left text-sm text-stone transition-colors hover:bg-sand/70 hover:text-clay-700"
+              >
+                <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-sand">
+                  <RotateCcw className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="flex-1 font-medium">Reset demo data</span>
+                <span className="text-[0.6875rem] text-stone">to seeds</span>
               </button>
             </div>
           </div>

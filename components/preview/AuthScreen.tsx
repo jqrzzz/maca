@@ -21,9 +21,9 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { card } from "./ui";
-import { avatarChoices } from "@/content/studentProfile";
 import { PinPad } from "./PinPad";
 import { toast } from "./toast";
+import { useStudents, type StudentRecord } from "./demoStore";
 
 export type AuthRole = "admin" | "member" | "steward" | "student" | "donor";
 
@@ -97,8 +97,10 @@ const field =
  */
 export function AuthScreen({
   onChoose,
+  onExplorer,
 }: {
   onChoose: (role: AuthRole) => void;
+  onExplorer: (student: StudentRecord) => void;
 }) {
   const [role, setRole] = useState<AuthRole | null>(null);
   const [mode, setMode] = useState<"signin" | "signup">("signin");
@@ -108,7 +110,11 @@ export function AuthScreen({
   const [showPw, setShowPw] = useState(false);
   const [forgot, setForgot] = useState(false);
   const [pin, setPin] = useState("");
-  const [avatar, setAvatar] = useState(avatarChoices[0]);
+  const [selectedStudentId, setSelectedStudentId] = useState<string | null>(
+    null,
+  );
+  const students = useStudents();
+  const roster = students.filter((s) => s.consent !== "withdrawn");
 
   const active = roles.find((r) => r.id === role) ?? null;
 
@@ -120,7 +126,7 @@ export function AuthScreen({
     setConfirm("");
     setForgot(false);
     setPin("");
-    setAvatar(avatarChoices[0]);
+    setSelectedStudentId(null);
   };
 
   const formValid =
@@ -214,6 +220,13 @@ export function AuthScreen({
     onChoose(active.id);
   };
 
+  const signInExplorer = () => {
+    const s = roster.find((x) => x.id === selectedStudentId);
+    if (!s || pin.length < 4) return;
+    toast(`Welcome, ${s.explorerName}`);
+    onExplorer(s);
+  };
+
   // ---- Role-specific sign-in ----
   return (
     <div className="flex min-h-[80vh] items-center justify-center bg-sand px-6 py-16">
@@ -243,45 +256,65 @@ export function AuthScreen({
           </div>
 
           {active.access === "steward" ? (
-            /* Student: picture + PIN */
+            /* Student: pick your picture, then your PIN */
             <div className="mt-6">
               <p className="text-sm text-stone">
-                Sign in with your picture and PIN.
+                Tap your picture, then tap your PIN.
               </p>
-              <div className="mt-3 flex flex-wrap justify-center gap-2">
-                {avatarChoices.slice(0, 6).map((a) => (
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {roster.map((s) => {
+                  const picked = s.id === selectedStudentId;
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedStudentId(s.id);
+                        setPin("");
+                      }}
+                      aria-pressed={picked}
+                      className={`flex flex-col items-center gap-1 rounded-[14px] border p-2 transition-colors ${
+                        picked
+                          ? "border-clay-300 bg-clay-50"
+                          : "border-line bg-cream hover:bg-sand"
+                      }`}
+                    >
+                      <span className="text-2xl" aria-hidden>
+                        {s.avatar}
+                      </span>
+                      <span className="max-w-full truncate text-xs font-medium text-forest-700">
+                        {s.explorerName}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {selectedStudentId && (
+                <div className="mt-5">
+                  <PinPad value={pin} onChange={setPin} />
                   <button
-                    key={a}
                     type="button"
-                    onClick={() => setAvatar(a)}
-                    aria-pressed={a === avatar}
-                    aria-label={`Choose ${a}`}
-                    className={`inline-flex h-11 w-11 items-center justify-center rounded-full text-2xl ring-1 transition-colors ring-inset ${
-                      a === avatar
-                        ? "bg-clay-50 ring-clay-300"
-                        : "bg-cream ring-line hover:bg-sand"
-                    }`}
+                    onClick={signInExplorer}
+                    disabled={pin.length < 4}
+                    className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[14px] bg-clay-600 px-6 font-medium text-cream shadow-soft transition-colors hover:bg-clay-700 disabled:opacity-40"
                   >
-                    {a}
+                    Sign in
+                    <ArrowRight className="h-4 w-4" aria-hidden />
                   </button>
-                ))}
+                </div>
+              )}
+
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-stone">
+                <span>New here? Your steward adds you.</span>
+                <button
+                  type="button"
+                  onClick={go}
+                  className="hover:text-clay-800 font-medium text-clay-700"
+                >
+                  Family account
+                </button>
               </div>
-              <div className="mt-5">
-                <PinPad value={pin} onChange={setPin} />
-              </div>
-              <button
-                type="button"
-                onClick={go}
-                disabled={pin.length < 4}
-                className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[14px] bg-clay-600 px-6 font-medium text-cream shadow-soft transition-colors hover:bg-clay-700 disabled:opacity-40"
-              >
-                Sign in
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </button>
-              <p className="mt-4 text-center text-xs text-stone">
-                New here? Your steward adds you, with your family&apos;s
-                consent.
-              </p>
             </div>
           ) : (
             /* Staff and donors: email + password */
