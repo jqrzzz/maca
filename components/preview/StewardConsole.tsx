@@ -12,10 +12,8 @@ import {
   Lock,
   CircleCheck,
   Camera,
-  ArrowRight,
   Star,
   Sparkles,
-  Languages,
   NotebookPen,
   Printer,
   PlayCircle,
@@ -30,7 +28,6 @@ import {
   ageBandLabel,
   sparkStatusLabel,
   type Learner,
-  type AgeBand,
   type AvatarTone,
 } from "@/content/curiosityDemo";
 import { Avatar, card } from "./ui";
@@ -39,7 +36,7 @@ import { SessionNotes } from "./SessionNotes";
 import { useCuriosityLive, setLiveSparkStatus } from "./curiosityStore";
 import { GuideTip } from "./GuideTip";
 import { StewardGuide } from "./StewardGuide";
-import { WelcomePhoto } from "./WelcomePhoto";
+import { EnrollStudent, type EnrollData } from "./EnrollStudent";
 import { StewardWallet } from "./StewardWallet";
 
 type Tab = "guide" | "learners" | "enroll" | "sparks" | "money" | "pay";
@@ -70,12 +67,6 @@ export function StewardConsole({
   const sparkList = seedSparks;
   const live = useCuriosityLive();
 
-  // Enroll form
-  const [name, setName] = useState("");
-  const [age, setAge] = useState<AgeBand>("child");
-  const [guardian, setGuardian] = useState(false);
-  const [photo, setPhoto] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
   const [justAdded, setJustAdded] = useState<{
     name: string;
     photo: boolean;
@@ -91,31 +82,24 @@ export function StewardConsole({
     (l) => l.lastActive === "today" || l.lastActive === "yesterday",
   ).length;
 
-  const enroll = () => {
-    if (!name.trim() || !guardian) return;
+  const handleEnroll = (data: EnrollData) => {
     const learner: Learner = {
       id: `L-${Date.now()}`,
-      explorerName: name.trim(),
-      ageBand: age,
+      explorerName: data.name,
+      ageBand: data.ageBand,
       consent: "given",
-      photoConsent: photo,
+      photoConsent: !!data.photoUrl,
       joined: "just now",
       weeksActive: 0,
       sessions: 0,
       lastActive: "not yet",
       stickers: [],
       tone: tones[list.length % tones.length],
-      welcomePhoto: photo ? (photoUrl ?? undefined) : undefined,
+      // Ownership of any object URL transfers to the learner record.
+      welcomePhoto: data.photoUrl ?? undefined,
     };
     setList((prev) => [learner, ...prev]);
     setJustAdded({ name: learner.explorerName, photo: !!learner.welcomePhoto });
-    setName("");
-    setAge("child");
-    setGuardian(false);
-    setPhoto(false);
-    // Ownership of the object URL transfers to the learner record; do not revoke.
-    setPhotoUrl(null);
-    setTab("learners");
   };
 
   const logSession = () => {
@@ -417,140 +401,7 @@ export function StewardConsole({
         )}
 
         {/* ENROLL */}
-        {tab === "enroll" && (
-          <div className="mt-5 space-y-4">
-            <details className="rounded-[16px] border border-gold-400/40 bg-gold-400/10 p-4">
-              <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-semibold text-forest-700">
-                <Languages className="h-4 w-4 text-clay-600" aria-hidden />
-                What to say to the family (in their language)
-              </summary>
-              <ul className="mt-3 space-y-1.5 text-sm text-stone">
-                <li>
-                  This is a small learning club. Your child can ask a friendly,
-                  safe helper anything they wonder about, and a grown-up is
-                  always there.
-                </li>
-                <li>
-                  To begin we keep only a name or nickname and an age group.
-                  Nothing more without your agreement.
-                </li>
-                <li>
-                  If you like, we will print and frame a photo of your child for
-                  you to keep.
-                </li>
-                <li>
-                  When your child keeps getting excited about something, we
-                  notice it openly and tell you, so we can bring something
-                  helpful.
-                </li>
-                <li>
-                  It is free and voluntary. Nothing depends on sharing anything
-                  private, and you can stop or remove their record any time.
-                </li>
-              </ul>
-              <a
-                href="/preview/consent"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
-              >
-                <Printer className="h-4 w-4" aria-hidden />
-                Open a printable consent card
-              </a>
-            </details>
-            <div className={`${card} p-5`}>
-              <h2 className="font-display text-lg font-semibold text-forest-700">
-                Welcome a new explorer
-              </h2>
-              <p className="mt-1 text-sm text-stone">
-                Start with consent. Explain it to the family in their language.
-                They decide, and they can withdraw any time without losing
-                anything.
-              </p>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <label className="text-sm font-medium text-forest-700">
-                  Name or nickname
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="An explorer name is fine"
-                    className={`mt-1.5 ${field}`}
-                  />
-                </label>
-                <label className="text-sm font-medium text-forest-700">
-                  Age group
-                  <select
-                    value={age}
-                    onChange={(e) => setAge(e.target.value as AgeBand)}
-                    className={`mt-1.5 ${field}`}
-                  >
-                    <option value="child">Child</option>
-                    <option value="teen">Teen</option>
-                    <option value="adult">Adult</option>
-                  </select>
-                </label>
-              </div>
-
-              <div className="mt-4 space-y-2.5">
-                <label className="flex items-start gap-3 rounded-[14px] border border-line bg-cream p-3 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={guardian}
-                    onChange={(e) => setGuardian(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 accent-clay-600"
-                  />
-                  <span className="text-forest-700">
-                    A parent or guardian has freely given consent, in their
-                    language, and knows it can be withdrawn.{" "}
-                    <span className="text-clay-700">Required.</span>
-                  </span>
-                </label>
-                <label className="flex items-start gap-3 rounded-[14px] border border-line bg-cream p-3 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={photo}
-                    onChange={(e) => {
-                      const on = e.target.checked;
-                      setPhoto(on);
-                      if (!on && photoUrl) {
-                        URL.revokeObjectURL(photoUrl);
-                        setPhotoUrl(null);
-                      }
-                    }}
-                    className="mt-0.5 h-4 w-4 accent-clay-600"
-                  />
-                  <span className="text-forest-700">
-                    The family would like a printed, framed photo as a welcome
-                    gift (optional).
-                  </span>
-                </label>
-                {photo && (
-                  <WelcomePhoto
-                    name={name}
-                    url={photoUrl}
-                    onChange={setPhotoUrl}
-                  />
-                )}
-              </div>
-
-              <button
-                type="button"
-                onClick={enroll}
-                disabled={!name.trim() || !guardian}
-                className="mt-4 inline-flex h-11 items-center gap-2 rounded-[14px] bg-clay-600 px-5 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-clay-700 disabled:opacity-40"
-              >
-                Welcome explorer
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </button>
-            </div>
-            <p className="text-xs text-stone">
-              We collect the minimum to begin: a name or nickname, an age group,
-              and consent. Nothing more until there is a reason and a safe place
-              to keep it.
-            </p>
-          </div>
-        )}
+        {tab === "enroll" && <EnrollStudent onEnroll={handleEnroll} />}
 
         {/* SPARKS */}
         {tab === "sparks" && (
