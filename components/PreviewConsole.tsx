@@ -21,6 +21,7 @@ import {
   type StudentRecord,
 } from "@/components/preview/demoStore";
 import { resetTour } from "@/components/preview/tourStore";
+import { resetWallet } from "@/components/preview/walletStore";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
@@ -117,6 +118,7 @@ export function PreviewConsole() {
   // Reset wipes the demo data back to the seed state.
   const resetDemo = () => {
     resetDemoStudents();
+    resetWallet();
     resetCuriosityLive();
     setActiveLearner(null);
     setView("login");

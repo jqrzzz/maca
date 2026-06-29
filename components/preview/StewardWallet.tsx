@@ -15,7 +15,6 @@ import {
 import { Badge } from "@/components/ui/Badge";
 import { card, thb } from "./ui";
 import {
-  stewardWalletSeed,
   moneyInCategories,
   moneyOutCategories,
   walletTotals,
@@ -24,6 +23,7 @@ import {
   type WalletDirection,
 } from "@/content/stewardWallet";
 import { toast } from "./toast";
+import { useWallet, addWalletEntry, removeWalletEntry } from "./walletStore";
 
 const field =
   "mt-1.5 w-full rounded-[14px] border border-line bg-cream px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400";
@@ -39,9 +39,7 @@ const todayLabel = () =>
  * founder confirms). Demo only: no real money, nothing leaves the device.
  */
 export function StewardWallet() {
-  const [entries, setEntries] = useState<WalletEntry[]>(() =>
-    [...stewardWalletSeed].reverse(),
-  );
+  const entries = useWallet();
   const [composer, setComposer] = useState<WalletDirection | null>(null);
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState<string>(moneyOutCategories[0]);
@@ -52,22 +50,16 @@ export function StewardWallet() {
   const parsedAmount = Math.round(Number(amount));
   const canSave = Number.isFinite(parsedAmount) && parsedAmount > 0;
 
-  // Revoke any live object URLs when the view unmounts. It is tab-gated, so it
-  // unmounts when the steward switches tabs; read latest values through a ref.
-  const live = useRef<{ staged: string | null; entries: WalletEntry[] }>({
-    staged: null,
-    entries: [],
-  });
+  // Revoke only the staged (unsaved) receipt photo when the view unmounts.
+  // Saved entries live in the shared store and keep their photos for the
+  // session, so switching tabs no longer loses them.
+  const stagedRef = useRef<string | null>(null);
   useEffect(() => {
-    live.current = { staged: receiptUrl, entries };
+    stagedRef.current = receiptUrl;
   });
   useEffect(
     () => () => {
-      if (live.current.staged) URL.revokeObjectURL(live.current.staged);
-      for (const e of live.current.entries) {
-        if (e.receiptUrl?.startsWith("blob:"))
-          URL.revokeObjectURL(e.receiptUrl);
-      }
+      if (stagedRef.current) URL.revokeObjectURL(stagedRef.current);
     },
     [],
   );
@@ -111,7 +103,7 @@ export function StewardWallet() {
       receiptUrl: composer === "out" ? (receiptUrl ?? undefined) : undefined,
       status: composer === "in" ? "approved" : "logged",
     };
-    setEntries((prev) => [entry, ...prev]);
+    addWalletEntry(entry);
     toast(composer === "in" ? "Money in recorded" : "Spending logged");
     // Ownership of the object URL transfers to the entry; do not revoke.
     setReceiptUrl(null);
@@ -120,13 +112,7 @@ export function StewardWallet() {
     setComposer(null);
   };
 
-  const remove = (id: string) => {
-    setEntries((prev) => {
-      const gone = prev.find((e) => e.id === id);
-      if (gone?.receiptUrl) URL.revokeObjectURL(gone.receiptUrl);
-      return prev.filter((e) => e.id !== id);
-    });
-  };
+  const remove = (id: string) => removeWalletEntry(id);
 
   const cats = composer === "in" ? moneyInCategories : moneyOutCategories;
 
@@ -392,9 +378,9 @@ export function StewardWallet() {
       <div className="flex items-start gap-2 rounded-[14px] bg-clay-50 px-4 py-3 text-xs text-clay-700 ring-1 ring-clay-100 ring-inset">
         <ReceiptText className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
         <p>
-          A practice space. No real money moves here, and nothing is saved or
-          sent. Logging what you spend, with a photo of the receipt, is how the
-          foundation keeps everything fair and clear for everyone.
+          A practice space. No real money moves here, and nothing is sent
+          anywhere. Logging what you spend, with a photo of the receipt, is how
+          the foundation keeps everything fair and clear for everyone.
         </p>
       </div>
     </div>

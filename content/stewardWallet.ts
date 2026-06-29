@@ -6,8 +6,8 @@
  * receipt, and a status the founder can confirm. Amounts are in Thai baht, the
  * steward's own currency.
  *
- * Nothing here is real. No real money moves, and in the demo nothing is saved
- * beyond the browser session.
+ * Nothing here is real. No real money moves and nothing is sent anywhere; the
+ * demo only remembers entries in this browser.
  */
 
 export type WalletDirection = "in" | "out";
