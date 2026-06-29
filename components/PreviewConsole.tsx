@@ -12,6 +12,7 @@ import {
   Sparkles,
   BookOpen,
   User,
+  HandCoins,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { demoPeople, type DemoPerson, type Role } from "@/content/previewDemo";
@@ -21,6 +22,7 @@ import { MemberApp } from "@/components/preview/MemberApp";
 import { StewardConsole } from "@/components/preview/StewardConsole";
 import { LearnerApp } from "@/components/preview/LearnerApp";
 import { StudentProfile } from "@/components/preview/StudentProfile";
+import { DonorPortal } from "@/components/preview/DonorPortal";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
@@ -32,7 +34,8 @@ type View =
   | "member"
   | "steward"
   | "learner"
-  | "student";
+  | "student"
+  | "donor";
 type Invite = { name: string; email: string; role: Role };
 
 const fieldCls =
@@ -142,6 +145,11 @@ export function PreviewConsole() {
         onOpenCuriosity={() => setView("learner")}
       />
     );
+  }
+
+  // ---- Donor portal ----
+  if (view === "donor") {
+    return <DonorPortal onSignOut={signOut} />;
   }
 
   // ---- Set-password (from an invite link) ----
@@ -351,6 +359,30 @@ export function PreviewConsole() {
                 </span>
               </span>
             </a>
+
+            <p className="pt-2 text-xs font-semibold tracking-wide text-stone uppercase">
+              Supporters
+            </p>
+
+            <button
+              type="button"
+              onClick={() => setView("donor")}
+              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-clay-700 text-cream">
+                <HandCoins className="h-5 w-5" aria-hidden />
+              </span>
+              <span className="min-w-0">
+                <span className="flex items-center gap-1.5 font-medium text-forest-700">
+                  Enter as a donor{" "}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="mt-0.5 block text-xs text-stone">
+                  The donor portal: your giving, where it goes, and your
+                  documents.
+                </span>
+              </span>
+            </button>
           </div>
         </div>
         <Link
