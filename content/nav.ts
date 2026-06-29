@@ -10,13 +10,14 @@ export type NavLink = {
 /** Primary header navigation (the Donate CTA is rendered separately). */
 export const primaryNav: NavLink[] = [
   { label: "Our Story", href: "/about" },
+  { label: "Founder", href: "/founder" },
   { label: "The Need", href: "/the-need" },
   { label: "What We Do", href: "/programs" },
   { label: "Field Notes", href: "/field-notes" },
   { label: "Get Involved", href: "/get-involved" },
 ];
 
-/** Site-wide primary call to action — always routes to the giving hub. */
+/** Site-wide primary call to action, always routes to the giving hub. */
 export const donateCta: NavLink = { label: "Donate", href: "/give" };
 
 /** Footer link columns. */
@@ -25,6 +26,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
     title: "About",
     links: [
       { label: "Our Story", href: "/about" },
+      { label: "Founder", href: "/founder" },
       { label: "The Need", href: "/the-need" },
       { label: "Transparency", href: "/transparency" },
       { label: "Press Kit", href: "/press" },
@@ -50,7 +52,7 @@ export const footerNav: { title: string; links: NavLink[] }[] = [
   },
 ];
 
-/** Legal / policy links — rendered in the footer's bottom bar. */
+/** Legal / policy links, rendered in the footer's bottom bar. */
 export const legalNav: NavLink[] = [
   { label: "Privacy", href: "/privacy" },
   { label: "Safeguarding", href: "/safeguarding" },

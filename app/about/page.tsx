@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Figure } from "@/components/Figure";
 import { Prose } from "@/components/ui/Prose";
+import { Button } from "@/components/ui/Button";
 import { CTASection } from "@/components/CTASection";
 import { buildMetadata } from "@/lib/metadata";
 import { images } from "@/lib/images";
@@ -35,11 +36,16 @@ export default function AboutPage() {
       {/* Founder story */}
       <Section tone="cream">
         <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-16">
-          <Prose>
-            {founderStory.map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </Prose>
+          <div>
+            <Prose>
+              {founderStory.map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </Prose>
+            <Button href="/founder" variant="outline" className="mt-6">
+              Meet the founder
+            </Button>
+          </div>
           <div className="lg:pt-2">
             <Figure
               media={images.programsMedical}

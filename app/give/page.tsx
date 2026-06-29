@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Package, Send, Landmark, ShieldCheck, ExternalLink } from "lucide-react";
+import {
+  Package,
+  Send,
+  Landmark,
+  ShieldCheck,
+  ExternalLink,
+  Eye,
+  Stethoscope,
+} from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { FAQ } from "@/components/FAQ";
+import { Quote } from "@/components/Quote";
 import {
   DonateLinkCard,
   DonateCryptoCard,
@@ -25,6 +34,7 @@ import {
   bankTransferIntro,
 } from "@/content/donations";
 import { giveFaqs } from "@/content/faqs";
+import { founderNote } from "@/content/home";
 
 export const metadata: Metadata = buildMetadata({
   title: "Ways to Give",
@@ -47,8 +57,7 @@ export default async function GivePage() {
       .filter((c) => methodVisible(c.enabled))
       .map(async (c) => ({
         ...c,
-        qrSvg:
-          c.enabled && c.address ? await makeQrSvg(c.address) : undefined,
+        qrSvg: c.enabled && c.address ? await makeQrSvg(c.address) : undefined,
       })),
   );
 
@@ -181,7 +190,7 @@ export default async function GivePage() {
         </div>
       </Section>
 
-      {/* Bank transfer & Western Union — contact-first, only when configured */}
+      {/* Bank transfer and Western Union: contact-first, only when configured */}
       {(config.bankTransfer.enabled || config.westernUnion.enabled) && (
         <Section tone="sand">
           <SectionHeading
@@ -212,21 +221,62 @@ export default async function GivePage() {
         </Section>
       )}
 
-      {/* How funds are used → transparency */}
+      {/* Where it goes, and why you can trust it */}
       <Section tone="cream">
-        <div className="mx-auto max-w-2xl rounded-[20px] bg-sand p-8 text-center">
-          <h2 className="text-h3">Where does it go?</h2>
-          <p className="mt-3 text-stone">
-            Support reaches the community directly: medical care, food,
-            education, and the infrastructure that keeps the village
-            self-reliant.
-          </p>
-          <Link
-            href="/transparency"
-            className="mt-4 inline-block font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
-          >
-            See how we operate
-          </Link>
+        <SectionHeading
+          eyebrow="Trust"
+          title="Where it goes, and why you can trust it"
+          lede="Support reaches the community directly, it is protected and accounted for, and the work is led by a doctor."
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {[
+            {
+              icon: Eye,
+              title: "Reaches the community",
+              body: "Care, food, education, and the infrastructure that keeps the village self-reliant.",
+              href: "/transparency",
+              cta: "See how we operate",
+            },
+            {
+              icon: ShieldCheck,
+              title: "Protected and accounted for",
+              body: "Clear controls and checks keep every gift safe, traceable, and honestly reported.",
+              href: "/funds-protection",
+              cta: "How funds are protected",
+            },
+            {
+              icon: Stethoscope,
+              title: "Led by a doctor",
+              body: "Founded and guided by a physician who has personally covered care for this community.",
+              href: "/founder",
+              cta: "Meet the founder",
+            },
+          ].map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <Reveal key={item.title} delay={i * 70}>
+                <Link
+                  href={item.href}
+                  className="group flex h-full flex-col rounded-[20px] border border-line bg-cream p-6 transition-colors hover:bg-sand/60"
+                >
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-[14px] bg-clay-50 text-clay-600">
+                    <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden />
+                  </span>
+                  <h3 className="mt-4 text-h3">{item.title}</h3>
+                  <p className="mt-2 text-stone">{item.body}</p>
+                  <span className="mt-4 inline-block font-medium text-clay-700 underline decoration-clay-300 underline-offset-4 group-hover:decoration-clay-600">
+                    {item.cta}
+                  </span>
+                </Link>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        <div className="mx-auto mt-12 max-w-3xl rounded-[20px] bg-sand p-8">
+          <Quote attribution={founderNote.attribution}>
+            {founderNote.quote}
+          </Quote>
         </div>
       </Section>
 
