@@ -11,6 +11,7 @@ import {
   Compass,
   Sparkles,
   BookOpen,
+  User,
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { demoPeople, type DemoPerson, type Role } from "@/content/previewDemo";
@@ -19,11 +20,19 @@ import { AdminConsole } from "@/components/preview/AdminConsole";
 import { MemberApp } from "@/components/preview/MemberApp";
 import { StewardConsole } from "@/components/preview/StewardConsole";
 import { LearnerApp } from "@/components/preview/LearnerApp";
+import { StudentProfile } from "@/components/preview/StudentProfile";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
 
-type View = "login" | "admin" | "setup" | "member" | "steward" | "learner";
+type View =
+  | "login"
+  | "admin"
+  | "setup"
+  | "member"
+  | "steward"
+  | "learner"
+  | "student";
 type Invite = { name: string; email: string; role: Role };
 
 const fieldCls =
@@ -121,6 +130,16 @@ export function PreviewConsole() {
         learner={demoLearner}
         onSignOut={signOut}
         onSwitch={goPerspective}
+      />
+    );
+  }
+
+  // ---- Student account (individual login) ----
+  if (view === "student") {
+    return (
+      <StudentProfile
+        onSignOut={signOut}
+        onOpenCuriosity={() => setView("learner")}
       />
     );
   }
@@ -288,6 +307,26 @@ export function PreviewConsole() {
                 <span className="mt-0.5 block text-xs text-stone">
                   Kid mode: a safe, friendly AI to ask anything, earn stickers,
                   and explore.
+                </span>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setView("student")}
+              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-forest-700 text-cream">
+                <User className="h-5 w-5" aria-hidden />
+              </span>
+              <span className="min-w-0">
+                <span className="flex items-center gap-1.5 font-medium text-forest-700">
+                  Enter as a student account{" "}
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </span>
+                <span className="mt-0.5 block text-xs text-stone">
+                  The individual login: your profile, your health notes, and the
+                  language center.
                 </span>
               </span>
             </button>
