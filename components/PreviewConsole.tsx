@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { demoPeople, type DemoPerson, type Role } from "@/content/previewDemo";
@@ -12,6 +12,7 @@ import { LearnerApp } from "@/components/preview/LearnerApp";
 import { StudentProfile } from "@/components/preview/StudentProfile";
 import { DonorPortal } from "@/components/preview/DonorPortal";
 import { AuthScreen, type AuthRole } from "@/components/preview/AuthScreen";
+import { DemoBar } from "@/components/preview/DemoBar";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
@@ -87,15 +88,22 @@ export function PreviewConsole() {
     }
   };
 
+  // The demo bar can jump to any space, including kid mode.
+  const switchTo = (target: string) => {
+    if (target === "learner") setView("learner");
+    else choose(target as AuthRole);
+  };
+
   // Returning to the login ends the session and resets the live demo state.
   const signOut = () => {
     resetCuriosityLive();
     setView("login");
   };
 
-  // ---- Admin console ----
+  let screen: ReactNode;
+
   if (view === "admin") {
-    return (
+    screen = (
       <AdminConsole
         me={people[0]}
         people={people}
@@ -109,47 +117,29 @@ export function PreviewConsole() {
         onSwitchPerspective={goPerspective}
       />
     );
-  }
-
-  // ---- Member field app ----
-  if (view === "member") {
-    return <MemberApp member={member} onSignOut={signOut} />;
-  }
-
-  // ---- Village steward (Curiosity Program) ----
-  if (view === "steward") {
-    return <StewardConsole onSignOut={signOut} onSwitch={goPerspective} />;
-  }
-
-  // ---- Young learner (kid mode) ----
-  if (view === "learner") {
-    return (
+  } else if (view === "member") {
+    screen = <MemberApp member={member} onSignOut={signOut} />;
+  } else if (view === "steward") {
+    screen = <StewardConsole onSignOut={signOut} onSwitch={goPerspective} />;
+  } else if (view === "learner") {
+    screen = (
       <LearnerApp
         learner={demoLearner}
         onSignOut={signOut}
         onSwitch={goPerspective}
       />
     );
-  }
-
-  // ---- Student account (individual login) ----
-  if (view === "student") {
-    return (
+  } else if (view === "student") {
+    screen = (
       <StudentProfile
         onSignOut={signOut}
         onOpenCuriosity={() => setView("learner")}
       />
     );
-  }
-
-  // ---- Donor portal ----
-  if (view === "donor") {
-    return <DonorPortal onSignOut={signOut} />;
-  }
-
-  // ---- Set-password (from an invite link) ----
-  if (view === "setup") {
-    return (
+  } else if (view === "donor") {
+    screen = <DonorPortal onSignOut={signOut} />;
+  } else if (view === "setup") {
+    screen = (
       <div className="flex min-h-[80vh] items-center justify-center bg-sand px-6 py-16">
         <div className="w-full max-w-md">
           <div className={`${card} p-8`}>
@@ -211,8 +201,20 @@ export function PreviewConsole() {
         </div>
       </div>
     );
+  } else {
+    screen = <AuthScreen onChoose={choose} />;
   }
 
-  // ---- Login (role-aware demo auth) ----
-  return <AuthScreen onChoose={choose} />;
+  const showBar = view !== "login" && view !== "setup";
+
+  return (
+    <>
+      <div key={view} className="animate-view">
+        {screen}
+      </div>
+      {showBar && (
+        <DemoBar current={view} onSwitch={switchTo} onReset={signOut} />
+      )}
+    </>
+  );
 }
