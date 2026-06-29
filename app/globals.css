@@ -211,11 +211,43 @@
   animation: prasm-bar-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Preview demo: the guided tour card eases in on each step. */
+@keyframes prasm-tour-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@utility animate-tour-in {
+  animation: prasm-tour-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Preview demo: a gentle pulse on the ring around a highlighted element. The
+   ring stays solid when this is disabled, so the highlight never disappears. */
+@keyframes prasm-tour-ring {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+@utility animate-tour-ring {
+  animation: prasm-tour-ring 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-reveal,
   .animate-pulse,
   .animate-view,
-  .animate-bar {
+  .animate-bar,
+  .animate-tour-in,
+  .animate-tour-ring {
     animation: none !important;
   }
 }

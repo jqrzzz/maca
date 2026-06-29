@@ -162,6 +162,9 @@ export function AuthScreen({
                   <button
                     key={r.id}
                     type="button"
+                    data-tour-id={
+                      r.id === "student" ? "auth-role-student" : undefined
+                    }
                     onClick={() => select(r.id)}
                     className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
                   >
@@ -261,7 +264,10 @@ export function AuthScreen({
               <p className="text-sm text-stone">
                 Tap your picture, then tap your PIN.
               </p>
-              <div className="mt-3 grid grid-cols-3 gap-2">
+              <div
+                className="mt-3 grid grid-cols-3 gap-2"
+                data-tour-id="auth-student-grid"
+              >
                 {roster.map((s) => {
                   const picked = s.id === selectedStudentId;
                   return (

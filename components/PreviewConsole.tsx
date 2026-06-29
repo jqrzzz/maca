@@ -13,12 +13,14 @@ import { StudentProfile } from "@/components/preview/StudentProfile";
 import { DonorPortal } from "@/components/preview/DonorPortal";
 import { AuthScreen, type AuthRole } from "@/components/preview/AuthScreen";
 import { DemoBar } from "@/components/preview/DemoBar";
+import { Tour } from "@/components/preview/Tour";
 import { Toaster } from "@/components/preview/Toaster";
 import { toast } from "@/components/preview/toast";
 import {
   resetDemoStudents,
   type StudentRecord,
 } from "@/components/preview/demoStore";
+import { resetTour } from "@/components/preview/tourStore";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
@@ -247,9 +249,11 @@ export function PreviewConsole() {
           onSwitch={switchTo}
           onSignOut={signOut}
           onResetData={resetDemo}
+          onReplayTour={resetTour}
         />
       )}
       <Toaster />
+      <Tour view={view} switchTo={switchTo} signOut={signOut} />
     </>
   );
 }

@@ -97,7 +97,10 @@ export function EnrollStudent({
   if (done) {
     return (
       <div className="mt-5">
-        <div className={`${card} p-6 text-center`}>
+        <div
+          className={`${card} p-6 text-center`}
+          data-tour-id="enroll-success"
+        >
           <span className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full bg-forest-500/10 text-forest-700">
             <CircleCheck className="h-7 w-7" aria-hidden />
           </span>
@@ -355,6 +358,7 @@ export function EnrollStudent({
           </button>
           <button
             type="button"
+            data-tour-id="enroll-next"
             onClick={next}
             disabled={!valid}
             className="inline-flex h-10 items-center gap-1.5 rounded-[14px] bg-clay-600 px-5 text-sm font-medium text-cream shadow-soft transition-colors hover:bg-clay-700 disabled:opacity-40"

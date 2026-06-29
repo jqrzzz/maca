@@ -183,6 +183,7 @@ export function StewardConsole({
               <button
                 key={t.id}
                 type="button"
+                data-tour-id={t.id === "enroll" ? "steward-tab-enroll" : undefined}
                 onClick={() => setTab(t.id)}
                 aria-current={isActive ? "page" : undefined}
                 className={`inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${

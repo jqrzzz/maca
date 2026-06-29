@@ -12,6 +12,7 @@ import {
   Check,
   LogOut,
   RotateCcw,
+  Play,
 } from "lucide-react";
 import { toast } from "./toast";
 
@@ -36,11 +37,13 @@ export function DemoBar({
   onSwitch,
   onSignOut,
   onResetData,
+  onReplayTour,
 }: {
   current: string;
   onSwitch: (target: string) => void;
   onSignOut: () => void;
   onResetData: () => void;
+  onReplayTour?: () => void;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -106,6 +109,22 @@ export function DemoBar({
               })}
             </div>
             <div className="border-t border-line p-1.5">
+              {onReplayTour && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    onReplayTour();
+                  }}
+                  className="flex w-full items-center gap-3 rounded-[12px] px-2.5 py-2 text-left text-sm text-forest-700 transition-colors hover:bg-sand/70"
+                >
+                  <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-[10px] bg-clay-50 text-clay-600">
+                    <Play className="h-4 w-4" aria-hidden />
+                  </span>
+                  <span className="flex-1 font-medium">Replay tour</span>
+                  <span className="text-[0.6875rem] text-stone">guided</span>
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => {
@@ -153,6 +172,7 @@ export function DemoBar({
 
           <button
             type="button"
+            data-tour-id="demobar-trigger"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-haspopup="menu"
