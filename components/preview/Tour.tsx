@@ -83,6 +83,8 @@ export function Tour({
   const [rect, setRect] = useState<Rect | null>(null);
   const enteredRef = useRef(-1);
   const rosterBaseline = useRef(0);
+  const maxStepRef = useRef(0);
+  const studentsRef = useRef(students.length);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
   // SSR-safe mount flag: false on the server and the first hydration render,
@@ -96,21 +98,41 @@ export function Tour({
   const open = mounted && !seen;
   const idx = Math.min(Math.max(step, 0), tourSteps.length - 1);
 
-  // Run the safe screen change (and snapshot the roster) once per step.
+  // Keep the latest roster size in a ref so the open effect can read it without
+  // re-running when students change (which would move the baseline).
+  useEffect(() => {
+    studentsRef.current = students.length;
+  }, [students.length]);
+
+  // Reset the per-run bookkeeping each time the tour opens or closes, so a
+  // replay re-runs every step's entry. The roster baseline is captured once, at
+  // the start of a run, so enrolling any child during the loop satisfies the
+  // hand-off no matter when it happens.
+  useEffect(() => {
+    enteredRef.current = -1;
+    maxStepRef.current = 0;
+    if (open) rosterBaseline.current = studentsRef.current;
+  }, [open]);
+
+  // On entering a step, put the app on the screen the step expects, once. The
+  // learner space is reached only by a real sign-in, so it is never forced here
+  // (forcing it would drop the child the visitor just signed in as).
   useEffect(() => {
     if (!open) return;
+    maxStepRef.current = Math.max(maxStepRef.current, idx);
     if (enteredRef.current === idx) return;
     enteredRef.current = idx;
     const s = tourSteps[idx];
-    if (s.gate === "roster") rosterBaseline.current = students.length;
-    if (s.enter === "steward") switchTo("steward");
-    else if (s.enter === "signout") signOut();
-  }, [open, idx, students.length, switchTo, signOut]);
+    if (s.view === "steward") switchTo("steward");
+    else if (s.view === "login") signOut();
+  }, [open, idx, switchTo, signOut]);
 
   // Hand-off steps advance off real, shared truth: the roster growing, or the
-  // visitor arriving in the learning space.
+  // visitor arriving in the learning space. Only when moving forward, so Back
+  // never bounces the visitor straight out of the step they returned to.
   useEffect(() => {
     if (!open) return;
+    if (idx < maxStepRef.current) return;
     const s = tourSteps[idx];
     if (s.gate === "roster" && students.length > rosterBaseline.current) {
       setTourStep(idx + 1);

@@ -25,10 +25,8 @@ export type TourStep = {
   body: string;
   /** data-tour-id of the element to highlight, or null to float in the middle. */
   spotlight: string | null;
-  /** The screen this step expects to be on. */
+  /** The screen this step expects to be on; the tour puts the app there. */
   view: TourView;
-  /** A safe screen change the tour performs when the step opens. */
-  enter?: "steward" | "signout";
   /** How the step advances. */
   gate: TourGate;
   /** Dim the rest of the screen. Defaults to true. */
@@ -47,7 +45,6 @@ export const tourSteps: TourStep[] = [
     body: "Millions of people have no proof they exist, so no school or clinic will let them in. This is the door we are building for them. In about a minute you will welcome one child, then walk in as them.",
     spotlight: null,
     view: "login",
-    enter: "signout",
     gate: "next",
   },
   {
@@ -57,7 +54,6 @@ export const tourSteps: TourStep[] = [
     body: "I have placed you in the village steward's seat. This bar at the bottom lets you stand in anyone's shoes here, and nothing you do is ever saved.",
     spotlight: "demobar-trigger",
     view: "steward",
-    enter: "steward",
     gate: "next",
   },
   {
@@ -67,7 +63,6 @@ export const tourSteps: TourStep[] = [
     body: "The steward is not a teacher or a computer person. They are a trusted grown-up in the village, and their whole job is to make a visit safe, warm, and welcoming.",
     spotlight: null,
     view: "steward",
-    enter: "steward",
     gate: "next",
   },
   {
@@ -77,7 +72,6 @@ export const tourSteps: TourStep[] = [
     body: "Tap Enroll to begin. Consent always comes first: the family decides, in their own language, and they can change their mind any time without losing a thing.",
     spotlight: "steward-tab-enroll",
     view: "steward",
-    enter: "steward",
     gate: "next",
     hint: "Tap Enroll to open the form",
   },
@@ -88,7 +82,6 @@ export const tourSteps: TourStep[] = [
     body: "Agree to consent, add a name, an optional photo, then the quiet magic: a child with no email signs in by picking a picture and tapping a four digit PIN they choose with their family. I will notice the moment they are welcomed.",
     spotlight: "enroll-next",
     view: "steward",
-    enter: "steward",
     gate: "roster",
     hint: "Finish the steps, then press Create",
   },
@@ -108,7 +101,6 @@ export const tourSteps: TourStep[] = [
     body: "You signed out as the helper, and now you arrive as the child you welcomed. Students sign in differently from staff, with a picture and a PIN, because that is who they are.",
     spotlight: "auth-role-student",
     view: "login",
-    enter: "signout",
     gate: "next",
     hint: "Choose Student or family",
   },

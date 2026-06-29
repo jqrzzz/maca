@@ -24,10 +24,9 @@ function read(): TourState {
     const raw = window.localStorage.getItem(KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as Partial<TourState>;
-      return {
-        seen: parsed.seen === true,
-        step: typeof parsed.step === "number" ? parsed.step : 0,
-      };
+      // Only "seen" is persisted; a run always starts fresh at step 0, so a
+      // reload mid-tour restarts cleanly instead of resuming onto a reset screen.
+      return { seen: parsed.seen === true, step: 0 };
     }
   } catch {
     /* ignore */
@@ -37,7 +36,7 @@ function read(): TourState {
 
 function persist() {
   try {
-    window.localStorage.setItem(KEY, JSON.stringify(state));
+    window.localStorage.setItem(KEY, JSON.stringify({ seen: state.seen }));
   } catch {
     /* ignore */
   }
@@ -67,9 +66,9 @@ export function useTour(): TourState {
 }
 
 export function setTourStep(step: number) {
+  // Step is in-memory only (not persisted); see read().
   state = { ...state, step };
   ready = true;
-  persist();
   emit();
 }
 

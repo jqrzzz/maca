@@ -49,11 +49,16 @@ export function DemoBar({
 
   useEffect(() => {
     if (!open) return;
+    // Capture phase plus stop, so Escape closes only this menu and does not also
+    // reach a guided tour listening for Escape underneath.
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        e.stopImmediatePropagation();
+        setOpen(false);
+      }
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
   }, [open]);
 
   const here = items.find((i) => i.id === current) ?? items[0];
@@ -70,7 +75,7 @@ export function DemoBar({
         />
       )}
 
-      <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 animate-bar">
+      <div className="fixed bottom-4 left-1/2 z-[90] -translate-x-1/2 animate-bar">
         {open && (
           <div className="absolute bottom-full left-1/2 mb-2 w-64 -translate-x-1/2 overflow-hidden rounded-[18px] border border-line bg-cream shadow-lift">
             <p className="px-4 pt-3 pb-1 text-[0.6875rem] font-semibold tracking-[0.1em] text-stone uppercase">
