@@ -248,7 +248,11 @@ export function Tour({
     <div className="pointer-events-none fixed inset-0 z-[80]">
       {/* Dim and highlight */}
       {mode === "center" && (
-        <div className="fixed inset-0 bg-forest-700/50" aria-hidden />
+        <div
+          className="fixed inset-0"
+          style={{ backgroundColor: "rgba(31, 41, 37, 0.55)" }}
+          aria-hidden
+        />
       )}
       {mode === "anchored" && rect && (
         <>

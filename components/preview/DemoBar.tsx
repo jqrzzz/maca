@@ -15,6 +15,7 @@ import {
   Play,
 } from "lucide-react";
 import { toast } from "./toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 type Item = { id: string; label: string; icon: React.ElementType };
 
@@ -192,6 +193,10 @@ export function DemoBar({
               aria-hidden
             />
           </button>
+
+          <span className="h-6 w-px bg-line" aria-hidden />
+
+          <ThemeToggle className="h-8 w-8 rounded-full text-stone hover:bg-sand" />
         </div>
       </div>
     </>
