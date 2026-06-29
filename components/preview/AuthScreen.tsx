@@ -23,6 +23,7 @@ import { Badge } from "@/components/ui/Badge";
 import { card } from "./ui";
 import { avatarChoices } from "@/content/studentProfile";
 import { PinPad } from "./PinPad";
+import { toast } from "./toast";
 
 export type AuthRole = "admin" | "member" | "steward" | "student" | "donor";
 
@@ -208,6 +209,11 @@ export function AuthScreen({
 
   const Icon = active.icon;
 
+  const go = () => {
+    toast(`Signed in as ${active.label}`);
+    onChoose(active.id);
+  };
+
   // ---- Role-specific sign-in ----
   return (
     <div className="flex min-h-[80vh] items-center justify-center bg-sand px-6 py-16">
@@ -265,7 +271,7 @@ export function AuthScreen({
               </div>
               <button
                 type="button"
-                onClick={() => onChoose("student")}
+                onClick={go}
                 disabled={pin.length < 4}
                 className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[14px] bg-clay-600 px-6 font-medium text-cream shadow-soft transition-colors hover:bg-clay-700 disabled:opacity-40"
               >
@@ -323,7 +329,7 @@ export function AuthScreen({
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  if (formValid) onChoose(active.id);
+                  if (formValid) go();
                 }}
                 className="space-y-3"
               >
@@ -420,7 +426,7 @@ export function AuthScreen({
               <div className="grid gap-2">
                 <button
                   type="button"
-                  onClick={() => onChoose(active.id)}
+                  onClick={go}
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-[14px] border border-line bg-cream text-sm font-medium text-forest-700 transition-colors hover:bg-sand"
                 >
                   <Globe className="h-4 w-4" aria-hidden />
@@ -428,7 +434,7 @@ export function AuthScreen({
                 </button>
                 <button
                   type="button"
-                  onClick={() => onChoose(active.id)}
+                  onClick={go}
                   className="inline-flex h-11 items-center justify-center gap-2 rounded-[14px] border border-line bg-cream text-sm font-medium text-forest-700 transition-colors hover:bg-sand"
                 >
                   <Apple className="h-4 w-4" aria-hidden />

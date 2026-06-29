@@ -23,6 +23,7 @@ import {
   type WalletEntry,
   type WalletDirection,
 } from "@/content/stewardWallet";
+import { toast } from "./toast";
 
 const field =
   "mt-1.5 w-full rounded-[14px] border border-line bg-cream px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400";
@@ -111,6 +112,7 @@ export function StewardWallet() {
       status: composer === "in" ? "approved" : "logged",
     };
     setEntries((prev) => [entry, ...prev]);
+    toast(composer === "in" ? "Money in recorded" : "Spending logged");
     // Ownership of the object URL transfers to the entry; do not revoke.
     setReceiptUrl(null);
     setAmount("");

@@ -13,6 +13,7 @@ import { StudentProfile } from "@/components/preview/StudentProfile";
 import { DonorPortal } from "@/components/preview/DonorPortal";
 import { AuthScreen, type AuthRole } from "@/components/preview/AuthScreen";
 import { DemoBar } from "@/components/preview/DemoBar";
+import { Toaster } from "@/components/preview/Toaster";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
@@ -215,6 +216,7 @@ export function PreviewConsole() {
       {showBar && (
         <DemoBar current={view} onSwitch={switchTo} onReset={signOut} />
       )}
+      <Toaster />
     </>
   );
 }

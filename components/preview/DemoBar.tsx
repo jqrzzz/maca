@@ -12,6 +12,7 @@ import {
   Check,
   LogOut,
 } from "lucide-react";
+import { toast } from "./toast";
 
 type Item = { id: string; label: string; icon: React.ElementType };
 
@@ -79,7 +80,10 @@ export function DemoBar({
                     type="button"
                     onClick={() => {
                       setOpen(false);
-                      if (!isHere) onSwitch(i.id);
+                      if (!isHere) {
+                        toast(`Now viewing ${i.label}`);
+                        onSwitch(i.id);
+                      }
                     }}
                     className={`flex w-full items-center gap-3 rounded-[12px] px-2.5 py-2 text-left text-sm transition-colors ${
                       isHere

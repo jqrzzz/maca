@@ -34,6 +34,7 @@ import {
   donorDocuments,
   type Gift,
 } from "@/content/donor";
+import { toast } from "./toast";
 
 type Tab = "overview" | "giving" | "documents";
 
@@ -65,6 +66,7 @@ function download(filename: string, text: string) {
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
+  toast("Downloaded");
 }
 
 const money = (n: number) => `${usd(n)} USD`;

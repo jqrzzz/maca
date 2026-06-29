@@ -32,6 +32,7 @@ import {
   type MedicalEntry,
 } from "@/content/studentProfile";
 import { LanguageCenter } from "./LanguageCenter";
+import { toast } from "./toast";
 
 type Tab = "me" | "health" | "learn";
 
@@ -100,6 +101,7 @@ export function StudentProfile({
     setMTitle("");
     setMDetail("");
     setAdding(false);
+    toast("Health note saved");
   };
 
   const removeMedical = (id: string) =>
