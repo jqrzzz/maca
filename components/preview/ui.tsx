@@ -9,6 +9,9 @@ export const card = "rounded-[20px] border border-line bg-cream shadow-soft";
 
 export const usd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
+/** Thai baht, the steward's local currency. Mirrors `usd`'s style. */
+export const thb = (n: number) => `฿${n.toLocaleString("en-US")}`;
+
 export const initials = (name: string): string =>
   name
     .replace(/[^a-zA-Z ]/g, "")

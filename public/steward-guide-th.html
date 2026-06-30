@@ -1,0 +1,976 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>คู่มือผู้ดูแล: โครงการ Curiosity</title>
+    <meta
+      name="description"
+      content="คู่มือง่าย ๆ อ่านออกเสียงได้ สำหรับผู้ดูแลประจำหมู่บ้าน: คืออะไร ช่วยได้อย่างไร แต่ละครั้งทำอะไร และวิธีฝึกการเยี่ยมครั้งแรก"
+    />
+    <style>
+      :root {
+        --cream: #fbf7f0;
+        --sand: #f1e8d8;
+        --line: #e3d7c2;
+        --ink: #2b2620;
+        --stone: #6f655a;
+        --clay: #b4541f;
+        --clay-700: #8f3f15;
+        --clay-50: #f6e9df;
+        --forest: #2f5d50;
+        --forest-50: #e6efe9;
+        --gold: #c8911f;
+        --gold-50: #f9efd6;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family:
+          ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans Thai",
+          Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.75;
+        font-size: 18px;
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 22px 20px 80px;
+      }
+      .icon {
+        width: 1.25em;
+        height: 1.25em;
+        stroke: currentColor;
+        stroke-width: 1.9;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex: 0 0 auto;
+      }
+      .langswitch {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        margin-bottom: 14px;
+      }
+      .langswitch a {
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--stone);
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 999px;
+        padding: 5px 14px;
+      }
+      .langswitch a.active {
+        background: var(--clay);
+        color: #fff;
+        border-color: var(--clay);
+      }
+      header.masthead {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        border-bottom: 2px solid var(--line);
+        padding-bottom: 18px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: var(--clay-50);
+        color: var(--clay);
+        flex: 0 0 auto;
+      }
+      .badge .icon {
+        width: 28px;
+        height: 28px;
+      }
+      h1 {
+        font-size: 27px;
+        line-height: 1.3;
+        margin: 0;
+        color: var(--forest);
+      }
+      .masthead p {
+        margin: 2px 0 0;
+        color: var(--stone);
+        font-size: 15px;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 18px 0 6px;
+      }
+      .btn {
+        font: inherit;
+        font-size: 15px;
+        font-weight: 600;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--forest);
+        border-radius: 12px;
+        padding: 9px 15px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn:hover {
+        background: var(--sand);
+      }
+      .btn.primary {
+        background: var(--clay);
+        color: #fff;
+        border-color: var(--clay);
+      }
+      .btn.primary:hover {
+        background: var(--clay-700);
+      }
+      .btn .icon {
+        width: 18px;
+        height: 18px;
+      }
+      .langnote {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: var(--gold-50);
+        border: 1px solid #ecd9a8;
+        border-radius: 12px;
+        padding: 12px 14px;
+        font-size: 15px;
+        margin: 16px 0;
+        color: var(--clay-700);
+      }
+      .lede {
+        font-size: 19px;
+        margin: 20px 0;
+      }
+      h2 {
+        font-size: 21px;
+        color: var(--forest);
+        margin: 34px 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      h2 .icon {
+        width: 22px;
+        height: 22px;
+        color: var(--clay);
+      }
+      .two {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr 1fr;
+      }
+      .tile {
+        background: var(--sand);
+        border-radius: 16px;
+        padding: 16px 18px;
+      }
+      .tile h3 {
+        margin: 0 0 4px;
+        font-size: 17px;
+        color: var(--forest);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .tile h3 .icon {
+        width: 20px;
+        height: 20px;
+        color: var(--clay);
+      }
+      .tile p {
+        margin: 0;
+        font-size: 16px;
+        color: var(--stone);
+      }
+      ol.steps {
+        list-style: none;
+        counter-reset: step;
+        margin: 0;
+        padding: 0;
+      }
+      ol.steps > li {
+        counter-increment: step;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px 16px;
+        margin: 10px 0;
+      }
+      ol.steps > li::before {
+        content: counter(step);
+        flex: 0 0 auto;
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        background: var(--clay);
+        color: #fff;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .step-ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: var(--clay-50);
+        color: var(--clay);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+      .step-ic .icon {
+        width: 20px;
+        height: 20px;
+      }
+      .step-text {
+        flex: 1;
+      }
+      .rules {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .rule {
+        background: var(--clay-50);
+        border: 1px solid rgba(180, 84, 31, 0.25);
+        border-radius: 16px;
+        padding: 14px 16px;
+      }
+      .rule .ic {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--clay);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+      }
+      .rule p {
+        margin: 0;
+        font-size: 15.5px;
+        color: var(--clay-700);
+      }
+      .supported {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: var(--forest-50);
+        border-radius: 16px;
+        padding: 16px 18px;
+        margin-top: 12px;
+      }
+      .supported .ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--forest);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+      .supported h3 {
+        margin: 0 0 2px;
+        color: var(--forest);
+        font-size: 17px;
+      }
+      .supported p {
+        margin: 0;
+        color: var(--stone);
+        font-size: 16px;
+      }
+      .rehearsal {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 6px 18px 16px;
+      }
+      .rstep {
+        padding: 16px 0;
+        border-bottom: 1px solid var(--sand);
+      }
+      .rstep:last-child {
+        border-bottom: none;
+      }
+      .rhead {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .rhead .step-ic {
+        width: 38px;
+        height: 38px;
+      }
+      .rhead h3 {
+        margin: 0;
+        font-size: 18px;
+        color: var(--forest);
+        flex: 1;
+      }
+      .rstep .do {
+        margin: 10px 0 0;
+        font-size: 16px;
+      }
+      .say {
+        margin-top: 10px;
+        border-left: 4px solid var(--clay);
+        background: var(--sand);
+        border-radius: 0 12px 12px 0;
+        padding: 10px 14px;
+      }
+      .say .label {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--stone);
+      }
+      .say .quote {
+        margin: 2px 0 0;
+        color: var(--forest);
+      }
+      .safety {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 10px;
+        background: var(--forest-50);
+        color: var(--forest);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .safety .icon {
+        width: 16px;
+        height: 16px;
+      }
+      .next {
+        background: var(--sand);
+        border-radius: 16px;
+        padding: 14px 18px;
+        margin-top: 14px;
+      }
+      .next p.k {
+        margin: 0 0 6px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--stone);
+      }
+      .next ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .next li {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+        margin: 7px 0;
+        font-size: 16px;
+      }
+      .next li .icon {
+        width: 18px;
+        height: 18px;
+        color: var(--clay);
+        margin-top: 6px;
+      }
+      .saybtn {
+        flex: 0 0 auto;
+        width: 38px;
+        height: 38px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--clay);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .saybtn:hover {
+        background: var(--sand);
+      }
+      .saybtn .icon {
+        width: 18px;
+        height: 18px;
+      }
+      .owner {
+        margin-top: 46px;
+        border-top: 2px dashed var(--line);
+        padding-top: 22px;
+      }
+      .owner h2 {
+        margin-top: 6px;
+      }
+      .owner ol {
+        padding-left: 0;
+        list-style: none;
+        counter-reset: o;
+      }
+      .owner li {
+        counter-increment: o;
+        display: flex;
+        gap: 12px;
+        margin: 12px 0;
+      }
+      .owner li::before {
+        content: counter(o);
+        flex: 0 0 auto;
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background: var(--forest);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .owner .t {
+        font-weight: 700;
+        color: var(--forest);
+      }
+      .owner .b {
+        color: var(--stone);
+        font-size: 16px;
+      }
+      footer {
+        margin-top: 40px;
+        padding-top: 16px;
+        border-top: 1px solid var(--line);
+        font-size: 14px;
+        color: var(--stone);
+      }
+      @media (max-width: 620px) {
+        body {
+          font-size: 17px;
+        }
+        .two,
+        .rules {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 23px;
+        }
+      }
+      @media print {
+        .toolbar,
+        .saybtn,
+        .langswitch {
+          display: none;
+        }
+        body {
+          background: #fff;
+        }
+        ol.steps > li,
+        .rehearsal,
+        .tile,
+        .rule {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ชุดไอคอน -->
+    <svg style="display: none" aria-hidden="true">
+      <symbol id="i-spark" viewBox="0 0 24 24">
+        <path
+          d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"
+        />
+      </symbol>
+      <symbol id="i-sprout" viewBox="0 0 24 24">
+        <path d="M7 20h10" />
+        <path d="M10 20c5.5-2.5.8-6.4 3-10" />
+        <path
+          d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"
+        />
+        <path
+          d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"
+        />
+      </symbol>
+      <symbol id="i-users" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path
+          d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"
+        />
+        <path d="m9 12 2 2 4-4" />
+      </symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+        <path d="M12 19v3" />
+      </symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24">
+        <path
+          d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A1.4 1.4 0 0 1 5.4 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.4a1.4 1.4 0 0 1 1 .4l3.4 3.4a.7.7 0 0 0 1.2-.5z"
+        />
+        <path d="M16 9a5 5 0 0 1 0 6" />
+        <path d="M19.4 5.6a9 9 0 0 1 0 12.7" />
+      </symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24">
+        <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+        <path
+          d="M18.4 2.6a1 1 0 0 1 3 3l-9 9a2 2 0 0 1-.9.5l-2.9.8a.5.5 0 0 1-.6-.6l.8-2.9a2 2 0 0 1 .5-.9z"
+        />
+      </symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24">
+        <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24">
+        <path
+          d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+        />
+      </symbol>
+      <symbol id="i-gift" viewBox="0 0 24 24">
+        <rect x="3" y="8" width="18" height="4" rx="1" />
+        <path d="M12 8v13" />
+        <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+        <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+      </symbol>
+      <symbol id="i-userplus" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M19 8v6" />
+        <path d="M22 11h-6" />
+      </symbol>
+      <symbol id="i-printer" viewBox="0 0 24 24">
+        <path d="M6 9V2h12v7" />
+        <path
+          d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+        />
+        <rect x="6" y="14" width="12" height="8" />
+      </symbol>
+      <symbol id="i-stop" viewBox="0 0 24 24">
+        <rect x="5" y="5" width="14" height="14" rx="2" />
+      </symbol>
+    </svg>
+
+    <div class="wrap">
+      <div class="langswitch">
+        <a href="/steward-guide.html">English</a>
+        <a href="/steward-guide-th.html" class="active" aria-current="page"
+          >ไทย</a
+        >
+      </div>
+
+      <header class="masthead">
+        <span class="badge"><svg class="icon"><use href="#i-spark" /></svg></span>
+        <div>
+          <h1>คู่มือผู้ดูแล</h1>
+          <p>โครงการ Curiosity</p>
+        </div>
+      </header>
+
+      <div class="toolbar">
+        <button class="btn primary" id="readAll" type="button">
+          <svg class="icon"><use href="#i-volume" /></svg>
+          อ่านออกเสียง
+        </button>
+        <button class="btn" id="stopBtn" type="button">
+          <svg class="icon"><use href="#i-stop" /></svg>
+          หยุด
+        </button>
+        <button class="btn" id="printBtn" type="button">
+          <svg class="icon"><use href="#i-printer" /></svg>
+          พิมพ์
+        </button>
+      </div>
+
+      <div class="langnote">
+        <svg class="icon" style="margin-top: 2px"><use href="#i-spark" /></svg>
+        <span
+          >นี่คือฉบับภาษาไทย เป็นฉบับร่างที่แปลด้วยความช่วยเหลือของ AI
+          กรุณาให้เจ้าของภาษาตรวจทานก่อนนำไปใช้จริงกับครอบครัว</span
+        >
+      </div>
+
+      <p
+        class="lede"
+        data-say="คุณคือผู้ดูแลประจำหมู่บ้าน นี่คือสิ่งที่โครงการนี้เป็น เหตุผลที่มันช่วยได้ และสิ่งที่คุณต้องทำ คุณไม่จำเป็นต้องเป็นครูหรือรู้เรื่องคอมพิวเตอร์"
+      >
+        คุณคือผู้ดูแลประจำหมู่บ้าน นี่คือสิ่งที่โครงการนี้เป็น เหตุผลที่มันช่วยได้
+        และสิ่งที่คุณต้องทำ คุณไม่จำเป็นต้องเป็นครูหรือรู้เรื่องคอมพิวเตอร์
+      </p>
+
+      <!-- คืออะไร / ช่วยได้อย่างไร -->
+      <div class="two">
+        <div class="tile">
+          <h3><svg class="icon"><use href="#i-spark" /></svg> คืออะไร</h3>
+          <p
+            data-say="คืออะไร ชมรมการเรียนรู้ เด็ก ๆ นั่งกับผู้ช่วยที่เป็นมิตรและปลอดภัยบนแท็บเล็ต แล้วถามเรื่องอะไรก็ได้ที่สงสัย มีผู้ใหญ่อยู่ด้วยเสมอ"
+          >
+            ชมรมการเรียนรู้ เด็ก ๆ นั่งกับผู้ช่วยที่เป็นมิตรและปลอดภัยบนแท็บเล็ต
+            แล้วถามเรื่องอะไรก็ได้ที่สงสัย มีผู้ใหญ่อยู่ด้วยเสมอ
+          </p>
+        </div>
+        <div class="tile">
+          <h3><svg class="icon"><use href="#i-sprout" /></svg> ช่วยได้อย่างไร</h3>
+          <p
+            data-say="ช่วยได้อย่างไร ที่นี่ไม่มีครู แต่เด็ก ๆ เต็มไปด้วยคำถาม ผู้ช่วยตอบได้โดยไม่มีเหนื่อย เมื่อเด็กชอบอะไรเป็นพิเศษ เราจะนำสิ่งของมาช่วยให้เขาได้เรียนรู้ต่อ"
+          >
+            ที่นี่ไม่มีครู แต่เด็ก ๆ เต็มไปด้วยคำถาม
+            ผู้ช่วยตอบได้โดยไม่มีเหนื่อย เมื่อเด็กชอบอะไรเป็นพิเศษ
+            เราจะนำสิ่งของมาช่วยให้เขาได้เรียนรู้ต่อ
+          </p>
+        </div>
+      </div>
+
+      <!-- สิ่งที่คุณทำ -->
+      <h2><svg class="icon"><use href="#i-spark" /></svg> สิ่งที่คุณทำในแต่ละครั้ง</h2>
+      <ol class="steps">
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-users" /></svg></span>
+          <span class="step-text">รวมเด็ก ๆ สองสามคนที่จุดนัดพบ</span>
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="รวมเด็ก ๆ สองสามคนที่จุดนัดพบ">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-shield" /></svg></span>
+          <span class="step-text"
+            >ให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ</span
+          >
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-mic" /></svg></span>
+          <span class="step-text"
+            >ส่งแท็บเล็ตให้เด็ก ให้เขาถาม ไม่ว่าจะพิมพ์หรือพูด</span
+          >
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ส่งแท็บเล็ตให้เด็ก ให้เขาถาม ไม่ว่าจะพิมพ์หรือพูด">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-volume" /></svg></span>
+          <span class="step-text">ให้เขาฟังคำตอบและสำรวจต่อไป</span>
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ให้เขาฟังคำตอบและสำรวจต่อไป">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+        <li>
+          <span class="step-ic"><svg class="icon"><use href="#i-pen" /></svg></span>
+          <span class="step-text"
+            >เขียนบันทึกสั้น ๆ หนึ่งบรรทัด: ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น</span
+          >
+          <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="เขียนบันทึกสั้น ๆ หนึ่งบรรทัด ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น">
+            <svg class="icon"><use href="#i-volume" /></svg>
+          </button>
+        </li>
+      </ol>
+
+      <!-- กฎ -->
+      <h2><svg class="icon"><use href="#i-shield" /></svg> กฎสามข้อที่ต้องรักษา</h2>
+      <div class="rules">
+        <div class="rule">
+          <span class="ic"><svg class="icon"><use href="#i-heart" /></svg></span>
+          <p
+            data-say="กฎข้อหนึ่ง การยินยอมเป็นของครอบครัว ขออนุญาตก่อนเสมอ และเขาปฏิเสธได้"
+          >
+            การยินยอมเป็นของครอบครัว ขออนุญาตก่อนเสมอ และเขาปฏิเสธได้
+          </p>
+        </div>
+        <div class="rule">
+          <span class="ic"><svg class="icon"><use href="#i-users" /></svg></span>
+          <p data-say="กฎข้อสอง มีผู้ใหญ่อยู่กับเด็ก ๆ เสมอ">
+            มีผู้ใหญ่อยู่กับเด็ก ๆ เสมอ
+          </p>
+        </div>
+        <div class="rule">
+          <span class="ic"><svg class="icon"><use href="#i-lock" /></svg></span>
+          <p data-say="กฎข้อสาม เรื่องส่วนตัวของแต่ละคนต้องเก็บเป็นความลับ">
+            เรื่องส่วนตัวของแต่ละคนต้องเก็บเป็นความลับ
+          </p>
+        </div>
+      </div>
+
+      <!-- ได้รับการสนับสนุน -->
+      <div class="supported">
+        <span class="ic"><svg class="icon"><use href="#i-gift" /></svg></span>
+        <div>
+          <h3>คุณได้รับการสนับสนุน</h3>
+          <p
+            data-say="คุณได้รับการสนับสนุน นี่คือบทบาทจริง มีค่าตอบแทนสำหรับบทบาทนี้ ไม่ใช่การจ่ายต่อเด็กหนึ่งคน ผู้ช่วยเป็นผู้ตอบคำถาม หน้าที่ของคุณคือทำให้ปลอดภัย อบอุ่น และสนุก"
+          >
+            นี่คือบทบาทจริง มีค่าตอบแทนสำหรับบทบาทนี้ ไม่ใช่การจ่ายต่อเด็กหนึ่งคน
+            ผู้ช่วยเป็นผู้ตอบคำถาม หน้าที่ของคุณคือทำให้ปลอดภัย อบอุ่น และสนุก
+          </p>
+        </div>
+      </div>
+
+      <!-- ฝึกการเยี่ยม -->
+      <h2><svg class="icon"><use href="#i-spark" /></svg> ฝึกการเยี่ยมหนึ่งครั้ง ทีละขั้นตอน</h2>
+      <p style="margin-top: 0; color: var(--stone); font-size: 16px">
+        การเดินผ่านการเยี่ยมหนึ่งครั้งอย่างใจเย็น เพื่อให้คุณรู้ว่าต้องทำอะไร
+        อ่านกี่ครั้งก็ได้ตามต้องการ
+      </p>
+      <div class="rehearsal">
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-heart" /></svg></span>
+            <h3>1. ขอความยินยอมก่อน</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ขอความยินยอมก่อน รวมเด็ก ๆ สองสามคนที่จุดนัดพบ และให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ ขออนุญาตแต่ละครอบครัวก่อน เป็นภาษาของเขา เขามีสิทธิ์ปฏิเสธได้ และไม่มีอะไรเสียหายถ้าเขาปฏิเสธ สิ่งที่คุณพูดได้: นี่คือชมรมการเรียนรู้ฟรีสำหรับเด็กที่อยากรู้อยากเห็น อยากให้ลูกของคุณเข้าร่วมวันนี้ไหม">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            รวมเด็ก ๆ สองสามคนที่จุดนัดพบ
+            และให้มีผู้ใหญ่ที่ไว้ใจได้อีกคนอยู่กับคุณ ขออนุญาตแต่ละครอบครัวก่อน
+            เป็นภาษาของเขา เขามีสิทธิ์ปฏิเสธได้ และไม่มีอะไรเสียหายถ้าเขาปฏิเสธ
+          </p>
+          <div class="say">
+            <div class="label">สิ่งที่คุณพูดได้</div>
+            <p class="quote">
+              "นี่คือชมรมการเรียนรู้ฟรีสำหรับเด็กที่อยากรู้อยากเห็น
+              อยากให้ลูกของคุณเข้าร่วมวันนี้ไหม"
+            </p>
+          </div>
+          <span class="safety"
+            ><svg class="icon"><use href="#i-shield" /></svg>
+            ผู้ปกครองยินยอมก่อน และมีผู้ใหญ่อยู่ด้วยเสมอ</span
+          >
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-userplus" /></svg></span>
+            <h3>2. ต้อนรับนักสำรวจ</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ต้อนรับนักสำรวจ เพิ่มเด็กด้วยชื่อหรือชื่อเล่นและช่วงอายุ ถ้าครอบครัวต้องการ ถ่ายรูปต้อนรับเพื่อพิมพ์และใส่กรอบเป็นของขวัญ สิ่งที่คุณพูดได้: อยากใช้ชื่ออะไรดี">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            เพิ่มเด็กด้วยชื่อหรือชื่อเล่นและช่วงอายุ ถ้าครอบครัวต้องการ
+            ถ่ายรูปต้อนรับเพื่อพิมพ์และใส่กรอบเป็นของขวัญ
+          </p>
+          <div class="say">
+            <div class="label">สิ่งที่คุณพูดได้</div>
+            <p class="quote">"อยากใช้ชื่ออะไรดี"</p>
+          </div>
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-mic" /></svg></span>
+            <h3>3. ส่งแท็บเล็ตให้เด็ก</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="ส่งแท็บเล็ตให้เด็ก ให้เด็กถามอะไรก็ได้ที่สงสัย ไม่ว่าจะพิมพ์หรือพูด เปิดการอ่านออกเสียงเพื่อให้เขาได้ยินคำตอบ ผู้ช่วยใจดีและไม่มีเหนื่อย สิ่งที่คุณพูดได้: ถามอะไรก็ได้ที่หนูอยากรู้">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            ให้เด็กถามอะไรก็ได้ที่สงสัย ไม่ว่าจะพิมพ์หรือพูด
+            เปิดการอ่านออกเสียงเพื่อให้เขาได้ยินคำตอบ ผู้ช่วยใจดีและไม่มีเหนื่อย
+          </p>
+          <div class="say">
+            <div class="label">สิ่งที่คุณพูดได้</div>
+            <p class="quote">"ถามอะไรก็ได้ที่หนูอยากรู้"</p>
+          </div>
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-sprout" /></svg></span>
+            <h3>4. สังเกตประกายความสนใจ</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="สังเกตประกายความสนใจ เมื่อเด็กตื่นเต้นกับเรื่องใดเรื่องหนึ่งซ้ำ ๆ แอปจะสังเกตเห็นอย่างเปิดเผย มันจะปรากฏในรายการประกายความสนใจของคุณภายหลัง เพื่อแนะนำสิ่งเล็ก ๆ ที่จะต่อยอด สิ่งที่คุณพูดได้: หนูชอบเรื่องนี้จริง ๆ นะ เราจะบอกผู้ใหญ่ที่ช่วยดูแลหนู เพื่อหาอะไรมาให้หนูเพิ่ม">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            เมื่อเด็กตื่นเต้นกับเรื่องใดเรื่องหนึ่งซ้ำ ๆ
+            แอปจะสังเกตเห็นอย่างเปิดเผย
+            มันจะปรากฏในรายการประกายความสนใจของคุณภายหลัง
+            เพื่อแนะนำสิ่งเล็ก ๆ ที่จะต่อยอด
+          </p>
+          <div class="say">
+            <div class="label">สิ่งที่คุณพูดได้</div>
+            <p class="quote">
+              "หนูชอบเรื่องนี้จริง ๆ นะ เราจะบอกผู้ใหญ่ที่ช่วยดูแลหนู
+              เพื่อหาอะไรมาให้หนูเพิ่ม"
+            </p>
+          </div>
+        </div>
+
+        <div class="rstep">
+          <div class="rhead">
+            <span class="step-ic"><svg class="icon"><use href="#i-pen" /></svg></span>
+            <h3>5. เขียนบันทึกสั้น ๆ หนึ่งบรรทัด</h3>
+            <button class="saybtn" type="button" aria-label="อ่านออกเสียง" data-say="เขียนบันทึกสั้น ๆ หนึ่งบรรทัด ก่อนจบ เขียนหนึ่งบรรทัด ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น นั่นคือบันทึกทั้งหมดที่เราเก็บ">
+              <svg class="icon"><use href="#i-volume" /></svg>
+            </button>
+          </div>
+          <p class="do">
+            ก่อนจบ เขียนหนึ่งบรรทัด: ใครมาบ้าง และอะไรที่ทำให้เขาตื่นเต้น
+            นั่นคือบันทึกทั้งหมดที่เราเก็บ
+          </p>
+        </div>
+      </div>
+
+      <div class="next">
+        <p class="k">หลังการเยี่ยม</p>
+        <ul>
+          <li>
+            <svg class="icon"><use href="#i-sprout" /></svg>
+            คุณแนะนำประกายความสนใจสำหรับเด็กที่ตื่นเต้นอย่างต่อเนื่อง
+          </li>
+          <li>
+            <svg class="icon"><use href="#i-sprout" /></svg>
+            ผู้ก่อตั้งอนุมัติก่อนซื้อสิ่งใด
+          </li>
+          <li>
+            <svg class="icon"><use href="#i-sprout" /></svg>
+            เรานำสิ่งเล็ก ๆ มาช่วยให้เขาต่อยอด
+          </li>
+        </ul>
+      </div>
+
+      <!-- สำหรับผู้แนะนำ -->
+      <div class="owner">
+        <h2>
+          <svg class="icon"><use href="#i-heart" /></svg>
+          สำหรับผู้ที่แนะนำคู่มือนี้
+        </h2>
+        <p style="margin-top: 0; color: var(--stone); font-size: 16px">
+          วิธีสั้น ๆ ในการพาผู้ดูแลทำความเข้าใจ ในแบบของเขา
+        </p>
+        <ol>
+          <li>
+            <div>
+              <div class="t">เริ่มจากให้เขาได้ลองมือ ไม่ใช่การบรรยาย</div>
+              <div class="b">
+                ให้เขาลองใช้โหมดเด็กด้วยตัวเองก่อน โดยใช้เสียง เมื่อมันตอบเขา
+                จุดประสงค์ก็ชัดเจนทันที
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">อธิบายในแบบโลกของเขา</div>
+              <div class="b">
+                ที่นี่ไม่มีครู เด็กที่อยากรู้อยากเห็นได้เรียนรู้
+                เมื่อเราเห็นว่าเด็กชอบอะไร เรานำสิ่งนั้นมาต่อยอด
+                คุณคือคนที่ทำให้สิ่งนี้เกิดขึ้น
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">ทำให้งานเล็กเข้าไว้</div>
+              <div class="b">
+                เดินผ่านขั้นตอนประจำสัปดาห์ห้าขั้นด้านบน นั่นคืองานทั้งหมด
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">กฎความปลอดภัยสามข้อ</div>
+              <div class="b">
+                การยินยอมเป็นของครอบครัว มีผู้ใหญ่อยู่ด้วยเสมอ
+                เรื่องส่วนตัวของแต่ละคนเก็บเป็นความลับ
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">ให้เขาเป็นคู่หูด้านภาษา</div>
+              <div class="b">
+                ขอคำศัพท์ในภาษาของเขา มันทำให้เขารู้สึกเป็นเจ้าของ
+                และเราได้ภาษากะยันจริง ๆ ที่เราไม่เดาเอง
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="t">เขาไม่จำเป็นต้องเข้าใจเทคโนโลยี</div>
+              <div class="b">
+                มุ่งที่ความมั่นใจ บทบาทที่ชัดเจน และความไว้ใจ
+                ไม่ใช่ความเข้าใจทางเทคนิค เครื่องมือก็เป็นแค่เครื่องมือที่เขาใช้ได้ดี
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <footer>
+        คู่มือผู้ดูแลโครงการ Curiosity เป็นการแนะแนวที่เป็นมิตร ไม่ใช่การทดสอบ
+        หน้านี้ใช้งานแบบออฟไลน์ได้เมื่อเปิดแล้ว
+        และสิ่งที่คุณทำที่นี่จะไม่ถูกบันทึกหรือส่งออกไป
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var synth = window.speechSynthesis || null;
+        function speak(text) {
+          if (!synth || !text) return;
+          synth.cancel();
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = "th-TH";
+          u.rate = 0.92;
+          synth.speak(u);
+        }
+        document.addEventListener("click", function (e) {
+          var b = e.target.closest("[data-say]");
+          if (b && b.classList.contains("saybtn")) {
+            speak(b.getAttribute("data-say"));
+          }
+        });
+        var readAll = document.getElementById("readAll");
+        if (readAll) {
+          readAll.addEventListener("click", function () {
+            var nodes = document.querySelectorAll("[data-say]");
+            var parts = [];
+            nodes.forEach(function (n) {
+              parts.push(n.getAttribute("data-say"));
+            });
+            speak(parts.join(" "));
+          });
+        }
+        var stopBtn = document.getElementById("stopBtn");
+        if (stopBtn)
+          stopBtn.addEventListener("click", function () {
+            if (synth) synth.cancel();
+          });
+        var printBtn = document.getElementById("printBtn");
+        if (printBtn)
+          printBtn.addEventListener("click", function () {
+            window.print();
+          });
+      })();
+    </script>
+  </body>
+</html>

@@ -37,10 +37,12 @@ import {
   type DemoDecision,
   type Role,
 } from "@/content/previewDemo";
-import { Avatar, card, usd, roleTone } from "./ui";
+import { Avatar, card, usd, thb, roleTone } from "./ui";
 import { CuriosityPanel } from "./CuriosityPanel";
 import { SessionNotes } from "./SessionNotes";
 import { type Perspective } from "./CuriositySwitcher";
+import { useWallet } from "./walletStore";
+import { walletTotals } from "@/content/stewardWallet";
 
 type Tab =
   | "overview"
@@ -113,6 +115,13 @@ export function AdminConsole({
     s === "agreed" ? "forest" : s === "proposed" ? "gold" : "neutral";
 
   const active = tabs.find((t) => t.id === tab)!;
+
+  // The village steward's cashbook rolls up here live, from the shared store.
+  const walletEntries = useWallet();
+  const stewardCash = walletTotals(walletEntries);
+  const stewardLogged = walletEntries.filter(
+    (e) => e.direction === "out" && e.status === "logged",
+  ).length;
   const activePeople = people.filter((p) => p.status === "active");
   const approved = demoExpenses.filter((e) => e.status === "approved");
   const pending = demoExpenses.filter((e) => e.status === "pending");
@@ -397,7 +406,36 @@ export function AdminConsole({
 
             {/* FINANCE */}
             {tab === "finance" && (
-              <div className={`${card} overflow-hidden`}>
+              <div className="space-y-4">
+                <div className={`${card} p-5`}>
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="flex items-center gap-2 text-stone">
+                      <Wallet className="h-4 w-4 text-clay-600" aria-hidden />
+                      <span className="text-sm font-medium">Village steward cashbook (live)</span>
+                    </div>
+                    {stewardLogged > 0 ? (
+                      <Badge tone="gold">{stewardLogged} logged, awaiting sign-off</Badge>
+                    ) : (
+                      <Badge tone="forest"><CircleCheck className="h-3.5 w-3.5" aria-hidden />All signed off</Badge>
+                    )}
+                  </div>
+                  <div className="mt-3 grid gap-4 sm:grid-cols-3">
+                    <div>
+                      <div className="text-xs text-stone">On hand</div>
+                      <div className="font-display text-2xl text-forest-700 tabular-nums">{thb(stewardCash.balance)}</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-stone">Received</div>
+                      <div className="font-display text-2xl text-forest-700 tabular-nums">{thb(stewardCash.inSum)}</div>
+                    </div>
+                    <div>
+                      <div className="text-xs text-stone">Spent</div>
+                      <div className="font-display text-2xl text-clay-700 tabular-nums">{thb(stewardCash.outSum)}</div>
+                    </div>
+                  </div>
+                  <p className="mt-3 text-xs text-stone">Rolls up live from the steward&apos;s own cashbook, in their currency. Switch to the village steward, log money, and watch it appear here.</p>
+                </div>
+                <div className={`${card} overflow-hidden`}>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-sm">
                     <thead>
@@ -426,6 +464,7 @@ export function AdminConsole({
                       ))}
                     </tbody>
                   </table>
+                </div>
                 </div>
               </div>
             )}

@@ -67,8 +67,8 @@
   --radius-xl: 28px;
 
   /* --- Shadows (warm-tinted, low-contrast) ------------------------------ */
-  --shadow-soft: 0 1px 2px rgba(36, 31, 26, 0.04),
-    0 8px 24px -12px rgba(36, 31, 26, 0.12);
+  --shadow-soft:
+    0 1px 2px rgba(36, 31, 26, 0.04), 0 8px 24px -12px rgba(36, 31, 26, 0.12);
   --shadow-lift: 0 12px 40px -16px rgba(36, 31, 26, 0.22);
 
   /* --- Container width --------------------------------------------------- */
@@ -93,8 +93,8 @@
   --color-clay-600: #ea9a45;
   --color-clay-700: #f0b264;
   --color-gold-400: #f1be6a;
-  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.2),
-    0 8px 24px -12px rgba(0, 0, 0, 0.4);
+  --shadow-soft:
+    0 1px 2px rgba(0, 0, 0, 0.2), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
   --shadow-lift: 0 12px 40px -16px rgba(0, 0, 0, 0.5);
 }
 
@@ -182,9 +182,72 @@
   animation: prasm-fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Preview demo: a gentle fade when switching role views. Opacity only (no
+   transform), so it never creates a containing block for fixed children. */
+@keyframes prasm-view-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@utility animate-view {
+  animation: prasm-view-in 0.28s ease-out both;
+}
+
+/* Preview demo: the demo cockpit bar slides up on first paint. */
+@keyframes prasm-bar-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+@utility animate-bar {
+  animation: prasm-bar-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Preview demo: the guided tour card eases in on each step. */
+@keyframes prasm-tour-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@utility animate-tour-in {
+  animation: prasm-tour-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Preview demo: a gentle pulse on the ring around a highlighted element. The
+   ring stays solid when this is disabled, so the highlight never disappears. */
+@keyframes prasm-tour-ring {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+@utility animate-tour-ring {
+  animation: prasm-tour-ring 1.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-reveal,
-  .animate-pulse {
+  .animate-pulse,
+  .animate-view,
+  .animate-bar,
+  .animate-tour-in,
+  .animate-tour-ring {
     animation: none !important;
   }
 }

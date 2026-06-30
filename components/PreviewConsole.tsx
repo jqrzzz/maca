@@ -1,16 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import {
-  Lock,
-  ArrowRight,
-  ArrowLeft,
-  UserCog,
-  HardHat,
-  Compass,
-  Sparkles,
-} from "lucide-react";
+import { useState, type ReactNode } from "react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { demoPeople, type DemoPerson, type Role } from "@/content/previewDemo";
 import { type Learner } from "@/content/curiosityDemo";
@@ -18,11 +9,32 @@ import { AdminConsole } from "@/components/preview/AdminConsole";
 import { MemberApp } from "@/components/preview/MemberApp";
 import { StewardConsole } from "@/components/preview/StewardConsole";
 import { LearnerApp } from "@/components/preview/LearnerApp";
+import { StudentProfile } from "@/components/preview/StudentProfile";
+import { DonorPortal } from "@/components/preview/DonorPortal";
+import { AuthScreen, type AuthRole } from "@/components/preview/AuthScreen";
+import { DemoBar } from "@/components/preview/DemoBar";
+import { Tour } from "@/components/preview/Tour";
+import { Toaster } from "@/components/preview/Toaster";
+import { toast } from "@/components/preview/toast";
+import {
+  resetDemoStudents,
+  type StudentRecord,
+} from "@/components/preview/demoStore";
+import { resetTour } from "@/components/preview/tourStore";
+import { resetWallet } from "@/components/preview/walletStore";
 import { type Perspective } from "@/components/preview/CuriositySwitcher";
 import { resetCuriosityLive } from "@/components/preview/curiosityStore";
 import { card } from "@/components/preview/ui";
 
-type View = "login" | "admin" | "setup" | "member" | "steward" | "learner";
+type View =
+  | "login"
+  | "admin"
+  | "setup"
+  | "member"
+  | "steward"
+  | "learner"
+  | "student"
+  | "donor";
 type Invite = { name: string; email: string; role: Role };
 
 const fieldCls =
@@ -55,6 +67,9 @@ export function PreviewConsole() {
   const [adminInitialTab, setAdminInitialTab] = useState<
     "overview" | "curiosity"
   >("overview");
+  const [activeLearner, setActiveLearner] = useState<StudentRecord | null>(
+    null,
+  );
 
   const addMember = (m: Invite) =>
     setPeople((prev) => [
@@ -72,15 +87,48 @@ export function PreviewConsole() {
     }
   };
 
-  // Returning to the login ends the session and resets the live demo state.
+  // Route a chosen role from the auth screen to its space.
+  const choose = (role: AuthRole) => {
+    if (role === "admin") {
+      setAdminInitialTab("overview");
+      setView("admin");
+    } else if (role === "member") {
+      setMember({ name: "Teacher", role: "volunteer" });
+      setView("member");
+    } else {
+      setView(role);
+    }
+  };
+
+  // The demo bar can jump to any space, including kid mode.
+  const switchTo = (target: string) => {
+    if (target === "learner") {
+      setActiveLearner(null);
+      setView("learner");
+    } else choose(target as AuthRole);
+  };
+
+  // Sign out returns to the front door but keeps the enrolled roster, so the
+  // demo stays continuous (enroll as steward, then sign in as that student).
   const signOut = () => {
     resetCuriosityLive();
     setView("login");
   };
 
-  // ---- Admin console ----
+  // Reset wipes the demo data back to the seed state.
+  const resetDemo = () => {
+    resetDemoStudents();
+    resetWallet();
+    resetCuriosityLive();
+    setActiveLearner(null);
+    setView("login");
+    toast("Demo reset to the start");
+  };
+
+  let screen: ReactNode;
+
   if (view === "admin") {
-    return (
+    screen = (
       <AdminConsole
         me={people[0]}
         people={people}
@@ -94,39 +142,29 @@ export function PreviewConsole() {
         onSwitchPerspective={goPerspective}
       />
     );
-  }
-
-  // ---- Member field app ----
-  if (view === "member") {
-    return (
-      <MemberApp member={member} onSignOut={signOut} />
-    );
-  }
-
-  // ---- Village steward (Curiosity Program) ----
-  if (view === "steward") {
-    return (
-      <StewardConsole
-        onSignOut={signOut}
-        onSwitch={goPerspective}
-      />
-    );
-  }
-
-  // ---- Young learner (kid mode) ----
-  if (view === "learner") {
-    return (
+  } else if (view === "member") {
+    screen = <MemberApp member={member} onSignOut={signOut} />;
+  } else if (view === "steward") {
+    screen = <StewardConsole onSignOut={signOut} onSwitch={goPerspective} />;
+  } else if (view === "learner") {
+    screen = (
       <LearnerApp
-        learner={demoLearner}
+        learner={activeLearner ?? demoLearner}
         onSignOut={signOut}
         onSwitch={goPerspective}
       />
     );
-  }
-
-  // ---- Set-password (from an invite link) ----
-  if (view === "setup") {
-    return (
+  } else if (view === "student") {
+    screen = (
+      <StudentProfile
+        onSignOut={signOut}
+        onOpenCuriosity={() => setView("learner")}
+      />
+    );
+  } else if (view === "donor") {
+    screen = <DonorPortal onSignOut={signOut} />;
+  } else if (view === "setup") {
+    screen = (
       <div className="flex min-h-[80vh] items-center justify-center bg-sand px-6 py-16">
         <div className="w-full max-w-md">
           <div className={`${card} p-8`}>
@@ -154,17 +192,25 @@ export function PreviewConsole() {
               )}
               <label className="block text-sm font-medium text-forest-700">
                 New password
-                <input type="password" defaultValue="demo-demo-demo" className={fieldCls} />
+                <input
+                  type="password"
+                  defaultValue="demo-demo-demo"
+                  className={fieldCls}
+                />
               </label>
               <label className="block text-sm font-medium text-forest-700">
                 Confirm password
-                <input type="password" defaultValue="demo-demo-demo" className={fieldCls} />
+                <input
+                  type="password"
+                  defaultValue="demo-demo-demo"
+                  className={fieldCls}
+                />
               </label>
               <button
                 type="submit"
                 className="mt-1 inline-flex h-12 items-center justify-center gap-2 rounded-[14px] bg-clay-600 px-6 font-medium text-cream shadow-soft transition-colors hover:bg-clay-700"
               >
-                Create account & continue
+                Create account and continue
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </button>
             </form>
@@ -180,126 +226,36 @@ export function PreviewConsole() {
         </div>
       </div>
     );
+  } else {
+    screen = (
+      <AuthScreen
+        onChoose={choose}
+        onExplorer={(student) => {
+          setActiveLearner(student);
+          setView("learner");
+        }}
+      />
+    );
   }
 
-  // ---- Login (choose a role to preview) ----
+  const showBar = view !== "login" && view !== "setup";
+
   return (
-    <div className="flex min-h-[80vh] items-center justify-center bg-sand px-6 py-16">
-      <div className="w-full max-w-md">
-        <div className={`${card} p-8`}>
-          <span className="inline-flex h-12 w-12 items-center justify-center rounded-[14px] bg-clay-50 text-clay-600">
-            <Lock className="h-6 w-6" strokeWidth={1.75} aria-hidden />
-          </span>
-          <div className="mt-5 flex items-center gap-2">
-            <h1 className="font-display text-2xl font-semibold text-forest-700">
-              PRASM Internal
-            </h1>
-            <Badge tone="gold">Preview</Badge>
-          </div>
-          <p className="mt-2 text-sm leading-relaxed text-stone">
-            A visual preview of the future team console. This is a demo: no real
-            account, and nothing you type leaves your browser. Choose a view.
-          </p>
-
-          <div className="mt-6 grid gap-3">
-            <p className="text-xs font-semibold tracking-wide text-stone uppercase">
-              Internal console
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setAdminInitialTab("overview");
-                setView("admin");
-              }}
-              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
-            >
-              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-clay-600 text-cream">
-                <UserCog className="h-5 w-5" aria-hidden />
-              </span>
-              <span className="min-w-0">
-                <span className="flex items-center gap-1.5 font-medium text-forest-700">
-                  Enter as admin <ArrowRight className="h-4 w-4" aria-hidden />
-                </span>
-                <span className="mt-0.5 block text-xs text-stone">
-                  The founder console: people, finance, approvals, field captures.
-                </span>
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                setMember({ name: "Teacher", role: "volunteer" });
-                setView("member");
-              }}
-              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
-            >
-              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-forest-500 text-cream">
-                <HardHat className="h-5 w-5" aria-hidden />
-              </span>
-              <span className="min-w-0">
-                <span className="flex items-center gap-1.5 font-medium text-forest-700">
-                  Enter as a field member <ArrowRight className="h-4 w-4" aria-hidden />
-                </span>
-                <span className="mt-0.5 block text-xs text-stone">
-                  The simple capture app: photos, notes, voice memos, expenses.
-                </span>
-              </span>
-            </button>
-
-            <p className="pt-2 text-xs font-semibold tracking-wide text-stone uppercase">
-              Curiosity Program
-            </p>
-
-            <button
-              type="button"
-              onClick={() => setView("steward")}
-              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
-            >
-              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-clay-500 text-cream">
-                <Compass className="h-5 w-5" aria-hidden />
-              </span>
-              <span className="min-w-0">
-                <span className="flex items-center gap-1.5 font-medium text-forest-700">
-                  Enter as the village steward{" "}
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </span>
-                <span className="mt-0.5 block text-xs text-stone">
-                  The Curiosity Program: welcome learners, see who comes back,
-                  suggest follow-through.
-                </span>
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setView("learner")}
-              className="flex items-center gap-3 rounded-[16px] border border-line bg-cream p-4 text-left transition-colors hover:bg-sand/60"
-            >
-              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-gold-400 text-forest-700">
-                <Sparkles className="h-5 w-5" aria-hidden />
-              </span>
-              <span className="min-w-0">
-                <span className="flex items-center gap-1.5 font-medium text-forest-700">
-                  Enter as a young learner{" "}
-                  <ArrowRight className="h-4 w-4" aria-hidden />
-                </span>
-                <span className="mt-0.5 block text-xs text-stone">
-                  Kid mode: a safe, friendly AI to ask anything, earn stickers,
-                  and explore.
-                </span>
-              </span>
-            </button>
-          </div>
-        </div>
-        <Link
-          href="/"
-          className="mt-6 inline-flex items-center gap-1.5 text-sm text-clay-700 underline decoration-clay-300 underline-offset-4 hover:decoration-clay-600"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden />
-          Back to the site
-        </Link>
+    <>
+      <div key={view} className="animate-view">
+        {screen}
       </div>
-    </div>
+      {showBar && (
+        <DemoBar
+          current={view}
+          onSwitch={switchTo}
+          onSignOut={signOut}
+          onResetData={resetDemo}
+          onReplayTour={resetTour}
+        />
+      )}
+      <Toaster />
+      <Tour view={view} switchTo={switchTo} signOut={signOut} />
+    </>
   );
 }
