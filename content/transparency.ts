@@ -48,11 +48,28 @@ export const whereSupportGoes: { label: string; body: string }[] = [
 export const leadership = {
   title: "Leadership & governance",
   body: [
-    "PRASM is led by its founder, a doctor whose visits to the village began this work, and supported by a small circle of volunteers and the families themselves.",
-    "As we formalize, we intend to add named leadership, advisors, and basic governance, and to publish them here. We'd rather introduce real, accountable people than hide behind a logo. If you'd like to know who you're talking to, just ask.",
+    "PRASM is led by its founder, Dr. Kwon Yonghyun (권용현), MD — a Korean physician whose visits to the village began this work, and who now lives and practises in Thailand. He is supported by a small circle of volunteers and the families themselves.",
+    "He chairs the Korea Cannabinoid Association and has chaired the Korea Aromatherapy Association since 2014; his own practice, MahKha, funds part of what happens here. His full record, including a plain note on which parts of it are not yet independently verifiable, is published at mahkha.com.",
+    "There is no board yet, and no advisors — one person and volunteers is the whole of it. As we formalize we intend to add named leadership, advisors, and basic governance, and to publish them here. We'd rather introduce real, accountable people than hide behind a logo. If you'd like to know who you're talking to, just ask.",
   ],
 };
-// TODO[user]: when consent allows, replace with the named founder + advisors/board.
+/*
+ * The founder is now named, which closes the older note here.
+ *
+ * Three things were deliberate. He is named because this section's own promise is to
+ * introduce real, accountable people rather than hide behind a logo, and an anonymous
+ * "a doctor" on a page headed Leadership & governance does not keep that promise.
+ *
+ * The absence of a board is now stated outright rather than implied by its omission —
+ * a donor reading a governance page should not have to infer that there is nobody else.
+ *
+ * And no medical registration number appears, because there is not one to publish
+ * yet. His own site says the same thing about the same credential; overstating it here,
+ * on the page whose subject is accountability, would be the worst possible place.
+ *
+ * TODO[user]: add advisors/board when they exist, and the registration number when it
+ * is available.
+ */
 
 export const howWeReport = {
   title: "How we report",

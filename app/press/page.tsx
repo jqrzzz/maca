@@ -8,6 +8,7 @@ import { buildMetadata } from "@/lib/metadata";
 import {
   pressIntro,
   fastFacts,
+  founderBio,
   approvedDescriptions,
   mediaGuidelines,
   whatWeOffer,
@@ -50,8 +51,30 @@ export default function PressPage() {
         </div>
       </Section>
 
-      {/* Approved descriptions */}
+      {/* About the founder */}
       <Section tone="sand">
+        <SectionHeading eyebrow="Who started this" title={founderBio.title} />
+        <div className="mx-auto mt-10 max-w-3xl space-y-5">
+          {founderBio.body.map((para, i) => (
+            <Reveal key={i} delay={i * 70}>
+              <p className="text-stone">{para}</p>
+            </Reveal>
+          ))}
+          <Reveal delay={founderBio.body.length * 70}>
+            <a
+              href={founderBio.link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block text-sm font-medium text-forest-700 underline decoration-gold-400 underline-offset-4 hover:decoration-forest-700"
+            >
+              {founderBio.link.label}
+            </a>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* Approved descriptions */}
+      <Section tone="cream">
         <SectionHeading
           eyebrow="Copy-paste safe"
           title="Approved descriptions"
@@ -72,7 +95,7 @@ export default function PressPage() {
       </Section>
 
       {/* Ground rules */}
-      <Section tone="cream">
+      <Section tone="sand">
         <SectionHeading
           eyebrow="The lines we hold"
           title={mediaGuidelines.title}
@@ -92,7 +115,7 @@ export default function PressPage() {
       </Section>
 
       {/* What we offer + assets */}
-      <Section tone="sand">
+      <Section tone="cream">
         <SectionHeading eyebrow="Working with us" title="What we can offer" />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {whatWeOffer.map((item, i) => (
