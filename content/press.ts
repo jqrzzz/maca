@@ -25,9 +25,23 @@ export const fastFacts: { label: string; value: string }[] = [
     value:
       "Kayan refugee families from Myanmar living off-grid, largely undocumented, in Mae Hong Son province, Thailand",
   },
+  /*
+   * Named, replacing "A medical doctor (named by role, by choice, for now)".
+   *
+   * This list's own rule is verified-only — no placeholders, no unconfirmed dates —
+   * so what is here is only what his own curricula vitae and independent press
+   * actually record. The chairmanship in particular is corroborated outside his own
+   * documents: MJBizDaily reported it in July 2019.
+   *
+   * What is deliberately absent is a medical registration number. Four CVs asserting
+   * MD are the doctor's account of himself, which is a different object from a
+   * registry a journalist can search, and this is the one page on this site that
+   * exists to be quoted. When the number arrives it belongs here, not before.
+   */
   {
     label: "Founded by",
-    value: "A medical doctor (named by role, by choice, for now)",
+    value:
+      "Dr. Kwon Yonghyun (권용현), MD — a Korean physician practising in Thailand, and chairperson of the Korea Cannabinoid Association since 2018",
   },
   {
     label: "Status",
@@ -57,10 +71,32 @@ export const mediaGuidelines = {
   ],
 };
 
+/**
+ * A short founder biography, for a journalist who needs more than the fast fact.
+ *
+ * Every line is drawn from documents he supplied or from independent press, and the
+ * page it links to carries his full record — including a standing note that the
+ * credentials there are his own account until a registry reference is published.
+ * Pointing at that rather than restating it here means this kit cannot drift out of
+ * step with it, and a writer who wants to check gets the caveat too.
+ */
+export const founderBio = {
+  title: "About the founder",
+  body: [
+    "PRASM was founded by Dr. Kwon Yonghyun (권용현), a Korean physician who graduated from Korea University Medical College and has practised integrative and holistic medicine since. He directed Bloom Clinic in Seoul from 2008 to 2017, and in 2019 an integrative clinic of his own.",
+    "He chairs the Korea Cannabinoid Association, which connects patients with doctors and advises on cannabis in Korea, and has chaired the Korea Aromatherapy Association since 2014. MJBizDaily described him in 2019 as the first doctor in Korea specializing in cannabinoids. He is a credited subject in Pull (2025), a documentary on the Korean hemp movement.",
+    "He now lives and practises in Thailand, where his own practice, MahKha, funds part of this work. His full record, and an honest note on what of it can and cannot yet be verified, is published there.",
+  ],
+  link: {
+    label: "His practice and full record — mahkha.com",
+    href: "https://mahkha.com/about",
+  },
+};
+
 export const whatWeOffer: { title: string; body: string }[] = [
   {
     title: "Interviews",
-    body: "Our founding doctor is available for interviews by arrangement. Contact us and we'll find a time across time zones.",
+    body: "Dr. Kwon is available for interviews by arrangement. Contact us and we'll find a time across time zones.",
   },
   {
     title: "First-hand material",

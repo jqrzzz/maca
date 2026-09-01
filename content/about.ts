@@ -1,7 +1,15 @@
 /**
  * "Our Story" content. Founder substance is REAL (a doctor who builds records
- * and has personally covered care); exact wording is editable. Confirm how
- * much to name the founder publicly before launch (see plan §12).
+ * and has personally covered care).
+ *
+ * The founder is named here now, which settles the question this note used to ask.
+ * He is named on his own practice's site as PRASM's founder, so the two would
+ * otherwise contradict each other — and a story that turns on one person's decision
+ * reads as evasive when that person is "a medical doctor" throughout.
+ *
+ * Named once, at the moment he enters, then "he" as before. Repeating a full name and
+ * credential through a paragraph about a sick child would make the paragraph about the
+ * doctor, which is not what it is about.
  */
 
 export const aboutIntro = {
@@ -11,7 +19,7 @@ export const aboutIntro = {
 };
 
 export const founderStory: string[] = [
-  "On a visit to the village, our founder, a medical doctor, met a family that had crossed from Myanmar only the day before, their home seized by the army. One of their boys was sick, and they had no way to afford a hospital that charges refugees as if they were tourists.",
+  "On a visit to the village, our founder — Dr. Kwon Yonghyun (권용현), a Korean physician now practising in Thailand — met a family that had crossed from Myanmar only the day before, their home seized by the army. One of their boys was sick, and they had no way to afford a hospital that charges refugees as if they were tourists.",
   "He did two things. He paid for the care and the journey to reach it. And he did what doctors are trained to do: he built a record, organizing the boy's history the way one doctor hands a patient to the next.",
   "That record did something unexpected. For a child with no papers, it became a first small proof of existence: a thread of identity where there had been none. PRASM is the idea that this can be done again, and properly, for many.",
 ];

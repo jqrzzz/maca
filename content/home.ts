@@ -45,8 +45,18 @@ export const founderNote = {
   eyebrow: "From the founder",
   quote:
     "I'm a doctor. The first thing I could give this family wasn't money. It was a record. For a child with no papers, a medical history became the first proof that he exists.",
-  // TODO[user]: confirm how to attribute the founder publicly.
-  attribution: "PRASM's founding doctor",
+  /*
+   * Named, replacing "PRASM's founding doctor".
+   *
+   * An unattributed quote on a donation page asks a stranger to trust a voice with no
+   * name behind it, which is the opposite of what the transparency page promises —
+   * "we'd rather introduce real, accountable people than hide behind a logo".
+   *
+   * Kept to the name and the credential. The rest of his record, and the honest note
+   * about which parts of it are not yet independently verifiable, belongs on his own
+   * site rather than in a pull quote; the press kit links there.
+   */
+  attribution: "Dr. Kwon Yonghyun (권용현), MD — founder",
 };
 
 export const waysToHelp = {
